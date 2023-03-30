@@ -1,10 +1,7 @@
 use spreadsheet_ods::{CellRange, CellRef};
 use std::borrow::Cow;
 use std::fmt::{Display, Formatter, Write};
-use std::io::BufRead;
-use std::mem::MaybeUninit;
 use std::ops::{Add, BitAnd, BitXor, Div, Mul, Neg, Sub};
-use std::{alloc, mem, slice};
 
 pub trait Any {
     fn formula(&self, buf: &mut String);
@@ -17,7 +14,7 @@ pub trait Reference: Any {}
 pub trait Matrix: Any {}
 pub trait Criterion: Any {}
 pub trait Sequence: Any {
-    fn extend_into(self, v: &mut Vec<Box<dyn Any>>);
+    fn into_vec(self) -> Vec<Box<dyn Any>>;
 }
 pub trait TextOrNumber: Any {}
 pub trait Scalar: Any {}
@@ -75,11 +72,11 @@ pub trait TextOp<T: Any> {
 /// Operations on boolean-like values.
 pub trait LogicalOp<T: Any> {
     /// and
-    fn and<U: Logical>(self, other: U) -> FnLogicalVar;
+    fn and<U: Logical>(self, other: U) -> FnLogical2<T, U>;
     /// or
-    fn or<U: Logical>(self, other: U) -> FnLogicalVar;
+    fn or<U: Logical>(self, other: U) -> FnLogical2<T, U>;
     /// xor
-    fn xor<U: Logical>(self, other: U) -> FnLogicalVar;
+    fn xor<U: Logical>(self, other: U) -> FnLogical2<T, U>;
 }
 
 /// Operations on references.
@@ -151,22 +148,16 @@ impl<T: Text> TextOp<T> for T {
 }
 
 impl<T: Logical> LogicalOp<T> for T {
-    fn and<U: Logical>(self, other: U) -> FnLogicalVar {
-        let v: Box<dyn Any> = Box::new(self);
-        let w: Box<dyn Any> = Box::new(other);
-        and(vec![v, w])
+    fn and<U: Logical>(self, other: U) -> FnLogical2<T, U> {
+        FnLogical2("AND", self, other)
     }
 
-    fn or<U: Logical>(self, other: U) -> FnLogicalVar {
-        let v: Box<dyn Any> = Box::new(self);
-        let w: Box<dyn Any> = Box::new(other);
-        or(vec![v, w])
+    fn or<U: Logical>(self, other: U) -> FnLogical2<T, U> {
+        FnLogical2("OR", self, other)
     }
 
-    fn xor<U: Logical>(self, other: U) -> FnLogicalVar {
-        let v: Box<dyn Any> = Box::new(self);
-        let w: Box<dyn Any> = Box::new(other);
-        xor(vec![v, w])
+    fn xor<U: Logical>(self, other: U) -> FnLogical2<T, U> {
+        FnLogical2("XOR", self, other)
     }
 }
 
@@ -193,8 +184,8 @@ impl Any for Vec<Box<dyn Any>> {
 }
 
 impl Sequence for Vec<Box<dyn Any>> {
-    fn extend_into(self, v: &mut Vec<Box<dyn Any>>) {
-        v.extend(self.into_iter());
+    fn into_vec(self) -> Vec<Box<dyn Any>> {
+        self
     }
 }
 
@@ -217,9 +208,9 @@ macro_rules! any_struct {
             }
         }
 
-        impl <A:Any, B:Any> Sequence for $t<A, B> {
-            fn extend_into(self, v: &mut Vec<Box<dyn Any>>) {
-                v.push(Box::new(self));
+        impl <A:Any+'static, B:Any+'static> Sequence for $t<A, B> {
+            fn into_vec(self) -> Vec<Box<dyn Any>> {
+                vec![Box::new(self)]
             }
         }
     };
@@ -245,36 +236,8 @@ macro_rules! any_struct {
         }
 
         impl Sequence for $t {
-            fn extend_into(self, v: &mut Vec<Box<dyn Any>>) {
-                v.push(Box::new(self));
-            }
-        }
-
-    };
-    (REFVAR $t:ident) => {
-
-        pub struct $t<'a>(
-            pub &'static str,
-            pub Vec<&'a dyn Any>
-        );
-
-        impl <'a> Any for $t<'a> {
-            fn formula(&self, buf: &mut String) {
-                buf.push_str(self.0);
-                buf.push('(');
-                for (i, v) in self.1.iter().enumerate() {
-                    if i > 0 {
-                        buf.push(';');
-                    }
-                    let _ = v.formula(buf);
-                }
-                buf.push(')');
-            }
-        }
-
-        impl<'a> Sequence for $t<'a> {
-            fn extend_into(self, v: &mut Vec<Box<dyn Any>>) {
-                v.push(Box::new(self));
+            fn into_vec(self) -> Vec<Box<dyn Any>> {
+                vec![Box::new(self)]
             }
         }
 
@@ -294,21 +257,21 @@ macro_rules! any_struct {
         }
 
         impl Sequence for $t {
-            fn extend_into(self, v: &mut Vec<Box<dyn Any>>) {
-                v.push(Box::new(self));
+            fn into_vec(self) -> Vec<Box<dyn Any>> {
+                vec![Box::new(self)]
             }
         }
 
     };
     ($t:ident : $tname0:tt $($tname:tt $tidx:tt)*) => {
 
-        pub struct $t<$tname0: Any $(,$tname: Any)*>(
+        pub struct $t<$tname0: Any+'static $(,$tname: Any+'static)*>(
             pub &'static str,
             pub $tname0
             $(, pub $tname)*
         );
 
-        impl <$tname0: Any $(,$tname: Any)*> Any for $t<$tname0 $(,$tname)*> {
+        impl <$tname0: Any+'static $(,$tname: Any+'static)*> Any for $t<$tname0 $(,$tname)*> {
             fn formula(&self, buf: &mut String) {
                 buf.push_str(self.0.as_ref());
                 buf.push('(');
@@ -321,9 +284,9 @@ macro_rules! any_struct {
             }
         }
 
-        impl <$tname0: Any $(,$tname: Any)*> Sequence for $t<$tname0 $(,$tname)*> {
-            fn extend_into(self, v: &mut Vec<Box<dyn Any>>) {
-                v.push(Box::new(self));
+        impl <$tname0: Any+'static $(,$tname: Any+'static)*> Sequence for $t<$tname0 $(,$tname)*> {
+            fn into_vec(self) -> Vec<Box<dyn Any>> {
+                vec![Box::new(self)]
             }
         }
     }
@@ -337,10 +300,6 @@ macro_rules! fn_any {
     (VAR $t:ident) => {
         any_struct!(VAR $t);
         fn_any!(__IMPL $t:);
-    };
-    (REFVAR $t:ident) => {
-        any_struct!(REFVAR $t);
-        fn_any!(__IMPL $t: 'a);
     };
     ($t:ident) => {
         any_struct!($t);
@@ -372,7 +331,6 @@ macro_rules! fn_any {
 
 fn_any!(OP OpAny);
 fn_any!(VAR FnAnyVar);
-fn_any!(REFVAR FnAnyRefVar);
 fn_any!(FnAny0);
 fn_any!(FnAny1: A);
 fn_any!(FnAny2: A B 2);
@@ -422,7 +380,6 @@ macro_rules! fn_number {
 
 fn_number!(OP OpNumber);
 fn_number!(VAR FnNumberVar);
-fn_number!(REFVAR FnNumberRefVar);
 fn_number!(FnNumber0);
 fn_number!(FnNumber1: A);
 fn_number!(FnNumber2: A B 2);
@@ -470,7 +427,6 @@ macro_rules! fn_text {
 
 fn_text!(OP OpText);
 fn_text!(VAR FnTextVar);
-fn_text!(REFVAR FnTextRefVar);
 fn_text!(FnText0);
 fn_text!(FnText1: A);
 fn_text!(FnText2: A B 2);
@@ -516,7 +472,6 @@ macro_rules! fn_logical {
 
 fn_logical!(OP OpLogical);
 fn_logical!(VAR FnLogicalVar);
-fn_logical!(REFVAR FnLogicalRefVar);
 fn_logical!(FnLogical0);
 fn_logical!(FnLogical1: A);
 fn_logical!(FnLogical2: A B 2);
@@ -556,7 +511,6 @@ macro_rules! fn_matrix {
 
 fn_matrix!(OP OpMatrix);
 fn_matrix!(VAR FnMatrixVar);
-fn_matrix!(REFVAR FnMatrixAnyVar);
 fn_matrix!(FnMatrix0);
 fn_matrix!(FnMatrix1: A);
 fn_matrix!(FnMatrix2: A B 2);
@@ -612,7 +566,6 @@ macro_rules! fn_reference {
 
 fn_reference!(OP OpReference);
 fn_reference!(VAR FnReferenceVar);
-fn_reference!(REFVAR FnReferenceRefVar);
 fn_reference!(FnReference0);
 fn_reference!(FnReference1: A);
 fn_reference!(FnReference2: A B 2);
@@ -678,25 +631,25 @@ impl<A: Any> Criterion for (CriterionCmp, A) {}
 
 // -----------------------------------------------------------------------
 
-impl<T: Any + ?Sized> Any for &T {
+impl<T: Any + ?Sized> Any for Box<T> {
     fn formula(&self, buf: &mut String) {
-        (*self).formula(buf);
+        self.as_ref().formula(buf);
     }
 }
-impl<T: Number + Any + ?Sized> Number for &T {}
-impl<T: Text + Any + ?Sized> Text for &T {}
-impl<T: Logical + Any + ?Sized> Logical for &T {}
-impl<T: Reference + Any + ?Sized> Reference for &T {}
-impl<T: Criterion + Any + ?Sized> Criterion for &T {}
-impl<T: Sequence + Any + ?Sized> Sequence for &T {
-    fn extend_into(self, v: &mut Vec<Box<dyn Any>>) {
-        v.push(Box::new(self));
+impl<T: Number + Any + ?Sized> Number for Box<T> {}
+impl<T: Text + Any + ?Sized> Text for Box<T> {}
+impl<T: Logical + Any + ?Sized> Logical for Box<T> {}
+impl<T: Reference + Any + ?Sized> Reference for Box<T> {}
+impl<T: Criterion + Any + ?Sized> Criterion for Box<T> {}
+impl<T: Sequence + Any + ?Sized + 'static> Sequence for Box<T> {
+    fn into_vec(self) -> Vec<Box<dyn Any>> {
+        vec![Box::new(self)]
     }
 }
-impl<T: Matrix + Any + ?Sized> Matrix for &T {}
-impl<T: TextOrNumber + Any + ?Sized> TextOrNumber for &T {}
-impl<T: Field + Any + ?Sized> Field for &T {}
-impl<T: DateTimeParam + Any + ?Sized> DateTimeParam for &T {}
+impl<T: Matrix + Any + ?Sized> Matrix for Box<T> {}
+impl<T: TextOrNumber + Any + ?Sized> TextOrNumber for Box<T> {}
+impl<T: Field + Any + ?Sized> Field for Box<T> {}
+impl<T: DateTimeParam + Any + ?Sized> DateTimeParam for Box<T> {}
 
 impl<T: Any + Sized> Any for Option<T> {
     fn formula(&self, buf: &mut String) {
@@ -710,9 +663,9 @@ impl<T: Text + Any + Sized> Text for Option<T> {}
 impl<T: Logical + Any + Sized> Logical for Option<T> {}
 impl<T: Reference + Any + Sized> Reference for Option<T> {}
 impl<T: Criterion + Any + Sized> Criterion for Option<T> {}
-impl<T: Sequence + Any> Sequence for Option<T> {
-    fn extend_into(self, v: &mut Vec<Box<dyn Any>>) {
-        v.push(Box::new(self));
+impl<T: Sequence + Any + 'static> Sequence for Option<T> {
+    fn into_vec(self) -> Vec<Box<dyn Any>> {
+        vec![Box::new(self)]
     }
 }
 impl<T: Matrix + Any + Sized> Matrix for Option<T> {}
@@ -762,9 +715,9 @@ impl<A: Number> Number for FParentheses<A> {}
 impl<A: Text> Text for FParentheses<A> {}
 impl<A: Logical> Logical for FParentheses<A> {}
 impl<A: Reference> Reference for FParentheses<A> {}
-impl<A: Sequence + Any> Sequence for FParentheses<A> {
-    fn extend_into(self, v: &mut Vec<Box<dyn Any>>) {
-        v.push(Box::new(self));
+impl<A: Sequence + Any + 'static> Sequence for FParentheses<A> {
+    fn into_vec(self) -> Vec<Box<dyn Any>> {
+        vec![Box::new(self)]
     }
 }
 impl<A: TextOrNumber> TextOrNumber for FParentheses<A> {}
@@ -788,8 +741,8 @@ macro_rules! value_number {
         impl Number for $t {}
         impl Logical for $t {}
         impl Sequence for $t {
-            fn extend_into(self, v: &mut Vec<Box<dyn Any>>) {
-                v.push(Box::new(self));
+            fn into_vec(self) -> Vec<Box<dyn Any>> {
+                vec![Box::new(self)]
             }
         }
         impl TextOrNumber for $t {}
@@ -823,8 +776,8 @@ impl Logical for bool {}
 impl Number for bool {}
 impl Scalar for bool {}
 impl Sequence for bool {
-    fn extend_into(self, v: &mut Vec<Box<dyn Any>>) {
-        v.push(Box::new(self));
+    fn into_vec(self) -> Vec<Box<dyn Any>> {
+        vec![Box::new(self)]
     }
 }
 
@@ -847,9 +800,9 @@ impl Any for &str {
     }
 }
 impl Text for &str {}
-impl Sequence for &str {
-    fn extend_into(self, v: &mut Vec<Box<dyn Any>>) {
-        v.push(Box::new(self));
+impl Sequence for &'static str {
+    fn into_vec(self) -> Vec<Box<dyn Any>> {
+        vec![Box::new(self)]
     }
 }
 impl TextOrNumber for &str {}
@@ -877,9 +830,9 @@ impl<'a> Any for Cow<'a, str> {
     }
 }
 impl<'a> Text for Cow<'a, str> {}
-impl<'a> Sequence for Cow<'a, str> {
-    fn extend_into(self, v: &mut Vec<Box<dyn Any>>) {
-        v.push(Box::new(self));
+impl Sequence for Cow<'static, str> {
+    fn into_vec(self) -> Vec<Box<dyn Any>> {
+        vec![Box::new(self)]
     }
 }
 impl<'a> TextOrNumber for Cow<'a, str> {}
@@ -907,8 +860,8 @@ impl Any for String {
 }
 impl Text for String {}
 impl Sequence for String {
-    fn extend_into(self, v: &mut Vec<Box<dyn Any>>) {
-        v.push(Box::new(self));
+    fn into_vec(self) -> Vec<Box<dyn Any>> {
+        vec![Box::new(self)]
     }
 }
 impl TextOrNumber for String {}
@@ -926,8 +879,8 @@ impl Number for CellRef {}
 impl Text for CellRef {}
 impl Logical for CellRef {}
 impl Sequence for CellRef {
-    fn extend_into(self, v: &mut Vec<Box<dyn Any>>) {
-        v.push(Box::new(self));
+    fn into_vec(self) -> Vec<Box<dyn Any>> {
+        vec![Box::new(self)]
     }
 }
 impl TextOrNumber for CellRef {}
@@ -946,8 +899,8 @@ impl Number for CellRange {}
 impl Text for CellRange {}
 impl Logical for CellRange {}
 impl Sequence for CellRange {
-    fn extend_into(self, v: &mut Vec<Box<dyn Any>>) {
-        v.push(Box::new(self));
+    fn into_vec(self) -> Vec<Box<dyn Any>> {
+        vec![Box::new(self)]
     }
 }
 impl TextOrNumber for CellRange {}
@@ -966,30 +919,6 @@ pub fn formula<T: Any>(f: T) -> String {
     buf.push_str("of=");
     let _ = f.formula(&mut buf);
     buf
-}
-
-// create a array for the parameters.
-fn create_param<'a>(n: usize) -> Box<[MaybeUninit<&'a dyn Any>]> {
-    let layout = alloc::Layout::array::<MaybeUninit<&dyn Any>>(n).unwrap();
-
-    assert!(layout.size() > 0);
-
-    let sl = unsafe {
-        let ptr = std::alloc::alloc(layout) as *mut MaybeUninit<&dyn Any>;
-        if ptr.is_null() {
-            alloc::handle_alloc_error(layout);
-        }
-
-        slice::from_raw_parts(ptr, n)
-    };
-
-    Box::from(sl)
-}
-
-// assume init
-#[inline]
-unsafe fn param_assume_init(p: Box<[MaybeUninit<&dyn Any>]>) -> Box<[&dyn Any]> {
-    mem::transmute(p)
 }
 
 // -----------------------------------------------------------------------
@@ -1034,7 +963,7 @@ macro_rules! number_op {
         impl <$($($l,)? $($tname: Any,)*)? V: Number> Add<V> for $t $(< $($l,)? $($tname,)* >)? {
             type Output = OpNumber<Self, V>;
 
-            fn add(mut self, rhs: V) -> Self::Output {
+            fn add(self, rhs: V) -> Self::Output {
                 OpNumber(self, "+", rhs)
             }
         }
@@ -1042,7 +971,7 @@ macro_rules! number_op {
         impl <$($($l,)? $($tname: Any,)*)? V: Number> Sub<V> for $t $(< $($l,)? $($tname,)* >)? {
             type Output = OpNumber<Self, V>;
 
-            fn sub(mut self, rhs: V) -> Self::Output {
+            fn sub(self, rhs: V) -> Self::Output {
                 OpNumber(self, "-", rhs)
             }
         }
@@ -1050,7 +979,7 @@ macro_rules! number_op {
         impl <$($($l,)? $($tname: Any,)*)? V: Number> Mul<V> for $t $(< $($l,)? $($tname,)* >)? {
             type Output = OpNumber<Self, V>;
 
-            fn mul(mut self, rhs: V) -> Self::Output {
+            fn mul(self, rhs: V) -> Self::Output {
                 OpNumber(self, "*", rhs)
             }
         }
@@ -1058,7 +987,7 @@ macro_rules! number_op {
         impl <$($($l,)? $($tname: Any,)*)? V: Number> Div<V> for $t $(< $($l,)? $($tname,)* >)? {
             type Output = OpNumber<Self, V>;
 
-            fn div(mut self, rhs: V) -> Self::Output {
+            fn div(self, rhs: V) -> Self::Output {
                 OpNumber(self, "*", rhs)
             }
         }
@@ -1066,7 +995,7 @@ macro_rules! number_op {
         impl <$($($l,)? $($tname: Any,)*)? V: Number> BitXor<V> for $t $(< $($l,)? $($tname,)* >)? {
             type Output = OpNumber<Self, V>;
 
-            fn bitxor(mut self, rhs: V) -> Self::Output {
+            fn bitxor(self, rhs: V) -> Self::Output {
                 OpNumber(self, "^", rhs)
             }
         }
@@ -1084,7 +1013,6 @@ macro_rules! number_op {
 
 number_op!(OpAny<A, B>);
 number_op!(FnAnyVar);
-number_op!(FnAnyRefVar<'a>);
 number_op!(FnAny0);
 number_op!(FnAny1<A>);
 number_op!(FnAny2<A, B>);
@@ -1095,7 +1023,6 @@ number_op!(FnAny6<A, B, C, D, E, F>);
 
 number_op!(OpNumber<A, B>);
 number_op!(FnNumberVar);
-number_op!(FnNumberRefVar<'a>);
 number_op!(FnNumber0);
 number_op!(FnNumber1<A>);
 number_op!(FnNumber2<A, B>);
@@ -1106,7 +1033,6 @@ number_op!(FnNumber6<A, B, C, D, E, F>);
 
 number_op!(OpLogical<A, B>);
 number_op!(FnLogicalVar);
-number_op!(FnLogicalRefVar<'a>);
 number_op!(FnLogical0);
 number_op!(FnLogical1<A>);
 number_op!(FnLogical2<A, B>);
@@ -1117,7 +1043,6 @@ number_op!(FnLogical6<A, B, C, D, E, F>);
 
 number_op!(OpReference<A, B>);
 number_op!(FnReferenceVar);
-number_op!(FnReferenceRefVar<'a>);
 number_op!(FnReference0);
 number_op!(FnReference1<A>);
 number_op!(FnReference2<A, B>);
@@ -1140,7 +1065,7 @@ macro_rules! text_op {
         impl <$($($l,)? $($tname: Any,)*)? V: Text> BitAnd<V> for $t $(< $($l,)? $($tname,)* >)? {
             type Output = OpText<Self, V>;
 
-            fn bitand(mut self, rhs: V) -> Self::Output {
+            fn bitand(self, rhs: V) -> Self::Output {
                 OpText(self, "&", rhs)
             }
         }
@@ -1149,7 +1074,6 @@ macro_rules! text_op {
 
 text_op!(OpText<A, B>);
 text_op!(FnTextVar);
-text_op!(FnTextRefVar<'a>);
 text_op!(FnText0);
 text_op!(FnText1<A>);
 text_op!(FnText2<A, B>);
@@ -1204,21 +1128,19 @@ pub fn ge<'a, A: Any, B: Any>(a: A, b: B) -> OpLogical<A, B> {
 ///  Compute logical AND of all parameters.
 #[inline]
 pub fn and(list: impl Sequence) -> FnLogicalVar {
-    let mut v = Vec::new();
-    list.extend_into(&mut v);
-    FnLogicalVar("AND", push)
+    FnLogicalVar("AND", list.into_vec())
 }
 
 /// Compute logical OR of all parameters.
 #[inline]
-pub fn or(logical: impl Sequence) -> FnLogicalVar {
-    FnLogicalVar("OR", logical.into_iter().collect())
+pub fn or(list: impl Sequence) -> FnLogicalVar {
+    FnLogicalVar("OR", list.into_vec())
 }
 
 /// Compute logical OR of all parameters.
 #[inline]
-pub fn xor(logical: impl Sequence) -> FnLogicalVar {
-    FnLogicalVar("XOR", logical.into_iter().collect())
+pub fn xor(list: impl Sequence) -> FnLogicalVar {
+    FnLogicalVar("XOR", list.into_vec())
 }
 
 // -----------------------------------------------------------------------
