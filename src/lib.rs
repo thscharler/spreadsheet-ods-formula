@@ -1,7 +1,26 @@
+mod bitop;
+mod complex;
+
 use spreadsheet_ods::{CellRange, CellRef};
 use std::borrow::Cow;
 use std::fmt::{Display, Formatter, Write};
 use std::ops::{Add, BitAnd, BitXor, Div, Mul, Neg, Sub};
+
+pub use bitop::*;
+pub use complex::*;
+
+/// The traits for this crate.
+/// And the function p() for parentheses.
+pub mod prelude {
+    pub use super::parentheses as p;
+    pub use super::{
+        Any, Criterion, DateTimeParam, Field, Logical, Matrix, Number, Reference, Scalar, Sequence,
+        Text, TextOrNumber,
+    };
+    pub use super::{AnyOp, LogicalOp, NumberOp, ReferenceOp, TextOp};
+}
+
+// -----------------------------------------------------------------------
 
 pub trait Any {
     fn formula(&self, buf: &mut String);
@@ -192,8 +211,25 @@ impl Sequence for Vec<Box<dyn Any>> {
 // -----------------------------------------------------------------------
 
 macro_rules! any_struct {
+    (VAL $t:ident) => {
+        #[derive(Debug)]
+        pub struct $t<A:Any>(pub A);
+
+        impl<A:Any> Any for $t<A> {
+            fn formula(&self, buf: &mut String) {
+                self.0.formula(buf);
+            }
+        }
+
+        impl <A:Any+'static> Sequence for $t<A> {
+            fn into_vec(self) -> Vec<Box<dyn Any>> {
+                vec![Box::new(self.0)]
+            }
+        }
+    };
     (OP $t:ident) => {
 
+        #[derive(Debug)]
         pub struct $t<A:Any, B:Any>(
             pub A,
             pub &'static str,
@@ -204,7 +240,7 @@ macro_rules! any_struct {
             fn formula(&self, buf: &mut String) {
                 self.0.formula(buf);
                 buf.push_str(self.1.as_ref());
-                self.1.formula(buf);
+                self.2.formula(buf);
             }
         }
 
@@ -244,6 +280,7 @@ macro_rules! any_struct {
     };
     ($t:ident) => {
 
+        #[derive(Debug)]
         pub struct $t(
             pub &'static str
         );
@@ -265,6 +302,7 @@ macro_rules! any_struct {
     };
     ($t:ident : $tname0:tt $($tname:tt $tidx:tt)*) => {
 
+        #[derive(Debug)]
         pub struct $t<$tname0: Any+'static $(,$tname: Any+'static)*>(
             pub &'static str,
             pub $tname0
@@ -293,6 +331,10 @@ macro_rules! any_struct {
 }
 
 macro_rules! fn_any {
+    (VAL $t:ident) => {
+        any_struct!(VAL $t);
+        fn_any!(__IMPL $t: A);
+    };
     (OP $t:ident) => {
         any_struct!(OP $t);
         fn_any!(__IMPL $t: A B);
@@ -329,6 +371,7 @@ macro_rules! fn_any {
     };
 }
 
+fn_any!(VAL ValAny);
 fn_any!(OP OpAny);
 fn_any!(VAR FnAnyVar);
 fn_any!(FnAny0);
@@ -340,6 +383,10 @@ fn_any!(FnAny5: A B 2 C 3 D 4 E 5);
 fn_any!(FnAny6: A B 2 C 3 D 4 E 5 F 6);
 
 macro_rules! fn_number {
+    (VAL $t:ident) => {
+        any_struct!(VAL $t);
+        fn_number!(__IMPL $t: A);
+    };
     (OP $t:ident) => {
         any_struct!(OP $t);
         fn_number!(__IMPL $t: A B);
@@ -378,6 +425,7 @@ macro_rules! fn_number {
     };
 }
 
+fn_number!(VAL ValNumber);
 fn_number!(OP OpNumber);
 fn_number!(VAR FnNumberVar);
 fn_number!(FnNumber0);
@@ -389,6 +437,10 @@ fn_number!(FnNumber5: A B 2 C 3 D 4 E 5);
 fn_number!(FnNumber6: A B 2 C 3 D 4 E 5 F 6);
 
 macro_rules! fn_text {
+    (VAL $t:ident) => {
+        any_struct!(VAL $t);
+        fn_text!(__IMPL $t: A);
+    };
     (OP $t:ident) => {
         any_struct!(OP $t);
         fn_text!(__IMPL $t: A B);
@@ -425,6 +477,7 @@ macro_rules! fn_text {
     };
 }
 
+fn_text!(VAL ValText);
 fn_text!(OP OpText);
 fn_text!(VAR FnTextVar);
 fn_text!(FnText0);
@@ -436,6 +489,10 @@ fn_text!(FnText5: A B 2 C 3 D 4 E 5);
 fn_text!(FnText6: A B 2 C 3 D 4 E 5 F 6);
 
 macro_rules! fn_logical {
+    (VAL $t:ident) => {
+        any_struct!(VAL $t);
+        fn_logical!(__IMPL $t: A);
+    };
     (OP $t:ident) => {
         any_struct!(OP $t);
         fn_logical!(__IMPL $t: A B);
@@ -470,6 +527,7 @@ macro_rules! fn_logical {
     };
 }
 
+fn_logical!(VAL ValLogical);
 fn_logical!(OP OpLogical);
 fn_logical!(VAR FnLogicalVar);
 fn_logical!(FnLogical0);
@@ -481,6 +539,10 @@ fn_logical!(FnLogical5: A B 2 C 3 D 4 E 5);
 fn_logical!(FnLogical6: A B 2 C 3 D 4 E 5 F 6);
 
 macro_rules! fn_matrix {
+    (VAL $t:ident) => {
+        any_struct!(VAL $t);
+        fn_matrix!(__IMPL $t: A);
+    };
     (OP $t:ident) => {
         any_struct!(OP $t);
         fn_matrix!(__IMPL $t: A B);
@@ -509,6 +571,7 @@ macro_rules! fn_matrix {
     };
 }
 
+fn_matrix!(VAL ValMatrix);
 fn_matrix!(OP OpMatrix);
 fn_matrix!(VAR FnMatrixVar);
 fn_matrix!(FnMatrix0);
@@ -520,6 +583,10 @@ fn_matrix!(FnMatrix5: A B 2 C 3 D 4 E 5);
 fn_matrix!(FnMatrix6: A B 2 C 3 D 4 E 5 F 6);
 
 macro_rules! fn_reference {
+    (VAL $t:ident) => {
+        any_struct!(VAL $t);
+        fn_reference!(__IMPL $t: A);
+    };
     (OP $t:ident) => {
         any_struct!(OP $t);
         fn_reference!(__IMPL $t: A B);
@@ -564,6 +631,7 @@ macro_rules! fn_reference {
     };
 }
 
+fn_reference!(VAL ValReference);
 fn_reference!(OP OpReference);
 fn_reference!(VAR FnReferenceVar);
 fn_reference!(FnReference0);
@@ -703,6 +771,7 @@ impl Any for () {
 
 /// An expression in parentheses.
 /// Use p() / parentheses() to create one.
+#[derive(Debug)]
 pub struct FParentheses<A>(A);
 impl<A: Any> Any for FParentheses<A> {
     fn formula(&self, buf: &mut String) {
@@ -988,7 +1057,7 @@ macro_rules! number_op {
             type Output = OpNumber<Self, V>;
 
             fn div(self, rhs: V) -> Self::Output {
-                OpNumber(self, "*", rhs)
+                OpNumber(self, "/", rhs)
             }
         }
 
@@ -1011,6 +1080,7 @@ macro_rules! number_op {
     };
 }
 
+number_op!(ValAny<A>);
 number_op!(OpAny<A, B>);
 number_op!(FnAnyVar);
 number_op!(FnAny0);
@@ -1021,6 +1091,7 @@ number_op!(FnAny4<A, B, C, D>);
 number_op!(FnAny5<A, B, C, D, E>);
 number_op!(FnAny6<A, B, C, D, E, F>);
 
+number_op!(ValNumber<A>);
 number_op!(OpNumber<A, B>);
 number_op!(FnNumberVar);
 number_op!(FnNumber0);
@@ -1031,6 +1102,7 @@ number_op!(FnNumber4<A, B, C, D>);
 number_op!(FnNumber5<A, B, C, D, E>);
 number_op!(FnNumber6<A, B, C, D, E, F>);
 
+number_op!(ValLogical<A>);
 number_op!(OpLogical<A, B>);
 number_op!(FnLogicalVar);
 number_op!(FnLogical0);
@@ -1041,6 +1113,7 @@ number_op!(FnLogical4<A, B, C, D>);
 number_op!(FnLogical5<A, B, C, D, E>);
 number_op!(FnLogical6<A, B, C, D, E, F>);
 
+number_op!(ValReference<A>);
 number_op!(OpReference<A, B>);
 number_op!(FnReferenceVar);
 number_op!(FnReference0);
@@ -1072,6 +1145,7 @@ macro_rules! text_op {
     }
 }
 
+text_op!(ValText<A>);
 text_op!(OpText<A, B>);
 text_op!(FnTextVar);
 text_op!(FnText0);
