@@ -6,6 +6,7 @@ mod date_man;
 mod extaccess;
 mod info;
 mod info_man;
+mod logical;
 mod logical_man;
 mod lookup_man;
 
@@ -24,7 +25,7 @@ pub use info::*;
 pub use info_man::*;
 pub use logical::*;
 pub use logical_man::*;
-pub use lookup::*;
+// pub use lookup::*;
 pub use lookup_man::*;
 
 /// The traits for this crate.
@@ -693,6 +694,10 @@ macro_rules! tup {
     }
 }
 
+impl Any for () {
+    fn formula(&self, _buf: &mut String) {}
+}
+
 tup!(A);
 tup!(A B 1 );
 tup!(A B 1 C 2 );
@@ -831,14 +836,9 @@ impl<T: Any, const N: usize, const M: usize> Any for [[T; M]; N] {
         buf.push('}');
     }
 }
+
 impl<T: Any, const N: usize, const M: usize> Matrix for [[T; M]; N] {}
 // todo: sequence?
-
-// -----------------------------------------------------------------------
-
-impl Any for () {
-    fn formula(&self, _buf: &mut String) {}
-}
 
 // -----------------------------------------------------------------------
 
