@@ -1,5 +1,13 @@
 mod bitop;
 mod complex;
+mod database;
+mod date;
+mod date_man;
+mod extaccess;
+mod info;
+mod info_man;
+mod logical_man;
+mod lookup_man;
 
 use spreadsheet_ods::{CellRange, CellRef};
 use std::borrow::Cow;
@@ -8,6 +16,16 @@ use std::ops::{Add, BitAnd, BitXor, Div, Mul, Neg, Sub};
 
 pub use bitop::*;
 pub use complex::*;
+pub use database::*;
+pub use date::*;
+pub use date_man::*;
+pub use extaccess::*;
+pub use info::*;
+pub use info_man::*;
+pub use logical::*;
+pub use logical_man::*;
+pub use lookup::*;
+pub use lookup_man::*;
 
 /// The traits for this crate.
 /// And the function p() for parentheses.
@@ -40,12 +58,16 @@ pub trait Scalar: Any {}
 pub trait Field: Any {}
 pub trait DateTimeParam: Any {}
 
-trait Param {
-    type ParamType<'a>
-    where
-        Self: 'a;
+/// Alias for Matrix
+pub use Matrix as Array;
+/// Alias for a cell reference. A cell range containing headers and a data set.
+pub use Reference as Database;
+/// Alias for a cell reference. A cell range containing headers and filters.
+pub use Reference as Criteria;
 
-    fn as_param(&self) -> Self::ParamType<'_>;
+pub trait Param {
+    type Type: Any;
+    fn as_param(&self) -> Self::Type;
 }
 
 // -----------------------------------------------------------------------
@@ -644,6 +666,57 @@ fn_reference!(FnReference6: A B 2 C 3 D 4 E 5 F 6);
 
 // -----------------------------------------------------------------------
 
+macro_rules! tup {
+    ( $tname0:ident $($tname:tt $tnum:tt)* ) => {
+
+        impl<$tname0: Any, $($tname: Any,)*> Any for ($tname0, $($tname,)*) {
+            fn formula(&self, buf: &mut String) {
+                self.0.formula(buf);
+                $(
+                    buf.push(';');
+                    self.$tnum.formula(buf);
+                )*
+            }
+        }
+
+        impl<$tname0: Any + 'static, $($tname: Any + 'static,)*> Sequence for ($tname0, $($tname,)*) {
+            fn into_vec(self) -> Vec<Box<dyn Any>> {
+                let mut v = Vec::new();
+                v.push(Box::new(self.0) as Box<dyn Any>);
+                $(
+                    v.push(Box::new(self.$tnum) as Box<dyn Any>);
+                )*
+                v
+            }
+        }
+
+    }
+}
+
+tup!(A);
+tup!(A B 1 );
+tup!(A B 1 C 2 );
+tup!(A B 1 C 2 D 3);
+tup!(A B 1 C 2 D 3 E 4);
+tup!(A B 1 C 2 D 3 E 4 F 5);
+tup!(A B 1 C 2 D 3 E 4 F 5 G 6);
+tup!(A B 1 C 2 D 3 E 4 F 5 G 6 H 7);
+tup!(A B 1 C 2 D 3 E 4 F 5 G 6 H 7 I 8);
+tup!(A B 1 C 2 D 3 E 4 F 5 G 6 H 7 I 8 J 9);
+tup!(A B 1 C 2 D 3 E 4 F 5 G 6 H 7 I 8 J 9 K 10);
+tup!(A B 1 C 2 D 3 E 4 F 5 G 6 H 7 I 8 J 9 K 10 L 11);
+tup!(A B 1 C 2 D 3 E 4 F 5 G 6 H 7 I 8 J 9 K 10 L 11 M 12);
+tup!(A B 1 C 2 D 3 E 4 F 5 G 6 H 7 I 8 J 9 K 10 L 11 M 12 N 13);
+tup!(A B 1 C 2 D 3 E 4 F 5 G 6 H 7 I 8 J 9 K 10 L 11 M 12 N 13 O 14);
+tup!(A B 1 C 2 D 3 E 4 F 5 G 6 H 7 I 8 J 9 K 10 L 11 M 12 N 13 O 14 P 15 );
+tup!(A B 1 C 2 D 3 E 4 F 5 G 6 H 7 I 8 J 9 K 10 L 11 M 12 N 13 O 14 P 15 Q 16);
+tup!(A B 1 C 2 D 3 E 4 F 5 G 6 H 7 I 8 J 9 K 10 L 11 M 12 N 13 O 14 P 15 Q 16 R 17);
+tup!(A B 1 C 2 D 3 E 4 F 5 G 6 H 7 I 8 J 9 K 10 L 11 M 12 N 13 O 14 P 15 Q 16 R 17 S 18);
+tup!(A B 1 C 2 D 3 E 4 F 5 G 6 H 7 I 8 J 9 K 10 L 11 M 12 N 13 O 14 P 15 Q 16 R 17 S 18 T 19);
+tup!(A B 1 C 2 D 3 E 4 F 5 G 6 H 7 I 8 J 9 K 10 L 11 M 12 N 13 O 14 P 15 Q 16 R 17 S 18 T 19 U 20);
+
+// -----------------------------------------------------------------------
+
 /// Filter criteria.
 #[derive(Debug)]
 pub enum CriterionCmp {
@@ -1195,26 +1268,6 @@ pub fn gt<'a, A: Any, B: Any>(a: A, b: B) -> OpLogical<A, B> {
 /// greater than or equal
 pub fn ge<'a, A: Any, B: Any>(a: A, b: B) -> OpLogical<A, B> {
     OpLogical(a, ">=", b)
-}
-
-// -----------------------------------------------------------------------
-
-///  Compute logical AND of all parameters.
-#[inline]
-pub fn and(list: impl Sequence) -> FnLogicalVar {
-    FnLogicalVar("AND", list.into_vec())
-}
-
-/// Compute logical OR of all parameters.
-#[inline]
-pub fn or(list: impl Sequence) -> FnLogicalVar {
-    FnLogicalVar("OR", list.into_vec())
-}
-
-/// Compute logical OR of all parameters.
-#[inline]
-pub fn xor(list: impl Sequence) -> FnLogicalVar {
-    FnLogicalVar("XOR", list.into_vec())
 }
 
 // -----------------------------------------------------------------------
