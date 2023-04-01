@@ -135,3 +135,14 @@ fn test_imaginary() {
         .test(eq, "of=IMSUM(5;7;9;99)")
         .q(Q);
 }
+
+#[test]
+fn test_database() {
+    test_ok(of::formula(of::daverage(
+        CellRange::local(5, 5, 20, 9),
+        "wango",
+        CellRange::local(22, 5, 22, 9),
+    )))
+    .test(eq, "of=DAVERAGE([.F6:.J21];\"wango\";[.F23:.J23])")
+    .q(Q);
+}

@@ -9,7 +9,13 @@ use std::path::PathBuf;
 
 #[test]
 fn run_build() {
-    dbg!(build_from_csv());
+    match build_from_csv() {
+        Ok(_) => {}
+        Err(e) => {
+            dbg!(e);
+            panic!();
+        }
+    };
 }
 
 struct DError(Box<dyn Error>);
@@ -69,6 +75,7 @@ impl<'a> TryFrom<&'a OdsFn<'a>> for Module {
 struct OdsArg<'a> {
     arg: &'a str,
     typ: &'a str,
+    opt: bool,
 }
 
 struct OdsFn<'a> {
@@ -83,11 +90,16 @@ impl<'a> From<&'a StringRecord> for OdsFn<'a> {
     fn from(r: &'a StringRecord) -> Self {
         let mut args = Vec::new();
         for n in 0..5 {
-            let arg = &r[4 + 2 * n];
-            let typ = &r[4 + 2 * n + 1];
+            let arg = &r[4 + 3 * n];
+            let typ = &r[4 + 3 * n + 1];
+            let opt = &r[4 + 3 * n + 2];
 
             if !arg.is_empty() && !typ.is_empty() {
-                args.push(OdsArg { arg, typ })
+                args.push(OdsArg {
+                    arg,
+                    typ,
+                    opt: opt == "OPT",
+                })
             } else if arg.is_empty() && typ.is_empty() {
                 // fine
             } else {
@@ -136,8 +148,6 @@ fn init_module(m: &mut Module) -> Result<(), DError> {
     Ok(())
 }
 
-const TNAME: [&str; 5] = ["A", "B", "C", "D", "E"];
-
 fn generate_fn(fnr: &OdsFn, m: &mut Module) -> Result<(), DError> {
     writeln!(m.gen, "")?;
     writeln!(m.gen, "/// {}", fnr.doc)?;
@@ -169,7 +179,15 @@ fn gen_param(fnr: &OdsFn) -> Result<String, DError> {
         if i > 0 {
             write!(buf, ", ")?;
         }
-        write!(buf, "{}", a.arg)?;
+        if is_trait(a)? {
+            write!(buf, "{}", a.arg)?;
+        } else {
+            if a.opt {
+                write!(buf, "{}.map(|v| v.as_param())", a.arg)?;
+            } else {
+                write!(buf, "{}.as_param()", a.arg)?;
+            }
+        }
     }
 
     Ok(buf)
@@ -182,11 +200,25 @@ fn gen_return(fnr: &OdsFn) -> Result<String, DError> {
     if fnr.args.len() > 0 {
         write!(buf, "<")?;
     }
+    let mut i_tv = 0usize;
     for (i, a) in fnr.args.iter().enumerate() {
         if i > 0 {
             write!(buf, ", ")?;
         }
-        write!(buf, "{}", TNAME[i])?;
+        if is_trait(a)? {
+            if a.opt {
+                write!(buf, "Option<{}>", TYPE_VARS[i_tv])?;
+            } else {
+                write!(buf, "{}", TYPE_VARS[i_tv])?;
+            }
+            i_tv += 1;
+        } else {
+            if a.opt {
+                write!(buf, "Option<<{} as Param>::Type>", a.typ)?;
+            } else {
+                write!(buf, "<{} as Param>::Type", a.typ)?;
+            }
+        }
     }
     if fnr.args.len() > 0 {
         write!(buf, ">")?;
@@ -198,11 +230,25 @@ fn gen_return(fnr: &OdsFn) -> Result<String, DError> {
 fn gen_arg(fnr: &OdsFn) -> Result<String, DError> {
     let mut buf = String::new();
 
+    let mut i_tv = 0usize;
     for (i, a) in fnr.args.iter().enumerate() {
         if i > 0 {
             write!(buf, ", ")?;
         }
-        write!(buf, "{}: {}", a.arg, TNAME[i])?;
+        if is_trait(a)? {
+            if a.opt {
+                write!(buf, "{}: Option<{}>", a.arg, TYPE_VARS[i_tv])?;
+            } else {
+                write!(buf, "{}: {}", a.arg, TYPE_VARS[i_tv])?;
+            }
+            i_tv += 1;
+        } else {
+            if a.opt {
+                write!(buf, "{}: Option<{}>", a.arg, a.typ)?;
+            } else {
+                write!(buf, "{}: {}", a.arg, a.typ)?;
+            }
+        }
     }
 
     Ok(buf)
@@ -214,11 +260,18 @@ fn gen_type_arg(fnr: &OdsFn) -> Result<String, DError> {
     if fnr.args.len() > 0 {
         write!(buf, "<")?;
     }
+    let mut i_tv = 0usize;
     for (i, a) in fnr.args.iter().enumerate() {
-        if i > 0 {
-            write!(buf, ", ")?;
+        if is_trait(a)? {
+            if i > 0 {
+                write!(buf, ", ")?;
+            }
+
+            write!(buf, "{}: {}", TYPE_VARS[i_tv], a.typ)?;
+            i_tv += 1;
+        } else {
+            // noop
         }
-        write!(buf, "{}: {}", TNAME[i], a.typ)?;
     }
     if fnr.args.len() > 0 {
         write!(buf, ">")?;
@@ -226,6 +279,8 @@ fn gen_type_arg(fnr: &OdsFn) -> Result<String, DError> {
 
     Ok(buf)
 }
+
+const TYPE_VARS: [&str; 5] = ["A", "B", "C", "D", "E"];
 
 fn gen_struct(fnr: &OdsFn) -> Result<String, DError> {
     match fnr.result {
@@ -238,7 +293,43 @@ fn gen_struct(fnr: &OdsFn) -> Result<String, DError> {
             5 => Ok("FnNumber5".into()),
             _ => Err(DErrorString(format!("Number args > 5 for {}", fnr.func)).into()),
         },
+        "Reference" => match fnr.args.len() {
+            0 => Ok("FnReference0".into()),
+            1 => Ok("FnReference1".into()),
+            2 => Ok("FnReference2".into()),
+            3 => Ok("FnReference3".into()),
+            4 => Ok("FnReference4".into()),
+            5 => Ok("FnReference5".into()),
+            _ => Err(DErrorString(format!("Reference args > 5 for {}", fnr.func)).into()),
+        },
+        "Text" => match fnr.args.len() {
+            0 => Ok("FnText0".into()),
+            1 => Ok("FnText1".into()),
+            2 => Ok("FnText2".into()),
+            3 => Ok("FnText3".into()),
+            4 => Ok("FnText4".into()),
+            5 => Ok("FnText5".into()),
+            _ => Err(DErrorString(format!("Text args > 5 for {}", fnr.func)).into()),
+        },
+        "Logical" => match fnr.args.len() {
+            0 => Ok("FnLogical0".into()),
+            1 => Ok("FnLogical1".into()),
+            2 => Ok("FnLogical2".into()),
+            3 => Ok("FnLogical3".into()),
+            4 => Ok("FnLogical4".into()),
+            5 => Ok("FnLogical5".into()),
+            _ => Err(DErrorString(format!("Logical args > 5 for {}", fnr.func)).into()),
+        },
         _ => Err(DErrorString(format!("Unknown result for {}", fnr.func)).into()),
+    }
+}
+
+fn is_trait(arg: &OdsArg) -> Result<bool, DError> {
+    match arg.typ {
+        "Any" | "Number" | "Text" | "Logical" | "Reference" | "Matrix" | "Criterion"
+        | "Sequence" | "TextOrNumber" | "Scalar" | "Field" | "DateTimeParam" | "Array"
+        | "Database" | "Criteria" => Ok(true),
+        _ => Ok(false),
     }
 }
 
