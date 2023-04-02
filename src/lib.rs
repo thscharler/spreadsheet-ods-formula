@@ -1047,7 +1047,7 @@ impl DateTimeParam for CellRange {}
 /// Creates a formula from any formula expression.
 pub fn formula<T: Any>(f: T) -> String {
     let mut buf = String::new();
-    buf.push_str("of=");
+    buf.push_str("of:=");
     let _ = f.formula(&mut buf);
     buf
 }
@@ -1178,31 +1178,3 @@ text_op!(FnText3<A, B, C>);
 text_op!(FnText4<A, B, C, D>);
 text_op!(FnText5<A, B, C, D, E>);
 text_op!(FnText6<A, B, C, D, E, F>);
-
-// -----------------------------------------------------------------------
-
-#[macro_export]
-macro_rules! cell {
-    ($row:expr, $col:expr) => {
-        CellRef::local($row, $col)
-    };
-    ($table:expr => $row:expr, $col:expr) => {
-        CellRef::remote($table, $row, $col)
-    };
-}
-
-#[macro_export]
-macro_rules! range {
-    ($row:expr, $col:expr, $row_to:expr, $col_to:expr) => {
-        CellRange::local($row, $col, $row_to, $col_to)
-    };
-    ($row:expr, $col:expr; + $row_delta:expr, $col_delta:expr) => {
-        CellRange::local($row, $col, $row + $row_delta, $col + $col_delta)
-    };
-    ($table:expr => $row:expr, $col:expr, $row_to:expr, $col_to:expr) => {
-        CellRange::remote($table, $row, $col, $row_to, $col_to)
-    };
-    ($table:expr => $row:expr, $col:expr; + $row_delta:expr, $col_delta:expr) => {
-        CellRange::remote($table, $row, $col, $row + $row_delta, $col + $col_delta)
-    };
-}
