@@ -1,3 +1,7 @@
+//!
+//! External access
+//!
+
 use crate::{Any, FnNumber3, FnNumber4, FnText2, Text};
 
 pub enum DDEConversion {

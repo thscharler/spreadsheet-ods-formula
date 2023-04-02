@@ -7,8 +7,7 @@ use std::fs::{create_dir_all, File};
 use std::io::Write as IOWrite;
 use std::path::PathBuf;
 
-#[test]
-fn run_build() {
+fn main() {
     match build_from_csv() {
         Ok(_) => {}
         Err(e) => {
@@ -62,7 +61,7 @@ impl<'a> TryFrom<&'a OdsFn<'a>> for Module {
         let _ = create_dir_all(&fpath);
 
         let mut fname = fpath.clone();
-        fname.push_str("generated.rs");
+        fname.push_str("/generated.rs");
 
         let mut fmodule = Module {
             mod_file: fname.into(),
@@ -147,6 +146,8 @@ fn build_from_csv() -> Result<(), DError> {
 
 fn init_module(m: &mut Module) -> Result<(), DError> {
     writeln!(m.gen, "use crate::*;")?;
+    writeln!(m.gen, "#[allow(unused_imports)]")?;
+    writeln!(m.gen, "use super::*;")?;
 
     Ok(())
 }
@@ -274,9 +275,9 @@ fn gen_type_arg(fnr: &OdsFn) -> Result<String, DError> {
         write!(buf, "<")?;
     }
     let mut i_tv = 0usize;
-    for (i, a) in fnr.args.iter().enumerate() {
+    for (_, a) in fnr.args.iter().enumerate() {
         if is_trait(a) {
-            if i > 0 {
+            if i_tv > 0 {
                 write!(buf, ", ")?;
             }
 

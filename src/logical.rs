@@ -1,37 +1,31 @@
-use crate::*;
+//!
+//! Logical functions.
+//!
 
-/// Compute logical AND of all parameters.
+mod generated;
+
+pub use generated::*;
+
+use crate::{Any, FnAny2, FnAny3, Logical};
+
+/// Return one of two values, depending on a condition.
 #[inline]
-pub fn and<A: Sequence>(seq: A) -> FnLogical1<A> {
-    FnLogical1("AND", seq)
+pub fn if_then_else<A: Logical, B: Any, C: Any>(
+    condition: A,
+    if_true: B,
+    if_false: C,
+) -> FnAny3<A, B, C> {
+    FnAny3("IF", condition, if_true, if_false)
 }
 
-/// Return X unless it is an Error, in which case return an alternative value.
+/// Return one of two values, depending on a condition.
 #[inline]
-pub fn iferror<A: Any, B: Any>(x: A, alt: B) -> FnAny2<A, B> {
-    FnAny2("IFERROR", x, alt)
+pub fn if_then<A: Logical, B: Any>(condition: A, if_true: B) -> FnAny2<A, B> {
+    FnAny2("IF", condition, if_true)
 }
 
-/// Compute logical NOT.
+/// Return one of two values, depending on a condition.
 #[inline]
-pub fn not<A: Logical>(v: A) -> FnLogical1<A> {
-    FnLogical1("NOT", v)
-}
-
-/// Compute logical OR of all parameters.
-#[inline]
-pub fn or<A: Sequence>(v: A) -> FnLogical1<A> {
-    FnLogical1("OR", v)
-}
-
-/// Compute logical XOR of all parameters.
-#[inline]
-pub fn xor<A: Sequence>(v: A) -> FnLogical1<A> {
-    FnLogical1("XOR", v)
-}
-
-/// Return X unless it is #N/A, in which case return an alternative value.
-#[inline]
-pub fn ifna<A: Any, B: Any>(x: A, alt: B) -> FnAny2<A, B> {
-    FnAny2("IFNA", x, alt)
+pub fn if_else<A: Logical, B: Any>(condition: A, if_false: B) -> FnAny3<A, (), B> {
+    FnAny3("IF", condition, (), if_false)
 }

@@ -3,6 +3,13 @@ name = "ods_formula3"
 version = "0.1.0"
 edition = "2021"
 
+[lib]
+name = "ods_formula3"
+
+[[bin]]
+name = "generate"
+path = "generate_src/generate.rs"
+
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]

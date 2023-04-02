@@ -3,63 +3,74 @@ use std::borrow::Cow;
 use std::fmt::{Display, Formatter, Write};
 use std::ops::{Add, BitAnd, BitXor, Div, Mul, Neg, Sub};
 
-mod bitop;
-mod complex;
-mod database;
-mod date;
-mod date_man;
-mod extaccess;
-mod info;
-mod info_man;
-mod logical;
-mod logical_man;
-mod lookup;
-mod lookup_man;
-mod math;
-mod math_man;
-
-pub use bitop::*;
-pub use complex::*;
-pub use database::*;
-pub use date::*;
-pub use date_man::*;
-pub use extaccess::*;
-pub use info::*;
-pub use info_man::*;
-pub use logical::*;
-pub use logical_man::*;
-pub use lookup::*;
-pub use lookup_man::*;
-pub use math_man::*;
+pub mod bit;
+pub mod compare;
+pub mod complex;
+pub mod database;
+pub mod date;
+pub mod ext;
+pub mod info;
+pub mod logical;
+pub mod lookup;
+pub mod math;
+pub mod operator;
+pub mod rounding;
 
 /// The traits for this crate.
 /// And the function p() for parentheses.
 pub mod prelude {
-    pub use super::parentheses as p;
-    pub use super::{
-        Any, Criterion, DateTimeParam, Field, Logical, Matrix, Number, Reference, Scalar, Sequence,
-        Text, TextOrNumber,
+    pub use crate::{
+        p, Any, AnyOp, Criterion, DateTimeParam, Field, Logical, LogicalOp, Matrix, Number,
+        NumberOp, Reference, ReferenceOp, Scalar, Sequence, Text, TextOp, TextOrNumber,
     };
-    pub use super::{AnyOp, LogicalOp, NumberOp, ReferenceOp, TextOp};
+}
+
+/// All functions.
+pub mod all {
+    pub use crate::bit::*;
+    pub use crate::compare::*;
+    pub use crate::complex::*;
+    pub use crate::database::*;
+    pub use crate::date::*;
+    pub use crate::ext::*;
+    pub use crate::info::*;
+    pub use crate::logical::*;
+    pub use crate::lookup::*;
+    pub use crate::math::*;
+    pub use crate::operator::*;
+    pub use crate::rounding::*;
 }
 
 // -----------------------------------------------------------------------
 
+/// Base trait for any part of a formula.
 pub trait Any {
+    /// Output to a formula.
     fn formula(&self, buf: &mut String);
 }
+/// Numeric parameter.
 pub trait Number: Any {}
+/// Text parameter.
 pub trait Text: Any {}
+/// Logical parameter.
 pub trait Logical: Any {}
+/// Reference parameter.
 pub trait Reference: Any {}
+/// Matrix parameter.
 pub trait Matrix: Any {}
+/// Filter/Search criterion.
 pub trait Criterion: Any {}
+/// Sequence of values.
 pub trait Sequence: Any {
     fn into_vec(self) -> Vec<Box<dyn Any>>;
 }
+/// Text or Number
 pub trait TextOrNumber: Any {}
+/// A single scalar value.
 pub trait Scalar: Any {}
+/// A field denominator for a database.
 pub trait Field: Any {}
+/// A date/time parameter.
 pub trait DateTimeParam: Any {}
 
 /// Alias for Matrix
@@ -71,7 +82,7 @@ pub use Reference as Criteria;
 
 // -----------------------------------------------------------------------
 
-// Comparision operators
+/// Comparision operators
 pub trait AnyOp<T: Any> {
     /// equal
     fn eq<U: Any>(self, other: U) -> OpLogical<T, U>;
@@ -131,59 +142,59 @@ pub trait ReferenceOp<T: Any> {
 
 impl<T: Any> AnyOp<T> for T {
     fn eq<U: Any>(self, other: U) -> OpLogical<T, U> {
-        eq(self, other)
+        OpLogical(self, "=", other)
     }
 
     fn ne<U: Any>(self, other: U) -> OpLogical<T, U> {
-        ne(self, other)
+        OpLogical(self, "<>", other)
     }
 
     fn lt<U: Any>(self, other: U) -> OpLogical<T, U> {
-        lt(self, other)
+        OpLogical(self, "<", other)
     }
 
     fn le<U: Any>(self, other: U) -> OpLogical<T, U> {
-        le(self, other)
+        OpLogical(self, "<=", other)
     }
 
     fn gt<U: Any>(self, other: U) -> OpLogical<T, U> {
-        gt(self, other)
+        OpLogical(self, ">", other)
     }
 
     fn ge<U: Any>(self, other: U) -> OpLogical<T, U> {
-        ge(self, other)
+        OpLogical(self, ">=", other)
     }
 }
 
 impl<T: Number> NumberOp<T> for T {
     fn add<U: Number>(self, other: U) -> OpNumber<T, U> {
-        add(self, other)
+        OpNumber(self, "+", other)
     }
 
     fn sub<U: Number>(self, other: U) -> OpNumber<T, U> {
-        sub(self, other)
+        OpNumber(self, "-", other)
     }
 
     fn mul<U: Number>(self, other: U) -> OpNumber<T, U> {
-        mul(self, other)
+        OpNumber(self, "*", other)
     }
 
     fn div<U: Number>(self, other: U) -> OpNumber<T, U> {
-        div(self, other)
+        OpNumber(self, "/", other)
     }
 
     fn pow<U: Number>(self, other: U) -> OpNumber<T, U> {
-        pow(self, other)
+        OpNumber(self, "^", other)
     }
 
     fn percent(self) -> OpNumber<T, ()> {
-        percent(self)
+        OpNumber(self, "%", ())
     }
 }
 
 impl<T: Text> TextOp<T> for T {
     fn concat<U: Text>(self, other: U) -> OpText<T, U> {
-        concat(self, other)
+        OpText(self, "&", other)
     }
 }
 
@@ -203,10 +214,10 @@ impl<T: Logical> LogicalOp<T> for T {
 
 impl<T: Reference> ReferenceOp<T> for T {
     fn intersect<U: Reference>(self, other: U) -> OpReference<T, U> {
-        intersect(self, other)
+        OpReference(self, "!", other)
     }
     fn refcat<U: Reference>(self, other: U) -> OpReference<T, U> {
-        refcat(self, other)
+        OpReference(self, "~", other)
     }
 }
 
@@ -233,6 +244,8 @@ impl Sequence for Vec<Box<dyn Any>> {
 
 macro_rules! any_struct {
     (VAL $t:ident) => {
+        /// A newtype wrapper for a simple value.
+        /// Useful in combination with overloaded operators.
         #[derive(Debug)]
         pub struct $t<A:Any>(pub A);
 
@@ -250,6 +263,7 @@ macro_rules! any_struct {
     };
     (OP $t:ident) => {
 
+        /// Operator definition.
         #[derive(Debug)]
         pub struct $t<A:Any, B:Any>(
             pub A,
@@ -273,6 +287,7 @@ macro_rules! any_struct {
     };
     (VAR $t:ident) => {
 
+        /// Function with variable number of parameters.
         pub struct $t(
             pub &'static str,
             pub Vec<Box<dyn Any>>
@@ -301,6 +316,7 @@ macro_rules! any_struct {
     };
     ($t:ident) => {
 
+        /// Parameterless function.
         #[derive(Debug)]
         pub struct $t(
             pub &'static str
@@ -323,6 +339,7 @@ macro_rules! any_struct {
     };
     ($t:ident : $tname0:tt $($tname:tt $tidx:tt)*) => {
 
+        /// Function with parameters.
         #[derive(Debug)]
         pub struct $t<$tname0: Any+'static $(,$tname: Any+'static)*>(
             pub &'static str,
@@ -836,7 +853,6 @@ impl<T: Any, const N: usize, const M: usize> Any for [[T; M]; N] {
 }
 
 impl<T: Any, const N: usize, const M: usize> Matrix for [[T; M]; N] {}
-// todo: sequence?
 
 // -----------------------------------------------------------------------
 
@@ -864,8 +880,9 @@ impl<A: TextOrNumber> TextOrNumber for FParentheses<A> {}
 impl<A: Field> Field for FParentheses<A> {}
 impl<A: DateTimeParam> DateTimeParam for FParentheses<A> {}
 
-/// Creates an expression in parentheses. Aliased as p().
-pub fn parentheses<A: Any>(a: A) -> FParentheses<A> {
+/// Creates an expression in parentheses.
+#[inline]
+pub fn p<A: Any>(a: A) -> FParentheses<A> {
     FParentheses(a)
 }
 
@@ -1051,8 +1068,6 @@ impl DateTimeParam for CellRange {}
 
 // -----------------------------------------------------------------------
 
-// -----------------------------------------------------------------------
-
 /// Creates a formula from any formula expression.
 pub fn formula<T: Any>(f: T) -> String {
     let mut buf = String::new();
@@ -1062,41 +1077,6 @@ pub fn formula<T: Any>(f: T) -> String {
 }
 
 // -----------------------------------------------------------------------
-
-/// Adds two numbers. Also available as postfix add() and as operator +.
-pub fn add<'a, A: Number, B: Number>(a: A, b: B) -> OpNumber<A, B> {
-    OpNumber(a, "+", b)
-}
-
-/// Subtracts two numbers. Also available as postfix sub() and as operator -.
-pub fn sub<'a, A: Number, B: Number>(a: A, b: B) -> OpNumber<A, B> {
-    OpNumber(a, "-", b)
-}
-
-/// Multiplies to numbers. Also available as postfix mul() and as operator *;
-pub fn mul<'a, A: Number, B: Number>(a: A, b: B) -> OpNumber<A, B> {
-    OpNumber(a, "*", b)
-}
-
-/// Divides to numbers. Also available as postfix div() and as operator /.
-pub fn div<'a, A: Number, B: Number>(a: A, b: B) -> OpNumber<A, B> {
-    OpNumber(a, "/", b)
-}
-
-/// Exponential function. Also available as postfix pow() and as operator ^.
-pub fn pow<'a, A: Number, B: Number>(a: A, b: B) -> OpNumber<A, B> {
-    OpNumber(a, "^", b)
-}
-
-/// Negates as number. Also available as prefix operator -.
-pub fn neg<'a, A: Number>(a: A) -> OpNumber<(), A> {
-    OpNumber((), "-", a)
-}
-
-/// percentage. Also available as postfix percent()
-pub fn percent<'a, A: Number>(a: A) -> OpNumber<A, ()> {
-    OpNumber(a, "%", ())
-}
 
 macro_rules! number_op {
     ($t:ident $(< $($l:lifetime $(,)? )? $($tname:ident $(,)?)* >)?) => {
@@ -1199,11 +1179,6 @@ number_op!(FParentheses<A>);
 
 // -----------------------------------------------------------------------
 
-/// concatenates two strings. Also available as postfix concat() and as operator &.
-pub fn concat<'a, A: Text, B: Text>(a: A, b: B) -> OpText<A, B> {
-    OpText(a, "&", b)
-}
-
 macro_rules! text_op {
     ($t:ident $(< $($l:lifetime $(,)? )? $($tname:ident $(,)?)* >)?) => {
         impl <$($($l,)? $($tname: Any,)*)? V: Text> BitAnd<V> for $t $(< $($l,)? $($tname,)* >)? {
@@ -1229,47 +1204,6 @@ text_op!(FnText6<A, B, C, D, E, F>);
 
 // -----------------------------------------------------------------------
 
-pub fn intersect<'a, A: Reference, B: Reference>(a: A, b: B) -> OpReference<A, B> {
-    OpReference(a, "!", b)
-}
-pub fn refcat<'a, A: Reference, B: Reference>(a: A, b: B) -> OpReference<A, B> {
-    OpReference(a, "~", b)
-}
-
-// -----------------------------------------------------------------------
-
-/// equal
-pub fn eq<'a, A: Any, B: Any>(a: A, b: B) -> OpLogical<A, B> {
-    OpLogical(a, "=", b)
-}
-
-/// inequal
-pub fn ne<'a, A: Any, B: Any>(a: A, b: B) -> OpLogical<A, B> {
-    OpLogical(a, "<>", b)
-}
-
-/// less than
-pub fn lt<'a, A: Any, B: Any>(a: A, b: B) -> OpLogical<A, B> {
-    OpLogical(a, "<", b)
-}
-
-/// less than or equal
-pub fn le<'a, A: Any, B: Any>(a: A, b: B) -> OpLogical<A, B> {
-    OpLogical(a, "<=", b)
-}
-
-/// greater than
-pub fn gt<'a, A: Any, B: Any>(a: A, b: B) -> OpLogical<A, B> {
-    OpLogical(a, ">", b)
-}
-
-/// greater than or equal
-pub fn ge<'a, A: Any, B: Any>(a: A, b: B) -> OpLogical<A, B> {
-    OpLogical(a, ">=", b)
-}
-
-// -----------------------------------------------------------------------
-
 #[macro_export]
 macro_rules! cell {
     ($row:expr, $col:expr) => {
@@ -1286,7 +1220,7 @@ macro_rules! range {
         CellRange::local($row, $col, $row_to, $col_to)
     };
     ($row:expr, $col:expr; + $row_delta:expr, $col_delta:expr) => {
-        CellRange::origin_span($row, $col, ($row_delta, $col_delta))
+        CellRange::local($row, $col, $row + $row_delta, $col + $col_delta)
     };
     ($table:expr => $row:expr, $col:expr, $row_to:expr, $col_to:expr) => {
         CellRange::remote($table, $row, $col, $row_to, $col_to)

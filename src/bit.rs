@@ -1,5 +1,5 @@
 //!
-//! Database functions.
+//! Bitwise functions.
 //!
 
 mod generated;
