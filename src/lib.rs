@@ -15,6 +15,7 @@ pub mod lookup;
 pub mod math;
 pub mod operator;
 pub mod rounding;
+pub mod statistic;
 
 /// The traits for this crate.
 /// And the function p() for parentheses.
@@ -37,8 +38,10 @@ pub mod of {
     pub use crate::math::*;
     pub use crate::operator::*;
     pub use crate::rounding::*;
+    pub use crate::statistic::*;
     pub use crate::{
-        bit, compare, complex, database, date, ext, info, logical, lookup, math, operator, rounding,
+        bit, compare, complex, database, date, ext, info, logical, lookup, math, operator,
+        rounding, statistic,
     };
 }
 
