@@ -9,10 +9,12 @@ pub mod complex;
 pub mod date;
 pub mod db;
 pub mod ext;
+pub mod fin;
 pub mod info;
 pub mod logic;
 pub mod lookup;
 pub mod math;
+pub mod matrix;
 pub mod op;
 pub mod round;
 pub mod stat;
@@ -32,14 +34,18 @@ pub mod of {
     pub use crate::date::*;
     pub use crate::db::*;
     pub use crate::ext::*;
+    pub use crate::fin::*;
     pub use crate::info::*;
     pub use crate::logic::*;
     pub use crate::lookup::*;
     pub use crate::math::*;
+    pub use crate::matrix::*;
     pub use crate::op::*;
     pub use crate::round::*;
     pub use crate::stat::*;
-    pub use crate::{bit, cmp, complex, date, db, ext, info, logic, lookup, math, op, round, stat};
+    pub use crate::{
+        bit, cmp, complex, date, db, ext, fin, info, logic, lookup, math, matrix, op, round, stat,
+    };
 }
 
 // -----------------------------------------------------------------------
@@ -430,6 +436,7 @@ fn_number!(FnNumber3: A B 2 C 3);
 fn_number!(FnNumber4: A B 2 C 3 D 4);
 fn_number!(FnNumber5: A B 2 C 3 D 4 E 5);
 fn_number!(FnNumber6: A B 2 C 3 D 4 E 5 F 6);
+fn_number!(FnNumber7: A B 2 C 3 D 4 E 5 F 6 G 7);
 
 macro_rules! fn_text {
     (VAL $t:ident) => {
@@ -575,11 +582,6 @@ fn_matrix!(OP OpMatrix);
 fn_matrix!(VAR FnMatrixVar);
 fn_matrix!(FnMatrix0);
 fn_matrix!(FnMatrix1: A);
-fn_matrix!(FnMatrix2: A B 2);
-fn_matrix!(FnMatrix3: A B 2 C 3);
-fn_matrix!(FnMatrix4: A B 2 C 3 D 4);
-fn_matrix!(FnMatrix5: A B 2 C 3 D 4 E 5);
-fn_matrix!(FnMatrix6: A B 2 C 3 D 4 E 5 F 6);
 
 macro_rules! fn_reference {
     (VAL $t:ident) => {
@@ -1126,6 +1128,7 @@ number_op!(FnNumber3<A, B, C>);
 number_op!(FnNumber4<A, B, C, D>);
 number_op!(FnNumber5<A, B, C, D, E>);
 number_op!(FnNumber6<A, B, C, D, E, F>);
+number_op!(FnNumber7<A, B, C, D, E, F, G>);
 
 number_op!(ValLogical<A>);
 number_op!(OpLogical<A, B>);

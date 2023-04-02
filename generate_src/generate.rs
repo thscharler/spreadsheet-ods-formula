@@ -91,7 +91,7 @@ struct OdsFn<'a> {
 impl<'a> From<&'a StringRecord> for OdsFn<'a> {
     fn from(r: &'a StringRecord) -> Self {
         let mut args = Vec::new();
-        for n in 0..5 {
+        for n in 0..7 {
             let arg = &r[4 + 3 * n];
             let typ = &r[4 + 3 * n + 1];
             let opt = &r[4 + 3 * n + 2];
@@ -307,7 +307,9 @@ fn gen_struct(fnr: &OdsFn) -> Result<String, DError> {
             3 => Ok("FnNumber3".into()),
             4 => Ok("FnNumber4".into()),
             5 => Ok("FnNumber5".into()),
-            _ => Err(DErrorString(format!("Number args > 5 for {}", fnr.func)).into()),
+            6 => Ok("FnNumber6".into()),
+            7 => Ok("FnNumber7".into()),
+            _ => Err(DErrorString(format!("Number args > 7 for {}", fnr.func)).into()),
         },
         "Reference" => match fnr.args.len() {
             0 => Ok("FnReference0".into()),
@@ -344,6 +346,11 @@ fn gen_struct(fnr: &OdsFn) -> Result<String, DError> {
             4 => Ok("FnAny4".into()),
             5 => Ok("FnAny5".into()),
             _ => Err(DErrorString(format!("Any args > 5 for {}", fnr.func)).into()),
+        },
+        "Matrix" => match fnr.args.len() {
+            0 => Ok("FnMatrix0".into()),
+            1 => Ok("FnMatrix1".into()),
+            _ => Err(DErrorString(format!("Matrix args > 1 for {}", fnr.func)).into()),
         },
         _ => Err(DErrorString(format!("Unknown result for {}", fnr.func)).into()),
     }
