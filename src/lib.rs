@@ -4,18 +4,18 @@ use std::fmt::{Display, Formatter, Write};
 use std::ops::{Add, BitAnd, BitXor, Div, Mul, Neg, Sub};
 
 pub mod bit;
-pub mod compare;
+pub mod cmp;
 pub mod complex;
-pub mod database;
 pub mod date;
+pub mod db;
 pub mod ext;
 pub mod info;
-pub mod logical;
+pub mod logic;
 pub mod lookup;
 pub mod math;
-pub mod operator;
-pub mod rounding;
-pub mod statistic;
+pub mod op;
+pub mod round;
+pub mod stat;
 
 /// The traits for this crate.
 /// And the function p() for parentheses.
@@ -27,22 +27,19 @@ pub mod prelude {
 /// All functions in one module, and also all families of functions.
 pub mod of {
     pub use crate::bit::*;
-    pub use crate::compare::*;
+    pub use crate::cmp::*;
     pub use crate::complex::*;
-    pub use crate::database::*;
     pub use crate::date::*;
+    pub use crate::db::*;
     pub use crate::ext::*;
     pub use crate::info::*;
-    pub use crate::logical::*;
+    pub use crate::logic::*;
     pub use crate::lookup::*;
     pub use crate::math::*;
-    pub use crate::operator::*;
-    pub use crate::rounding::*;
-    pub use crate::statistic::*;
-    pub use crate::{
-        bit, compare, complex, database, date, ext, info, logical, lookup, math, operator,
-        rounding, statistic,
-    };
+    pub use crate::op::*;
+    pub use crate::round::*;
+    pub use crate::stat::*;
+    pub use crate::{bit, cmp, complex, date, db, ext, info, logic, lookup, math, op, round, stat};
 }
 
 // -----------------------------------------------------------------------
@@ -76,7 +73,7 @@ pub trait Sequence: Any {}
 pub trait TextOrNumber: Any {}
 /// A single scalar value.
 pub trait Scalar: Any {}
-/// A field denominator for a database.
+/// A field denominator for a db.
 pub trait Field: Any {}
 /// A date/time parameter.
 pub trait DateTimeParam: Any {}
