@@ -3,7 +3,7 @@ use std::collections::HashMap;
 use std::error::Error;
 use std::fmt::Write;
 use std::fmt::{Debug, Display, Formatter};
-use std::fs::File;
+use std::fs::{create_dir_all, File};
 use std::io::Write as IOWrite;
 use std::path::PathBuf;
 
@@ -57,9 +57,12 @@ impl<'a> TryFrom<&'a OdsFn<'a>> for Module {
     type Error = DError;
 
     fn try_from(fnr: &'a OdsFn<'a>) -> Result<Self, Self::Error> {
-        let mut fname = String::from("src/");
-        fname.push_str(fnr.module);
-        fname.push_str(".rs");
+        let mut fpath = String::from("src/");
+        fpath.push_str(fnr.module);
+        let _ = create_dir_all(&fpath);
+
+        let mut fname = fpath.clone();
+        fname.push_str("generated.rs");
 
         let mut fmodule = Module {
             mod_file: fname.into(),
@@ -179,14 +182,12 @@ fn gen_param(fnr: &OdsFn) -> Result<String, DError> {
         if i > 0 {
             write!(buf, ", ")?;
         }
-        if is_trait(a)? {
+        if is_trait(a) {
+            write!(buf, "{}", a.arg)?;
+        } else if is_type(a) {
             write!(buf, "{}", a.arg)?;
         } else {
-            if a.opt {
-                write!(buf, "{}.map(|v| v.as_param())", a.arg)?;
-            } else {
-                write!(buf, "{}.as_param()", a.arg)?;
-            }
+            write!(buf, "{}", a.arg)?;
         }
     }
 
@@ -205,18 +206,24 @@ fn gen_return(fnr: &OdsFn) -> Result<String, DError> {
         if i > 0 {
             write!(buf, ", ")?;
         }
-        if is_trait(a)? {
+        if is_trait(a) {
             if a.opt {
                 write!(buf, "Option<{}>", TYPE_VARS[i_tv])?;
             } else {
                 write!(buf, "{}", TYPE_VARS[i_tv])?;
             }
             i_tv += 1;
+        } else if is_type(a) {
+            if a.opt {
+                write!(buf, "Option<{}>", a.typ)?;
+            } else {
+                write!(buf, "{}", a.typ)?;
+            }
         } else {
             if a.opt {
-                write!(buf, "Option<<{} as Param>::Type>", a.typ)?;
+                write!(buf, "Option<{}>", a.typ)?;
             } else {
-                write!(buf, "<{} as Param>::Type", a.typ)?;
+                write!(buf, "{}", a.typ)?;
             }
         }
     }
@@ -235,13 +242,19 @@ fn gen_arg(fnr: &OdsFn) -> Result<String, DError> {
         if i > 0 {
             write!(buf, ", ")?;
         }
-        if is_trait(a)? {
+        if is_trait(a) {
             if a.opt {
                 write!(buf, "{}: Option<{}>", a.arg, TYPE_VARS[i_tv])?;
             } else {
                 write!(buf, "{}: {}", a.arg, TYPE_VARS[i_tv])?;
             }
             i_tv += 1;
+        } else if is_type(a) {
+            if a.opt {
+                write!(buf, "{}: Option<{}>", a.arg, a.typ)?;
+            } else {
+                write!(buf, "{}: {}", a.arg, a.typ)?;
+            }
         } else {
             if a.opt {
                 write!(buf, "{}: Option<{}>", a.arg, a.typ)?;
@@ -262,13 +275,15 @@ fn gen_type_arg(fnr: &OdsFn) -> Result<String, DError> {
     }
     let mut i_tv = 0usize;
     for (i, a) in fnr.args.iter().enumerate() {
-        if is_trait(a)? {
+        if is_trait(a) {
             if i > 0 {
                 write!(buf, ", ")?;
             }
 
             write!(buf, "{}: {}", TYPE_VARS[i_tv], a.typ)?;
             i_tv += 1;
+        } else if is_type(a) {
+            // noop
         } else {
             // noop
         }
@@ -320,20 +335,44 @@ fn gen_struct(fnr: &OdsFn) -> Result<String, DError> {
             5 => Ok("FnLogical5".into()),
             _ => Err(DErrorString(format!("Logical args > 5 for {}", fnr.func)).into()),
         },
+        "Any" => match fnr.args.len() {
+            0 => Ok("FnAny0".into()),
+            1 => Ok("FnAny1".into()),
+            2 => Ok("FnAny2".into()),
+            3 => Ok("FnAny3".into()),
+            4 => Ok("FnAny4".into()),
+            5 => Ok("FnAny5".into()),
+            _ => Err(DErrorString(format!("Any args > 5 for {}", fnr.func)).into()),
+        },
         _ => Err(DErrorString(format!("Unknown result for {}", fnr.func)).into()),
     }
 }
 
-fn is_trait(arg: &OdsArg) -> Result<bool, DError> {
+fn is_trait(arg: &OdsArg) -> bool {
     match arg.typ {
         "Any" | "Number" | "Text" | "Logical" | "Reference" | "Matrix" | "Criterion"
         | "Sequence" | "TextOrNumber" | "Scalar" | "Field" | "DateTimeParam" | "Array"
-        | "Database" | "Criteria" => Ok(true),
-        _ => Ok(false),
+        | "Database" | "Criteria" => true,
+        _ => false,
+    }
+}
+
+fn is_type(arg: &OdsArg) -> bool {
+    match arg.typ {
+        "i8" | "i16" | "i32" | "i64" | "i128" | "isize" | "u8" | "u16" | "u32" | "u64" | "u128"
+        | "usize" | "f32" | "f64" | "bool" | "&str" | "String" | "CellRef" | "CellRange" => true,
+        _ => false,
     }
 }
 
 fn gen_fn_name(fnr: &OdsFn) -> Result<String, DError> {
     let fname = fnr.func.to_lowercase().replace('.', "_");
-    Ok(fname)
+
+    let fname = match fname.as_str() {
+        "match" => "match_",
+        "mod" => "mod_",
+        v => v,
+    };
+
+    Ok(fname.into())
 }

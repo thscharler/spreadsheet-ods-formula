@@ -1,3 +1,8 @@
+use spreadsheet_ods::{CellRange, CellRef};
+use std::borrow::Cow;
+use std::fmt::{Display, Formatter, Write};
+use std::ops::{Add, BitAnd, BitXor, Div, Mul, Neg, Sub};
+
 mod bitop;
 mod complex;
 mod database;
@@ -8,12 +13,10 @@ mod info;
 mod info_man;
 mod logical;
 mod logical_man;
+mod lookup;
 mod lookup_man;
-
-use spreadsheet_ods::{CellRange, CellRef};
-use std::borrow::Cow;
-use std::fmt::{Display, Formatter, Write};
-use std::ops::{Add, BitAnd, BitXor, Div, Mul, Neg, Sub};
+mod math;
+mod math_man;
 
 pub use bitop::*;
 pub use complex::*;
@@ -25,8 +28,9 @@ pub use info::*;
 pub use info_man::*;
 pub use logical::*;
 pub use logical_man::*;
-// pub use lookup::*;
+pub use lookup::*;
 pub use lookup_man::*;
+pub use math_man::*;
 
 /// The traits for this crate.
 /// And the function p() for parentheses.
@@ -44,7 +48,6 @@ pub mod prelude {
 pub trait Any {
     fn formula(&self, buf: &mut String);
 }
-
 pub trait Number: Any {}
 pub trait Text: Any {}
 pub trait Logical: Any {}
@@ -65,11 +68,6 @@ pub use Matrix as Array;
 pub use Reference as Database;
 /// Alias for a cell reference. A cell range containing headers and filters.
 pub use Reference as Criteria;
-
-pub trait Param {
-    type Type: Any;
-    fn as_param(&self) -> Self::Type;
-}
 
 // -----------------------------------------------------------------------
 

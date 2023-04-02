@@ -1,4 +1,4 @@
-use crate::{FnLogical0, Param};
+use crate::Any;
 
 /// Method for DATEDIF()
 pub enum DateDifMethod {
@@ -16,18 +16,16 @@ pub enum DateDifMethod {
     DaysIgnoreYears,
 }
 
-impl Param for DateDifMethod {
-    type Type = &'static str;
-
-    fn as_param(&self) -> Self::Type {
-        match self {
+impl Any for DateDifMethod {
+    fn formula(&self, buf: &mut String) {
+        buf.push_str(match self {
             DateDifMethod::Years => "y",
             DateDifMethod::Months => "m",
             DateDifMethod::Days => "d",
             DateDifMethod::DaysIgnoreMonthsYears => "md",
             DateDifMethod::MonthsIgnoreYears => "ym",
             DateDifMethod::DaysIgnoreYears => "yd",
-        }
+        });
     }
 }
 
@@ -39,14 +37,12 @@ pub enum Days360Method {
     Europe,
 }
 
-impl Param for Days360Method {
-    type Type = FnLogical0;
-
-    fn as_param(&self) -> Self::Type {
-        match self {
-            Days360Method::USNasd => FnLogical0("FALSE()"),
-            Days360Method::Europe => FnLogical0("TRUE()"),
-        }
+impl Any for Days360Method {
+    fn formula(&self, buf: &mut String) {
+        buf.push_str(match self {
+            Days360Method::USNasd => "FALSE()",
+            Days360Method::Europe => "TRUE()",
+        });
     }
 }
 
@@ -70,11 +66,9 @@ pub enum WeekdayMethod {
     Sunday1,
 }
 
-impl Param for WeekdayMethod {
-    type Type = &'static str;
-
-    fn as_param(&self) -> Self::Type {
-        match self {
+impl Any for WeekdayMethod {
+    fn formula(&self, buf: &mut String) {
+        buf.push_str(match self {
             WeekdayMethod::Monday0 => "3",
             WeekdayMethod::Monday1 => "11",
             WeekdayMethod::Tuesday1 => "12",
@@ -83,7 +77,7 @@ impl Param for WeekdayMethod {
             WeekdayMethod::Friday1 => "15",
             WeekdayMethod::Saturday1 => "16",
             WeekdayMethod::Sunday1 => "17",
-        }
+        });
     }
 }
 
@@ -107,11 +101,9 @@ pub enum WeeknumMethod {
     ISOWeeknum,
 }
 
-impl Param for WeeknumMethod {
-    type Type = &'static str;
-
-    fn as_param(&self) -> Self::Type {
-        match self {
+impl Any for WeeknumMethod {
+    fn formula(&self, buf: &mut String) {
+        buf.push_str(match self {
             WeeknumMethod::Jan1WeekMonday => "11",
             WeeknumMethod::Jan1WeekTuesday => "12",
             WeeknumMethod::Jan1WeekWednesday => "13",
@@ -120,7 +112,7 @@ impl Param for WeeknumMethod {
             WeeknumMethod::Jan1WeekSaturday => "16",
             WeeknumMethod::Jan1WeekSunday => "17",
             WeeknumMethod::ISOWeeknum => "21",
-        }
+        });
     }
 }
 
@@ -138,16 +130,14 @@ pub enum YearFracMethod {
     European30_360,
 }
 
-impl Param for YearFracMethod {
-    type Type = &'static str;
-
-    fn as_param(&self) -> Self::Type {
-        match self {
+impl Any for YearFracMethod {
+    fn formula(&self, buf: &mut String) {
+        buf.push_str(match self {
             YearFracMethod::USNasd30_360 => "0",
             YearFracMethod::ActualActual => "1",
             YearFracMethod::Actual360 => "2",
             YearFracMethod::Actual365 => "3",
             YearFracMethod::European30_360 => "4",
-        }
+        });
     }
 }

@@ -8,7 +8,11 @@ pub fn date<A: Number, B: Number, C: Number>(year: A, month: B, day: C) -> FnNum
 
 ///  Returns the difference in years, months, or days of two date numbers.
 #[inline]
-pub fn datedif<A: DateTimeParam, B: DateTimeParam, C: Text>(start_date: A, end_date: B, format: C) -> FnNumber3<A, B, C> {
+pub fn datedif<A: DateTimeParam, B: DateTimeParam, C: Text>(
+    start_date: A,
+    end_date: B,
+    format: C,
+) -> FnNumber3<A, B, C> {
     FnNumber3("DATEDIF", start_date, end_date, format)
 }
 
@@ -32,7 +36,11 @@ pub fn days<A: DateTimeParam, B: DateTimeParam>(end_date: A, start_date: B) -> F
 
 ///  Returns the number of days between two dates using the 360-day year
 #[inline]
-pub fn days360<A: DateTimeParam, B: DateTimeParam, C: Logical>(start_date: A, end_date: B, method: Option<C>) -> FnNumber3<A, B, Option<C>> {
+pub fn days360<A: DateTimeParam, B: DateTimeParam, C: Logical>(
+    start_date: A,
+    end_date: B,
+    method: Option<C>,
+) -> FnNumber3<A, B, Option<C>> {
     FnNumber3("DAYS360", start_date, end_date, method)
 }
 
@@ -74,14 +82,19 @@ pub fn month<A: DateTimeParam>(d: A) -> FnNumber1<A> {
 
 ///  Returns the whole number of work days between two dates.
 #[inline]
-pub fn networkdays<A: DateTimeParam, B: DateTimeParam, C: Sequence, D: Sequence>(date1: A, date2: B, holidays: Option<C>, workdays: Option<D>) -> FnNumber4<A, B, Option<C>, Option<D>> {
+pub fn networkdays<A: DateTimeParam, B: DateTimeParam, C: Sequence, D: Sequence>(
+    date1: A,
+    date2: B,
+    holidays: Option<C>,
+    workdays: Option<D>,
+) -> FnNumber4<A, B, Option<C>, Option<D>> {
     FnNumber4("NETWORKDAYS", date1, date2, holidays, workdays)
 }
 
 ///  Returns the serial number of the current date and time.
 #[inline]
 pub fn now() -> FnNumber0 {
-    FnNumber0("NOW", )
+    FnNumber0("NOW")
 }
 
 ///  Extracts the second (the integer 0 through 59) from a time. This function presumes that leap seconds never exist.
@@ -92,7 +105,11 @@ pub fn second<A: DateTimeParam>(t: A) -> FnNumber1<A> {
 
 ///  Constructs a time value from hours, minutes, and seconds.
 #[inline]
-pub fn time<A: Number, B: Number, C: Number>(hours: A, minutes: B, seconds: C) -> FnNumber3<A, B, C> {
+pub fn time<A: Number, B: Number, C: Number>(
+    hours: A,
+    minutes: B,
+    seconds: C,
+) -> FnNumber3<A, B, C> {
     FnNumber3("TIME", hours, minutes, seconds)
 }
 
@@ -105,24 +122,29 @@ pub fn timevalue<A: Text>(t: A) -> FnNumber1<A> {
 ///  Returns the serial number of today.
 #[inline]
 pub fn today() -> FnNumber0 {
-    FnNumber0("TODAY", )
+    FnNumber0("TODAY")
 }
 
 ///  Extracts the day of the week from a date; if text, uses current locale to convert to a date.
 #[inline]
-pub fn weekday<A: DateTimeParam>(d: A, t: WeekdayMethod) -> FnNumber2<A, <WeekdayMethod as Param>::Type> {
-    FnNumber2("WEEKDAY", d, t.as_param())
+pub fn weekday<A: DateTimeParam>(d: A, t: WeekdayMethod) -> FnNumber2<A, WeekdayMethod> {
+    FnNumber2("WEEKDAY", d, t)
 }
 
 ///  Determines the week number of the year for a given date.
 #[inline]
-pub fn weeknum<A: DateTimeParam>(d: A, m: WeeknumMethod) -> FnNumber2<A, <WeeknumMethod as Param>::Type> {
-    FnNumber2("WEEKNUM", d, m.as_param())
+pub fn weeknum<A: DateTimeParam>(d: A, m: WeeknumMethod) -> FnNumber2<A, WeeknumMethod> {
+    FnNumber2("WEEKNUM", d, m)
 }
 
 ///  Returns the date serial number which is a specified number of work days before or after an input date.
 #[inline]
-pub fn workday<A: DateTimeParam, B: Number, C: Sequence, D: Sequence>(d: A, offset: B, holidays: Option<C>, workdays: Option<D>) -> FnNumber4<A, B, Option<C>, Option<D>> {
+pub fn workday<A: DateTimeParam, B: Number, C: Sequence, D: Sequence>(
+    d: A,
+    offset: B,
+    holidays: Option<C>,
+    workdays: Option<D>,
+) -> FnNumber4<A, B, Option<C>, Option<D>> {
     FnNumber4("WORKDAY", d, offset, holidays, workdays)
 }
 
@@ -134,6 +156,10 @@ pub fn year<A: DateTimeParam>(d: A) -> FnNumber1<A> {
 
 ///  Extracts the number of years (including fractional part) between two dates
 #[inline]
-pub fn yearfrac<A: DateTimeParam, B: DateTimeParam>(start_date: A, end_date: B, b: Option<YearFracMethod>) -> FnNumber3<A, B, Option<<YearFracMethod as Param>::Type>> {
-    FnNumber3("YEARFRAC", start_date, end_date, b.map(|v| v.as_param()))
+pub fn yearfrac<A: DateTimeParam, B: DateTimeParam>(
+    start_date: A,
+    end_date: B,
+    b: Option<YearFracMethod>,
+) -> FnNumber3<A, B, Option<YearFracMethod>> {
+    FnNumber3("YEARFRAC", start_date, end_date, b)
 }

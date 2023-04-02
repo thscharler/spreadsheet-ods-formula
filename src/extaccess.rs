@@ -1,18 +1,16 @@
-use crate::{Any, FnNumber3, FnNumber4, FnText2, Param, Text};
+use crate::{Any, FnNumber3, FnNumber4, FnText2, Text};
 
 pub enum DDEConversion {
     NumberLocalized,
     NumberEnUS,
 }
 
-impl Param for DDEConversion {
-    type Type = &'static str;
-
-    fn as_param(&self) -> Self::Type {
-        match self {
+impl Any for DDEConversion {
+    fn formula(&self, buf: &mut String) {
+        buf.push_str(match self {
             DDEConversion::NumberLocalized => "0",
             DDEConversion::NumberEnUS => "1",
-        }
+        });
     }
 }
 
@@ -29,8 +27,8 @@ pub fn dde_conv<A: Text, B: Text, C: Text>(
     topic: B,
     item: C,
     mode: DDEConversion,
-) -> FnNumber4<A, B, C, <DDEConversion as Param>::Type> {
-    FnNumber4("DDE", server, topic, item, mode.as_param())
+) -> FnNumber4<A, B, C, DDEConversion> {
+    FnNumber4("DDE", server, topic, item, mode)
 }
 
 ///  Returns data from a DDE request.

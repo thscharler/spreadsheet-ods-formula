@@ -1,14 +1,16 @@
-use crate::FCriterion;
+use crate::*;
 
-// /// Count the number of cells that meet multiple criteria in multiple ranges.
-// #[inline]
-// pub fn countifs(list: &[(FReference, FCriterion<A>)]) -> FNumber {
-//     let mut param = create_param(list.len() * 2);
-//     for (i, (r, c)) in list.iter().enumerate() {
-//         param[2 * i].write(r);
-//         param[2 * i + 1].write(c);
-//     }
-//     let param = unsafe { param_assume_init(param) };
-//
-//     FNumber(func("COUNTIFS", param.as_ref()))
-// }
+/// Count the number of cells that meet multiple criteria in multiple ranges.
+#[inline]
+pub fn countifs<R: Reference + 'static, C: Criterion + 'static, const N: usize>(
+    list: [(R, C); N],
+) -> FnNumberVar {
+    let mut param = Vec::new();
+
+    for (r, c) in list {
+        param.push(Box::new(r) as Box<dyn Any>);
+        param.push(Box::new(c) as Box<dyn Any>);
+    }
+
+    FnNumberVar("COUNTIFS", param)
+}
