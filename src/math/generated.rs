@@ -358,13 +358,13 @@ pub fn sum<A: Sequence>(n: A) -> FnNumber1<A> {
 
 ///  Sum the values of cells in a range that meet a criteria.
 #[inline]
-pub fn sumif<A: Sequence>(n: A) -> FnNumber1<A> {
-    FnNumber1("SUMIF", n)
+pub fn sumif<A: Sequence, B: Criterion, C: Reference>(n: A, crit: B, refs: Option<C>) -> FnNumber3<A, B, Option<C>> {
+    FnNumber3("SUMIF", n, crit, refs)
 }
 
 ///  Returns the sum of the products of the matrix elements
 #[inline]
-pub fn sumproduct<A: Array>(a: A) -> FnNumber1<A> {
+pub fn sumproduct<A: Sequence>(a: A) -> FnNumber1<A> {
     FnNumber1("SUMPRODUCT", a)
 }
 

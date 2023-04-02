@@ -3,7 +3,6 @@
 //!
 
 mod generated;
-
 pub use generated::*;
 
 use crate::{Any, FnAny2, FnAny3, Logical};

@@ -2,7 +2,7 @@
 //! Basic operators as functions.
 //!
 
-use crate::*;
+use crate::{Number, OpNumber, OpReference, OpText, Reference, Text};
 
 /// Adds two numbers. Also available as postfix add() and as operator +.
 pub fn add<'a, A: Number, B: Number>(a: A, b: B) -> OpNumber<A, B> {

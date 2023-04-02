@@ -34,7 +34,7 @@ pub fn days<A: DateTimeParam, B: DateTimeParam>(end_date: A, start_date: B) -> F
 
 ///  Returns the number of days between two dates using the 360-day year
 #[inline]
-pub fn days360<A: DateTimeParam, B: DateTimeParam, C: Logical>(start_date: A, end_date: B, method: Option<C>) -> FnNumber3<A, B, Option<C>> {
+pub fn days360<A: DateTimeParam, B: DateTimeParam>(start_date: A, end_date: B, method: Days360Method) -> FnNumber3<A, B, Days360Method> {
     FnNumber3("DAYS360", start_date, end_date, method)
 }
 
@@ -76,7 +76,7 @@ pub fn month<A: DateTimeParam>(d: A) -> FnNumber1<A> {
 
 ///  Returns the whole number of work days between two dates.
 #[inline]
-pub fn networkdays<A: DateTimeParam, B: DateTimeParam, C: Sequence, D: Sequence>(date1: A, date2: B, holidays: Option<C>, workdays: Option<D>) -> FnNumber4<A, B, Option<C>, Option<D>> {
+pub fn networkdays<A: DateTimeParam, B: DateTimeParam, C: Array, D: Array>(date1: A, date2: B, holidays: Option<C>, workdays: Option<D>) -> FnNumber4<A, B, Option<C>, Option<D>> {
     FnNumber4("NETWORKDAYS", date1, date2, holidays, workdays)
 }
 

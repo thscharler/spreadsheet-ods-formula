@@ -10,7 +10,7 @@ pub fn choose<A: Number, B: Sequence>(idx: A, values: B) -> FnAny2<A, B> {
 
 ///  Look for a matching value in the first row of the given table, and return the value of the indicated row.
 #[inline]
-pub fn hlookup<A: Any, B: Reference, C: Number>(lookup: A, data_source: B, row: C, range_lookup: bool) -> FnAny4<A, B, C, bool> {
+pub fn hlookup<A: Any, B: Array, C: Number>(lookup: A, data_source: B, row: C, range_lookup: bool) -> FnAny4<A, B, C, bool> {
     FnAny4("HLOOKUP", lookup, data_source, row, range_lookup)
 }
 
@@ -28,13 +28,13 @@ pub fn indirect<A: Text>(refs: A, format_a1: bool) -> FnReference2<A, bool> {
 
 ///  Look for criterion in an already-sorted array, and return a corresponding result
 #[inline]
-pub fn lookup<A: Any, B: Reference, C: Reference>(find: A, searched: B, results: C) -> FnAny3<A, B, C> {
+pub fn lookup<A: Any, B: Array, C: Array>(find: A, searched: B, results: Option<C>) -> FnAny3<A, B, Option<C>> {
     FnAny3("LOOKUP", find, searched, results)
 }
 
 /// Finds a Search item in a sequence, and returns its position (starting from 1)
 #[inline]
-pub fn match_<A: Scalar, B: Reference>(search: A, search_region: B, match_type: Option<MatchType>) -> FnAny3<A, B, Option<MatchType>> {
+pub fn match_<A: Scalar, B: Array>(search: A, search_region: B, match_type: Option<MatchType>) -> FnAny3<A, B, Option<MatchType>> {
     FnAny3("MATCH", search, search_region, match_type)
 }
 
@@ -52,6 +52,6 @@ pub fn offset<A: Reference, B: Number, C: Number, D: Number, E: Number>(re: A, r
 
 ///  Look for a matching value in the first column of the given table, and return the value of the indicated column.
 #[inline]
-pub fn vlookup<A: Any, B: Reference, C: Number>(lookup: A, data_source: B, column: C, range_lookup: bool) -> FnAny4<A, B, C, bool> {
+pub fn vlookup<A: Any, B: Array, C: Number>(lookup: A, data_source: B, column: C, range_lookup: bool) -> FnAny4<A, B, C, bool> {
     FnAny4("VLOOKUP", lookup, data_source, column, range_lookup)
 }

@@ -1,0 +1,18 @@
+## Marker traits
+
+Number
+Text
+Logical
+Reference
+Matrix
+Array
+Database == Reference
+Criterion **
+Criteria == Reference
+Sequence
+TextOrNumber
+Scalar
+Field
+DateTimeParam
+
+** Very special trait.

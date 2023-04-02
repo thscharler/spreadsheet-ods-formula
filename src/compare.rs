@@ -2,7 +2,7 @@
 //! Comparison operators as functions.
 //!
 
-pub use crate::*;
+use crate::{Any, OpLogical};
 
 /// equal
 pub fn eq<'a, A: Any, B: Any>(a: A, b: B) -> OpLogical<A, B> {

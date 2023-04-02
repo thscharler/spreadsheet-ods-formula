@@ -19,14 +19,12 @@ pub mod rounding;
 /// The traits for this crate.
 /// And the function p() for parentheses.
 pub mod prelude {
-    pub use crate::{
-        p, Any, AnyOp, Criterion, DateTimeParam, Field, Logical, LogicalOp, Matrix, Number,
-        NumberOp, Reference, ReferenceOp, Scalar, Sequence, Text, TextOp, TextOrNumber,
-    };
+    pub use crate::Any;
+    pub use crate::{AnyOp, LogicalOp, NumberOp, ReferenceOp, TextOp};
 }
 
-/// All functions.
-pub mod all {
+/// All functions in one module, and also all families of functions.
+pub mod of {
     pub use crate::bit::*;
     pub use crate::compare::*;
     pub use crate::complex::*;
@@ -39,6 +37,9 @@ pub mod all {
     pub use crate::math::*;
     pub use crate::operator::*;
     pub use crate::rounding::*;
+    pub use crate::{
+        bit, compare, complex, database, date, ext, info, logical, lookup, math, operator, rounding,
+    };
 }
 
 // -----------------------------------------------------------------------
@@ -58,12 +59,16 @@ pub trait Logical: Any {}
 pub trait Reference: Any {}
 /// Matrix parameter.
 pub trait Matrix: Any {}
+/// Array parameter.
+pub trait Array: Any {}
+/// Alias for a cell reference. A cell range containing headers and a data set.
+pub trait Database: Any {}
 /// Filter/Search criterion.
 pub trait Criterion: Any {}
+/// A cell range containing headers and filters.
+pub trait Criteria: Any {}
 /// Sequence of values.
-pub trait Sequence: Any {
-    fn into_vec(self) -> Vec<Box<dyn Any>>;
-}
+pub trait Sequence: Any {}
 /// Text or Number
 pub trait TextOrNumber: Any {}
 /// A single scalar value.
@@ -72,13 +77,6 @@ pub trait Scalar: Any {}
 pub trait Field: Any {}
 /// A date/time parameter.
 pub trait DateTimeParam: Any {}
-
-/// Alias for Matrix
-pub use Matrix as Array;
-/// Alias for a cell reference. A cell range containing headers and a data set.
-pub use Reference as Database;
-/// Alias for a cell reference. A cell range containing headers and filters.
-pub use Reference as Criteria;
 
 // -----------------------------------------------------------------------
 
@@ -223,27 +221,9 @@ impl<T: Reference> ReferenceOp<T> for T {
 
 // -----------------------------------------------------------------------
 
-impl Any for Vec<Box<dyn Any>> {
-    fn formula(&self, buf: &mut String) {
-        for (i, v) in self.iter().enumerate() {
-            if i > 0 {
-                buf.push(';');
-            }
-            let _ = v.formula(buf);
-        }
-    }
-}
-
-impl Sequence for Vec<Box<dyn Any>> {
-    fn into_vec(self) -> Vec<Box<dyn Any>> {
-        self
-    }
-}
-
-// -----------------------------------------------------------------------
-
 macro_rules! any_struct {
     (VAL $t:ident) => {
+
         /// A newtype wrapper for a simple value.
         /// Useful in combination with overloaded operators.
         #[derive(Debug)]
@@ -255,11 +235,6 @@ macro_rules! any_struct {
             }
         }
 
-        impl <A:Any+'static> Sequence for $t<A> {
-            fn into_vec(self) -> Vec<Box<dyn Any>> {
-                vec![Box::new(self.0)]
-            }
-        }
     };
     (OP $t:ident) => {
 
@@ -279,11 +254,6 @@ macro_rules! any_struct {
             }
         }
 
-        impl <A:Any+'static, B:Any+'static> Sequence for $t<A, B> {
-            fn into_vec(self) -> Vec<Box<dyn Any>> {
-                vec![Box::new(self)]
-            }
-        }
     };
     (VAR $t:ident) => {
 
@@ -307,12 +277,6 @@ macro_rules! any_struct {
             }
         }
 
-        impl Sequence for $t {
-            fn into_vec(self) -> Vec<Box<dyn Any>> {
-                vec![Box::new(self)]
-            }
-        }
-
     };
     ($t:ident) => {
 
@@ -327,12 +291,6 @@ macro_rules! any_struct {
                 buf.push_str(self.0.as_ref());
                 buf.push('(');
                 buf.push(')');
-            }
-        }
-
-        impl Sequence for $t {
-            fn into_vec(self) -> Vec<Box<dyn Any>> {
-                vec![Box::new(self)]
             }
         }
 
@@ -360,11 +318,6 @@ macro_rules! any_struct {
             }
         }
 
-        impl <$tname0: Any+'static $(,$tname: Any+'static)*> Sequence for $t<$tname0 $(,$tname)*> {
-            fn into_vec(self) -> Vec<Box<dyn Any>> {
-                vec![Box::new(self)]
-            }
-        }
     }
 }
 
@@ -393,18 +346,20 @@ macro_rules! fn_any {
         impl $(<$l>)? Number for $t$(<$l>)?  {}
         impl $(<$l>)? Text for $t$(<$l>)?  {}
         impl $(<$l>)? Logical for $t$(<$l>)?  {}
+        impl $(<$l>)? Sequence for $t$(<$l>)?  {}
         impl $(<$l>)? TextOrNumber for $t$(<$l>)?  {}
-        impl $(<$l>)? Field for $t$(<$l>)?  {}
         impl $(<$l>)? Scalar for $t$(<$l>)?  {}
+        impl $(<$l>)? Field for $t$(<$l>)?  {}
         impl $(<$l>)? DateTimeParam for $t$(<$l>)?  {}
     };
     (__IMPL $t:ident : $($l:lifetime)? $tname0:tt $($tname:tt)*) => {
         impl <$($l, )?$tname0: Any $(,$tname: Any)*> Number for $t<$($l, )?$tname0 $(,$tname)*> {}
         impl <$($l, )?$tname0: Any $(,$tname: Any)*> Text for $t<$($l, )?$tname0 $(,$tname)*> {}
         impl <$($l, )?$tname0: Any $(,$tname: Any)*> Logical for $t<$($l, )?$tname0 $(,$tname)*> {}
+        impl <$($l, )?$tname0: Any $(,$tname: Any)*> Sequence for $t<$($l, )?$tname0 $(,$tname)*> {}
         impl <$($l, )?$tname0: Any $(,$tname: Any)*> TextOrNumber for $t<$($l, )?$tname0 $(,$tname)*> {}
-        impl <$($l, )?$tname0: Any $(,$tname: Any)*> Field for $t<$($l, )?$tname0 $(,$tname)*> {}
         impl <$($l, )?$tname0: Any $(,$tname: Any)*> Scalar for $t<$($l, )?$tname0 $(,$tname)*> {}
+        impl <$($l, )?$tname0: Any $(,$tname: Any)*> Field for $t<$($l, )?$tname0 $(,$tname)*> {}
         impl <$($l, )?$tname0: Any $(,$tname: Any)*> DateTimeParam for $t<$($l, )?$tname0 $(,$tname)*> {}
     };
 }
@@ -448,17 +403,19 @@ macro_rules! fn_number {
     (__IMPL $t:ident : $($l:lifetime)?) => {
         impl $(<$l>)? Number for $t$(<$l>)?  {}
         impl $(<$l>)? Logical for $t$(<$l>)?  {}
+        impl $(<$l>)? Sequence for $t$(<$l>)?  {}
         impl $(<$l>)? TextOrNumber for $t$(<$l>)?  {}
-        impl $(<$l>)? Field for $t$(<$l>)?  {}
         impl $(<$l>)? Scalar for $t$(<$l>)?  {}
+        impl $(<$l>)? Field for $t$(<$l>)?  {}
         impl $(<$l>)? DateTimeParam for $t$(<$l>)?  {}
     };
     (__IMPL $t:ident : $($l:lifetime)? $tname0:tt $($tname:tt)*) => {
         impl <$($l, )?$tname0: Any $(,$tname: Any)*> Number for $t<$($l, )?$tname0 $(,$tname)*> {}
         impl <$($l, )?$tname0: Any $(,$tname: Any)*> Logical for $t<$($l, )?$tname0 $(,$tname)*> {}
+        impl <$($l, )?$tname0: Any $(,$tname: Any)*> Sequence for $t<$($l, )?$tname0 $(,$tname)*> {}
         impl <$($l, )?$tname0: Any $(,$tname: Any)*> TextOrNumber for $t<$($l, )?$tname0 $(,$tname)*> {}
-        impl <$($l, )?$tname0: Any $(,$tname: Any)*> Field for $t<$($l, )?$tname0 $(,$tname)*> {}
         impl <$($l, )?$tname0: Any $(,$tname: Any)*> Scalar for $t<$($l, )?$tname0 $(,$tname)*> {}
+        impl <$($l, )?$tname0: Any $(,$tname: Any)*> Field for $t<$($l, )?$tname0 $(,$tname)*> {}
         impl <$($l, )?$tname0: Any $(,$tname: Any)*> DateTimeParam for $t<$($l, )?$tname0 $(,$tname)*> {}
     };
 }
@@ -501,16 +458,18 @@ macro_rules! fn_text {
     };
     (__IMPL $t:ident : $($l:lifetime)?) => {
         impl $(<$l>)? Text for $t$(<$l>)?  {}
+        impl $(<$l>)? Sequence for $t$(<$l>)?  {}
         impl $(<$l>)? TextOrNumber for $t$(<$l>)?  {}
-        impl $(<$l>)? Field for $t$(<$l>)?  {}
         impl $(<$l>)? Scalar for $t$(<$l>)?  {}
+        impl $(<$l>)? Field for $t$(<$l>)?  {}
         impl $(<$l>)? DateTimeParam for $t$(<$l>)?  {}
     };
     (__IMPL $t:ident : $($l:lifetime)? $tname0:tt $($tname:tt)*) => {
         impl <$($l, )?$tname0: Any $(,$tname: Any)*> Text for $t<$($l, )?$tname0 $(,$tname)*> {}
+        impl <$($l, )?$tname0: Any $(,$tname: Any)*> Sequence for $t<$($l, )?$tname0 $(,$tname)*> {}
         impl <$($l, )?$tname0: Any $(,$tname: Any)*> TextOrNumber for $t<$($l, )?$tname0 $(,$tname)*> {}
-        impl <$($l, )?$tname0: Any $(,$tname: Any)*> Field for $t<$($l, )?$tname0 $(,$tname)*> {}
         impl <$($l, )?$tname0: Any $(,$tname: Any)*> Scalar for $t<$($l, )?$tname0 $(,$tname)*> {}
+        impl <$($l, )?$tname0: Any $(,$tname: Any)*> Field for $t<$($l, )?$tname0 $(,$tname)*> {}
         impl <$($l, )?$tname0: Any $(,$tname: Any)*> DateTimeParam for $t<$($l, )?$tname0 $(,$tname)*> {}
     };
 }
@@ -552,16 +511,18 @@ macro_rules! fn_logical {
         fn_logical!(__IMPL $t: $tname0 $($tname)*);
     };
     (__IMPL $t:ident : $($l:lifetime)?) => {
-        impl $(<$l>)? Logical for $t$(<$l>)?  {}
         impl $(<$l>)? Number for $t$(<$l>)?  {}
-        impl $(<$l>)? Scalar for $t$(<$l>)?  {}
+        impl $(<$l>)? Logical for $t$(<$l>)?  {}
+        impl $(<$l>)? Sequence for $t$(<$l>)?  {}
         impl $(<$l>)? TextOrNumber for $t$(<$l>)?  {}
+        impl $(<$l>)? Scalar for $t$(<$l>)?  {}
     };
     (__IMPL $t:ident : $($l:lifetime)? $tname0:tt $($tname:tt)*) => {
-        impl <$($l, )?$tname0: Any $(,$tname: Any)*> Logical for $t<$($l, )?$tname0 $(,$tname)*> {}
         impl <$($l, )?$tname0: Any $(,$tname: Any)*> Number for $t<$($l, )?$tname0 $(,$tname)*> {}
-        impl <$($l, )?$tname0: Any $(,$tname: Any)*> Scalar for $t<$($l, )?$tname0 $(,$tname)*> {}
+        impl <$($l, )?$tname0: Any $(,$tname: Any)*> Logical for $t<$($l, )?$tname0 $(,$tname)*> {}
+        impl <$($l, )?$tname0: Any $(,$tname: Any)*> Sequence for $t<$($l, )?$tname0 $(,$tname)*> {}
         impl <$($l, )?$tname0: Any $(,$tname: Any)*> TextOrNumber for $t<$($l, )?$tname0 $(,$tname)*> {}
+        impl <$($l, )?$tname0: Any $(,$tname: Any)*> Scalar for $t<$($l, )?$tname0 $(,$tname)*> {}
     };
 }
 
@@ -646,25 +607,33 @@ macro_rules! fn_reference {
         fn_reference!(__IMPL $t: $tname0 $($tname)*);
     };
     (__IMPL $t:ident : $($l:lifetime)?) => {
-        impl $(<$l>)? Reference for $t$(<$l>)?  {}
         impl $(<$l>)? Number for $t$(<$l>)?  {}
         impl $(<$l>)? Text for $t$(<$l>)?  {}
         impl $(<$l>)? Logical for $t$(<$l>)?  {}
+        impl $(<$l>)? Reference for $t$(<$l>)?  {}
         impl $(<$l>)? Matrix for $t$(<$l>)?  {}
+        impl $(<$l>)? Array for $t$(<$l>)?  {}
+        impl $(<$l>)? Database for $t$(<$l>)?  {}
+        impl $(<$l>)? Criteria for $t$(<$l>)?  {}
+        impl $(<$l>)? Sequence for $t$(<$l>)?  {}
         impl $(<$l>)? TextOrNumber for $t$(<$l>)?  {}
-        impl $(<$l>)? Field for $t$(<$l>)?  {}
         impl $(<$l>)? Scalar for $t$(<$l>)?  {}
+        impl $(<$l>)? Field for $t$(<$l>)?  {}
         impl $(<$l>)? DateTimeParam for $t$(<$l>)?  {}
     };
     (__IMPL $t:ident : $($l:lifetime)? $tname0:tt $($tname:tt)*) => {
-        impl <$($l, )?$tname0: Any $(,$tname: Any)*> Reference for $t<$($l, )?$tname0 $(,$tname)*> {}
         impl <$($l, )?$tname0: Any $(,$tname: Any)*> Number for $t<$($l, )?$tname0 $(,$tname)*> {}
         impl <$($l, )?$tname0: Any $(,$tname: Any)*> Text for $t<$($l, )?$tname0 $(,$tname)*> {}
         impl <$($l, )?$tname0: Any $(,$tname: Any)*> Logical for $t<$($l, )?$tname0 $(,$tname)*> {}
+        impl <$($l, )?$tname0: Any $(,$tname: Any)*> Reference for $t<$($l, )?$tname0 $(,$tname)*> {}
         impl <$($l, )?$tname0: Any $(,$tname: Any)*> Matrix for $t<$($l, )?$tname0 $(,$tname)*> {}
+        impl <$($l, )?$tname0: Any $(,$tname: Any)*> Array for $t<$($l, )?$tname0 $(,$tname)*> {}
+        impl <$($l, )?$tname0: Any $(,$tname: Any)*> Database for $t<$($l, )?$tname0 $(,$tname)*> {}
+        impl <$($l, )?$tname0: Any $(,$tname: Any)*> Criteria for $t<$($l, )?$tname0 $(,$tname)*> {}
+        impl <$($l, )?$tname0: Any $(,$tname: Any)*> Sequence for $t<$($l, )?$tname0 $(,$tname)*> {}
         impl <$($l, )?$tname0: Any $(,$tname: Any)*> TextOrNumber for $t<$($l, )?$tname0 $(,$tname)*> {}
-        impl <$($l, )?$tname0: Any $(,$tname: Any)*> Field for $t<$($l, )?$tname0 $(,$tname)*> {}
         impl <$($l, )?$tname0: Any $(,$tname: Any)*> Scalar for $t<$($l, )?$tname0 $(,$tname)*> {}
+        impl <$($l, )?$tname0: Any $(,$tname: Any)*> Field for $t<$($l, )?$tname0 $(,$tname)*> {}
         impl <$($l, )?$tname0: Any $(,$tname: Any)*> DateTimeParam for $t<$($l, )?$tname0 $(,$tname)*> {}
     };
 }
@@ -682,6 +651,19 @@ fn_reference!(FnReference6: A B 2 C 3 D 4 E 5 F 6);
 
 // -----------------------------------------------------------------------
 
+impl Any for Vec<Box<dyn Any>> {
+    fn formula(&self, buf: &mut String) {
+        for (i, v) in self.iter().enumerate() {
+            if i > 0 {
+                buf.push(';');
+            }
+            let _ = v.formula(buf);
+        }
+    }
+}
+
+impl Sequence for Vec<Box<dyn Any>> {}
+
 macro_rules! tup {
     ( $tname0:ident $($tname:tt $tnum:tt)* ) => {
 
@@ -695,16 +677,7 @@ macro_rules! tup {
             }
         }
 
-        impl<$tname0: Any + 'static, $($tname: Any + 'static,)*> Sequence for ($tname0, $($tname,)*) {
-            fn into_vec(self) -> Vec<Box<dyn Any>> {
-                let mut v = Vec::new();
-                v.push(Box::new(self.0) as Box<dyn Any>);
-                $(
-                    v.push(Box::new(self.$tnum) as Box<dyn Any>);
-                )*
-                v
-            }
-        }
+        impl<$tname0: Any + 'static, $($tname: Any + 'static,)*> Sequence for ($tname0, $($tname,)*) {}
 
     }
 }
@@ -712,6 +685,7 @@ macro_rules! tup {
 impl Any for () {
     fn formula(&self, _buf: &mut String) {}
 }
+impl Sequence for () {}
 
 tup!(A);
 tup!(A B 1 );
@@ -792,6 +766,47 @@ impl<A: Any> Criterion for (CriterionCmp, A) {}
 
 // -----------------------------------------------------------------------
 
+pub struct FMatrix<T: Any, const N: usize, const M: usize>(pub [[T; M]; N]);
+
+impl<T: Any, const N: usize, const M: usize> Any for FMatrix<T, N, M> {
+    fn formula(&self, buf: &mut String) {
+        buf.push('{');
+        for (i, r) in self.0.iter().enumerate() {
+            if i > 0 {
+                buf.push('|');
+            }
+            for (j, v) in r.iter().enumerate() {
+                if j > 0 {
+                    buf.push(';');
+                }
+                v.formula(buf);
+            }
+        }
+        buf.push('}');
+    }
+}
+
+impl<T: Any, const N: usize, const M: usize> Matrix for FMatrix<T, N, M> {}
+
+pub struct FArray<T: Any, const N: usize>(pub [T; N]);
+
+impl<T: Any, const N: usize> Any for FArray<T, N> {
+    fn formula(&self, buf: &mut String) {
+        buf.push('{');
+        for (i, v) in self.0.iter().enumerate() {
+            if i > 0 {
+                buf.push(';');
+            }
+            v.formula(buf);
+        }
+        buf.push('}');
+    }
+}
+
+impl<T: Any, const N: usize> Array for FArray<T, N> {}
+
+// -----------------------------------------------------------------------
+
 impl<T: Any + ?Sized> Any for Box<T> {
     fn formula(&self, buf: &mut String) {
         self.as_ref().formula(buf);
@@ -801,14 +816,14 @@ impl<T: Number + Any + ?Sized> Number for Box<T> {}
 impl<T: Text + Any + ?Sized> Text for Box<T> {}
 impl<T: Logical + Any + ?Sized> Logical for Box<T> {}
 impl<T: Reference + Any + ?Sized> Reference for Box<T> {}
-impl<T: Criterion + Any + ?Sized> Criterion for Box<T> {}
-impl<T: Sequence + Any + ?Sized + 'static> Sequence for Box<T> {
-    fn into_vec(self) -> Vec<Box<dyn Any>> {
-        vec![Box::new(self)]
-    }
-}
 impl<T: Matrix + Any + ?Sized> Matrix for Box<T> {}
+impl<T: Array + Any + ?Sized> Array for Box<T> {}
+impl<T: Database + Any + ?Sized> Database for Box<T> {}
+impl<T: Criterion + Any + ?Sized> Criterion for Box<T> {}
+impl<T: Criteria + Any + ?Sized> Criteria for Box<T> {}
+impl<T: Sequence + Any + ?Sized + 'static> Sequence for Box<T> {}
 impl<T: TextOrNumber + Any + ?Sized> TextOrNumber for Box<T> {}
+impl<T: Scalar + Any + ?Sized> Scalar for Box<T> {}
 impl<T: Field + Any + ?Sized> Field for Box<T> {}
 impl<T: DateTimeParam + Any + ?Sized> DateTimeParam for Box<T> {}
 
@@ -823,36 +838,16 @@ impl<T: Number + Any + Sized> Number for Option<T> {}
 impl<T: Text + Any + Sized> Text for Option<T> {}
 impl<T: Logical + Any + Sized> Logical for Option<T> {}
 impl<T: Reference + Any + Sized> Reference for Option<T> {}
-impl<T: Criterion + Any + Sized> Criterion for Option<T> {}
-impl<T: Sequence + Any + 'static> Sequence for Option<T> {
-    fn into_vec(self) -> Vec<Box<dyn Any>> {
-        vec![Box::new(self)]
-    }
-}
 impl<T: Matrix + Any + Sized> Matrix for Option<T> {}
+impl<T: Array + Any + Sized> Array for Option<T> {}
+impl<T: Database + Any + Sized> Database for Option<T> {}
+impl<T: Criterion + Any + Sized> Criterion for Option<T> {}
+impl<T: Criteria + Any + Sized> Criteria for Option<T> {}
+impl<T: Sequence + Any + Sized> Sequence for Option<T> {}
 impl<T: TextOrNumber + Any + Sized> TextOrNumber for Option<T> {}
+impl<T: Scalar + Any + Sized> Scalar for Option<T> {}
 impl<T: Field + Any + Sized> Field for Option<T> {}
 impl<T: DateTimeParam + Any + Sized> DateTimeParam for Option<T> {}
-
-impl<T: Any, const N: usize, const M: usize> Any for [[T; M]; N] {
-    fn formula(&self, buf: &mut String) {
-        buf.push('{');
-        for (i, r) in self.iter().enumerate() {
-            if i > 0 {
-                buf.push('|');
-            }
-            for (j, c) in r.iter().enumerate() {
-                if j > 0 {
-                    buf.push(';');
-                }
-                c.formula(buf);
-            }
-        }
-        buf.push('}');
-    }
-}
-
-impl<T: Any, const N: usize, const M: usize> Matrix for [[T; M]; N] {}
 
 // -----------------------------------------------------------------------
 
@@ -871,12 +866,13 @@ impl<A: Number> Number for FParentheses<A> {}
 impl<A: Text> Text for FParentheses<A> {}
 impl<A: Logical> Logical for FParentheses<A> {}
 impl<A: Reference> Reference for FParentheses<A> {}
-impl<A: Sequence + Any + 'static> Sequence for FParentheses<A> {
-    fn into_vec(self) -> Vec<Box<dyn Any>> {
-        vec![Box::new(self)]
-    }
-}
+impl<A: Matrix> Matrix for FParentheses<A> {}
+impl<A: Array> Array for FParentheses<A> {}
+impl<A: Database> Database for FParentheses<A> {}
+impl<A: Criteria> Criteria for FParentheses<A> {}
+impl<A: Sequence> Sequence for FParentheses<A> {}
 impl<A: TextOrNumber> TextOrNumber for FParentheses<A> {}
+impl<A: Scalar> Scalar for FParentheses<A> {}
 impl<A: Field> Field for FParentheses<A> {}
 impl<A: DateTimeParam> DateTimeParam for FParentheses<A> {}
 
@@ -897,14 +893,10 @@ macro_rules! value_number {
         }
         impl Number for $t {}
         impl Logical for $t {}
-        impl Sequence for $t {
-            fn into_vec(self) -> Vec<Box<dyn Any>> {
-                vec![Box::new(self)]
-            }
-        }
+        impl Sequence for $t {}
         impl TextOrNumber for $t {}
-        impl Field for $t {}
         impl Scalar for $t {}
+        impl Field for $t {}
         impl DateTimeParam for $t {}
     };
 }
@@ -929,14 +921,10 @@ impl Any for bool {
         buf.push_str(if *self { "TRUE()" } else { "FALSE()" });
     }
 }
-impl Logical for bool {}
 impl Number for bool {}
+impl Logical for bool {}
+impl Sequence for bool {}
 impl Scalar for bool {}
-impl Sequence for bool {
-    fn into_vec(self) -> Vec<Box<dyn Any>> {
-        vec![Box::new(self)]
-    }
-}
 
 impl Any for &str {
     fn formula(&self, buf: &mut String) {
@@ -957,14 +945,10 @@ impl Any for &str {
     }
 }
 impl Text for &str {}
-impl Sequence for &'static str {
-    fn into_vec(self) -> Vec<Box<dyn Any>> {
-        vec![Box::new(self)]
-    }
-}
+impl Sequence for &str {}
 impl TextOrNumber for &str {}
-impl Field for &str {}
 impl Scalar for &str {}
+impl Field for &str {}
 impl DateTimeParam for &str {}
 
 impl<'a> Any for Cow<'a, str> {
@@ -987,14 +971,10 @@ impl<'a> Any for Cow<'a, str> {
     }
 }
 impl<'a> Text for Cow<'a, str> {}
-impl Sequence for Cow<'static, str> {
-    fn into_vec(self) -> Vec<Box<dyn Any>> {
-        vec![Box::new(self)]
-    }
-}
+impl<'a> Sequence for Cow<'a, str> {}
 impl<'a> TextOrNumber for Cow<'a, str> {}
-impl<'a> Field for Cow<'a, str> {}
 impl<'a> Scalar for Cow<'a, str> {}
+impl<'a> Field for Cow<'a, str> {}
 impl<'a> DateTimeParam for Cow<'a, str> {}
 
 impl Any for String {
@@ -1016,14 +996,10 @@ impl Any for String {
     }
 }
 impl Text for String {}
-impl Sequence for String {
-    fn into_vec(self) -> Vec<Box<dyn Any>> {
-        vec![Box::new(self)]
-    }
-}
+impl Sequence for String {}
 impl TextOrNumber for String {}
-impl Field for String {}
 impl Scalar for String {}
+impl Field for String {}
 impl DateTimeParam for String {}
 
 impl Any for CellRef {
@@ -1031,19 +1007,18 @@ impl Any for CellRef {
         buf.push_str(self.to_formula().as_str())
     }
 }
-impl Reference for CellRef {}
 impl Number for CellRef {}
 impl Text for CellRef {}
 impl Logical for CellRef {}
-impl Sequence for CellRef {
-    fn into_vec(self) -> Vec<Box<dyn Any>> {
-        vec![Box::new(self)]
-    }
-}
-impl TextOrNumber for CellRef {}
-impl Field for CellRef {}
-impl Scalar for CellRef {}
+impl Reference for CellRef {}
 impl Matrix for CellRef {}
+impl Array for CellRef {}
+impl Database for CellRef {}
+impl Criteria for CellRef {}
+impl Sequence for CellRef {}
+impl TextOrNumber for CellRef {}
+impl Scalar for CellRef {}
+impl Field for CellRef {}
 impl DateTimeParam for CellRef {}
 
 impl Any for CellRange {
@@ -1051,19 +1026,18 @@ impl Any for CellRange {
         buf.push_str(self.to_formula().as_str())
     }
 }
-impl Reference for CellRange {}
 impl Number for CellRange {}
 impl Text for CellRange {}
 impl Logical for CellRange {}
-impl Sequence for CellRange {
-    fn into_vec(self) -> Vec<Box<dyn Any>> {
-        vec![Box::new(self)]
-    }
-}
-impl TextOrNumber for CellRange {}
-impl Field for CellRange {}
-impl Scalar for CellRange {}
+impl Reference for CellRange {}
 impl Matrix for CellRange {}
+impl Array for CellRange {}
+impl Database for CellRange {}
+impl Criteria for CellRange {}
+impl Sequence for CellRange {}
+impl TextOrNumber for CellRange {}
+impl Scalar for CellRange {}
+impl Field for CellRange {}
 impl DateTimeParam for CellRange {}
 
 // -----------------------------------------------------------------------

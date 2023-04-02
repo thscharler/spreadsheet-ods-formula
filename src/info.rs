@@ -3,10 +3,9 @@
 //!
 
 mod generated;
-
 pub use generated::*;
 
-use crate::*;
+use crate::{Any, Criterion, FnNumberVar, Reference};
 
 /// Count the number of cells that meet multiple criteria in multiple ranges.
 #[inline]
