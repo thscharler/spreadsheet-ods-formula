@@ -302,6 +302,12 @@ pub fn sec<A: Number>(n: A) -> FnNumber1<A> {
     FnNumber1("SEC", n)
 }
 
+///  Return the hyperbolic secant of the given angle specified in radians
+#[inline]
+pub fn sech<A: Number>(n: A) -> FnNumber1<A> {
+    FnNumber1("SECH", n)
+}
+
 ///  Returns the sum of a power series.
 #[inline]
 pub fn seriessum<A: Number, B: Number, C: Number, D: Array>(x: A, n: B, m: C, coefficients: D) -> FnNumber4<A, B, C, D> {
@@ -324,12 +330,6 @@ pub fn sin<A: Number>(n: A) -> FnNumber1<A> {
 #[inline]
 pub fn sinh<A: Number>(n: A) -> FnNumber1<A> {
     FnNumber1("SINH", n)
-}
-
-///  Return the hyperbolic secant of the given angle specified in radians
-#[inline]
-pub fn sech<A: Number>(n: A) -> FnNumber1<A> {
-    FnNumber1("SECH", n)
 }
 
 ///  Return the square root of a number.

@@ -100,26 +100,14 @@ pub fn impower<A: Number, B: Number>(x: A, y: B) -> FnNumber2<A, B> {
 
 /// Returns the product of complex numbers.
 #[inline]
-pub fn improduct<A: Number, B: Number>(x: A, y: B) -> FnNumber2<A, B> {
-    FnNumber2("IMPRODUCT", x, y)
+pub fn improduct<A: Sequence>(seq: A) -> FnNumber1<A> {
+    FnNumber1("IMPRODUCT", seq)
 }
 
 /// Returns the real coefficient of a complex number.
 #[inline]
 pub fn imreal<A: Number>(v: A) -> FnNumber1<A> {
     FnNumber1("IMREAL", v)
-}
-
-/// Returns the sine of a complex number.
-#[inline]
-pub fn imsin<A: Number>(v: A) -> FnNumber1<A> {
-    FnNumber1("IMSIN", v)
-}
-
-/// Returns the hyperbolic sine of a complex number.
-#[inline]
-pub fn imsinh<A: Number>(v: A) -> FnNumber1<A> {
-    FnNumber1("IMSINH", v)
 }
 
 /// Returns the secant of a complex number.
@@ -132,6 +120,18 @@ pub fn imsec<A: Number>(v: A) -> FnNumber1<A> {
 #[inline]
 pub fn imsech<A: Number>(v: A) -> FnNumber1<A> {
     FnNumber1("IMSECH", v)
+}
+
+/// Returns the sine of a complex number.
+#[inline]
+pub fn imsin<A: Number>(v: A) -> FnNumber1<A> {
+    FnNumber1("IMSIN", v)
+}
+
+/// Returns the hyperbolic sine of a complex number.
+#[inline]
+pub fn imsinh<A: Number>(v: A) -> FnNumber1<A> {
+    FnNumber1("IMSINH", v)
 }
 
 /// Returns the square root of a complex number

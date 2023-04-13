@@ -74,14 +74,18 @@ impl<'a> TryFrom<&'a OdsFn<'a>> for Module {
     }
 }
 
+#[derive(Clone, Debug)]
 struct OdsArg<'a> {
     arg: &'a str,
     typ: &'a str,
     opt: bool,
+    vol: bool,
 }
 
+#[derive(Clone, Debug)]
 struct OdsFn<'a> {
     module: &'a str,
+    fname: String,
     func: &'a str,
     doc: &'a str,
     result: &'a str,
@@ -101,6 +105,7 @@ impl<'a> From<&'a StringRecord> for OdsFn<'a> {
                     arg,
                     typ,
                     opt: opt == "OPT",
+                    vol: opt == "VOL",
                 })
             } else if arg.is_empty() && typ.is_empty() {
                 // fine
@@ -111,6 +116,7 @@ impl<'a> From<&'a StringRecord> for OdsFn<'a> {
 
         Self {
             module: &r[0],
+            fname: (&r[1]).into(),
             func: &r[1],
             doc: &r[2],
             result: &r[3],
@@ -133,7 +139,7 @@ fn build_from_csv() -> Result<(), DError> {
         }
         let m = mods.get_mut(fnr.module).expect("module");
 
-        generate_fn(&fnr, m)?;
+        generate_all_fn(&fnr, m)?;
     }
 
     for v in mods.values() {
@@ -148,6 +154,37 @@ fn init_module(m: &mut Module) -> Result<(), DError> {
     writeln!(m.gen, "use crate::*;")?;
     writeln!(m.gen, "#[allow(unused_imports)]")?;
     writeln!(m.gen, "use super::*;")?;
+
+    Ok(())
+}
+
+fn generate_all_fn(fnr: &OdsFn, m: &mut Module) -> Result<(), DError> {
+    let mut n_vol = 1;
+    for x in &fnr.args {
+        if x.vol {
+            n_vol += 1;
+        }
+    }
+
+    let mut ff = fnr.clone();
+    while n_vol > 0 {
+        ff.fname = format!("{}{}", fnr.func, "_".repeat(n_vol - 1));
+
+        generate_fn(&ff, m)?;
+
+        n_vol -= 1;
+
+        if n_vol > 0 {
+            if let Some(v) = ff.args.pop() {
+                if !v.vol {
+                    return Err(DError::from(DErrorString(format!(
+                        "Invalid VOL in function {}. Must be trailing.",
+                        ff.func
+                    ))));
+                }
+            }
+        }
+    }
 
     Ok(())
 }
@@ -374,11 +411,12 @@ fn is_type(arg: &OdsArg) -> bool {
 }
 
 fn gen_fn_name(fnr: &OdsFn) -> Result<String, DError> {
-    let fname = fnr.func.to_lowercase().replace('.', "_");
+    let fname = fnr.fname.to_lowercase().replace('.', "_");
 
     let fname = match fname.as_str() {
         "match" => "match_",
         "mod" => "mod_",
+        "type" => "type_",
         v => v,
     };
 

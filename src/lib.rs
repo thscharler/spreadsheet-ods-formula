@@ -1044,16 +1044,6 @@ impl DateTimeParam for CellRange {}
 
 // -----------------------------------------------------------------------
 
-/// Creates a formula from any formula expression.
-pub fn formula<T: Any>(f: T) -> String {
-    let mut buf = String::new();
-    buf.push_str("of:=");
-    let _ = f.formula(&mut buf);
-    buf
-}
-
-// -----------------------------------------------------------------------
-
 macro_rules! number_op {
     ($t:ident $(< $($l:lifetime $(,)? )? $($tname:ident $(,)?)* >)?) => {
         impl <$($($l,)? $($tname: Any,)*)? V: Number> Add<V> for $t $(< $($l,)? $($tname,)* >)? {
@@ -1178,3 +1168,13 @@ text_op!(FnText3<A, B, C>);
 text_op!(FnText4<A, B, C, D>);
 text_op!(FnText5<A, B, C, D, E>);
 text_op!(FnText6<A, B, C, D, E, F>);
+
+// -----------------------------------------------------------------------
+
+/// Creates a formula from any formula expression.
+pub fn formula<T: Any>(f: T) -> String {
+    let mut buf = String::new();
+    buf.push_str("of:=");
+    let _ = f.formula(&mut buf);
+    buf
+}

@@ -8,16 +8,16 @@ pub fn ceiling<A: Number, B: Number>(n: A, significance: B, rounding: RoundingMo
     FnNumber3("CEILING", n, significance, rounding)
 }
 
-///  Rounds a number down to the nearest integer.
-#[inline]
-pub fn int<A: Number>(n: A) -> FnNumber1<A> {
-    FnNumber1("INT", n)
-}
-
 ///  Round a number N down to the nearest multiple of the second parameter,
 #[inline]
 pub fn floor<A: Number, B: Number>(n: A, significance: B, rounding: RoundingMode) -> FnNumber3<A, B, RoundingMode> {
     FnNumber3("FLOOR", n, significance, rounding)
+}
+
+///  Rounds a number down to the nearest integer.
+#[inline]
+pub fn int<A: Number>(n: A) -> FnNumber1<A> {
+    FnNumber1("INT", n)
 }
 
 ///  Rounds the number to given multiple.

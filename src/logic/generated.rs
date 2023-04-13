@@ -14,6 +14,12 @@ pub fn iferror<A: Any, B: Any>(x: A, alt: B) -> FnAny2<A, B> {
     FnAny2("IFERROR", x, alt)
 }
 
+/// Return X unless it is #N/A, in which case return an alternative value.
+#[inline]
+pub fn ifna<A: Any, B: Any>(x: A, alt: B) -> FnAny2<A, B> {
+    FnAny2("IFNA", x, alt)
+}
+
 /// Compute logical NOT.
 #[inline]
 pub fn not<A: Logical>(v: A) -> FnLogical1<A> {
@@ -30,10 +36,4 @@ pub fn or<A: Sequence>(v: A) -> FnLogical1<A> {
 #[inline]
 pub fn xor<A: Sequence>(v: A) -> FnLogical1<A> {
     FnLogical1("XOR", v)
-}
-
-/// Return X unless it is #N/A, in which case return an alternative value.
-#[inline]
-pub fn ifna<A: Any, B: Any>(x: A, alt: B) -> FnAny2<A, B> {
-    FnAny2("IFNA", x, alt)
 }

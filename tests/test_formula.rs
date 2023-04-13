@@ -4,7 +4,7 @@ use spreadsheet_ods_formula::date::{Days360Method, WeekdayMethod};
 use spreadsheet_ods_formula::of;
 use spreadsheet_ods_formula::prelude::*;
 use spreadsheet_ods_formula::{
-    cell, formula, p, range, CriterionCmp, FArray, FCriterion, FMatrix, FnAny0, ValNumber,
+    formula, p, CriterionCmp, FArray, FCriterion, FMatrix, FnAny0, ValNumber,
 };
 
 use crate::result_test::{test_ok, ReportValues};
@@ -149,34 +149,46 @@ fn test_date() {
     test_ok(formula(of::date(1, 1, 1)))
         .test(eq, "of:=DATE(1;1;1)")
         .q(Q);
-    test_ok(formula(of::datevalue(cell!(6, 7)))).q(Q);
-    test_ok(formula(of::day(cell!("FUGU" => 9,9)))).q(Q);
-    test_ok(formula(of::days(range!(8,8; + 4, 4), range!(9,9;+4,4)))).q(Q);
-    test_ok(formula(of::days360(
-        range!("MANGO"=> 9,9,12,12),
-        range!("YARO"=> 8,8,12,12),
+    test_ok(formula(of::datevalue(CellRef::local(6, 7)))).q(Q);
+    test_ok(formula(of::day(CellRef::remote("FUGU", 9, 9)))).q(Q);
+    test_ok(formula(of::days(
+        CellRange::local(8, 8, 12, 12),
+        CellRange::local(9, 9, 13, 13),
+    )))
+    .q(Q);
+    test_ok(formula(of::days360_(
+        CellRange::remote("MANGO", 9, 9, 12, 12),
+        CellRange::remote("YARO", 8, 8, 12, 12),
         Days360Method::Europe,
     )))
     .q(Q);
-    test_ok(formula(of::edate(range!("DARO"=> 8,8; +5,5), 7))).q(Q);
-    test_ok(formula(of::eomonth(cell!("LOGA"=>4,4), 5))).q(Q);
+    test_ok(formula(of::edate(
+        CellRange::remote("DARO", 8, 8, 13, 13),
+        7,
+    )))
+    .q(Q);
+    test_ok(formula(of::eomonth(CellRef::remote("LOGA", 4, 4), 5))).q(Q);
     test_ok(formula(of::hour(5))).q(Q);
     test_ok(formula(of::isoweeknum(99))).q(Q);
-    test_ok(formula(of::minute(cell!(9, 9)))).q(Q);
-    test_ok(formula(of::month(cell!(0, 0)))).q(Q);
-    test_ok(formula(of::networkdays(
-        cell!(5, 5),
-        cell!(9, 9),
-        Some(FArray([9, 9, 9])),
-        Some(FArray([0, 0, 0, 0, 0, 1, 0])),
+    test_ok(formula(of::minute(CellRef::local(9, 9)))).q(Q);
+    test_ok(formula(of::month(CellRef::local(0, 0)))).q(Q);
+    test_ok(formula(of::networkdays__(
+        CellRef::local(5, 5),
+        CellRef::local(9, 9),
+        FArray([9, 9, 9]),
+        FArray([0, 0, 0, 0, 0, 1, 0]),
     )))
     .q(Q);
     test_ok(formula(of::now())).q(Q);
-    test_ok(formula(of::second(cell!(5, 5)))).q(Q);
+    test_ok(formula(of::second(CellRef::local(5, 5)))).q(Q);
     test_ok(formula(of::time(5, 5, 5))).q(Q);
-    test_ok(formula(of::timevalue(cell!(9, 9)))).q(Q);
+    test_ok(formula(of::timevalue(CellRef::local(9, 9)))).q(Q);
     test_ok(formula(of::today())).q(Q);
-    test_ok(formula(of::weekday(cell!(5, 5), WeekdayMethod::Monday0))).q(Q);
+    test_ok(formula(of::weekday(
+        CellRef::local(5, 5),
+        WeekdayMethod::Monday0,
+    )))
+    .q(Q);
 }
 
 #[test]
@@ -188,18 +200,18 @@ fn test_compose() {
 fn test_lookup() {
     test_ok(formula(of::getpivotdata_fields(
         "bonk",
-        range!(1, 1, 10, 10),
+        CellRange::local(1, 1, 10, 10),
         [("wang", "rang")],
     )))
     .q(Q);
     test_ok(formula(of::lookup(
-        range!(1, 2, 3, 4),
+        CellRange::local(1, 2, 3, 4),
         FArray([9, 9, 9, 9]),
         Some(FArray([4, 4, 4, 4])),
     )))
     .q(Q);
     test_ok(formula(of::lookup(
-        range!(1, 2, 3, 4),
+        CellRange::local(1, 2, 3, 4),
         FArray([9, 9, 9, 9]),
         None::<FArray<(), 0>>,
     )))
@@ -210,21 +222,21 @@ fn test_lookup() {
 fn test_math() {
     test_ok(formula(of::sumproduct((
         FMatrix([[1, 2, 3], [4, 5, 6]]),
-        range!(5, 5, 9, 9),
+        CellRange::local(5, 5, 9, 9),
         FMatrix([[9, 9, 9], [10, 10, 10]]),
     ))))
     .q(Q);
 
     test_ok(formula(of::sumif(
-        range!(0, 0, 99, 99),
+        CellRange::local(0, 0, 99, 99),
         (CriterionCmp::Eq, 1001),
-        Some(range!(101, 0, 199, 99)),
+        Some(CellRange::local(101, 0, 199, 99)),
     )))
     .q(Q);
 
     test_ok(formula(of::sumifs(
-        range!(0, 0, 99, 99),
-        [(range!(101, 0, 199, 99), (CriterionCmp::Eq, 1001))],
+        CellRange::local(0, 0, 99, 99),
+        [(CellRange::local(101, 0, 199, 99), (CriterionCmp::Eq, 1001))],
     )))
     .q(Q);
 }

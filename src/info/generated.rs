@@ -8,88 +8,28 @@ pub fn areas<A: Reference>(refs: A) -> FnNumber1<A> {
     FnNumber1("AREAS", refs)
 }
 
-/// Returns information about position, formatting or contents in a reference.
+///  Returns information about position, formatting or contents in a reference.
 #[inline]
-pub fn cell_col<A: Reference>(refs: A) -> FnNumber1<A> {
-    FnNumber1("CELL_COL", refs)
+pub fn cell_<A: Reference>(info_type: CellInfo, refs: A) -> FnAny2<CellInfo, A> {
+    FnAny2("CELL", info_type, refs)
 }
 
-/// Returns information about position, formatting or contents in a reference.
+///  Returns information about position, formatting or contents in a reference.
 #[inline]
-pub fn cell_row<A: Reference>(refs: A) -> FnNumber1<A> {
-    FnNumber1("CELL_ROW", refs)
-}
-
-/// Returns information about position, formatting or contents in a reference.
-#[inline]
-pub fn cell_sheet<A: Reference>(refs: A) -> FnNumber1<A> {
-    FnNumber1("CELL_SHEET", refs)
-}
-
-/// Returns information about position, formatting or contents in a reference.
-#[inline]
-pub fn cell_address<A: Reference>(refs: A) -> FnReference1<A> {
-    FnReference1("CELL_ADDRESS", refs)
-}
-
-/// Returns information about position, formatting or contents in a reference.
-#[inline]
-pub fn cell_filename<A: Reference>(refs: A) -> FnText1<A> {
-    FnText1("CELL_FILENAME", refs)
-}
-
-/// Returns information about position, formatting or contents in a reference.
-#[inline]
-pub fn cell_contents<A: Reference>(refs: A) -> FnText1<A> {
-    FnText1("CELL_CONTENTS", refs)
-}
-
-/// Returns information about position, formatting or contents in a reference.
-#[inline]
-pub fn cell_colored<A: Reference>(refs: A) -> FnLogical1<A> {
-    FnLogical1("CELL_COLORED", refs)
-}
-
-/// Returns information about position, formatting or contents in a reference.
-#[inline]
-pub fn cell_format<A: Reference>(refs: A) -> FnText1<A> {
-    FnText1("CELL_FORMAT", refs)
-}
-
-/// Returns information about position, formatting or contents in a reference.
-#[inline]
-pub fn cell_type<A: Reference>(refs: A) -> FnText1<A> {
-    FnText1("CELL_TYPE", refs)
-}
-
-/// Returns information about position, formatting or contents in a reference.
-#[inline]
-pub fn cell_width<A: Reference>(refs: A) -> FnNumber1<A> {
-    FnNumber1("CELL_WIDTH", refs)
-}
-
-/// Returns information about position, formatting or contents in a reference.
-#[inline]
-pub fn cell_protect<A: Reference>(refs: A) -> FnLogical1<A> {
-    FnLogical1("CELL_PROTECT", refs)
-}
-
-/// Returns information about position, formatting or contents in a reference.
-#[inline]
-pub fn cell_parentheses<A: Reference>(refs: A) -> FnLogical1<A> {
-    FnLogical1("CELL_PARENTHESES", refs)
-}
-
-/// Returns information about position, formatting or contents in a reference.
-#[inline]
-pub fn cell_prefix<A: Reference>(refs: A) -> FnText1<A> {
-    FnText1("CELL_PREFIX", refs)
+pub fn cell<>(info_type: CellInfo) -> FnAny1<CellInfo> {
+    FnAny1("CELL", info_type)
 }
 
 /// Returns the column number(s) of a reference
 #[inline]
-pub fn column<A: Reference>(refs: A) -> FnNumber1<A> {
+pub fn column_<A: Reference>(refs: A) -> FnNumber1<A> {
     FnNumber1("COLUMN", refs)
+}
+
+/// Returns the column number(s) of a reference
+#[inline]
+pub fn column() -> FnNumber0 {
+    FnNumber0("COLUMN", )
 }
 
 /// Returns the number of columns in a given range.
@@ -128,70 +68,10 @@ pub fn error_type<A: Any>(error: A) -> FnNumber1<A> {
     FnNumber1("ERROR_TYPE", error)
 }
 
-///  Returns formula at given reference as text.
-#[inline]
-pub fn cell_formula<A: Reference>(refs: A) -> FnText1<A> {
-    FnText1("CELL_FORMULA", refs)
-}
-
 /// Returns information about the environment
 #[inline]
-pub fn info_directory() -> FnText0 {
-    FnText0("INFO_DIRECTORY", )
-}
-
-/// Returns information about the environment
-#[inline]
-pub fn info_memavail() -> FnNumber0 {
-    FnNumber0("INFO_MEMAVAIL", )
-}
-
-/// Returns information about the environment
-#[inline]
-pub fn info_memused() -> FnNumber0 {
-    FnNumber0("INFO_MEMUSED", )
-}
-
-/// Returns information about the environment
-#[inline]
-pub fn info_numfile() -> FnNumber0 {
-    FnNumber0("INFO_NUMFILE", )
-}
-
-/// Returns information about the environment
-#[inline]
-pub fn info_osversion() -> FnText0 {
-    FnText0("INFO_OSVERSION", )
-}
-
-/// Returns information about the environment
-#[inline]
-pub fn info_origin() -> FnText0 {
-    FnText0("INFO_ORIGIN", )
-}
-
-/// Returns information about the environment
-#[inline]
-pub fn info_recal() -> FnText0 {
-    FnText0("INFO_RECAL", )
-}
-
-/// Returns information about the environment
-#[inline]
-pub fn info_release() -> FnText0 {
-    FnText0("INFO_RELEASE", )
-}
-
-/// Returns information about the environment
-#[inline]
-pub fn info_system() -> FnText0 {
-    FnText0("INFO_SYSTEM", )
-}
-
-/// Returns information about the environment
-#[inline]
-pub fn info_totmem() -> FnNumber0 {
-    FnNumber0("INFO_TOTMEM", )
+pub fn info<>(category: InfoInfo) -> FnAny1<InfoInfo> {
+    FnAny1("INFO", category)
 }
 
 /// Return TRUE if the referenced cell is blank, else return FALSE
@@ -280,14 +160,32 @@ pub fn na() -> FnLogical0 {
 
 /// Convert text to number, in a locale-independent way.
 #[inline]
-pub fn numbervalue<A: Text, B: Text, C: Text>(text: A, sep: Option<B>, grp: Option<C>) -> FnNumber3<A, Option<B>, Option<C>> {
+pub fn numbervalue__<A: Text, B: Text, C: Text>(text: A, sep: B, grp: C) -> FnNumber3<A, B, C> {
     FnNumber3("NUMBERVALUE", text, sep, grp)
+}
+
+/// Convert text to number, in a locale-independent way.
+#[inline]
+pub fn numbervalue_<A: Text, B: Text>(text: A, sep: B) -> FnNumber2<A, B> {
+    FnNumber2("NUMBERVALUE", text, sep)
+}
+
+/// Convert text to number, in a locale-independent way.
+#[inline]
+pub fn numbervalue<A: Text>(text: A) -> FnNumber1<A> {
+    FnNumber1("NUMBERVALUE", text)
 }
 
 /// Returns the row number(s) of a reference.
 #[inline]
-pub fn row<A: Reference>(refs: A) -> FnNumber1<A> {
+pub fn row_<A: Reference>(refs: A) -> FnNumber1<A> {
     FnNumber1("ROW", refs)
+}
+
+/// Returns the row number(s) of a reference.
+#[inline]
+pub fn row() -> FnNumber0 {
+    FnNumber0("ROW", )
 }
 
 /// Returns the number of rows in a given range.
@@ -298,24 +196,36 @@ pub fn rows<A: Reference>(refs: A) -> FnNumber1<A> {
 
 /// Returns the sheet number of the reference or the string representing a sheet name.
 #[inline]
-pub fn sheet<A: Reference>(refs: A) -> FnNumber1<A> {
+pub fn sheet_<A: Reference>(refs: A) -> FnNumber1<A> {
     FnNumber1("SHEET", refs)
+}
+
+/// Returns the sheet number of the reference or the string representing a sheet name.
+#[inline]
+pub fn sheet() -> FnNumber0 {
+    FnNumber0("SHEET", )
 }
 
 /// Returns the number of sheets in a reference or current document.
 #[inline]
-pub fn sheets<A: Reference>(refs: A) -> FnNumber1<A> {
+pub fn sheets_<A: Reference>(refs: A) -> FnNumber1<A> {
     FnNumber1("SHEETS", refs)
 }
 
-/// Returns a number indicating the type of the provided value.
+/// Returns the number of sheets in a reference or current document.
 #[inline]
-pub fn value_type<A: Any>(a: A) -> FnNumber1<A> {
-    FnNumber1("VALUE_TYPE", a)
+pub fn sheets() -> FnNumber0 {
+    FnNumber0("SHEETS", )
 }
 
 /// Convert text to number
 #[inline]
 pub fn value<A: Text>(text: A) -> FnNumber1<A> {
     FnNumber1("VALUE", text)
+}
+
+/// Returns a number indicating the type of the provided value.
+#[inline]
+pub fn type_<A: Any>(a: A) -> FnNumber1<A> {
+    FnNumber1("TYPE", a)
 }
