@@ -2,8 +2,7 @@
 //! Data lookup functions.
 //!
 
-mod generated;
-pub use generated::*;
+pub use crate::generated::lookup::*;
 
 use crate::{Any, FnAny2, FnAnyVar, Reference, Scalar, Text};
 use std::fmt::Write;

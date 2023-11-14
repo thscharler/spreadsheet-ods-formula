@@ -1,6 +1,6 @@
 use crate::*;
 #[allow(unused_imports)]
-use super::*;
+use crate::math::*;
 
 ///  Return the absolute (nonnegative) value.
 #[inline]

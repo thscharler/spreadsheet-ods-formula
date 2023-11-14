@@ -1,11 +1,11 @@
 use spreadsheet_ods::{CellRange, CellRef};
 
 use spreadsheet_ods_formula::date::{Days360Method, WeekdayMethod};
-use spreadsheet_ods_formula::of;
 use spreadsheet_ods_formula::prelude::*;
 use spreadsheet_ods_formula::{
     formula, p, CriterionCmp, FArray, FCriterion, FMatrix, FnAny0, ValNumber,
 };
+use spreadsheet_ods_formula::{num, of};
 
 use crate::result_test::{test_ok, ReportValues};
 
@@ -37,6 +37,8 @@ fn test_base() {
 
     test_ok(formula(p(1.1))).test(eq, "of:=(1.1)").q(Q);
 
+    test_ok(formula(num(1.1))).test(eq, "of:=1.1").q(Q);
+
     // can't be instantiated directly, which is ok.
     // test_ok(formula(FAny("1234".into()))).test(eq, "of:=1").q(Q);
     // test_ok(formula(FNumber("1234".into()))).test(eq, "of:=1").q(Q);
@@ -44,7 +46,7 @@ fn test_base() {
     // test_ok(formula(FLogical("1".into()))).test(eq, "of:=1").q(Q);
     // test_ok(formula(FMatrix("1".into()))).test(eq, "of:=1").q(Q);
     // test_ok(formula(FReference("1".into()))).test(eq, "of:=1").q(Q);
-    test_ok(formula(FCriterion::new(CriterionCmp::Gt, 1)))
+    test_ok(formula(FCriterion::gt(1)))
         .test(eq, "of:=\">\"&1")
         .q(Q);
     test_ok(formula((CriterionCmp::Eq, 5)))
@@ -68,7 +70,12 @@ pub fn test_op() {
     test_ok(formula(ValNumber(1) * 5)).test(eq, "of:=1*5").q(Q);
     test_ok(formula(ValNumber(1) / 5)).test(eq, "of:=1/5").q(Q);
     test_ok(formula(ValNumber(1) ^ 5)).test(eq, "of:=1^5").q(Q);
+    test_ok(formula(num(1) + 5)).test(eq, "of:=1+5").q(Q);
     test_ok(formula(-1)).test(eq, "of:=-1").q(Q);
+
+    test_ok(formula(ValNumber(5).eq("A")))
+        .test(eq, "of:=5=\"A\"")
+        .q(Q);
 
     test_ok(formula(true.and(false)))
         .test(eq, "of:=AND(TRUE();FALSE())")
@@ -184,7 +191,7 @@ fn test_date() {
     test_ok(formula(of::time(5, 5, 5))).q(Q);
     test_ok(formula(of::timevalue(CellRef::local(9, 9)))).q(Q);
     test_ok(formula(of::today())).q(Q);
-    test_ok(formula(of::weekday(
+    test_ok(formula(of::weekday_(
         CellRef::local(5, 5),
         WeekdayMethod::Monday0,
     )))
@@ -204,16 +211,15 @@ fn test_lookup() {
         [("wang", "rang")],
     )))
     .q(Q);
-    test_ok(formula(of::lookup(
+    test_ok(formula(of::lookup_(
         CellRange::local(1, 2, 3, 4),
         FArray([9, 9, 9, 9]),
-        Some(FArray([4, 4, 4, 4])),
+        FArray([4, 4, 4, 4]),
     )))
     .q(Q);
     test_ok(formula(of::lookup(
         CellRange::local(1, 2, 3, 4),
         FArray([9, 9, 9, 9]),
-        None::<FArray<(), 0>>,
     )))
     .q(Q);
 }

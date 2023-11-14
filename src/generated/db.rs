@@ -1,6 +1,6 @@
 use crate::*;
 #[allow(unused_imports)]
-use super::*;
+use crate::db::*;
 
 ///  Finds the average of values in a given field from the records (rows) in a database that match a search criteria.
 #[inline]

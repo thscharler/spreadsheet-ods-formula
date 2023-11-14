@@ -1,10 +1,8 @@
-mod generated;
-pub use generated::*;
-
 use crate::Any;
 use std::fmt::Write;
 
-pub(self) use crate::date::YearFracMethod;
+pub use crate::date::YearFracMethod;
+pub use crate::generated::fin::*;
 
 pub enum Frequency {
     Annual,

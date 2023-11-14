@@ -1,6 +1,6 @@
 use crate::*;
 #[allow(unused_imports)]
-use super::*;
+use crate::matrix::*;
 
 ///  Calculates the determinant of a matrix.
 #[inline]

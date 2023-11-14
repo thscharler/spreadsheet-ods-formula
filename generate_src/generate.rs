@@ -48,22 +48,25 @@ impl Display for DErrorString {
 impl Error for DErrorString {}
 
 struct Module {
+    pub module: String,
     pub mod_file: PathBuf,
     pub gen: String,
 }
 
-impl<'a> TryFrom<&'a OdsFn<'a>> for Module {
+impl TryFrom<&OdsFn> for Module {
     type Error = DError;
 
-    fn try_from(fnr: &'a OdsFn<'a>) -> Result<Self, Self::Error> {
-        let mut fpath = String::from("src/");
-        fpath.push_str(fnr.module);
+    fn try_from(fnr: &OdsFn) -> Result<Self, Self::Error> {
+        let fpath = String::from("src/generated/");
         let _ = create_dir_all(&fpath);
 
         let mut fname = fpath.clone();
-        fname.push_str("/generated.rs");
+        fname.push_str("/");
+        fname.push_str(fnr.module.as_str());
+        fname.push_str(".rs");
 
         let mut fmodule = Module {
+            module: fnr.module.clone(),
             mod_file: fname.into(),
             gen: String::new(),
         };
@@ -75,35 +78,39 @@ impl<'a> TryFrom<&'a OdsFn<'a>> for Module {
 }
 
 #[derive(Clone, Debug)]
-struct OdsArg<'a> {
-    arg: &'a str,
-    typ: &'a str,
+struct OdsArg {
+    arg: String,
+    typ: String,
     opt: bool,
     vol: bool,
 }
 
 #[derive(Clone, Debug)]
-struct OdsFn<'a> {
-    module: &'a str,
+struct OdsFn {
+    module: String,
     fname: String,
-    func: &'a str,
-    doc: &'a str,
-    result: &'a str,
-    args: Vec<OdsArg<'a>>,
+    func: String,
+    doc: String,
+    result: String,
+    args: Vec<OdsArg>,
 }
 
-impl<'a> From<&'a StringRecord> for OdsFn<'a> {
-    fn from(r: &'a StringRecord) -> Self {
+impl From<&StringRecord> for OdsFn {
+    fn from(r: &StringRecord) -> Self {
         let mut args = Vec::new();
         for n in 0..7 {
             let arg = &r[4 + 3 * n];
             let typ = &r[4 + 3 * n + 1];
             let opt = &r[4 + 3 * n + 2];
 
+            if opt != "" && opt != "OPT" && opt != "VOL" {
+                panic!("expect OPT or VOL for {}:{}", &r[1], arg);
+            }
+
             if !arg.is_empty() && !typ.is_empty() {
                 args.push(OdsArg {
-                    arg,
-                    typ,
+                    arg: filter_arg(arg),
+                    typ: typ.into(),
                     opt: opt == "OPT",
                     vol: opt == "VOL",
                 })
@@ -115,14 +122,39 @@ impl<'a> From<&'a StringRecord> for OdsFn<'a> {
         }
 
         Self {
-            module: &r[0],
-            fname: (&r[1]).into(),
-            func: &r[1],
-            doc: &r[2],
-            result: &r[3],
+            module: r[0].into(),
+            fname: filter_fname(&r[1]),
+            func: r[1].into(),
+            doc: r[2].into(),
+            result: r[3].into(),
             args,
         }
     }
+}
+
+fn filter_arg(arg: &str) -> String {
+    let arg = arg.to_lowercase().replace('.', "_");
+
+    let arg = match arg.as_str() {
+        "const" => "const_",
+        "type" => "type_",
+        v => v,
+    };
+
+    arg.into()
+}
+
+fn filter_fname(fname: &str) -> String {
+    let fname = fname.to_lowercase().replace('.', "_");
+
+    let fname = match fname.as_str() {
+        "match" => "match_",
+        "mod" => "mod_",
+        "type" => "type_",
+        v => v,
+    };
+
+    fname.into()
 }
 
 fn build_from_csv() -> Result<(), DError> {
@@ -134,10 +166,10 @@ fn build_from_csv() -> Result<(), DError> {
 
         let fnr: OdsFn = (&r).into();
 
-        if !mods.contains_key(fnr.module) {
+        if !mods.contains_key(fnr.module.as_str()) {
             mods.insert(fnr.module.to_string(), (&fnr).try_into()?);
         }
-        let m = mods.get_mut(fnr.module).expect("module");
+        let m = mods.get_mut(fnr.module.as_str()).expect("module");
 
         generate_all_fn(&fnr, m)?;
     }
@@ -153,8 +185,7 @@ fn build_from_csv() -> Result<(), DError> {
 fn init_module(m: &mut Module) -> Result<(), DError> {
     writeln!(m.gen, "use crate::*;")?;
     writeln!(m.gen, "#[allow(unused_imports)]")?;
-    writeln!(m.gen, "use super::*;")?;
-
+    writeln!(m.gen, "use crate::{}::*;", m.module)?;
     Ok(())
 }
 
@@ -168,7 +199,7 @@ fn generate_all_fn(fnr: &OdsFn, m: &mut Module) -> Result<(), DError> {
 
     let mut ff = fnr.clone();
     while n_vol > 0 {
-        ff.fname = format!("{}{}", fnr.func, "_".repeat(n_vol - 1));
+        ff.fname = format!("{}{}", fnr.fname, "_".repeat(n_vol - 1));
 
         generate_fn(&ff, m)?;
 
@@ -196,7 +227,7 @@ fn generate_fn(fnr: &OdsFn, m: &mut Module) -> Result<(), DError> {
     writeln!(
         m.gen,
         "pub fn {}{}({}) -> {} {{",
-        gen_fn_name(fnr)?,
+        fnr.fname,
         gen_type_arg(fnr)?,
         gen_arg(fnr)?,
         gen_return(fnr)?
@@ -333,10 +364,10 @@ fn gen_type_arg(fnr: &OdsFn) -> Result<String, DError> {
     Ok(buf)
 }
 
-const TYPE_VARS: [&str; 5] = ["A", "B", "C", "D", "E"];
+const TYPE_VARS: [&str; 7] = ["A", "B", "C", "D", "E", "F", "G"];
 
 fn gen_struct(fnr: &OdsFn) -> Result<String, DError> {
-    match fnr.result {
+    match fnr.result.as_str() {
         "Number" => match fnr.args.len() {
             0 => Ok("FnNumber0".into()),
             1 => Ok("FnNumber1".into()),
@@ -389,12 +420,21 @@ fn gen_struct(fnr: &OdsFn) -> Result<String, DError> {
             1 => Ok("FnMatrix1".into()),
             _ => Err(DErrorString(format!("Matrix args > 1 for {}", fnr.func)).into()),
         },
+        "Array" => match fnr.args.len() {
+            0 => Ok("FnArray0".into()),
+            1 => Ok("FnArray1".into()),
+            2 => Ok("FnArray2".into()),
+            3 => Ok("FnArray3".into()),
+            4 => Ok("FnArray4".into()),
+            5 => Ok("FnArray5".into()),
+            _ => Err(DErrorString(format!("Array args > 5 for {}", fnr.func)).into()),
+        },
         _ => Err(DErrorString(format!("Unknown result for {}", fnr.func)).into()),
     }
 }
 
 fn is_trait(arg: &OdsArg) -> bool {
-    match arg.typ {
+    match arg.typ.as_str() {
         "Any" | "Number" | "Text" | "Logical" | "Reference" | "Matrix" | "Criterion"
         | "Sequence" | "TextOrNumber" | "Scalar" | "Field" | "DateTimeParam" | "Array"
         | "Database" | "Criteria" => true,
@@ -403,22 +443,9 @@ fn is_trait(arg: &OdsArg) -> bool {
 }
 
 fn is_type(arg: &OdsArg) -> bool {
-    match arg.typ {
+    match arg.typ.as_str() {
         "i8" | "i16" | "i32" | "i64" | "i128" | "isize" | "u8" | "u16" | "u32" | "u64" | "u128"
         | "usize" | "f32" | "f64" | "bool" | "&str" | "String" | "CellRef" | "CellRange" => true,
         _ => false,
     }
-}
-
-fn gen_fn_name(fnr: &OdsFn) -> Result<String, DError> {
-    let fname = fnr.fname.to_lowercase().replace('.', "_");
-
-    let fname = match fname.as_str() {
-        "match" => "match_",
-        "mod" => "mod_",
-        "type" => "type_",
-        v => v,
-    };
-
-    Ok(fname.into())
 }

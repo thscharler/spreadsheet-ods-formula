@@ -1,6 +1,6 @@
 use crate::*;
 #[allow(unused_imports)]
-use super::*;
+use crate::date::*;
 
 ///  Constructs a date from year, month, and day of month
 #[inline]

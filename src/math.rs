@@ -2,8 +2,7 @@
 //! Mathematical functions.
 //!
 
-mod generated;
-pub use generated::*;
+pub use crate::generated::math::*;
 
 use crate::{Any, Criterion, FnNumberVar, Reference};
 use std::fmt::Write;

@@ -1,6 +1,6 @@
 use crate::*;
 #[allow(unused_imports)]
-use super::*;
+use crate::info::*;
 
 /// Returns the number of areas in a given list of references.
 #[inline]
@@ -218,14 +218,14 @@ pub fn sheets() -> FnNumber0 {
     FnNumber0("SHEETS", )
 }
 
-/// Convert text to number
-#[inline]
-pub fn value<A: Text>(text: A) -> FnNumber1<A> {
-    FnNumber1("VALUE", text)
-}
-
 /// Returns a number indicating the type of the provided value.
 #[inline]
 pub fn type_<A: Any>(a: A) -> FnNumber1<A> {
     FnNumber1("TYPE", a)
+}
+
+/// Convert text to number
+#[inline]
+pub fn value<A: Text>(text: A) -> FnNumber1<A> {
+    FnNumber1("VALUE", text)
 }

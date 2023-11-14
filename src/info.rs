@@ -2,13 +2,9 @@
 //! Information functions.
 //!
 
-mod generated;
-pub use generated::*;
+pub use crate::generated::info::*;
 
-use crate::{
-    Any, Criterion, FnLogical1, FnLogical2, FnNumber2, FnNumberVar, FnReference2, FnText2,
-    Reference,
-};
+use crate::{Any, Criterion, FnNumberVar, Reference};
 use std::fmt::Write;
 
 pub enum CellInfo {

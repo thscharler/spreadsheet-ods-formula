@@ -1,6 +1,6 @@
 use crate::*;
 #[allow(unused_imports)]
-use super::*;
+use crate::logic::*;
 
 /// Compute logical AND of all parameters.
 #[inline]

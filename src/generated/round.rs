@@ -1,6 +1,6 @@
 use crate::*;
 #[allow(unused_imports)]
-use super::*;
+use crate::round::*;
 
 ///  Round a number N up to the nearest multiple of the second parameter, significance.
 #[inline]

@@ -1,7 +1,10 @@
 use spreadsheet_ods::{CellRange, CellRef};
+use std::borrow::Borrow;
 use std::borrow::Cow;
 use std::fmt::{Display, Formatter, Write};
 use std::ops::{Add, BitAnd, BitXor, Div, Mul, Neg, Sub};
+
+mod generated;
 
 pub mod bit;
 pub mod cmp;
@@ -145,81 +148,100 @@ pub trait ReferenceOp<T: Any> {
 // -----------------------------------------------------------------------
 
 impl<T: Any> AnyOp<T> for T {
+    #[inline]
     fn eq<U: Any>(self, other: U) -> OpLogical<T, U> {
         OpLogical(self, "=", other)
     }
 
+    #[inline]
     fn ne<U: Any>(self, other: U) -> OpLogical<T, U> {
         OpLogical(self, "<>", other)
     }
 
+    #[inline]
     fn lt<U: Any>(self, other: U) -> OpLogical<T, U> {
         OpLogical(self, "<", other)
     }
 
+    #[inline]
     fn le<U: Any>(self, other: U) -> OpLogical<T, U> {
         OpLogical(self, "<=", other)
     }
 
+    #[inline]
     fn gt<U: Any>(self, other: U) -> OpLogical<T, U> {
         OpLogical(self, ">", other)
     }
 
+    #[inline]
     fn ge<U: Any>(self, other: U) -> OpLogical<T, U> {
         OpLogical(self, ">=", other)
     }
 }
 
 impl<T: Number> NumberOp<T> for T {
+    #[inline]
     fn add<U: Number>(self, other: U) -> OpNumber<T, U> {
         OpNumber(self, "+", other)
     }
 
+    #[inline]
     fn sub<U: Number>(self, other: U) -> OpNumber<T, U> {
         OpNumber(self, "-", other)
     }
 
+    #[inline]
     fn mul<U: Number>(self, other: U) -> OpNumber<T, U> {
         OpNumber(self, "*", other)
     }
 
+    #[inline]
     fn div<U: Number>(self, other: U) -> OpNumber<T, U> {
         OpNumber(self, "/", other)
     }
 
+    #[inline]
     fn pow<U: Number>(self, other: U) -> OpNumber<T, U> {
         OpNumber(self, "^", other)
     }
 
+    #[inline]
     fn percent(self) -> OpNumber<T, ()> {
         OpNumber(self, "%", ())
     }
 }
 
 impl<T: Text> TextOp<T> for T {
+    #[inline]
     fn concat<U: Text>(self, other: U) -> OpText<T, U> {
         OpText(self, "&", other)
     }
 }
 
 impl<T: Logical> LogicalOp<T> for T {
+    #[inline]
     fn and<U: Logical>(self, other: U) -> FnLogical2<T, U> {
         FnLogical2("AND", self, other)
     }
 
+    #[inline]
     fn or<U: Logical>(self, other: U) -> FnLogical2<T, U> {
         FnLogical2("OR", self, other)
     }
 
+    #[inline]
     fn xor<U: Logical>(self, other: U) -> FnLogical2<T, U> {
         FnLogical2("XOR", self, other)
     }
 }
 
 impl<T: Reference> ReferenceOp<T> for T {
+    #[inline]
     fn intersect<U: Reference>(self, other: U) -> OpReference<T, U> {
         OpReference(self, "!", other)
     }
+
+    #[inline]
     fn refcat<U: Reference>(self, other: U) -> OpReference<T, U> {
         OpReference(self, "~", other)
     }
@@ -236,7 +258,8 @@ macro_rules! any_struct {
         pub struct $t<A:Any>(pub A);
 
         impl<A:Any> Any for $t<A> {
-            fn formula(&self, buf: &mut String) {
+             #[inline]
+             fn formula(&self, buf: &mut String) {
                 self.0.formula(buf);
             }
         }
@@ -253,6 +276,7 @@ macro_rules! any_struct {
         );
 
         impl<A:Any, B: Any> Any for $t<A,B> {
+            #[inline]
             fn formula(&self, buf: &mut String) {
                 self.0.formula(buf);
                 buf.push_str(self.1.as_ref());
@@ -270,6 +294,7 @@ macro_rules! any_struct {
         );
 
         impl Any for $t {
+            #[inline]
             fn formula(&self, buf: &mut String) {
                 buf.push_str(self.0);
                 buf.push('(');
@@ -293,6 +318,7 @@ macro_rules! any_struct {
         );
 
         impl Any for $t {
+            #[inline]
             fn formula(&self, buf: &mut String) {
                 buf.push_str(self.0.as_ref());
                 buf.push('(');
@@ -312,6 +338,7 @@ macro_rules! any_struct {
         );
 
         impl <$tname0: Any+'static $(,$tname: Any+'static)*> Any for $t<$tname0 $(,$tname)*> {
+            #[inline]
             fn formula(&self, buf: &mut String) {
                 buf.push_str(self.0.as_ref());
                 buf.push('(');
@@ -651,9 +678,54 @@ fn_reference!(FnReference4: A B 2 C 3 D 4);
 fn_reference!(FnReference5: A B 2 C 3 D 4 E 5);
 fn_reference!(FnReference6: A B 2 C 3 D 4 E 5 F 6);
 
+macro_rules! fn_array {
+    (VAL $t:ident) => {
+        any_struct!(VAL $t);
+        fn_array!(__IMPL $t: A);
+    };
+    (OP $t:ident) => {
+        any_struct!(OP $t);
+        fn_array!(__IMPL $t: A B);
+    };
+    (VAR $t:ident) => {
+        any_struct!(VAR $t);
+        fn_array!(__IMPL $t:);
+    };
+    (REFVAR $t:ident) => {
+        any_struct!(REFVAR $t);
+        fn_array!(__IMPL $t: 'a);
+    };
+    ($t:ident) => {
+        any_struct!($t);
+        fn_array!(__IMPL $t:);
+    };
+    ($t:ident : $tname0:tt $($tname:tt $tidx:tt)*) => {
+        any_struct!($t: $tname0 $($tname $tidx)*);
+        fn_array!(__IMPL $t: $tname0 $($tname)*);
+    };
+    (__IMPL $t:ident : $($l:lifetime)?) => {
+        impl $(<$l>)? Array for $t$(<$l>)?  {}
+    };
+    (__IMPL $t:ident : $($l:lifetime)? $tname0:tt $($tname:tt)*) => {
+        impl <$($l, )?$tname0: Any $(,$tname: Any)*> Array for $t<$($l, )?$tname0 $(,$tname)*> {}
+    };
+}
+
+fn_array!(VAL ValArray);
+fn_array!(OP OpArray);
+fn_array!(VAR FnArrayVar);
+fn_array!(FnArray0);
+fn_array!(FnArray1: A);
+fn_array!(FnArray2: A B 2);
+fn_array!(FnArray3: A B 2 C 3);
+fn_array!(FnArray4: A B 2 C 3 D 4);
+fn_array!(FnArray5: A B 2 C 3 D 4 E 5);
+fn_array!(FnArray6: A B 2 C 3 D 4 E 5 F 6);
+
 // -----------------------------------------------------------------------
 
 impl Any for Vec<Box<dyn Any>> {
+    #[inline]
     fn formula(&self, buf: &mut String) {
         for (i, v) in self.iter().enumerate() {
             if i > 0 {
@@ -670,6 +742,7 @@ macro_rules! tup {
     ( $tname0:ident $($tname:tt $tnum:tt)* ) => {
 
         impl<$tname0: Any, $($tname: Any,)*> Any for ($tname0, $($tname,)*) {
+            #[inline]
             fn formula(&self, buf: &mut String) {
                 self.0.formula(buf);
                 $(
@@ -685,6 +758,7 @@ macro_rules! tup {
 }
 
 impl Any for () {
+    #[inline]
     fn formula(&self, _buf: &mut String) {}
 }
 impl Sequence for () {}
@@ -726,6 +800,7 @@ pub enum CriterionCmp {
 }
 
 impl Display for CriterionCmp {
+    #[inline]
     fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
         match self {
             CriterionCmp::Cmp => write!(f, ""),
@@ -743,12 +818,44 @@ impl Display for CriterionCmp {
 #[derive(Debug)]
 pub struct FCriterion<A: Any>(CriterionCmp, A);
 impl<A: Any> FCriterion<A> {
-    pub fn new(op: CriterionCmp, f: A) -> Self {
-        Self(op, f)
+    #[inline]
+    pub fn cmp(f: A) -> Self {
+        Self(CriterionCmp::Cmp, f)
+    }
+
+    #[inline]
+    pub fn eq(f: A) -> Self {
+        Self(CriterionCmp::Eq, f)
+    }
+
+    #[inline]
+    pub fn ne(f: A) -> Self {
+        Self(CriterionCmp::Ne, f)
+    }
+
+    #[inline]
+    pub fn lt(f: A) -> Self {
+        Self(CriterionCmp::Lt, f)
+    }
+
+    #[inline]
+    pub fn gt(f: A) -> Self {
+        Self(CriterionCmp::Gt, f)
+    }
+
+    #[inline]
+    pub fn lte(f: A) -> Self {
+        Self(CriterionCmp::LtEq, f)
+    }
+
+    #[inline]
+    pub fn gte(f: A) -> Self {
+        Self(CriterionCmp::GtEq, f)
     }
 }
 
 impl<A: Any> Any for FCriterion<A> {
+    #[inline]
     fn formula(&self, buf: &mut String) {
         let _ = write!(buf, "\"{}\"", self.0);
         buf.push('&');
@@ -758,6 +865,7 @@ impl<A: Any> Any for FCriterion<A> {
 impl<A: Any> Criterion for FCriterion<A> {}
 
 impl<A: Any> Any for (CriterionCmp, A) {
+    #[inline]
     fn formula(&self, buf: &mut String) {
         let _ = write!(buf, "\"{}\"", self.0);
         buf.push('&');
@@ -771,6 +879,7 @@ impl<A: Any> Criterion for (CriterionCmp, A) {}
 pub struct FMatrix<T: Any, const N: usize, const M: usize>(pub [[T; M]; N]);
 
 impl<T: Any, const N: usize, const M: usize> Any for FMatrix<T, N, M> {
+    #[inline]
     fn formula(&self, buf: &mut String) {
         buf.push('{');
         for (i, r) in self.0.iter().enumerate() {
@@ -793,6 +902,7 @@ impl<T: Any, const N: usize, const M: usize> Matrix for FMatrix<T, N, M> {}
 pub struct FArray<T: Any, const N: usize>(pub [T; N]);
 
 impl<T: Any, const N: usize> Any for FArray<T, N> {
+    #[inline]
     fn formula(&self, buf: &mut String) {
         buf.push('{');
         for (i, v) in self.0.iter().enumerate() {
@@ -810,6 +920,7 @@ impl<T: Any, const N: usize> Array for FArray<T, N> {}
 // -----------------------------------------------------------------------
 
 impl<T: Any + ?Sized> Any for Box<T> {
+    #[inline]
     fn formula(&self, buf: &mut String) {
         self.as_ref().formula(buf);
     }
@@ -830,26 +941,28 @@ impl<T: Field + Any + ?Sized> Field for Box<T> {}
 impl<T: DateTimeParam + Any + ?Sized> DateTimeParam for Box<T> {}
 
 impl<T: Any + Sized> Any for Option<T> {
+    #[inline]
     fn formula(&self, buf: &mut String) {
         if let Some(v) = self {
             v.formula(buf);
         }
     }
 }
-impl<T: Number + Any + Sized> Number for Option<T> {}
-impl<T: Text + Any + Sized> Text for Option<T> {}
-impl<T: Logical + Any + Sized> Logical for Option<T> {}
-impl<T: Reference + Any + Sized> Reference for Option<T> {}
-impl<T: Matrix + Any + Sized> Matrix for Option<T> {}
-impl<T: Array + Any + Sized> Array for Option<T> {}
-impl<T: Database + Any + Sized> Database for Option<T> {}
-impl<T: Criterion + Any + Sized> Criterion for Option<T> {}
-impl<T: Criteria + Any + Sized> Criteria for Option<T> {}
-impl<T: Sequence + Any + Sized> Sequence for Option<T> {}
-impl<T: TextOrNumber + Any + Sized> TextOrNumber for Option<T> {}
-impl<T: Scalar + Any + Sized> Scalar for Option<T> {}
-impl<T: Field + Any + Sized> Field for Option<T> {}
-impl<T: DateTimeParam + Any + Sized> DateTimeParam for Option<T> {}
+
+// impl<T: Number + Any + Sized> Number for Option<T> {}
+// impl<T: Text + Any + Sized> Text for Option<T> {}
+// impl<T: Logical + Any + Sized> Logical for Option<T> {}
+// impl<T: Reference + Any + Sized> Reference for Option<T> {}
+// impl<T: Matrix + Any + Sized> Matrix for Option<T> {}
+// impl<T: Array + Any + Sized> Array for Option<T> {}
+// impl<T: Database + Any + Sized> Database for Option<T> {}
+// impl<T: Criterion + Any + Sized> Criterion for Option<T> {}
+// impl<T: Criteria + Any + Sized> Criteria for Option<T> {}
+// impl<T: Sequence + Any + Sized> Sequence for Option<T> {}
+// impl<T: TextOrNumber + Any + Sized> TextOrNumber for Option<T> {}
+// impl<T: Scalar + Any + Sized> Scalar for Option<T> {}
+// impl<T: Field + Any + Sized> Field for Option<T> {}
+// impl<T: DateTimeParam + Any + Sized> DateTimeParam for Option<T> {}
 
 // -----------------------------------------------------------------------
 
@@ -858,6 +971,7 @@ impl<T: DateTimeParam + Any + Sized> DateTimeParam for Option<T> {}
 #[derive(Debug)]
 pub struct FParentheses<A>(A);
 impl<A: Any> Any for FParentheses<A> {
+    #[inline]
     fn formula(&self, buf: &mut String) {
         buf.push('(');
         self.0.formula(buf);
@@ -889,6 +1003,7 @@ pub fn p<A: Any>(a: A) -> FParentheses<A> {
 macro_rules! value_number {
     ($t:ty) => {
         impl Any for $t {
+            #[inline]
             fn formula(&self, buf: &mut String) {
                 let _ = write!(buf, "{}", self);
             }
@@ -918,7 +1033,13 @@ value_number!(usize);
 value_number!(f32);
 value_number!(f64);
 
+#[inline]
+pub fn num<A: Number>(n: A) -> ValNumber<A> {
+    ValNumber(n)
+}
+
 impl Any for bool {
+    #[inline]
     fn formula(&self, buf: &mut String) {
         buf.push_str(if *self { "TRUE()" } else { "FALSE()" });
     }
@@ -929,6 +1050,7 @@ impl Sequence for bool {}
 impl Scalar for bool {}
 
 impl Any for &str {
+    #[inline]
     fn formula(&self, buf: &mut String) {
         if self.contains('"') {
             buf.push('"');
@@ -954,22 +1076,10 @@ impl Field for &str {}
 impl DateTimeParam for &str {}
 
 impl<'a> Any for Cow<'a, str> {
+    #[inline]
     fn formula(&self, buf: &mut String) {
-        let str = self.as_ref();
-        if str.contains('"') {
-            buf.push('"');
-            for (i, s) in str.split('"').enumerate() {
-                if i > 0 {
-                    buf.push_str("\"\"");
-                }
-                buf.push_str(s);
-            }
-            buf.push('"');
-        } else {
-            buf.push('"');
-            buf.push_str(str);
-            buf.push('"');
-        }
+        let s: &str = self.borrow();
+        s.formula(buf)
     }
 }
 impl<'a> Text for Cow<'a, str> {}
@@ -980,21 +1090,9 @@ impl<'a> Field for Cow<'a, str> {}
 impl<'a> DateTimeParam for Cow<'a, str> {}
 
 impl Any for String {
+    #[inline]
     fn formula(&self, buf: &mut String) {
-        if self.contains('"') {
-            buf.push('"');
-            for (i, s) in self.split('"').enumerate() {
-                if i > 0 {
-                    buf.push_str("\"\"");
-                }
-                buf.push_str(s);
-            }
-            buf.push('"');
-        } else {
-            buf.push('"');
-            buf.push_str(self);
-            buf.push('"');
-        }
+        self.as_str().formula(buf)
     }
 }
 impl Text for String {}
@@ -1005,6 +1103,7 @@ impl Field for String {}
 impl DateTimeParam for String {}
 
 impl Any for CellRef {
+    #[inline]
     fn formula(&self, buf: &mut String) {
         buf.push_str(self.to_formula().as_str())
     }
@@ -1024,6 +1123,7 @@ impl Field for CellRef {}
 impl DateTimeParam for CellRef {}
 
 impl Any for CellRange {
+    #[inline]
     fn formula(&self, buf: &mut String) {
         buf.push_str(self.to_formula().as_str())
     }
@@ -1049,6 +1149,7 @@ macro_rules! number_op {
         impl <$($($l,)? $($tname: Any,)*)? V: Number> Add<V> for $t $(< $($l,)? $($tname,)* >)? {
             type Output = OpNumber<Self, V>;
 
+            #[inline]
             fn add(self, rhs: V) -> Self::Output {
                 OpNumber(self, "+", rhs)
             }
@@ -1057,6 +1158,7 @@ macro_rules! number_op {
         impl <$($($l,)? $($tname: Any,)*)? V: Number> Sub<V> for $t $(< $($l,)? $($tname,)* >)? {
             type Output = OpNumber<Self, V>;
 
+            #[inline]
             fn sub(self, rhs: V) -> Self::Output {
                 OpNumber(self, "-", rhs)
             }
@@ -1065,6 +1167,7 @@ macro_rules! number_op {
         impl <$($($l,)? $($tname: Any,)*)? V: Number> Mul<V> for $t $(< $($l,)? $($tname,)* >)? {
             type Output = OpNumber<Self, V>;
 
+            #[inline]
             fn mul(self, rhs: V) -> Self::Output {
                 OpNumber(self, "*", rhs)
             }
@@ -1073,6 +1176,7 @@ macro_rules! number_op {
         impl <$($($l,)? $($tname: Any,)*)? V: Number> Div<V> for $t $(< $($l,)? $($tname,)* >)? {
             type Output = OpNumber<Self, V>;
 
+            #[inline]
             fn div(self, rhs: V) -> Self::Output {
                 OpNumber(self, "/", rhs)
             }
@@ -1081,6 +1185,7 @@ macro_rules! number_op {
         impl <$($($l,)? $($tname: Any,)*)? V: Number> BitXor<V> for $t $(< $($l,)? $($tname,)* >)? {
             type Output = OpNumber<Self, V>;
 
+            #[inline]
             fn bitxor(self, rhs: V) -> Self::Output {
                 OpNumber(self, "^", rhs)
             }
@@ -1089,6 +1194,7 @@ macro_rules! number_op {
         impl <$($($l,)? $($tname: Any,)*)?> Neg for $t $(< $($l,)? $($tname,)* >)? {
             type Output = OpNumber<(), Self>;
 
+            #[inline]
             fn neg(self) -> Self::Output {
                 OpNumber((), "-", self)
             }
@@ -1151,6 +1257,7 @@ macro_rules! text_op {
         impl <$($($l,)? $($tname: Any,)*)? V: Text> BitAnd<V> for $t $(< $($l,)? $($tname,)* >)? {
             type Output = OpText<Self, V>;
 
+            #[inline]
             fn bitand(self, rhs: V) -> Self::Output {
                 OpText(self, "&", rhs)
             }
@@ -1172,6 +1279,7 @@ text_op!(FnText6<A, B, C, D, E, F>);
 // -----------------------------------------------------------------------
 
 /// Creates a formula from any formula expression.
+#[inline]
 pub fn formula<T: Any>(f: T) -> String {
     let mut buf = String::new();
     buf.push_str("of:=");

@@ -2,8 +2,7 @@
 //! Date functions
 //!
 
-mod generated;
-pub use generated::*;
+pub use crate::generated::date::*;
 
 use crate::Any;
 

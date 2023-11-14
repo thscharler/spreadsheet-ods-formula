@@ -1,6 +1,6 @@
 use crate::*;
 #[allow(unused_imports)]
-use super::*;
+use crate::lookup::*;
 
 ///  Returns a cell address (reference) as text
 #[inline]
@@ -88,7 +88,7 @@ pub fn lookup<A: Any, B: Array>(find: A, searched: B) -> FnAny2<A, B> {
 
 /// Finds a Search item in a sequence, and returns its position (starting from 1)
 #[inline]
-pub fn match_<A: Scalar, B: Array>(search: A, search_region: B, match_type: MatchType) -> FnAny3<A, B, MatchType> {
+pub fn match__<A: Scalar, B: Array>(search: A, search_region: B, match_type: MatchType) -> FnAny3<A, B, MatchType> {
     FnAny3("MATCH", search, search_region, match_type)
 }
 

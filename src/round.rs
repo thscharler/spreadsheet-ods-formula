@@ -2,8 +2,7 @@
 //! Rounding functions.
 //!
 
-mod generated;
-pub use generated::*;
+pub use crate::generated::round::*;
 
 use crate::Any;
 use std::fmt::Write;

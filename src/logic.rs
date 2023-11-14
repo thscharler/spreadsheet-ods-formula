@@ -2,8 +2,7 @@
 //! Logical functions.
 //!
 
-mod generated;
-pub use generated::*;
+pub use crate::generated::logic::*;
 
 use crate::{Any, FnAny2, FnAny3, Logical};
 

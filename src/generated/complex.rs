@@ -1,6 +1,6 @@
 use crate::*;
 #[allow(unused_imports)]
-use super::*;
+use crate::complex::*;
 
 /// Creates a complex number from a given real coefficient and imaginary coefficient.
 #[inline]

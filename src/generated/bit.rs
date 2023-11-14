@@ -1,6 +1,6 @@
 use crate::*;
 #[allow(unused_imports)]
-use super::*;
+use crate::bit::*;
 
 /// Returns bitwise “and” of its parameters
 #[inline]
