@@ -18,6 +18,10 @@ name = "spreadsheet_ods_formula"
 name = "generate"
 path = "generate_src/generate.rs"
 
+[[bin]]
+name = "create_fn"
+path = "generate_src/create_fn.rs"
+
 [dependencies]
 csv = "1.2.1"
 
@@ -25,3 +29,14 @@ csv = "1.2.1"
 version = "0.17.0"
 #path = "../spreadsheet-ods"
 features = ["use_decimal", "all_locales"]
+
+[dependencies.nom]
+version = "7.1"
+features = [ "alloc" ]
+
+[dependencies.nom_locate]
+version = "4.0"
+
+[dependencies.kparse]
+version = "3.0.4"
+path = "../../StableProjects/kparse"
