@@ -774,6 +774,7 @@ Semantics: Perform VARP on only the data records in database D field F that matc
 See also VARP 6.18.84, DVAR 6.9.12
 6.10 Date and Time Functions
 6.10.1 General
+
 6.10.2 DATE
 
 Summary: Constructs a date from year, month, and day of month.
@@ -939,7 +940,7 @@ See also DAYS 6.10.6, DATEDIF 6.10.3, EOMONTH 6.10.9
 
 Summary: Returns the serial number of the end of a month, given date plus MonthAdd months
 
-Syntax: EOMONTH( DateParam StartDate ; Integer MonthAdd
+Syntax: EOMONTH( DateParam StartDate ; Integer MonthAdd)
 
 Returns: Number
 
