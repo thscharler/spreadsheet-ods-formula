@@ -57,7 +57,7 @@ impl TryFrom<&OdsFn> for Module {
     type Error = DError;
 
     fn try_from(fnr: &OdsFn) -> Result<Self, Self::Error> {
-        let fpath = String::from("src/generated/");
+        let fpath = String::from("generated_2/");
         let _ = create_dir_all(&fpath);
 
         let mut fname = fpath.clone();

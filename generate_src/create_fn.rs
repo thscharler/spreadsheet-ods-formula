@@ -1,13 +1,13 @@
 #![allow(dead_code)]
 
-use crate::mapp::{mod_file, mod_name};
-use crate::parse::{Func, Spec};
+use crate::error::DError;
+use crate::mapp::{args, fnname, mod_file, mod_name, ret_args, ret_type, returns, type_vars};
+use crate::parse::{Func, Mod, Spec};
 use std::fs::File;
-use std::io;
 use std::io::Read;
 use std::io::Write;
 
-fn main() -> Result<(), io::Error> {
+fn main() -> Result<(), DError> {
     let mut txt = Vec::new();
 
     let mut f = File::open("generate_src/spec.txt")?;
@@ -17,25 +17,23 @@ fn main() -> Result<(), io::Error> {
 
     let mut it = txt.as_ref();
     let mut file = None;
+    let mut mod_name_ = String::from("");
     loop {
         let (rest, spec) = parse::parse(&it).expect("mods");
         match spec {
-            Spec::Mod(m) => {
-                println!("{:?}", m.name);
-                file.replace(File::create(format!("generated/{}", mod_file(&m)))?);
+            Spec::Mod(mod_) => {
+                mod_name_ = mod_name(&mod_)?.into();
+
+                println!("{:?}", mod_.name);
+
+                file.replace(File::create(format!("generated/{}", mod_file(&mod_)?))?);
                 let f = file.as_mut().expect("file");
 
-                for l in m.desc.lines() {
-                    writeln!(f, "//! {}", l)?;
-                }
-                writeln!(f)?;
-
-                writeln!(f, "use crate::*;")?;
-                writeln!(f, "#[allow(unused_imports)]")?;
-                writeln!(f, "use crate::{}::*;", mod_name(&m))?;
-                writeln!(f)?;
+                generate_mod(f, &mod_)?;
             }
-            Spec::Func(fun) => {
+            Spec::Func(mut fun) => {
+                fun.mod_ = mod_name_.clone();
+
                 let f = file.as_mut().expect("file");
                 generate_fn(f, &fun)?;
             }
@@ -50,84 +48,397 @@ fn main() -> Result<(), io::Error> {
     Ok(())
 }
 
-pub fn generate_fn(f: &mut File, fun: &Func) -> Result<(), io::Error> {
+fn generate_mod(f: &mut File, m: &Mod) -> Result<(), DError> {
+    // for l in m.desc.lines() {
+    //     writeln!(f, "//! {}", l)?;
+    // }
+    // writeln!(f)?;
+
+    writeln!(f, "use crate::*;")?;
+    writeln!(f, "#[allow(unused_imports)]")?;
+    writeln!(f, "use crate::{}::*;", mod_name(&m)?)?;
+    Ok(())
+}
+
+pub fn generate_fn(f: &mut File, fun: &Func) -> Result<(), DError> {
     writeln!(f)?;
 
     if fun.summary.len() > 0 {
-        writeln!(f, "/// ")?;
         for l in fun.summary.lines() {
             writeln!(f, "/// {}", l)?;
         }
     }
 
-    if let Some(extra0) = &fun.extra0 {
-        if extra0.len() > 0 {
-            writeln!(f)?;
-            writeln!(f, "/// Arguments:")?;
-            for l in extra0.lines() {
-                writeln!(f, "/// {}", l)?;
-            }
-        }
-    }
+    // if let Some(extra0) = &fun.extra0 {
+    //     if extra0.len() > 0 {
+    //         writeln!(f, "///")?;
+    //         writeln!(f, "/// Arguments:")?;
+    //         for l in extra0.lines() {
+    //             writeln!(f, "/// {}", l)?;
+    //         }
+    //     }
+    // }
+    //
+    // if let Some(constraints) = &fun.constraints {
+    //     if constraints.len() > 0 {
+    //         writeln!(f, "///")?;
+    //         writeln!(f, "/// Constraints:")?;
+    //         for l in constraints.lines() {
+    //             writeln!(f, "/// {}", l)?;
+    //         }
+    //     }
+    // }
+    //
+    // if let Some(extra1) = &fun.extra1 {
+    //     if extra1.len() > 0 {
+    //         writeln!(f, "///")?;
+    //         writeln!(f, "/// Info2:")?;
+    //         for l in extra1.lines() {
+    //             writeln!(f, "/// {}", l)?;
+    //         }
+    //     }
+    // }
+    //
+    // if fun.semantics.len() > 0 {
+    //     writeln!(f, "///")?;
+    //     writeln!(f, "/// Semantics:")?;
+    //     for l in fun.semantics.lines() {
+    //         writeln!(f, "/// {}", l)?;
+    //     }
+    // }
+    //
+    // if let Some(note) = &fun.note {
+    //     if note.len() > 0 {
+    //         writeln!(f, "///")?;
+    //         writeln!(f, "/// Note:")?;
+    //         for l in note.lines() {
+    //             writeln!(f, "/// {}", l)?;
+    //         }
+    //     }
+    // }
+    //
+    // if !fun.see_also.fnname.is_empty() {
+    //     writeln!(f, "///")?;
+    //     write!(f, "/// See also: ")?;
+    //     for l in &fun.see_also.fnname {
+    //         write!(f, "{:?}, ", l)?;
+    //     }
+    // }
 
-    if let Some(constraints) = &fun.constraints {
-        if constraints.len() > 0 {
-            writeln!(f)?;
-            writeln!(f, "/// Constraints:")?;
-            for l in constraints.lines() {
-                writeln!(f, "/// {}", l)?;
-            }
-        }
-    }
-
-    if let Some(extra1) = &fun.extra1 {
-        if extra1.len() > 0 {
-            writeln!(f)?;
-            writeln!(f, "/// Info2:")?;
-            for l in extra1.lines() {
-                writeln!(f, "/// {}", l)?;
-            }
-        }
-    }
-
-    if fun.semantics.len() > 0 {
-        writeln!(f)?;
-        writeln!(f, "/// Semantics:")?;
-        for l in fun.semantics.lines() {
-            writeln!(f, "/// {}", l)?;
-        }
-    }
-
-    if let Some(note) = &fun.note {
-        if note.len() > 0 {
-            writeln!(f)?;
-            writeln!(f, "/// Note:")?;
-            for l in note.lines() {
-                writeln!(f, "/// {}", l)?;
-            }
-        }
-    }
-
-    if !fun.see_also.fnname.is_empty() {
-        writeln!(f)?;
-        write!(f, "/// See also: ")?;
-        for l in &fun.see_also.fnname {
-            write!(f, "{:?}, ", l)?;
-        }
-    }
+    writeln!(f, "#[inline]")?;
+    writeln!(
+        f,
+        "pub fn {}{}({}) -> {} {{",
+        fnname(fun)?,
+        type_vars(fun)?,
+        args(fun)?,
+        returns(fun)?
+    )?;
+    writeln!(
+        f,
+        "    {}(\"{}\", {})",
+        ret_type(fun)?,
+        fun.name,
+        ret_args(fun)?,
+    )?;
+    writeln!(f, "}}")?;
 
     Ok(())
 }
 
 mod mapp {
-    use crate::parse::Mod;
+    use crate::error::{DError, DErrorString};
+    use crate::parse::{Arg, Func, Mod};
+    use std::fmt::Display;
+    use std::fmt::Write;
 
-    pub fn mod_file(m: &Mod) -> String {
-        format!("{}.rs", mod_name(m))
+    const TYPE_VARS: [&str; 8] = ["A", "B", "C", "D", "E", "F", "G", "H"];
+
+    pub fn fnname(f: &Func) -> Result<String, DError> {
+        Ok(f.name.to_lowercase())
     }
 
-    pub fn mod_name(m: &Mod) -> &'static str {
-        match m.name.as_str() {
+    pub fn type_(a: &Arg) -> Result<String, DError> {
+        match a.type_.as_str() {
+            _ => panic!("no type for {:?}", a.type_),
+        }
+    }
+
+    pub fn type_vars(fun: &Func) -> Result<impl Display, DError> {
+        let mut buf = String::new();
+
+        if !fun.args.is_empty() {
+            write!(buf, "<")?;
+        }
+
+        let mut t_idx = 0usize;
+        for a in fun.args.iter() {
+            if let Some((v, t)) = type_var(t_idx, fun, a)? {
+                if t_idx > 0 {
+                    write!(buf, ", ")?;
+                }
+                write!(buf, "{}: {}", v, t)?;
+                t_idx += 1;
+            }
+        }
+
+        if !fun.args.is_empty() {
+            write!(buf, ">")?;
+        }
+
+        Ok(buf)
+    }
+
+    pub fn args(f: &Func) -> Result<String, DError> {
+        let mut buf = String::new();
+
+        let mut t_idx = 0usize;
+        for (idx, a) in f.args.iter().enumerate() {
+            if t_idx > 0 {
+                write!(buf, ", ")?;
+            }
+            write!(buf, "{}: {}", arg_name(idx, f, a)?, arg_type(idx, f, a)?)?;
+
+            t_idx += 1;
+        }
+
+        Ok(buf)
+    }
+
+    pub fn returns(f: &Func) -> Result<String, DError> {
+        let mut buf = String::new();
+
+        write!(buf, "{}", ret_type(f)?)?;
+
+        if !f.args.is_empty() {
+            write!(buf, "<")?;
+        }
+
+        let mut t_idx = 0usize;
+        for a in f.args.iter() {
+            let v = arg_type(t_idx, f, a)?;
+            if t_idx > 0 {
+                write!(buf, ", ")?;
+            }
+            write!(buf, "{}", v)?;
+            t_idx += 1;
+        }
+
+        if !f.args.is_empty() {
+            write!(buf, ">")?;
+        }
+
+        Ok(buf)
+    }
+
+    pub fn ret_args(f: &Func) -> Result<String, DError> {
+        let mut buf = String::new();
+
+        let mut t_idx = 0usize;
+        for (idx, a) in f.args.iter().enumerate() {
+            if t_idx > 0 {
+                write!(buf, ", ")?;
+            }
+            write!(buf, "{}", arg_name(idx, f, a)?)?;
+            t_idx += 1;
+        }
+
+        Ok(buf)
+    }
+
+    // type args + arg-trait
+    pub fn type_var(idx: usize, fun: &Func, arg: &Arg) -> Result<Option<(String, String)>, DError> {
+        let v = match (
+            fun.mod_.as_str(),
+            fun.name.as_str(),
+            arg.type_.as_str(),
+            arg.ident.as_str(),
+        ) {
+            (_, "DAYS360", "Logical", "Method") => None,
+            (_, "WEEKDAY", "Integer", "Type") => None,
+            (_, "WEEKNUM", "Number", "Mode") => None,
+            (_, "YEARFRAC", "Basis", "B") => None,
+            ("fin", _, "Basis", "B") => None,
+            ("fin", _, "Basis", "Basis") => None,
+            ("fin", _, "Basis", "Bas") => None,
+
+            (_, _, "Any", _) => Some((TYPE_VARS[idx], "Any")),
+            (_, _, "Array", _) => Some((TYPE_VARS[idx], "Array")),
+            (_, _, "ByteLength", _) => Some((TYPE_VARS[idx], "Number")),
+            (_, _, "BytePosition", _) => Some((TYPE_VARS[idx], "Number")),
+            (_, _, "Complex", _) => Some((TYPE_VARS[idx], "Number")),
+            (_, _, "Criteria", _) => Some((TYPE_VARS[idx], "Criteria")),
+            (_, _, "Criterion", _) => Some((TYPE_VARS[idx], "Criterion")),
+            (_, _, "Database", _) => Some((TYPE_VARS[idx], "Database")),
+            (_, _, "Date", _) => Some((TYPE_VARS[idx], "Number")),
+            (_, _, "DateParam", _) => Some((TYPE_VARS[idx], "DateTimeParam")),
+            (_, _, "Error", _) => Some((TYPE_VARS[idx], "Any")),
+            (_, _, "Field", _) => Some((TYPE_VARS[idx], "Field")),
+            (_, _, "Integer", _) => Some((TYPE_VARS[idx], "Number")),
+            (_, _, "Logical", _) => Some((TYPE_VARS[idx], "Logical")),
+            (_, _, "Number", _) => Some((TYPE_VARS[idx], "Number")),
+            (_, _, "Reference", _) => Some((TYPE_VARS[idx], "Reference")),
+            (_, _, "Scalar", _) => Some((TYPE_VARS[idx], "Number")),
+            (_, _, "Text", _) => Some((TYPE_VARS[idx], "Text")),
+            (_, _, "TimeParam", _) => Some((TYPE_VARS[idx], "DateTimeParam")),
+
+            (_, _, "ComplexSequence", _) => Some((TYPE_VARS[idx], "Sequence")),
+            (_, _, "DateSequence", _) => Some((TYPE_VARS[idx], "Sequence")),
+            (_, _, "LogicalSequence", _) => Some((TYPE_VARS[idx], "Sequence")),
+            (_, _, "NumberSequence", _) => Some((TYPE_VARS[idx], "Sequence")),
+            (_, _, "NumberSequenceList", _) => Some((TYPE_VARS[idx], "Sequence")),
+            (_, _, "ReferenceList", _) => Some((TYPE_VARS[idx], "Reference")),
+
+            (_, _, "Text|Number", _) => Some((TYPE_VARS[idx], "Text")),
+            (_, _, "Reference|Array", _) => Some((TYPE_VARS[idx], "Array")),
+            (_, _, "Text|Reference", _) => Some((TYPE_VARS[idx], "Text")),
+            (_, _, "ReferenceList|Array", _) => Some((TYPE_VARS[idx], "Array")),
+            (_, _, "Logical|NumberSequenceList", _) => Some((TYPE_VARS[idx], "Logical")),
+            (_, _, "ReferenceList|Reference", _) => Some((TYPE_VARS[idx], "Reference")),
+            (_, _, "Number|Array", _) => Some((TYPE_VARS[idx], "Array")),
+            (_, _, "Number or Array", _) => Some((TYPE_VARS[idx], "Array")),
+            (_, _, "Integer|Array", _) => Some((TYPE_VARS[idx], "Array")),
+            (_, _, "TextOrNumber", _) => Some((TYPE_VARS[idx], "Any")),
+
+            _ => {
+                return Err(DErrorString(format!(
+                    "no type_var for {:?} {:?} -- {:?}",
+                    arg.ident, arg.type_, fun
+                ))
+                .into());
+            }
+        };
+
+        return Ok(v.map(|(v, t)| (v.into(), t.into())));
+    }
+
+    // argument type
+    pub fn arg_type(idx: usize, fun: &Func, arg: &Arg) -> Result<String, DError> {
+        let v = match (
+            fun.mod_.as_str(),
+            fun.name.as_str(),
+            arg.type_.as_str(),
+            arg.ident.as_str(),
+        ) {
+            (_, "DAYS360", "Logical", "Method") => "Days360Method",
+            (_, "WEEKDAY", "Integer", "Type") => "WeekdayMethod",
+            (_, "WEEKNUM", "Number", "Mode") => "WeeknumMethod",
+            (_, "YEARFRAC", "Basis", "B") => "YearFracMethod",
+            ("fin", _, "Basis", "B") => "YearFracMethod",
+            ("fin", _, "Basis", "Basis") => "YearFracMethod",
+            ("fin", _, "Basis", "Bas") => "YearFracMethod",
+
+            (_, _, "Any", _) => TYPE_VARS[idx],
+            (_, _, "Array", _) => TYPE_VARS[idx],
+            (_, _, "ByteLength", _) => TYPE_VARS[idx],
+            (_, _, "BytePosition", _) => TYPE_VARS[idx],
+            (_, _, "Complex", _) => TYPE_VARS[idx],
+            (_, _, "Criteria", _) => TYPE_VARS[idx],
+            (_, _, "Criterion", _) => TYPE_VARS[idx],
+            (_, _, "Database", _) => TYPE_VARS[idx],
+            (_, _, "Date", _) => TYPE_VARS[idx],
+            (_, _, "DateParam", _) => TYPE_VARS[idx],
+            (_, _, "Error", _) => TYPE_VARS[idx],
+            (_, _, "Field", _) => TYPE_VARS[idx],
+            (_, _, "Integer", _) => TYPE_VARS[idx],
+            (_, _, "Logical", _) => TYPE_VARS[idx],
+            (_, _, "Number", _) => TYPE_VARS[idx],
+            (_, _, "Reference", _) => TYPE_VARS[idx],
+            (_, _, "Scalar", _) => TYPE_VARS[idx],
+            (_, _, "Text", _) => TYPE_VARS[idx],
+            (_, _, "TimeParam", _) => TYPE_VARS[idx],
+
+            (_, _, "ComplexSequence", _) => TYPE_VARS[idx],
+            (_, _, "DateSequence", _) => TYPE_VARS[idx],
+            (_, _, "LogicalSequence", _) => TYPE_VARS[idx],
+            (_, _, "NumberSequence", _) => TYPE_VARS[idx],
+            (_, _, "NumberSequenceList", _) => TYPE_VARS[idx],
+            (_, _, "ReferenceList", _) => TYPE_VARS[idx],
+
+            (_, _, "Text|Number", _) => TYPE_VARS[idx],
+            (_, _, "Reference|Array", _) => TYPE_VARS[idx],
+            (_, _, "Text|Reference", _) => TYPE_VARS[idx],
+            (_, _, "ReferenceList|Array", _) => TYPE_VARS[idx],
+            (_, _, "Logical|NumberSequenceList", _) => TYPE_VARS[idx],
+            (_, _, "ReferenceList|Reference", _) => TYPE_VARS[idx],
+            (_, _, "Number|Array", _) => TYPE_VARS[idx],
+            (_, _, "Number or Array", _) => TYPE_VARS[idx],
+            (_, _, "Integer|Array", _) => TYPE_VARS[idx],
+            (_, _, "TextOrNumber", _) => TYPE_VARS[idx],
+
+            _ => {
+                return Err(
+                    DErrorString(format!("no type for {:?} -- {:?}", arg.type_, fun)).into(),
+                )
+            }
+        };
+
+        Ok(v.into())
+    }
+
+    // argument name
+    #[allow(unreachable_code)]
+    pub fn arg_name(_idx: usize, _fun: &Func, arg: &Arg) -> Result<String, DError> {
+        let _v: &str = match arg.ident.as_str() {
+            _ => return Ok(arg.ident.to_lowercase()),
+        };
+        Ok(_v.into())
+    }
+
+    pub fn ret_type(fun: &Func) -> Result<String, DError> {
+        let Some(ret) = &fun.ret else {
+            return Ok(format!("FnNumber{}", fun.args.len()));
+        };
+
+        let ty = match ret.as_str() {
+            "Any" => format!("FnAny{}", fun.args.len()),
+            "Array" => format!("FnArray{}", fun.args.len()),
+            "ByteLength" => format!("FnNumber{}", fun.args.len()),
+            "BytePosition" => format!("FnNumber{}", fun.args.len()),
+            "Complex" => format!("FnNumber{}", fun.args.len()),
+            "Currency" => format!("FnNumber{}", fun.args.len()),
+            "Database" => format!("FnNumber{}", fun.args.len()),
+            "Date" => format!("FnNumber{}", fun.args.len()),
+            "DateTime" => format!("FnNumber{}", fun.args.len()),
+            "Error" => format!("FnAny{}", fun.args.len()),
+            "Integer" => format!("FnNumber{}", fun.args.len()),
+            "Logical" => format!("FnLogical{}", fun.args.len()),
+            "Matrix" => format!("FnMatrix{}", fun.args.len()),
+            "Number" => format!("FnNumber{}", fun.args.len()),
+            "Percentage" => format!("FnNumber{}", fun.args.len()),
+            "Reference" => format!("FnReference{}", fun.args.len()),
+            "String" => format!("FnText{}", fun.args.len()),
+            "Text" => format!("FnText{}", fun.args.len()),
+            "Time" => format!("FnNumber{}", fun.args.len()),
+
+            "ComplexSequence" => format!("FnNumber{}", fun.args.len()),
+
+            "Any (see below)" => format!("FnAny{}", fun.args.len()),
+            "Number|Text" => format!("FnText{}", fun.args.len()),
+            "Text or Number" => format!("FnText{}", fun.args.len()),
+            "Information about position, formatting properties or content" => {
+                format!("FnText{}", fun.args.len())
+            }
+            "Number ≥ 1" => format!("FnNumber{}", fun.args.len()),
+            "Number or Array" => format!("FnArray{}", fun.args.len()),
+
+            _ => {
+                return Err(
+                    DErrorString(format!("no return type for {:?} -- {:?}", ret, fun)).into(),
+                )
+            }
+        };
+
+        Ok(ty)
+    }
+
+    pub fn mod_file(mod_: &Mod) -> Result<String, DError> {
+        let file = format!("{}.rs", mod_name(mod_)?);
+        Ok(file)
+    }
+
+    pub fn mod_name(mod_: &Mod) -> Result<&'static str, DError> {
+        let v = match mod_.name.as_str() {
             "Matrix Functions" => "matrix",
             "Bit operation functions" => "bit",
             "Byte-position text functions" => "textb",
@@ -144,8 +455,10 @@ mod mapp {
             "Statistical Functions" => "stat",
             "Number Representation Conversion Functions" => "conv",
             "Text Functions" => "text",
-            _ => panic!("no match for {:?}", m.name),
-        }
+            _ => return Err(DErrorString(format!("no match for {:?}", mod_.name)).into()),
+        };
+
+        Ok(v)
     }
 }
 
@@ -164,7 +477,6 @@ mod parse {
     use std::fmt::{Debug, Display, Formatter};
     use std::mem;
     use std::ops::{RangeFrom, RangeTo};
-    use std::str::Lines;
 
     #[derive(Debug, PartialEq, Clone, Copy, Eq)]
     pub enum SpecCode {
@@ -229,6 +541,8 @@ mod parse {
 
     #[derive(Debug, Clone)]
     pub struct Func {
+        pub mod_: String,
+
         pub name: String,
         pub args: Vec<Arg>,
         pub etc: bool,
@@ -306,7 +620,7 @@ mod parse {
                     Err(_) => rest_loop,
                 };
                 let rest2 = match whitespace1(rest2) {
-                    Ok((rest, v)) => {
+                    Ok((rest, _v)) => {
                         if line.len() > 0 {
                             line.push(' ');
                         }
@@ -421,6 +735,7 @@ mod parse {
                 let see_also = see_also.unwrap_or(SeeAlso { fnname: vec![] });
 
                 let fun = Func {
+                    mod_: "".to_string(),
                     name: syntax.0.into(),
                     args: syntax.1,
                     etc: syntax.2,
@@ -621,14 +936,16 @@ mod parse {
             .with_code(SpecCode::Syntax)
             .track()?;
 
-            args.push(Arg {
-                type_mod: type_mod.map(|v| (*v.fragment()).into()),
-                type_: (*type_.fragment()).into(),
-                ident: (*ident.fragment()).into(),
-                default: default.map(|v| (*v.fragment()).into()),
-                opt: opt_stack > 0,
-                rep: rep_stack > 0,
-            });
+            if !ident.fragment().is_empty() {
+                args.push(Arg {
+                    type_mod: type_mod.map(|v| (*v.fragment()).into()),
+                    type_: (*type_.fragment()).into(),
+                    ident: (*ident.fragment()).into(),
+                    default: default.map(|v| (*v.fragment()).into()),
+                    opt: opt_stack > 0,
+                    rep: rep_stack > 0,
+                });
+            }
 
             let (rest2, v) = syntax_bracket(rest2)?;
             opt_stack += v;
@@ -1096,4 +1413,39 @@ mod parse {
             )))
         }
     }
+}
+
+mod error {
+    use std::error::Error;
+    use std::fmt::{Debug, Display, Formatter};
+
+    pub struct DError(pub Box<dyn Error>);
+
+    impl Debug for DError {
+        fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+            write!(f, "{:?}", self.0)
+        }
+    }
+
+    impl<T: Error + 'static> From<T> for DError {
+        fn from(value: T) -> Self {
+            Self(Box::new(value))
+        }
+    }
+
+    pub struct DErrorString(pub String);
+
+    impl Debug for DErrorString {
+        fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+            write!(f, "{:?}", self.0)
+        }
+    }
+
+    impl Display for DErrorString {
+        fn fmt(&self, f: &mut Formatter<'_>) -> std::fmt::Result {
+            write!(f, "{}", self.0)
+        }
+    }
+
+    impl Error for DErrorString {}
 }
