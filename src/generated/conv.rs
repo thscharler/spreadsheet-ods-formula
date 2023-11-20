@@ -818,98 +818,9 @@ pub fn oct2hex_<A: TextOrNumber, B: Number>(x: A, digits: B) -> FnText2<A, B> {
 /// numerals that precede (directly or indirectly) a larger-valued roman number 
 /// subtract their value from the final value.
 /// 
-/// Table 31 - ROMAN
-/// 
-/// Roman Numeral
-/// 
-/// Value
-/// 
-/// Unicode Code Point
-/// 
-/// I
-/// 
-/// 1
-/// 
-/// U+0049
-/// 
-/// V
-/// 
-/// 5
-/// 
-/// U+0056
-/// 
-/// X
-/// 
-/// 10
-/// 
-/// U+0058
-/// 
-/// L
-/// 
-/// 50
-/// 
-/// U+004C
-/// 
-/// C
-/// 
-/// 100
-/// 
-/// U+0043
-/// 
-/// D
-/// 
-/// 500
-/// 
-/// U+0044
-/// 
-/// M
-/// 
-/// 1000
-/// 
-/// U+004D
-/// 
 /// Evaluators that accept 0 as a value of N should return the string “0”. 
 /// Evaluators that accept negative values of N should include a negative sign 
 /// (“-”) as the first character.
-/// 
-/// The Format levels are:
-/// 
-/// Table 32 - ROMAN
-/// 
-/// Format
-/// 
-/// Meaning
-/// 
-/// 0
-/// or omitted
-/// (or TRUE)
-/// 
-/// Only subtract powers of 10, not L or V, and only if the next number is not 
-/// more than 10 times greater. A number following the larger one shall be 
-/// smaller than the subtracted number. Also known as classic.
-/// 
-/// 1
-/// 
-/// Powers of 10, and L and V may be subtracted, only if the next number is not 
-/// more than 10 times greater. A number following the larger one shall be 
-/// smaller than the subtracted number.
-/// 
-/// 2
-/// 
-/// Powers of 10 and L, but not V, may be subtracted, also if the next number 
-/// is more than 10 times greater. A number following the larger one shall be 
-/// smaller than the subtracted number.
-/// 
-/// 3
-/// 
-/// Powers of 10, and L and V may be subtracted, also if the next number is 
-/// more than 10 times greater. A number following the larger one shall be 
-/// smaller than the subtracted number.
-/// 
-/// 4
-/// (or FALSE)
-/// 
-/// Produce the fewest Roman digits possible. Also known as simplified.
 ///
 /// See also: "Infix Operator \"&\"", "ISLOGICAL", "ARABIC", 
 #[inline]
@@ -942,98 +853,9 @@ pub fn roman<A: Number>(n: A) -> FnText1<A> {
 /// numerals that precede (directly or indirectly) a larger-valued roman number 
 /// subtract their value from the final value.
 /// 
-/// Table 31 - ROMAN
-/// 
-/// Roman Numeral
-/// 
-/// Value
-/// 
-/// Unicode Code Point
-/// 
-/// I
-/// 
-/// 1
-/// 
-/// U+0049
-/// 
-/// V
-/// 
-/// 5
-/// 
-/// U+0056
-/// 
-/// X
-/// 
-/// 10
-/// 
-/// U+0058
-/// 
-/// L
-/// 
-/// 50
-/// 
-/// U+004C
-/// 
-/// C
-/// 
-/// 100
-/// 
-/// U+0043
-/// 
-/// D
-/// 
-/// 500
-/// 
-/// U+0044
-/// 
-/// M
-/// 
-/// 1000
-/// 
-/// U+004D
-/// 
 /// Evaluators that accept 0 as a value of N should return the string “0”. 
 /// Evaluators that accept negative values of N should include a negative sign 
 /// (“-”) as the first character.
-/// 
-/// The Format levels are:
-/// 
-/// Table 32 - ROMAN
-/// 
-/// Format
-/// 
-/// Meaning
-/// 
-/// 0
-/// or omitted
-/// (or TRUE)
-/// 
-/// Only subtract powers of 10, not L or V, and only if the next number is not 
-/// more than 10 times greater. A number following the larger one shall be 
-/// smaller than the subtracted number. Also known as classic.
-/// 
-/// 1
-/// 
-/// Powers of 10, and L and V may be subtracted, only if the next number is not 
-/// more than 10 times greater. A number following the larger one shall be 
-/// smaller than the subtracted number.
-/// 
-/// 2
-/// 
-/// Powers of 10 and L, but not V, may be subtracted, also if the next number 
-/// is more than 10 times greater. A number following the larger one shall be 
-/// smaller than the subtracted number.
-/// 
-/// 3
-/// 
-/// Powers of 10, and L and V may be subtracted, also if the next number is 
-/// more than 10 times greater. A number following the larger one shall be 
-/// smaller than the subtracted number.
-/// 
-/// 4
-/// (or FALSE)
-/// 
-/// Produce the fewest Roman digits possible. Also known as simplified.
 ///
 /// See also: "Infix Operator \"&\"", "ISLOGICAL", "ARABIC", 
 #[inline]

@@ -404,6 +404,9 @@ mod mapp {
             (_, "CELL", "Text", "Info_Type") => None,
             (_, "INFO", "Text", "Category") => None,
             (_, "NPER", "Number", "PayType") => None,
+            (_, "CONVERT", "Text", "From") => None,
+            (_, "CONVERT", "Text", "Into") => None,
+            (_, "DATEDIF", "Text", "Format") => None,
 
             ("fin", _, "Basis", "B") => None,
             ("fin", _, "Basis", "Basis") => None,
@@ -500,6 +503,9 @@ mod mapp {
             (_, "CELL", "Text", "Info_Type") => ("CellInfo", false),
             (_, "INFO", "Text", "Category") => ("InfoInfo", false),
             (_, "NPER", "Number", "PayType") => ("PayType", false),
+            (_, "CONVERT", "Text", "From") => ("ConvertUnit", false),
+            (_, "CONVERT", "Text", "Into") => ("ConvertUnit", false),
+            (_, "DATEDIF", "Text", "Format") => ("DateDifMethod", false),
 
             ("fin", _, "Basis", "B") => ("YearFracMethod", false),
             ("fin", _, "Basis", "Basis") => ("YearFracMethod", false),

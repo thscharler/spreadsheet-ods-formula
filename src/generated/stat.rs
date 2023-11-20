@@ -1279,7 +1279,7 @@ pub fn large<A: Sequence, B: NumberOrArray>(list: A, n: B) -> FnArray2<A, B> {
 /// parameter, it is set to the sequence 1,2,3,…,k , where k = ROWS(KnownY) 
 /// ∙ COLUMNS(KnownY).
 /// 
-/// Const: If set to FALSE, the model constant a is equal to 0.
+/// •Const: If set to FALSE, the model constant a is equal to 0.
 /// 
 /// •Stats: If FALSE, only the regression coefficient is to be calculated. If 
 /// set to TRUE, the result will include other statistical data.
@@ -1287,119 +1287,7 @@ pub fn large<A: Sequence, B: NumberOrArray>(list: A, n: B) -> FnArray2<A, B> {
 /// If any of the entries in KnownY and KnownX do not convert to Number, LINEST 
 /// returns an error.
 /// 
-/// The result created by LINEST if STATS is TRUE is given in Table 29 - 
-/// LINEST. If STATS is FALSE it is just the first row of Table 29 - LINEST. 
-/// The empty cells in this table are returned as empty or as containing an 
-/// error.
-/// 
-/// Table 29 - LINEST
-/// 
-/// bn
-/// 
-/// bn-1
-/// 
-/// …
-/// 
-/// b1
-/// 
-/// a
-/// 
-/// …
-/// 
-/// F
-/// 
-/// df
-/// 
-/// SSreg
-/// 
-/// SSresid
-/// 
-/// If COLUMNS(KnownY) = COLUMNS(KnownX) and ROWS(KnownY) = ROWS(KnownX) then n 
-/// = 1, k = ROWS(KnownY) ∙ COLUMNS(KnownY), the entries of KnownX in column 
-/// major order are denoted with
-/// and the entries of KnownY in column major order are denoted with
-/// .
-/// Otherwise but if COLUMNS(KnownY) = 1, then n = COLUMNS(KnownX), k = 
-/// ROWS(KnownY), the entry in the jth column and ith row of KnownX is denoted
-/// and the entry in the ith row of KnownY is denoted
-/// .
-/// Otherwise but if ROWS(KnownY) = 1, then n = ROWS(KnownX), k = 
-/// COLUMNS(KnownY), the entry in the jth column and ith row of KnownX is 
-/// denoted
-/// and the entry in the jth column of KnownY is denoted
-/// .
-/// 
-/// If Const is TRUE and k ≤ n + 1, LINEST returns an error. Similarly, if 
-/// Const is FALSE and k ≤ n, LINEST returns an error.
-/// 
-/// We denote
-/// 
-/// and
-/// ,
-/// 
-/// and define the following matrices:
-/// and
-/// for Const being TRUE, and
-/// for Const being FALSE().
-/// 
-/// Let
-/// denote the transpose of X, see TRANSPOSE 6.5.6. Then the matrix product
-/// is a square matrix. If
-/// is not invertible, then LINEST shall either return an error or calculate a 
-/// result as described below.
-/// 
-/// If
-/// is invertible, then
-/// is a matrix B with a single column. If Const is TRUE, the entries of B are 
-/// denoted
-/// ; if Const is FALSE, the entries of B are denoted
-/// and a = 0.
-/// 
-/// These
-/// are the values returned by LINEST in the first row of its result array in 
-/// the order given in Table 29 - LINEST.
-/// 
-/// The statistics in the 2nd to 5th rows of Table 29 - LINEST are as follows:
-/// 
-/// If Const is TRUE:
-/// .
-/// 
-/// ,
-/// ,
-/// 
-/// and
-/// 
-/// where
-/// is the element in the ith row and ith column of
-/// 
-/// ,
-/// ,
-/// and
-/// .
-/// 
-/// If Const is FALSE:
-/// ,
-/// ,
-/// ,
-/// 
-/// where
-/// is the element in the ith row and ith column of
-/// 
-/// ,
-/// ,
-/// and
-/// .
-/// 
-/// In this case
-/// is undefined and is returned as either 0, blank or an error.
-/// 
-/// If
-/// is not invertible, then the columns of X are linearly dependent. In this 
-/// case an evaluator shall return an error or select any maximal linearly 
-/// independent subset of these columns that if Const is TRUE includes the 
-/// first column and perform the above calculations with that subset. In the 
-/// latter case the coefficients
-/// of omitted columns are returned as 0.
+/// ** Some formulas **
 ///
 /// See also: "COLUMNS", "ROWS", 
 #[inline]
@@ -1424,7 +1312,7 @@ pub fn linest<A: Array>(known_y: A) -> FnArray1<A> {
 /// parameter, it is set to the sequence 1,2,3,…,k , where k = ROWS(KnownY) 
 /// ∙ COLUMNS(KnownY).
 /// 
-/// Const: If set to FALSE, the model constant a is equal to 0.
+/// •Const: If set to FALSE, the model constant a is equal to 0.
 /// 
 /// •Stats: If FALSE, only the regression coefficient is to be calculated. If 
 /// set to TRUE, the result will include other statistical data.
@@ -1432,119 +1320,7 @@ pub fn linest<A: Array>(known_y: A) -> FnArray1<A> {
 /// If any of the entries in KnownY and KnownX do not convert to Number, LINEST 
 /// returns an error.
 /// 
-/// The result created by LINEST if STATS is TRUE is given in Table 29 - 
-/// LINEST. If STATS is FALSE it is just the first row of Table 29 - LINEST. 
-/// The empty cells in this table are returned as empty or as containing an 
-/// error.
-/// 
-/// Table 29 - LINEST
-/// 
-/// bn
-/// 
-/// bn-1
-/// 
-/// …
-/// 
-/// b1
-/// 
-/// a
-/// 
-/// …
-/// 
-/// F
-/// 
-/// df
-/// 
-/// SSreg
-/// 
-/// SSresid
-/// 
-/// If COLUMNS(KnownY) = COLUMNS(KnownX) and ROWS(KnownY) = ROWS(KnownX) then n 
-/// = 1, k = ROWS(KnownY) ∙ COLUMNS(KnownY), the entries of KnownX in column 
-/// major order are denoted with
-/// and the entries of KnownY in column major order are denoted with
-/// .
-/// Otherwise but if COLUMNS(KnownY) = 1, then n = COLUMNS(KnownX), k = 
-/// ROWS(KnownY), the entry in the jth column and ith row of KnownX is denoted
-/// and the entry in the ith row of KnownY is denoted
-/// .
-/// Otherwise but if ROWS(KnownY) = 1, then n = ROWS(KnownX), k = 
-/// COLUMNS(KnownY), the entry in the jth column and ith row of KnownX is 
-/// denoted
-/// and the entry in the jth column of KnownY is denoted
-/// .
-/// 
-/// If Const is TRUE and k ≤ n + 1, LINEST returns an error. Similarly, if 
-/// Const is FALSE and k ≤ n, LINEST returns an error.
-/// 
-/// We denote
-/// 
-/// and
-/// ,
-/// 
-/// and define the following matrices:
-/// and
-/// for Const being TRUE, and
-/// for Const being FALSE().
-/// 
-/// Let
-/// denote the transpose of X, see TRANSPOSE 6.5.6. Then the matrix product
-/// is a square matrix. If
-/// is not invertible, then LINEST shall either return an error or calculate a 
-/// result as described below.
-/// 
-/// If
-/// is invertible, then
-/// is a matrix B with a single column. If Const is TRUE, the entries of B are 
-/// denoted
-/// ; if Const is FALSE, the entries of B are denoted
-/// and a = 0.
-/// 
-/// These
-/// are the values returned by LINEST in the first row of its result array in 
-/// the order given in Table 29 - LINEST.
-/// 
-/// The statistics in the 2nd to 5th rows of Table 29 - LINEST are as follows:
-/// 
-/// If Const is TRUE:
-/// .
-/// 
-/// ,
-/// ,
-/// 
-/// and
-/// 
-/// where
-/// is the element in the ith row and ith column of
-/// 
-/// ,
-/// ,
-/// and
-/// .
-/// 
-/// If Const is FALSE:
-/// ,
-/// ,
-/// ,
-/// 
-/// where
-/// is the element in the ith row and ith column of
-/// 
-/// ,
-/// ,
-/// and
-/// .
-/// 
-/// In this case
-/// is undefined and is returned as either 0, blank or an error.
-/// 
-/// If
-/// is not invertible, then the columns of X are linearly dependent. In this 
-/// case an evaluator shall return an error or select any maximal linearly 
-/// independent subset of these columns that if Const is TRUE includes the 
-/// first column and perform the above calculations with that subset. In the 
-/// latter case the coefficients
-/// of omitted columns are returned as 0.
+/// ** Some formulas **
 ///
 /// See also: "COLUMNS", "ROWS", 
 #[inline]
@@ -1569,7 +1345,7 @@ pub fn linest_<A: Array, B: Array>(known_y: A, known_x: B) -> FnArray2<A, B> {
 /// parameter, it is set to the sequence 1,2,3,…,k , where k = ROWS(KnownY) 
 /// ∙ COLUMNS(KnownY).
 /// 
-/// Const: If set to FALSE, the model constant a is equal to 0.
+/// •Const: If set to FALSE, the model constant a is equal to 0.
 /// 
 /// •Stats: If FALSE, only the regression coefficient is to be calculated. If 
 /// set to TRUE, the result will include other statistical data.
@@ -1577,119 +1353,7 @@ pub fn linest_<A: Array, B: Array>(known_y: A, known_x: B) -> FnArray2<A, B> {
 /// If any of the entries in KnownY and KnownX do not convert to Number, LINEST 
 /// returns an error.
 /// 
-/// The result created by LINEST if STATS is TRUE is given in Table 29 - 
-/// LINEST. If STATS is FALSE it is just the first row of Table 29 - LINEST. 
-/// The empty cells in this table are returned as empty or as containing an 
-/// error.
-/// 
-/// Table 29 - LINEST
-/// 
-/// bn
-/// 
-/// bn-1
-/// 
-/// …
-/// 
-/// b1
-/// 
-/// a
-/// 
-/// …
-/// 
-/// F
-/// 
-/// df
-/// 
-/// SSreg
-/// 
-/// SSresid
-/// 
-/// If COLUMNS(KnownY) = COLUMNS(KnownX) and ROWS(KnownY) = ROWS(KnownX) then n 
-/// = 1, k = ROWS(KnownY) ∙ COLUMNS(KnownY), the entries of KnownX in column 
-/// major order are denoted with
-/// and the entries of KnownY in column major order are denoted with
-/// .
-/// Otherwise but if COLUMNS(KnownY) = 1, then n = COLUMNS(KnownX), k = 
-/// ROWS(KnownY), the entry in the jth column and ith row of KnownX is denoted
-/// and the entry in the ith row of KnownY is denoted
-/// .
-/// Otherwise but if ROWS(KnownY) = 1, then n = ROWS(KnownX), k = 
-/// COLUMNS(KnownY), the entry in the jth column and ith row of KnownX is 
-/// denoted
-/// and the entry in the jth column of KnownY is denoted
-/// .
-/// 
-/// If Const is TRUE and k ≤ n + 1, LINEST returns an error. Similarly, if 
-/// Const is FALSE and k ≤ n, LINEST returns an error.
-/// 
-/// We denote
-/// 
-/// and
-/// ,
-/// 
-/// and define the following matrices:
-/// and
-/// for Const being TRUE, and
-/// for Const being FALSE().
-/// 
-/// Let
-/// denote the transpose of X, see TRANSPOSE 6.5.6. Then the matrix product
-/// is a square matrix. If
-/// is not invertible, then LINEST shall either return an error or calculate a 
-/// result as described below.
-/// 
-/// If
-/// is invertible, then
-/// is a matrix B with a single column. If Const is TRUE, the entries of B are 
-/// denoted
-/// ; if Const is FALSE, the entries of B are denoted
-/// and a = 0.
-/// 
-/// These
-/// are the values returned by LINEST in the first row of its result array in 
-/// the order given in Table 29 - LINEST.
-/// 
-/// The statistics in the 2nd to 5th rows of Table 29 - LINEST are as follows:
-/// 
-/// If Const is TRUE:
-/// .
-/// 
-/// ,
-/// ,
-/// 
-/// and
-/// 
-/// where
-/// is the element in the ith row and ith column of
-/// 
-/// ,
-/// ,
-/// and
-/// .
-/// 
-/// If Const is FALSE:
-/// ,
-/// ,
-/// ,
-/// 
-/// where
-/// is the element in the ith row and ith column of
-/// 
-/// ,
-/// ,
-/// and
-/// .
-/// 
-/// In this case
-/// is undefined and is returned as either 0, blank or an error.
-/// 
-/// If
-/// is not invertible, then the columns of X are linearly dependent. In this 
-/// case an evaluator shall return an error or select any maximal linearly 
-/// independent subset of these columns that if Const is TRUE includes the 
-/// first column and perform the above calculations with that subset. In the 
-/// latter case the coefficients
-/// of omitted columns are returned as 0.
+/// ** Some formulas **
 ///
 /// See also: "COLUMNS", "ROWS", 
 #[inline]
@@ -1714,7 +1378,7 @@ pub fn linest__<A: Array, B: Array, C: Logical>(known_y: A, known_x: B, const_: 
 /// parameter, it is set to the sequence 1,2,3,…,k , where k = ROWS(KnownY) 
 /// ∙ COLUMNS(KnownY).
 /// 
-/// Const: If set to FALSE, the model constant a is equal to 0.
+/// •Const: If set to FALSE, the model constant a is equal to 0.
 /// 
 /// •Stats: If FALSE, only the regression coefficient is to be calculated. If 
 /// set to TRUE, the result will include other statistical data.
@@ -1722,119 +1386,7 @@ pub fn linest__<A: Array, B: Array, C: Logical>(known_y: A, known_x: B, const_: 
 /// If any of the entries in KnownY and KnownX do not convert to Number, LINEST 
 /// returns an error.
 /// 
-/// The result created by LINEST if STATS is TRUE is given in Table 29 - 
-/// LINEST. If STATS is FALSE it is just the first row of Table 29 - LINEST. 
-/// The empty cells in this table are returned as empty or as containing an 
-/// error.
-/// 
-/// Table 29 - LINEST
-/// 
-/// bn
-/// 
-/// bn-1
-/// 
-/// …
-/// 
-/// b1
-/// 
-/// a
-/// 
-/// …
-/// 
-/// F
-/// 
-/// df
-/// 
-/// SSreg
-/// 
-/// SSresid
-/// 
-/// If COLUMNS(KnownY) = COLUMNS(KnownX) and ROWS(KnownY) = ROWS(KnownX) then n 
-/// = 1, k = ROWS(KnownY) ∙ COLUMNS(KnownY), the entries of KnownX in column 
-/// major order are denoted with
-/// and the entries of KnownY in column major order are denoted with
-/// .
-/// Otherwise but if COLUMNS(KnownY) = 1, then n = COLUMNS(KnownX), k = 
-/// ROWS(KnownY), the entry in the jth column and ith row of KnownX is denoted
-/// and the entry in the ith row of KnownY is denoted
-/// .
-/// Otherwise but if ROWS(KnownY) = 1, then n = ROWS(KnownX), k = 
-/// COLUMNS(KnownY), the entry in the jth column and ith row of KnownX is 
-/// denoted
-/// and the entry in the jth column of KnownY is denoted
-/// .
-/// 
-/// If Const is TRUE and k ≤ n + 1, LINEST returns an error. Similarly, if 
-/// Const is FALSE and k ≤ n, LINEST returns an error.
-/// 
-/// We denote
-/// 
-/// and
-/// ,
-/// 
-/// and define the following matrices:
-/// and
-/// for Const being TRUE, and
-/// for Const being FALSE().
-/// 
-/// Let
-/// denote the transpose of X, see TRANSPOSE 6.5.6. Then the matrix product
-/// is a square matrix. If
-/// is not invertible, then LINEST shall either return an error or calculate a 
-/// result as described below.
-/// 
-/// If
-/// is invertible, then
-/// is a matrix B with a single column. If Const is TRUE, the entries of B are 
-/// denoted
-/// ; if Const is FALSE, the entries of B are denoted
-/// and a = 0.
-/// 
-/// These
-/// are the values returned by LINEST in the first row of its result array in 
-/// the order given in Table 29 - LINEST.
-/// 
-/// The statistics in the 2nd to 5th rows of Table 29 - LINEST are as follows:
-/// 
-/// If Const is TRUE:
-/// .
-/// 
-/// ,
-/// ,
-/// 
-/// and
-/// 
-/// where
-/// is the element in the ith row and ith column of
-/// 
-/// ,
-/// ,
-/// and
-/// .
-/// 
-/// If Const is FALSE:
-/// ,
-/// ,
-/// ,
-/// 
-/// where
-/// is the element in the ith row and ith column of
-/// 
-/// ,
-/// ,
-/// and
-/// .
-/// 
-/// In this case
-/// is undefined and is returned as either 0, blank or an error.
-/// 
-/// If
-/// is not invertible, then the columns of X are linearly dependent. In this 
-/// case an evaluator shall return an error or select any maximal linearly 
-/// independent subset of these columns that if Const is TRUE includes the 
-/// first column and perform the above calculations with that subset. In the 
-/// latter case the coefficients
-/// of omitted columns are returned as 0.
+/// ** Some formulas **
 ///
 /// See also: "COLUMNS", "ROWS", 
 #[inline]
@@ -1860,7 +1412,7 @@ pub fn linest___<A: Array, B: Array, C: Logical, D: Logical>(known_y: A, known_x
 /// parameter, it is set to the sequence 1,2,3,…,k, where k = ROWS(KnownY) 
 /// ∙ COLUMNS(KnownY).
 /// 
-/// Const: If set to FALSE, the model constant a is equal to 0.
+/// •Const: If set to FALSE, the model constant a is equal to 0.
 /// 
 /// •Stats: If FALSE, only the regression coefficient is to be calculated. If 
 /// set to TRUE, the result will include other statistical data.
@@ -1868,110 +1420,7 @@ pub fn linest___<A: Array, B: Array, C: Logical, D: Logical>(known_y: A, known_x
 /// If any of the entries in KnownY and KnownX do not convert to Number or if 
 /// any of the entries in KnownY is negative, LOGEST returns an error.
 /// 
-/// The result created by LOGEST if STATS is TRUE is given in Table 30 - 
-/// LOGEST. If STATS is FALSE it is just the first row of Table 30 - LOGEST. 
-/// The empty cells in this table are returned as empty or as containing an 
-/// error.
-/// 
-/// Table 30 - LOGEST
-/// 
-/// …
-/// 
-/// …
-/// 
-/// F
-/// 
-/// df
-/// 
-/// SSreg
-/// 
-/// SSresid
-/// 
-/// If COLUMNS(KnownY) = COLUMNS(KnownX) and ROWS(KnownY) = ROWS(KnownX) then n 
-/// = 1, k = ROWS(KnownY) ∙ COLUMNS(KnownY), the entries of KnownX in column 
-/// major order are denoted with
-/// and the entries of KnownY in column major order are denoted with
-/// .
-/// Otherwise but if COLUMNS(KnownY) = 1, then n = COLUMNS(KnownX), k = 
-/// ROWS(KnownY), the entry in the jth column and ith row of KnownX is denoted
-/// and the entry in the ith row of KnownY is denoted
-/// .
-/// Otherwise but if ROWS(KnownY) = 1, then n = ROWS(KnownX), k = 
-/// COLUMNS(KnownY), the entry in the jth column and ith row of KnownX is 
-/// denoted
-/// and the entry in the jth column of KnownY is denoted
-/// .
-/// 
-/// If Const is TRUE and k ≤ n + 1, LOGEST returns an error. Similarly, if 
-/// Const is FALSE and k ≤ n, LOGEST returns an error.
-/// 
-/// We denote
-/// 
-/// and
-/// ,
-/// 
-/// and define the following matrices:
-/// and
-/// for Const being TRUE, and
-/// for Const being FALSE().
-/// 
-/// Let
-/// denote the transpose of X, see TRANSPOSE 6.5.6. Then the matrix product
-/// is a square matrix. If
-/// is not invertible, then LOGEST shall either return an error or calculate a 
-/// result as described below.
-/// 
-/// If
-/// is invertible, then
-/// is a matrix B with a single column. If Const is TRUE, the entries of B are 
-/// denoted
-/// ; if Const is FALSE, the entries of B are denoted
-/// and a = 0.
-/// 
-/// Then
-/// are the values returned by LOGEST in the first row of its result array in 
-/// the order given in Table 1 - Operators.
-/// 
-/// The statistics in the 2nd to 5th rows of Table 1 - Operators are as 
-/// follows:
-/// 
-/// If Const is TRUE():
-/// .
-/// , ,
-/// 
-/// and
-/// 
-/// where
-/// is the element in the ith row and ith column of
-/// 
-/// ,
-/// ,
-/// and
-/// .
-/// 
-/// If Const is FALSE:
-/// ,
-/// ,
-/// ,
-/// 
-/// where
-/// is the element in the ith row and ith column of
-/// 
-/// ,
-/// ,
-/// and
-/// .
-/// 
-/// In this case
-/// is undefined and is returned as either 0, blank or an error.
-/// 
-/// If
-/// is not invertible, then the columns of X are linearly dependent. In this 
-/// case an evaluator shall return an error or select any maximal linearly 
-/// independent subset of these columns that if Const is TRUE includes the 
-/// first column and perform the above calculations with that subset. In the 
-/// latter case the coefficients
-/// of omitted columns are returned as 1.
+/// ** Some formulas **
 ///
 /// See also: "COLUMNS", "ROWS", 
 #[inline]
@@ -1997,7 +1446,7 @@ pub fn logest<A: Array>(known_y: A) -> FnArray1<A> {
 /// parameter, it is set to the sequence 1,2,3,…,k, where k = ROWS(KnownY) 
 /// ∙ COLUMNS(KnownY).
 /// 
-/// Const: If set to FALSE, the model constant a is equal to 0.
+/// •Const: If set to FALSE, the model constant a is equal to 0.
 /// 
 /// •Stats: If FALSE, only the regression coefficient is to be calculated. If 
 /// set to TRUE, the result will include other statistical data.
@@ -2005,110 +1454,7 @@ pub fn logest<A: Array>(known_y: A) -> FnArray1<A> {
 /// If any of the entries in KnownY and KnownX do not convert to Number or if 
 /// any of the entries in KnownY is negative, LOGEST returns an error.
 /// 
-/// The result created by LOGEST if STATS is TRUE is given in Table 30 - 
-/// LOGEST. If STATS is FALSE it is just the first row of Table 30 - LOGEST. 
-/// The empty cells in this table are returned as empty or as containing an 
-/// error.
-/// 
-/// Table 30 - LOGEST
-/// 
-/// …
-/// 
-/// …
-/// 
-/// F
-/// 
-/// df
-/// 
-/// SSreg
-/// 
-/// SSresid
-/// 
-/// If COLUMNS(KnownY) = COLUMNS(KnownX) and ROWS(KnownY) = ROWS(KnownX) then n 
-/// = 1, k = ROWS(KnownY) ∙ COLUMNS(KnownY), the entries of KnownX in column 
-/// major order are denoted with
-/// and the entries of KnownY in column major order are denoted with
-/// .
-/// Otherwise but if COLUMNS(KnownY) = 1, then n = COLUMNS(KnownX), k = 
-/// ROWS(KnownY), the entry in the jth column and ith row of KnownX is denoted
-/// and the entry in the ith row of KnownY is denoted
-/// .
-/// Otherwise but if ROWS(KnownY) = 1, then n = ROWS(KnownX), k = 
-/// COLUMNS(KnownY), the entry in the jth column and ith row of KnownX is 
-/// denoted
-/// and the entry in the jth column of KnownY is denoted
-/// .
-/// 
-/// If Const is TRUE and k ≤ n + 1, LOGEST returns an error. Similarly, if 
-/// Const is FALSE and k ≤ n, LOGEST returns an error.
-/// 
-/// We denote
-/// 
-/// and
-/// ,
-/// 
-/// and define the following matrices:
-/// and
-/// for Const being TRUE, and
-/// for Const being FALSE().
-/// 
-/// Let
-/// denote the transpose of X, see TRANSPOSE 6.5.6. Then the matrix product
-/// is a square matrix. If
-/// is not invertible, then LOGEST shall either return an error or calculate a 
-/// result as described below.
-/// 
-/// If
-/// is invertible, then
-/// is a matrix B with a single column. If Const is TRUE, the entries of B are 
-/// denoted
-/// ; if Const is FALSE, the entries of B are denoted
-/// and a = 0.
-/// 
-/// Then
-/// are the values returned by LOGEST in the first row of its result array in 
-/// the order given in Table 1 - Operators.
-/// 
-/// The statistics in the 2nd to 5th rows of Table 1 - Operators are as 
-/// follows:
-/// 
-/// If Const is TRUE():
-/// .
-/// , ,
-/// 
-/// and
-/// 
-/// where
-/// is the element in the ith row and ith column of
-/// 
-/// ,
-/// ,
-/// and
-/// .
-/// 
-/// If Const is FALSE:
-/// ,
-/// ,
-/// ,
-/// 
-/// where
-/// is the element in the ith row and ith column of
-/// 
-/// ,
-/// ,
-/// and
-/// .
-/// 
-/// In this case
-/// is undefined and is returned as either 0, blank or an error.
-/// 
-/// If
-/// is not invertible, then the columns of X are linearly dependent. In this 
-/// case an evaluator shall return an error or select any maximal linearly 
-/// independent subset of these columns that if Const is TRUE includes the 
-/// first column and perform the above calculations with that subset. In the 
-/// latter case the coefficients
-/// of omitted columns are returned as 1.
+/// ** Some formulas **
 ///
 /// See also: "COLUMNS", "ROWS", 
 #[inline]
@@ -2134,7 +1480,7 @@ pub fn logest_<A: Array, B: Array>(known_y: A, known_x: B) -> FnArray2<A, B> {
 /// parameter, it is set to the sequence 1,2,3,…,k, where k = ROWS(KnownY) 
 /// ∙ COLUMNS(KnownY).
 /// 
-/// Const: If set to FALSE, the model constant a is equal to 0.
+/// •Const: If set to FALSE, the model constant a is equal to 0.
 /// 
 /// •Stats: If FALSE, only the regression coefficient is to be calculated. If 
 /// set to TRUE, the result will include other statistical data.
@@ -2142,110 +1488,7 @@ pub fn logest_<A: Array, B: Array>(known_y: A, known_x: B) -> FnArray2<A, B> {
 /// If any of the entries in KnownY and KnownX do not convert to Number or if 
 /// any of the entries in KnownY is negative, LOGEST returns an error.
 /// 
-/// The result created by LOGEST if STATS is TRUE is given in Table 30 - 
-/// LOGEST. If STATS is FALSE it is just the first row of Table 30 - LOGEST. 
-/// The empty cells in this table are returned as empty or as containing an 
-/// error.
-/// 
-/// Table 30 - LOGEST
-/// 
-/// …
-/// 
-/// …
-/// 
-/// F
-/// 
-/// df
-/// 
-/// SSreg
-/// 
-/// SSresid
-/// 
-/// If COLUMNS(KnownY) = COLUMNS(KnownX) and ROWS(KnownY) = ROWS(KnownX) then n 
-/// = 1, k = ROWS(KnownY) ∙ COLUMNS(KnownY), the entries of KnownX in column 
-/// major order are denoted with
-/// and the entries of KnownY in column major order are denoted with
-/// .
-/// Otherwise but if COLUMNS(KnownY) = 1, then n = COLUMNS(KnownX), k = 
-/// ROWS(KnownY), the entry in the jth column and ith row of KnownX is denoted
-/// and the entry in the ith row of KnownY is denoted
-/// .
-/// Otherwise but if ROWS(KnownY) = 1, then n = ROWS(KnownX), k = 
-/// COLUMNS(KnownY), the entry in the jth column and ith row of KnownX is 
-/// denoted
-/// and the entry in the jth column of KnownY is denoted
-/// .
-/// 
-/// If Const is TRUE and k ≤ n + 1, LOGEST returns an error. Similarly, if 
-/// Const is FALSE and k ≤ n, LOGEST returns an error.
-/// 
-/// We denote
-/// 
-/// and
-/// ,
-/// 
-/// and define the following matrices:
-/// and
-/// for Const being TRUE, and
-/// for Const being FALSE().
-/// 
-/// Let
-/// denote the transpose of X, see TRANSPOSE 6.5.6. Then the matrix product
-/// is a square matrix. If
-/// is not invertible, then LOGEST shall either return an error or calculate a 
-/// result as described below.
-/// 
-/// If
-/// is invertible, then
-/// is a matrix B with a single column. If Const is TRUE, the entries of B are 
-/// denoted
-/// ; if Const is FALSE, the entries of B are denoted
-/// and a = 0.
-/// 
-/// Then
-/// are the values returned by LOGEST in the first row of its result array in 
-/// the order given in Table 1 - Operators.
-/// 
-/// The statistics in the 2nd to 5th rows of Table 1 - Operators are as 
-/// follows:
-/// 
-/// If Const is TRUE():
-/// .
-/// , ,
-/// 
-/// and
-/// 
-/// where
-/// is the element in the ith row and ith column of
-/// 
-/// ,
-/// ,
-/// and
-/// .
-/// 
-/// If Const is FALSE:
-/// ,
-/// ,
-/// ,
-/// 
-/// where
-/// is the element in the ith row and ith column of
-/// 
-/// ,
-/// ,
-/// and
-/// .
-/// 
-/// In this case
-/// is undefined and is returned as either 0, blank or an error.
-/// 
-/// If
-/// is not invertible, then the columns of X are linearly dependent. In this 
-/// case an evaluator shall return an error or select any maximal linearly 
-/// independent subset of these columns that if Const is TRUE includes the 
-/// first column and perform the above calculations with that subset. In the 
-/// latter case the coefficients
-/// of omitted columns are returned as 1.
+/// ** Some formulas **
 ///
 /// See also: "COLUMNS", "ROWS", 
 #[inline]
@@ -2271,7 +1514,7 @@ pub fn logest__<A: Array, B: Array, C: Logical>(known_y: A, known_x: B, const_: 
 /// parameter, it is set to the sequence 1,2,3,…,k, where k = ROWS(KnownY) 
 /// ∙ COLUMNS(KnownY).
 /// 
-/// Const: If set to FALSE, the model constant a is equal to 0.
+/// •Const: If set to FALSE, the model constant a is equal to 0.
 /// 
 /// •Stats: If FALSE, only the regression coefficient is to be calculated. If 
 /// set to TRUE, the result will include other statistical data.
@@ -2279,110 +1522,7 @@ pub fn logest__<A: Array, B: Array, C: Logical>(known_y: A, known_x: B, const_: 
 /// If any of the entries in KnownY and KnownX do not convert to Number or if 
 /// any of the entries in KnownY is negative, LOGEST returns an error.
 /// 
-/// The result created by LOGEST if STATS is TRUE is given in Table 30 - 
-/// LOGEST. If STATS is FALSE it is just the first row of Table 30 - LOGEST. 
-/// The empty cells in this table are returned as empty or as containing an 
-/// error.
-/// 
-/// Table 30 - LOGEST
-/// 
-/// …
-/// 
-/// …
-/// 
-/// F
-/// 
-/// df
-/// 
-/// SSreg
-/// 
-/// SSresid
-/// 
-/// If COLUMNS(KnownY) = COLUMNS(KnownX) and ROWS(KnownY) = ROWS(KnownX) then n 
-/// = 1, k = ROWS(KnownY) ∙ COLUMNS(KnownY), the entries of KnownX in column 
-/// major order are denoted with
-/// and the entries of KnownY in column major order are denoted with
-/// .
-/// Otherwise but if COLUMNS(KnownY) = 1, then n = COLUMNS(KnownX), k = 
-/// ROWS(KnownY), the entry in the jth column and ith row of KnownX is denoted
-/// and the entry in the ith row of KnownY is denoted
-/// .
-/// Otherwise but if ROWS(KnownY) = 1, then n = ROWS(KnownX), k = 
-/// COLUMNS(KnownY), the entry in the jth column and ith row of KnownX is 
-/// denoted
-/// and the entry in the jth column of KnownY is denoted
-/// .
-/// 
-/// If Const is TRUE and k ≤ n + 1, LOGEST returns an error. Similarly, if 
-/// Const is FALSE and k ≤ n, LOGEST returns an error.
-/// 
-/// We denote
-/// 
-/// and
-/// ,
-/// 
-/// and define the following matrices:
-/// and
-/// for Const being TRUE, and
-/// for Const being FALSE().
-/// 
-/// Let
-/// denote the transpose of X, see TRANSPOSE 6.5.6. Then the matrix product
-/// is a square matrix. If
-/// is not invertible, then LOGEST shall either return an error or calculate a 
-/// result as described below.
-/// 
-/// If
-/// is invertible, then
-/// is a matrix B with a single column. If Const is TRUE, the entries of B are 
-/// denoted
-/// ; if Const is FALSE, the entries of B are denoted
-/// and a = 0.
-/// 
-/// Then
-/// are the values returned by LOGEST in the first row of its result array in 
-/// the order given in Table 1 - Operators.
-/// 
-/// The statistics in the 2nd to 5th rows of Table 1 - Operators are as 
-/// follows:
-/// 
-/// If Const is TRUE():
-/// .
-/// , ,
-/// 
-/// and
-/// 
-/// where
-/// is the element in the ith row and ith column of
-/// 
-/// ,
-/// ,
-/// and
-/// .
-/// 
-/// If Const is FALSE:
-/// ,
-/// ,
-/// ,
-/// 
-/// where
-/// is the element in the ith row and ith column of
-/// 
-/// ,
-/// ,
-/// and
-/// .
-/// 
-/// In this case
-/// is undefined and is returned as either 0, blank or an error.
-/// 
-/// If
-/// is not invertible, then the columns of X are linearly dependent. In this 
-/// case an evaluator shall return an error or select any maximal linearly 
-/// independent subset of these columns that if Const is TRUE includes the 
-/// first column and perform the above calculations with that subset. In the 
-/// latter case the coefficients
-/// of omitted columns are returned as 1.
+/// ** Some formulas **
 ///
 /// See also: "COLUMNS", "ROWS", 
 #[inline]

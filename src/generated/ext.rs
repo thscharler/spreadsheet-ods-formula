@@ -24,23 +24,6 @@ use crate::ext::*;
 /// 
 /// Mode is an optional parameter that determines how the results are returned:
 /// 
-/// Table 7 - DDE
-/// 
-/// Mode
-/// 
-/// Effect
-/// 
-/// 0 or missing
-/// 
-/// Data converted to number using VALUE in the number style's locale of the 
-/// default table cell style
-/// 
-/// 1
-/// 
-/// Data converted to number using VALUE in the English-US (en_US) locale
-/// 
-/// 2
-/// 
 /// Data retrieved as text (not converted to number)
 /// 
 /// In an OpenDocument spreadsheet document the default table cell style is 
@@ -73,23 +56,6 @@ pub fn dde<A: Text, B: Text, C: Text>(server: A, topic: B, item: C) -> FnText3<A
 /// their security policies permit it.
 /// 
 /// Mode is an optional parameter that determines how the results are returned:
-/// 
-/// Table 7 - DDE
-/// 
-/// Mode
-/// 
-/// Effect
-/// 
-/// 0 or missing
-/// 
-/// Data converted to number using VALUE in the number style's locale of the 
-/// default table cell style
-/// 
-/// 1
-/// 
-/// Data converted to number using VALUE in the English-US (en_US) locale
-/// 
-/// 2
 /// 
 /// Data retrieved as text (not converted to number)
 /// 

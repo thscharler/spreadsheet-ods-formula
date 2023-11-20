@@ -25,28 +25,6 @@ use crate::fin::*;
 /// Issue < First < Settlement ; Coupon > 0; Par > 0
 /// 
 /// Frequency is one of the following values:
-/// 
-/// Table 8 - ACCRINT
-/// 
-/// Frequency
-/// 
-/// Frequency of coupon payments
-/// 
-/// 1
-/// 
-/// Annual
-/// 
-/// 2
-/// 
-/// Semiannual
-/// 
-/// 4
-/// 
-/// Quarterly
-/// 
-/// 12
-/// 
-/// Monthly
 ///
 /// Semantics:
 /// Calculates the accrued interest for securities with periodic interest 
@@ -91,28 +69,6 @@ pub fn accrint<A: DateTime, B: DateTime, C: DateTime, D: Number, E: Number>(issu
 /// Issue < First < Settlement ; Coupon > 0; Par > 0
 /// 
 /// Frequency is one of the following values:
-/// 
-/// Table 8 - ACCRINT
-/// 
-/// Frequency
-/// 
-/// Frequency of coupon payments
-/// 
-/// 1
-/// 
-/// Annual
-/// 
-/// 2
-/// 
-/// Semiannual
-/// 
-/// 4
-/// 
-/// Quarterly
-/// 
-/// 12
-/// 
-/// Monthly
 ///
 /// Semantics:
 /// Calculates the accrued interest for securities with periodic interest 
@@ -157,28 +113,6 @@ pub fn accrint_<A: DateTime, B: DateTime, C: DateTime, D: Number, E: Number>(iss
 /// Issue < First < Settlement ; Coupon > 0; Par > 0
 /// 
 /// Frequency is one of the following values:
-/// 
-/// Table 8 - ACCRINT
-/// 
-/// Frequency
-/// 
-/// Frequency of coupon payments
-/// 
-/// 1
-/// 
-/// Annual
-/// 
-/// 2
-/// 
-/// Semiannual
-/// 
-/// 4
-/// 
-/// Quarterly
-/// 
-/// 12
-/// 
-/// Monthly
 ///
 /// Semantics:
 /// Calculates the accrued interest for securities with periodic interest 
@@ -371,24 +305,6 @@ pub fn amorlinc_<A: Number, B: DateTime, C: DateTime, D: Number, E: Number, F: N
 /// Settlement < Maturity
 /// 
 /// Frequency is one of the following values:
-/// 
-/// Table 9 - COUPDAYBS
-/// 
-/// Frequency
-/// 
-/// Frequency of coupon payments
-/// 
-/// 1
-/// 
-/// Annual
-/// 
-/// 2
-/// 
-/// Semiannual
-/// 
-/// 4
-/// 
-/// Quarterly
 ///
 /// Semantics:
 /// Calculate the number of days from the beginning of the coupon period to the 
@@ -416,24 +332,6 @@ pub fn coupdaybs<A: DateTime, B: DateTime>(settlement: A, maturity: B, frequency
 /// Settlement < Maturity
 /// 
 /// Frequency is one of the following values:
-/// 
-/// Table 9 - COUPDAYBS
-/// 
-/// Frequency
-/// 
-/// Frequency of coupon payments
-/// 
-/// 1
-/// 
-/// Annual
-/// 
-/// 2
-/// 
-/// Semiannual
-/// 
-/// 4
-/// 
-/// Quarterly
 ///
 /// Semantics:
 /// Calculate the number of days from the beginning of the coupon period to the 
@@ -461,24 +359,6 @@ pub fn coupdaybs_<A: DateTime, B: DateTime>(settlement: A, maturity: B, frequenc
 /// Settlement < Maturity
 /// 
 /// Frequency is one of the following values:
-/// 
-/// Table 10 - COUPDAYS
-/// 
-/// Frequency
-/// 
-/// Frequency of coupon payments
-/// 
-/// 1
-/// 
-/// Annual
-/// 
-/// 2
-/// 
-/// Semiannual
-/// 
-/// 4
-/// 
-/// Quarterly
 ///
 /// Semantics:
 /// Calculates the number of days in the coupon period containing the 
@@ -506,24 +386,6 @@ pub fn coupdays<A: DateTime, B: DateTime>(settlement: A, maturity: B, frequency:
 /// Settlement < Maturity
 /// 
 /// Frequency is one of the following values:
-/// 
-/// Table 10 - COUPDAYS
-/// 
-/// Frequency
-/// 
-/// Frequency of coupon payments
-/// 
-/// 1
-/// 
-/// Annual
-/// 
-/// 2
-/// 
-/// Semiannual
-/// 
-/// 4
-/// 
-/// Quarterly
 ///
 /// Semantics:
 /// Calculates the number of days in the coupon period containing the 
@@ -551,24 +413,6 @@ pub fn coupdays_<A: DateTime, B: DateTime>(settlement: A, maturity: B, frequency
 /// Settlement < Maturity
 /// 
 /// Frequency is one of the following values:
-/// 
-/// Table 11 - COUPDAYSNC
-/// 
-/// Frequency
-/// 
-/// Frequency of coupon payments
-/// 
-/// 1
-/// 
-/// Annual
-/// 
-/// 2
-/// 
-/// Semiannual
-/// 
-/// 4
-/// 
-/// Quarterly
 ///
 /// Semantics:
 /// Calculates the number of days between the settlement date and the next 
@@ -596,24 +440,6 @@ pub fn coupdaync<A: DateTime, B: DateTime>(settlement: A, maturity: B, frequency
 /// Settlement < Maturity
 /// 
 /// Frequency is one of the following values:
-/// 
-/// Table 11 - COUPDAYSNC
-/// 
-/// Frequency
-/// 
-/// Frequency of coupon payments
-/// 
-/// 1
-/// 
-/// Annual
-/// 
-/// 2
-/// 
-/// Semiannual
-/// 
-/// 4
-/// 
-/// Quarterly
 ///
 /// Semantics:
 /// Calculates the number of days between the settlement date and the next 
@@ -641,24 +467,6 @@ pub fn coupdaync_<A: DateTime, B: DateTime>(settlement: A, maturity: B, frequenc
 /// 
 /// Frequency is the number of coupon payments per year. Frequency is one of 
 /// the following values:
-/// 
-/// Table 12 - COUPNCD
-/// 
-/// Frequency
-/// 
-/// Frequency of coupon payments
-/// 
-/// 1
-/// 
-/// Annual
-/// 
-/// 2
-/// 
-/// Semiannual
-/// 
-/// 4
-/// 
-/// Quarterly
 ///
 /// Semantics:
 /// Calculates the next coupon date after the Settlement date based on the 
@@ -681,24 +489,6 @@ pub fn coupncd<A: DateTime, B: DateTime>(settlement: A, maturity: B, frequency: 
 /// 
 /// Frequency is the number of coupon payments per year. Frequency is one of 
 /// the following values:
-/// 
-/// Table 12 - COUPNCD
-/// 
-/// Frequency
-/// 
-/// Frequency of coupon payments
-/// 
-/// 1
-/// 
-/// Annual
-/// 
-/// 2
-/// 
-/// Semiannual
-/// 
-/// 4
-/// 
-/// Quarterly
 ///
 /// Semantics:
 /// Calculates the next coupon date after the Settlement date based on the 
@@ -720,24 +510,6 @@ pub fn coupncd_<A: DateTime, B: DateTime>(settlement: A, maturity: B, frequency:
 /// Constraints:
 /// Frequency is the number of coupon payments per year. Frequency is one of 
 /// the following values:
-/// 
-/// Table 13 - COUPNUM
-/// 
-/// Frequency
-/// 
-/// Frequency of coupon payments
-/// 
-/// 1
-/// 
-/// Annual
-/// 
-/// 2
-/// 
-/// Semiannual
-/// 
-/// 4
-/// 
-/// Quarterly
 ///
 /// Semantics:
 /// Calculates the number of coupons in the interval between the Settlement and 
@@ -759,24 +531,6 @@ pub fn coupnum<A: DateTime, B: DateTime>(settlement: A, maturity: B, frequency: 
 /// Constraints:
 /// Frequency is the number of coupon payments per year. Frequency is one of 
 /// the following values:
-/// 
-/// Table 13 - COUPNUM
-/// 
-/// Frequency
-/// 
-/// Frequency of coupon payments
-/// 
-/// 1
-/// 
-/// Annual
-/// 
-/// 2
-/// 
-/// Semiannual
-/// 
-/// 4
-/// 
-/// Quarterly
 ///
 /// Semantics:
 /// Calculates the number of coupons in the interval between the Settlement and 
@@ -799,24 +553,6 @@ pub fn coupnum_<A: DateTime, B: DateTime>(settlement: A, maturity: B, frequency:
 /// 
 /// Frequency is the number of coupon payments per year. Frequency is one of 
 /// the following values:
-/// 
-/// Table 14 - COUPPCD
-/// 
-/// Frequency
-/// 
-/// Frequency of coupon payments
-/// 
-/// 1
-/// 
-/// Annual
-/// 
-/// 2
-/// 
-/// Semiannual
-/// 
-/// 4
-/// 
-/// Quarterly
 ///
 /// Semantics:
 /// Calculates the next coupon date prior to the Settlement date based on the 
@@ -839,24 +575,6 @@ pub fn couppcd<A: DateTime, B: DateTime>(settlement: A, maturity: B, frequency: 
 /// 
 /// Frequency is the number of coupon payments per year. Frequency is one of 
 /// the following values:
-/// 
-/// Table 14 - COUPPCD
-/// 
-/// Frequency
-/// 
-/// Frequency of coupon payments
-/// 
-/// 1
-/// 
-/// Annual
-/// 
-/// 2
-/// 
-/// Semiannual
-/// 
-/// 4
-/// 
-/// Quarterly
 ///
 /// Semantics:
 /// Calculates the next coupon date prior to the Settlement date based on the 
@@ -878,18 +596,6 @@ pub fn couppcd_<A: DateTime, B: DateTime>(settlement: A, maturity: B, frequency:
 /// Rate > 0; Value > 0; 1 ≤ Start ≤ End ≤ Periods
 /// 
 /// Type is one of the following values:
-/// 
-/// Table 15 - CUMIPMT
-/// 
-/// Type
-/// 
-/// Maturity date
-/// 
-/// 0
-/// 
-/// due at the end
-/// 
-/// 1
 /// 
 /// due at the beginning
 ///
@@ -919,32 +625,6 @@ pub fn cumipmt<A: Number, B: Number, C: Number, D: Number, E: Number>(rate: A, p
 ///
 /// Constraints:
 /// Type is one of the following values:
-/// 
-/// Table 16 - CUMPRINC
-/// 
-/// Type
-/// 
-/// Maturity date
-/// 
-/// 0
-/// 
-/// due at the end
-/// 
-/// 1
-/// 
-/// due at the beginning
-/// 
-/// Type
-/// 
-/// Maturity date
-/// 
-/// 0
-/// 
-/// due at the end
-/// 
-/// 1
-/// 
-/// due at the beginning
 ///
 /// Semantics:
 /// Calculates the cumulative principal payment.

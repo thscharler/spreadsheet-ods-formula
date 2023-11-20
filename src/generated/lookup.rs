@@ -24,48 +24,6 @@ use crate::lookup::*;
 /// column and/or row is absolute or relative. The value of A1Style determines 
 /// if A1 reference style or R1C1 reference style is used.
 /// 
-/// Table 21 - ADDRESS
-/// 
-/// Abs
-/// 
-/// Meaning
-/// 
-/// A1Style = TRUE
-/// 
-/// A1Style = FALSE
-/// 
-/// 1
-/// 
-/// fully absolute
-/// 
-/// $A$1
-/// 
-/// R1C1
-/// 
-/// 2
-/// 
-/// row absolute, column relative
-/// 
-/// A$1
-/// 
-/// R1C[1]
-/// 
-/// 3
-/// 
-/// row relative, column absolute
-/// 
-/// $A1
-/// 
-/// R[1]C1
-/// 
-/// 4
-/// 
-/// fully relative
-/// 
-/// A1
-/// 
-/// R[1]C[1]
-/// 
 /// Note that the INDIRECT function accepts this format.
 ///
 /// See also: "INDIRECT", 
@@ -90,48 +48,6 @@ pub fn address<A: Number, B: Number>(row: A, column: B) -> FnText2<A, B> {
 /// identified using uppercase letters. The value of Abs determines if the 
 /// column and/or row is absolute or relative. The value of A1Style determines 
 /// if A1 reference style or R1C1 reference style is used.
-/// 
-/// Table 21 - ADDRESS
-/// 
-/// Abs
-/// 
-/// Meaning
-/// 
-/// A1Style = TRUE
-/// 
-/// A1Style = FALSE
-/// 
-/// 1
-/// 
-/// fully absolute
-/// 
-/// $A$1
-/// 
-/// R1C1
-/// 
-/// 2
-/// 
-/// row absolute, column relative
-/// 
-/// A$1
-/// 
-/// R1C[1]
-/// 
-/// 3
-/// 
-/// row relative, column absolute
-/// 
-/// $A1
-/// 
-/// R[1]C1
-/// 
-/// 4
-/// 
-/// fully relative
-/// 
-/// A1
-/// 
-/// R[1]C[1]
 /// 
 /// Note that the INDIRECT function accepts this format.
 ///
@@ -158,48 +74,6 @@ pub fn address_<A: Number, B: Number>(row: A, column: B, abs: AddressAbs) -> FnT
 /// column and/or row is absolute or relative. The value of A1Style determines 
 /// if A1 reference style or R1C1 reference style is used.
 /// 
-/// Table 21 - ADDRESS
-/// 
-/// Abs
-/// 
-/// Meaning
-/// 
-/// A1Style = TRUE
-/// 
-/// A1Style = FALSE
-/// 
-/// 1
-/// 
-/// fully absolute
-/// 
-/// $A$1
-/// 
-/// R1C1
-/// 
-/// 2
-/// 
-/// row absolute, column relative
-/// 
-/// A$1
-/// 
-/// R1C[1]
-/// 
-/// 3
-/// 
-/// row relative, column absolute
-/// 
-/// $A1
-/// 
-/// R[1]C1
-/// 
-/// 4
-/// 
-/// fully relative
-/// 
-/// A1
-/// 
-/// R[1]C[1]
-/// 
 /// Note that the INDIRECT function accepts this format.
 ///
 /// See also: "INDIRECT", 
@@ -224,48 +98,6 @@ pub fn address__<A: Number, B: Number, C: Logical>(row: A, column: B, abs: Addre
 /// identified using uppercase letters. The value of Abs determines if the 
 /// column and/or row is absolute or relative. The value of A1Style determines 
 /// if A1 reference style or R1C1 reference style is used.
-/// 
-/// Table 21 - ADDRESS
-/// 
-/// Abs
-/// 
-/// Meaning
-/// 
-/// A1Style = TRUE
-/// 
-/// A1Style = FALSE
-/// 
-/// 1
-/// 
-/// fully absolute
-/// 
-/// $A$1
-/// 
-/// R1C1
-/// 
-/// 2
-/// 
-/// row absolute, column relative
-/// 
-/// A$1
-/// 
-/// R1C[1]
-/// 
-/// 3
-/// 
-/// row relative, column absolute
-/// 
-/// $A1
-/// 
-/// R[1]C1
-/// 
-/// 4
-/// 
-/// fully relative
-/// 
-/// A1
-/// 
-/// R[1]C[1]
 /// 
 /// Note that the INDIRECT function accepts this format.
 ///
