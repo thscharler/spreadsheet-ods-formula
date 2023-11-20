@@ -9,10 +9,11 @@ use std::fs::File;
 use std::io::Read;
 use std::io::Write;
 
+#[test]
 fn main() -> Result<(), DError> {
     let mut txt = Vec::new();
 
-    let mut f = File::open("generate_src/spec.txt")?;
+    let mut f = File::open("spec.txt")?;
     f.read_to_end(&mut txt)?;
 
     let txt = String::from_utf8_lossy(txt.as_ref());
