@@ -223,7 +223,7 @@ fn generate_all_fn(mut fun: OdsFn, m: &mut Module) -> Result<(), DError> {
 
 fn generate_fn(fnr: &OdsFn, m: &mut Module) -> Result<(), DError> {
     writeln!(m.gen, "")?;
-    // writeln!(m.gen, "/// {}", fnr.doc)?;
+    writeln!(m.gen, "/// {}", fnr.doc)?;
     writeln!(m.gen, "#[inline]")?;
     writeln!(
         m.gen,

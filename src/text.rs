@@ -1,3 +1,7 @@
+//!
+//! Text functions.
+//!
+
 use crate::{Any, FnTextVar, Text};
 
 pub use crate::generated::text::*;

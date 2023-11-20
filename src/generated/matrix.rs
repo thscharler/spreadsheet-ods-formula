@@ -15,12 +15,16 @@ use crate::*;
 use crate::matrix::*;
 
 /// Calculates the determinant of a matrix.
-/// Syntax: MDETERM( A Array; )
 ///
-/// Constraints:
+/// __Syntax__: 
+/// ```ods
+///     MDETERM( A Array )
+/// ```
+///
+/// __Constraints__:
 /// Only square matrices are allowed.
 ///
-/// Semantics:
+/// __Semantics__:
 /// Returns the determinant of matrix A. The determinant is defined by
 /// 
 /// where P denotes a permutation of the numbers 1, 2, ..., n and
@@ -29,19 +33,23 @@ use crate::matrix::*;
 /// an even number of transpositions), -1 otherwise. A transposition on 1, ..., 
 /// n is a permutation of 1, ..., n with exactly (n - 2) numbers fixed.
 ///
-/// See also: "MINVERSE", 
+/// __See also__: "MINVERSE", 
 #[inline]
 pub fn mdeterm<A: Matrix>(a: A) -> FnNumber1<A> {
     FnNumber1("MDETERM", a)
 }
 
 /// Returns the inverse of a matrix.
-/// Syntax: MINVERSE( A Array; )
 ///
-/// Constraints:
+/// __Syntax__: 
+/// ```ods
+///     MINVERSE( A Array )
+/// ```
+///
+/// __Constraints__:
 /// Only square matrices are allowed.
 ///
-/// Semantics:
+/// __Semantics__:
 /// Calculates the inverse
 /// of matrix A. The matrix A multiplied with its inverse
 /// results in the unity matrix of the same dimension as A:
@@ -49,36 +57,44 @@ pub fn mdeterm<A: Matrix>(a: A) -> FnNumber1<A> {
 /// Invertible matrices have a non-zero determinant. If the matrix is not 
 /// invertible, this function should return an Error value.
 ///
-/// See also: "MDETERM", 
+/// __See also__: "MDETERM", 
 #[inline]
 pub fn minverse<A: Matrix>(a: A) -> FnMatrix1<A> {
     FnMatrix1("MINVERSE", a)
 }
 
 /// Multiplies the matrices A and B.
-/// Syntax: MMULT( A Array;; B Array; )
 ///
-/// Constraints:
+/// __Syntax__: 
+/// ```ods
+///     MMULT( A Array; B Array )
+/// ```
+///
+/// __Constraints__:
 /// COLUMNS(A) = ROWS(B)
 ///
-/// Semantics:
+/// __Semantics__:
 /// Returns the matrix product of the two matrices. The elements
 /// of the resulting matrix
 /// , are defined by:
 ///
-/// See also: "COLUMNS", "ROWS", 
+/// __See also__: "COLUMNS", "ROWS", 
 #[inline]
 pub fn mmult<A: Matrix, B: Matrix>(a: A, b: B) -> FnMatrix2<A, B> {
     FnMatrix2("MMULT", a, b)
 }
 
 /// Creates a unit matrix of a specified dimension N.
-/// Syntax: MUNIT( N Integer; )
 ///
-/// Constraints:
+/// __Syntax__: 
+/// ```ods
+///     MUNIT( N Integer )
+/// ```
+///
+/// __Constraints__:
 /// The dimension has to be greater than zero.
 ///
-/// Semantics:
+/// __Semantics__:
 /// Creates the unit matrix (identity matrix) of dimension N.
 #[inline]
 pub fn munit<A: Number>(n: A) -> FnMatrix1<A> {
@@ -86,12 +102,16 @@ pub fn munit<A: Number>(n: A) -> FnMatrix1<A> {
 }
 
 /// Returns the transpose of a matrix.
-/// Syntax: TRANSPOSE( A Array; )
 ///
-/// Constraints:
+/// __Syntax__: 
+/// ```ods
+///     TRANSPOSE( A Array )
+/// ```
+///
+/// __Constraints__:
 /// None
 ///
-/// Semantics:
+/// __Semantics__:
 /// Returns the transpose AT of a matrix A, i.e. rows and columns of the matrix 
 /// are exchanged.
 #[inline]

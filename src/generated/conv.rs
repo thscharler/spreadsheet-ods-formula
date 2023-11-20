@@ -24,12 +24,16 @@ use crate::*;
 use crate::conv::*;
 
 /// Convert Roman numerals to Number.
-/// Syntax: ARABIC( X Text; )
 ///
-/// Constraints:
+/// __Syntax__: 
+/// ```ods
+///     ARABIC( X Text )
+/// ```
+///
+/// __Constraints__:
 /// X shall contain Roman numerals, or an empty string.
 ///
-/// Semantics:
+/// __Semantics__:
 /// Converts the Roman numeral to Number. This is the reverse of ROMAN; see 
 /// ROMAN for the values of individual Roman numeral symbols. A Roman symbol to 
 /// the left of a larger symbol (directly or indirectly) reduces the final 
@@ -45,19 +49,23 @@ use crate::conv::*;
 /// 
 /// If X is an empty string, 0 is returned.
 ///
-/// See also: "Infix Operator \"&\"", "ROMAN", 
+/// __See also__: "Infix Operator \"&\"", "ROMAN", 
 #[inline]
 pub fn arabic<A: Text>(x: A) -> FnNumber1<A> {
     FnNumber1("ARABIC", x)
 }
 
 /// Converts a number into a text representation with the given base.
-/// Syntax: BASE( X Integer;; Radix Integer; )
 ///
-/// Constraints:
+/// __Syntax__: 
+/// ```ods
+///     BASE( X Integer; Radix Integer )
+/// ```
+///
+/// __Constraints__:
 /// X ≥ 0, 2 ≤ Radix ≤ 36, MinimumLength ≥ 0
 ///
-/// Semantics:
+/// __Semantics__:
 /// Converts number X into text that represents the value of X in base Radix. 
 /// The symbols 0-9 (U+0030 through U+0039), then upper case A-Z (U+0041 
 /// through U+005A) are used as digits. Thus, BASE(45745;36) returns “ZAP”.
@@ -69,19 +77,23 @@ pub fn arabic<A: Text>(x: A) -> FnNumber1<A> {
 /// characters long. If the text is longer than the MinimumLength argument, the 
 /// MinimumLength parameter is ignored.
 ///
-/// See also: "DECIMAL", 
+/// __See also__: "DECIMAL", 
 #[inline]
 pub fn base<A: Number, B: Number>(x: A, radix: B) -> FnText2<A, B> {
     FnText2("BASE", x, radix)
 }
 
 /// Converts a number into a text representation with the given base.
-/// Syntax: BASE( X Integer;; Radix Integer;[; MinimumLength Integer] )
 ///
-/// Constraints:
+/// __Syntax__: 
+/// ```ods
+///     BASE( X Integer; Radix Integer; MinimumLength Integer )
+/// ```
+///
+/// __Constraints__:
 /// X ≥ 0, 2 ≤ Radix ≤ 36, MinimumLength ≥ 0
 ///
-/// Semantics:
+/// __Semantics__:
 /// Converts number X into text that represents the value of X in base Radix. 
 /// The symbols 0-9 (U+0030 through U+0039), then upper case A-Z (U+0041 
 /// through U+005A) are used as digits. Thus, BASE(45745;36) returns “ZAP”.
@@ -93,7 +105,7 @@ pub fn base<A: Number, B: Number>(x: A, radix: B) -> FnText2<A, B> {
 /// characters long. If the text is longer than the MinimumLength argument, the 
 /// MinimumLength parameter is ignored.
 ///
-/// See also: "DECIMAL", 
+/// __See also__: "DECIMAL", 
 #[inline]
 pub fn base_<A: Number, B: Number, C: Number>(x: A, radix: B, minimum_length: C) -> FnText3<A, B, C> {
     FnText3("BASE", x, radix, minimum_length)
@@ -101,15 +113,19 @@ pub fn base_<A: Number, B: Number, C: Number>(x: A, radix: B, minimum_length: C)
 
 /// Converts a binary (base 2) number (up to 10 digits) to its decimal 
 /// equivalent
-/// Syntax: BIN2DEC( X TextOrNumber; )
 ///
-/// Constraints:
+/// __Syntax__: 
+/// ```ods
+///     BIN2DEC( X TextOrNumber )
+/// ```
+///
+/// __Constraints__:
 /// X shall contain only binary digits (no space or other characters), and 
 /// shall contain at least one binary digit. When considered as a Number, 
 /// INT(X) = X. Evaluators may evaluate expressions where the digits in X are 
 /// only 0 or 1, no more than 10 digits.
 ///
-/// Semantics:
+/// __Semantics__:
 /// Converts given binary number into decimal equivalent, with the topmost 10th 
 /// digit being the sign bit (using a two's-complement representation). If 
 /// given Text, the text is considered a binary number representation. If given 
@@ -123,7 +139,7 @@ pub fn base_<A: Number, B: Number, C: Number>(x: A, radix: B, minimum_length: C)
 /// implementation-defined what happens if an evaluator is given an empty 
 /// string; evaluators may return an Error or 0 in such cases.
 ///
-/// See also: "INT", 
+/// __See also__: "INT", 
 #[inline]
 pub fn bin2dec<A: TextOrNumber>(x: A) -> FnNumber1<A> {
     FnNumber1("BIN2DEC", x)
@@ -131,15 +147,19 @@ pub fn bin2dec<A: TextOrNumber>(x: A) -> FnNumber1<A> {
 
 /// Converts a binary (base 2) number (10th bit is sign) to its hexadecimal 
 /// equivalent
-/// Syntax: BIN2HEX( X TextOrNumber; )
 ///
-/// Constraints:
+/// __Syntax__: 
+/// ```ods
+///     BIN2HEX( X TextOrNumber )
+/// ```
+///
+/// __Constraints__:
 /// X shall contain only binary digits (no space or other characters), and 
 /// shall contain at least one binary digit. When considered as a Number, 
 /// INT(X) = X. Evaluators may evaluate expressions where the digits in X are 
 /// only 0 or 1, no more than 10 digits.
 ///
-/// Semantics:
+/// __Semantics__:
 /// Converts given binary number into hexadecimal (base 16) equivalent. For 
 /// input value X, the topmost 10th digit is considered the sign bit (using a 
 /// two's-complement representation). If given Text, the text is considered a 
@@ -163,7 +183,7 @@ pub fn bin2dec<A: TextOrNumber>(x: A) -> FnNumber1<A> {
 /// than the Digits parameter specifies, the results are 
 /// implementation-defined.
 ///
-/// See also: "INT", 
+/// __See also__: "INT", 
 #[inline]
 pub fn bin2hex<A: TextOrNumber>(x: A) -> FnText1<A> {
     FnText1("BIN2HEX", x)
@@ -171,15 +191,19 @@ pub fn bin2hex<A: TextOrNumber>(x: A) -> FnText1<A> {
 
 /// Converts a binary (base 2) number (10th bit is sign) to its hexadecimal 
 /// equivalent
-/// Syntax: BIN2HEX( X TextOrNumber;[; Digits Number] )
 ///
-/// Constraints:
+/// __Syntax__: 
+/// ```ods
+///     BIN2HEX( X TextOrNumber; Digits Number )
+/// ```
+///
+/// __Constraints__:
 /// X shall contain only binary digits (no space or other characters), and 
 /// shall contain at least one binary digit. When considered as a Number, 
 /// INT(X) = X. Evaluators may evaluate expressions where the digits in X are 
 /// only 0 or 1, no more than 10 digits.
 ///
-/// Semantics:
+/// __Semantics__:
 /// Converts given binary number into hexadecimal (base 16) equivalent. For 
 /// input value X, the topmost 10th digit is considered the sign bit (using a 
 /// two's-complement representation). If given Text, the text is considered a 
@@ -203,7 +227,7 @@ pub fn bin2hex<A: TextOrNumber>(x: A) -> FnText1<A> {
 /// than the Digits parameter specifies, the results are 
 /// implementation-defined.
 ///
-/// See also: "INT", 
+/// __See also__: "INT", 
 #[inline]
 pub fn bin2hex_<A: TextOrNumber, B: Number>(x: A, digits: B) -> FnText2<A, B> {
     FnText2("BIN2HEX", x, digits)
@@ -211,15 +235,19 @@ pub fn bin2hex_<A: TextOrNumber, B: Number>(x: A, digits: B) -> FnText2<A, B> {
 
 /// Converts a binary (base 2) number (10th bit is sign) to its octal (base 8) 
 /// equivalent
-/// Syntax: BIN2OCT( X TextOrNumber; )
 ///
-/// Constraints:
+/// __Syntax__: 
+/// ```ods
+///     BIN2OCT( X TextOrNumber )
+/// ```
+///
+/// __Constraints__:
 /// X shall contain only binary digits (no space or other characters), and 
 /// shall contain at least one binary digit. When considered as a Number, 
 /// INT(X) = X. Evaluators may evaluate expressions where the digits in X are 
 /// only 0 or 1, no more than 10 digits.
 ///
-/// Semantics:
+/// __Semantics__:
 /// Converts given binary number into octal (base 8) equivalent. For input 
 /// value X, the topmost 10th digit is considered the sign bit (using a 
 /// two's-complement representation). If given Text, the text is considered a 
@@ -242,7 +270,7 @@ pub fn bin2hex_<A: TextOrNumber, B: Number>(x: A, digits: B) -> FnText2<A, B> {
 /// are more digits than specified by the Digits parameter, its results are 
 /// implementation-defined.
 ///
-/// See also: "INT", 
+/// __See also__: "INT", 
 #[inline]
 pub fn bin2oct<A: TextOrNumber>(x: A) -> FnText1<A> {
     FnText1("BIN2OCT", x)
@@ -250,15 +278,19 @@ pub fn bin2oct<A: TextOrNumber>(x: A) -> FnText1<A> {
 
 /// Converts a binary (base 2) number (10th bit is sign) to its octal (base 8) 
 /// equivalent
-/// Syntax: BIN2OCT( X TextOrNumber;[; Digits Number] )
 ///
-/// Constraints:
+/// __Syntax__: 
+/// ```ods
+///     BIN2OCT( X TextOrNumber; Digits Number )
+/// ```
+///
+/// __Constraints__:
 /// X shall contain only binary digits (no space or other characters), and 
 /// shall contain at least one binary digit. When considered as a Number, 
 /// INT(X) = X. Evaluators may evaluate expressions where the digits in X are 
 /// only 0 or 1, no more than 10 digits.
 ///
-/// Semantics:
+/// __Semantics__:
 /// Converts given binary number into octal (base 8) equivalent. For input 
 /// value X, the topmost 10th digit is considered the sign bit (using a 
 /// two's-complement representation). If given Text, the text is considered a 
@@ -281,21 +313,25 @@ pub fn bin2oct<A: TextOrNumber>(x: A) -> FnText1<A> {
 /// are more digits than specified by the Digits parameter, its results are 
 /// implementation-defined.
 ///
-/// See also: "INT", 
+/// __See also__: "INT", 
 #[inline]
 pub fn bin2oct_<A: TextOrNumber, B: Number>(x: A, digits: B) -> FnText2<A, B> {
     FnText2("BIN2OCT", x, digits)
 }
 
 /// Converts a decimal number to base 2 (whose 10th bit is sign)
-/// Syntax: DEC2BIN( X TextOrNumber; )
 ///
-/// Constraints:
+/// __Syntax__: 
+/// ```ods
+///     DEC2BIN( X TextOrNumber )
+/// ```
+///
+/// __Constraints__:
 /// X shall contain only decimal digits (no space or other characters), and 
 /// shall contain at least one decimal digit. When considered as a Number, 
 /// INT(X) = X. Evaluators may evaluate expressions where -512 ≤ X ≤ 511.
 ///
-/// Semantics:
+/// __Semantics__:
 /// Converts given number into binary (base 2) equivalent. If given Text, the 
 /// text is considered a decimal number representation, and may have a leading 
 /// minus sign. It is implementation-defined what happens if given a Logical 
@@ -310,21 +346,25 @@ pub fn bin2oct_<A: TextOrNumber, B: Number>(x: A, digits: B) -> FnText2<A, B> {
 /// digits than specified by the Digits parameter, the results are 
 /// implementation-defined.
 ///
-/// See also: "INT", 
+/// __See also__: "INT", 
 #[inline]
 pub fn dec2bin<A: TextOrNumber>(x: A) -> FnText1<A> {
     FnText1("DEC2BIN", x)
 }
 
 /// Converts a decimal number to base 2 (whose 10th bit is sign)
-/// Syntax: DEC2BIN( X TextOrNumber;[; Digits Number] )
 ///
-/// Constraints:
+/// __Syntax__: 
+/// ```ods
+///     DEC2BIN( X TextOrNumber; Digits Number )
+/// ```
+///
+/// __Constraints__:
 /// X shall contain only decimal digits (no space or other characters), and 
 /// shall contain at least one decimal digit. When considered as a Number, 
 /// INT(X) = X. Evaluators may evaluate expressions where -512 ≤ X ≤ 511.
 ///
-/// Semantics:
+/// __Semantics__:
 /// Converts given number into binary (base 2) equivalent. If given Text, the 
 /// text is considered a decimal number representation, and may have a leading 
 /// minus sign. It is implementation-defined what happens if given a Logical 
@@ -339,21 +379,25 @@ pub fn dec2bin<A: TextOrNumber>(x: A) -> FnText1<A> {
 /// digits than specified by the Digits parameter, the results are 
 /// implementation-defined.
 ///
-/// See also: "INT", 
+/// __See also__: "INT", 
 #[inline]
 pub fn dec2bin_<A: TextOrNumber, B: Number>(x: A, digits: B) -> FnText2<A, B> {
     FnText2("DEC2BIN", x, digits)
 }
 
 /// Converts a decimal number to base 16 (whose 40th bit is sign)
-/// Syntax: DEC2HEX( X TextOrNumber; )
 ///
-/// Constraints:
+/// __Syntax__: 
+/// ```ods
+///     DEC2HEX( X TextOrNumber )
+/// ```
+///
+/// __Constraints__:
 /// X shall contain only decimal digits (no space or other characters), and 
 /// shall contain at least one decimal digit. When considered as a Number, 
 /// INT(X) = X. Evaluators may evaluate expressions where -239≤ X ≤ 239-1.
 ///
-/// Semantics:
+/// __Semantics__:
 /// Converts given number into hexadecimal (base 16) equivalent. If given Text, 
 /// the text is considered a decimal number representation, and may have a 
 /// leading minus sign. It is implementation-defined what happens if given a 
@@ -369,21 +413,25 @@ pub fn dec2bin_<A: TextOrNumber, B: Number>(x: A, digits: B) -> FnText2<A, B> {
 /// more digits than specified by the Digits parameter, the results are 
 /// implementation-defined.
 ///
-/// See also: "INT", 
+/// __See also__: "INT", 
 #[inline]
 pub fn dec2hex<A: TextOrNumber>(x: A) -> FnText1<A> {
     FnText1("DEC2HEX", x)
 }
 
 /// Converts a decimal number to base 16 (whose 40th bit is sign)
-/// Syntax: DEC2HEX( X TextOrNumber;[; Digits Number] )
 ///
-/// Constraints:
+/// __Syntax__: 
+/// ```ods
+///     DEC2HEX( X TextOrNumber; Digits Number )
+/// ```
+///
+/// __Constraints__:
 /// X shall contain only decimal digits (no space or other characters), and 
 /// shall contain at least one decimal digit. When considered as a Number, 
 /// INT(X) = X. Evaluators may evaluate expressions where -239≤ X ≤ 239-1.
 ///
-/// Semantics:
+/// __Semantics__:
 /// Converts given number into hexadecimal (base 16) equivalent. If given Text, 
 /// the text is considered a decimal number representation, and may have a 
 /// leading minus sign. It is implementation-defined what happens if given a 
@@ -399,21 +447,25 @@ pub fn dec2hex<A: TextOrNumber>(x: A) -> FnText1<A> {
 /// more digits than specified by the Digits parameter, the results are 
 /// implementation-defined.
 ///
-/// See also: "INT", 
+/// __See also__: "INT", 
 #[inline]
 pub fn dec2hex_<A: TextOrNumber, B: Number>(x: A, digits: B) -> FnText2<A, B> {
     FnText2("DEC2HEX", x, digits)
 }
 
 /// Converts a decimal number to base 8 (whose 30th bit is sign)
-/// Syntax: DEC2OCT( X TextOrNumber; )
 ///
-/// Constraints:
+/// __Syntax__: 
+/// ```ods
+///     DEC2OCT( X TextOrNumber )
+/// ```
+///
+/// __Constraints__:
 /// X shall contain only decimal digits (no space or other characters), and 
 /// shall contain at least one decimal digit. When considered as a Number, 
 /// INT(X) = X. Evaluators may evaluate expressions where -229≤ X ≤ 229-1.
 ///
-/// Semantics:
+/// __Semantics__:
 /// Converts given number into octal (base 8) equivalent. If given Text, the 
 /// text is considered a decimal number representation, and may have a leading 
 /// minus sign. It is implementation-defined what happens if given a Logical 
@@ -428,21 +480,25 @@ pub fn dec2hex_<A: TextOrNumber, B: Number>(x: A, digits: B) -> FnText2<A, B> {
 /// than specified by the Digits parameter, the results are 
 /// implementation-defined.
 ///
-/// See also: "INT", "OCT2DEC", 
+/// __See also__: "INT", "OCT2DEC", 
 #[inline]
 pub fn dec2oct<A: TextOrNumber>(x: A) -> FnText1<A> {
     FnText1("DEC2OCT", x)
 }
 
 /// Converts a decimal number to base 8 (whose 30th bit is sign)
-/// Syntax: DEC2OCT( X TextOrNumber;[; Digits Number] )
 ///
-/// Constraints:
+/// __Syntax__: 
+/// ```ods
+///     DEC2OCT( X TextOrNumber; Digits Number )
+/// ```
+///
+/// __Constraints__:
 /// X shall contain only decimal digits (no space or other characters), and 
 /// shall contain at least one decimal digit. When considered as a Number, 
 /// INT(X) = X. Evaluators may evaluate expressions where -229≤ X ≤ 229-1.
 ///
-/// Semantics:
+/// __Semantics__:
 /// Converts given number into octal (base 8) equivalent. If given Text, the 
 /// text is considered a decimal number representation, and may have a leading 
 /// minus sign. It is implementation-defined what happens if given a Logical 
@@ -457,19 +513,23 @@ pub fn dec2oct<A: TextOrNumber>(x: A) -> FnText1<A> {
 /// than specified by the Digits parameter, the results are 
 /// implementation-defined.
 ///
-/// See also: "INT", "OCT2DEC", 
+/// __See also__: "INT", "OCT2DEC", 
 #[inline]
 pub fn dec2oct_<A: TextOrNumber, B: Number>(x: A, digits: B) -> FnText2<A, B> {
     FnText2("DEC2OCT", x, digits)
 }
 
 /// Converts text representing a number in a given base into a base 10 number.
-/// Syntax: DECIMAL( X Text;; Radix Integer; )
 ///
-/// Constraints:
+/// __Syntax__: 
+/// ```ods
+///     DECIMAL( X Text; Radix Integer )
+/// ```
+///
+/// __Constraints__:
 /// 2 ≤ Radix ≤ 36
 ///
-/// Semantics:
+/// __Semantics__:
 /// Converts text X in base Radix to a Number. Uppercase letters (U+0041 
 /// through U+005A) and lowercase letters (U+0061 through U+007A) are both 
 /// accepted as equivalent if Radix > 10. Thus, DECIMAL("zap";36) and 
@@ -481,7 +541,7 @@ pub fn dec2oct_<A: TextOrNumber, B: Number>(x: A, digits: B) -> FnText2<A, B> {
 /// H or h. If Radix is 2, the letter b or B at the end is ignored (if 
 /// present).
 ///
-/// See also: "BASE", 
+/// __See also__: "BASE", 
 #[inline]
 pub fn decimal<A: Text, B: Number>(x: A, radix: B) -> FnNumber2<A, B> {
     FnNumber2("DECIMAL", x, radix)
@@ -489,15 +549,19 @@ pub fn decimal<A: Text, B: Number>(x: A, radix: B) -> FnNumber2<A, B> {
 
 /// Converts a hexadecimal number (40th bit is sign) to base 2 (whose 10th bit 
 /// is sign)
-/// Syntax: HEX2BIN( X TextOrNumber; )
 ///
-/// Constraints:
+/// __Syntax__: 
+/// ```ods
+///     HEX2BIN( X TextOrNumber )
+/// ```
+///
+/// __Constraints__:
 /// X shall contain only hexadecimal digits (no space or other characters), and 
 /// shall contain at least one hexadecimal digit. When considered as a Number, 
 /// INT(X) = X. Evaluators may evaluate expressions where X is considered in 
 /// base 10, -512 ≤ X ≤ 511.
 ///
-/// Semantics:
+/// __Semantics__:
 /// Converts given hexadecimal number into binary (base 2) equivalent. If given 
 /// Text, the text is considered a hexadecimal number representation; if its 
 /// 40th bit is 1, it is considered a negative number. It is 
@@ -513,7 +577,7 @@ pub fn decimal<A: Text, B: Number>(x: A, radix: B) -> FnNumber2<A, B> {
 /// digits. If there are more digits than specified by the Digits parameter, 
 /// the results are implementation-defined.
 ///
-/// See also: "INT", 
+/// __See also__: "INT", 
 #[inline]
 pub fn hex2bin<A: TextOrNumber>(x: A) -> FnText1<A> {
     FnText1("HEX2BIN", x)
@@ -521,15 +585,19 @@ pub fn hex2bin<A: TextOrNumber>(x: A) -> FnText1<A> {
 
 /// Converts a hexadecimal number (40th bit is sign) to base 2 (whose 10th bit 
 /// is sign)
-/// Syntax: HEX2BIN( X TextOrNumber;[; Digits Number] )
 ///
-/// Constraints:
+/// __Syntax__: 
+/// ```ods
+///     HEX2BIN( X TextOrNumber; Digits Number )
+/// ```
+///
+/// __Constraints__:
 /// X shall contain only hexadecimal digits (no space or other characters), and 
 /// shall contain at least one hexadecimal digit. When considered as a Number, 
 /// INT(X) = X. Evaluators may evaluate expressions where X is considered in 
 /// base 10, -512 ≤ X ≤ 511.
 ///
-/// Semantics:
+/// __Semantics__:
 /// Converts given hexadecimal number into binary (base 2) equivalent. If given 
 /// Text, the text is considered a hexadecimal number representation; if its 
 /// 40th bit is 1, it is considered a negative number. It is 
@@ -545,22 +613,26 @@ pub fn hex2bin<A: TextOrNumber>(x: A) -> FnText1<A> {
 /// digits. If there are more digits than specified by the Digits parameter, 
 /// the results are implementation-defined.
 ///
-/// See also: "INT", 
+/// __See also__: "INT", 
 #[inline]
 pub fn hex2bin_<A: TextOrNumber, B: Number>(x: A, digits: B) -> FnText2<A, B> {
     FnText2("HEX2BIN", x, digits)
 }
 
 /// Converts a hexadecimal number (40th bit is sign) to decimal
-/// Syntax: HEX2DEC( X TextOrNumber; )
 ///
-/// Constraints:
+/// __Syntax__: 
+/// ```ods
+///     HEX2DEC( X TextOrNumber )
+/// ```
+///
+/// __Constraints__:
 /// X shall contain only hexadecimal digits (no space or other characters), and 
 /// shall contain at least one hexadecimal digit. When considered as a Number, 
 /// INT(X) = X. Evaluators may evaluate expressions where X shall have 1 though 
 /// 10 (inclusive) hexadecimal digits.
 ///
-/// Semantics:
+/// __Semantics__:
 /// Converts given hexadecimal number into decimal equivalent. If given Text, 
 /// the text is considered a hexadecimal number representation. If X's 40th bit 
 /// is 1, it is considered a negative number. It is implementation-defined what 
@@ -570,7 +642,7 @@ pub fn hex2bin_<A: TextOrNumber, B: Number>(x: A, digits: B) -> FnText2<A, B> {
 /// 
 /// The resulting value is a decimal number.
 ///
-/// See also: "INT", 
+/// __See also__: "INT", 
 #[inline]
 pub fn hex2dec<A: TextOrNumber>(x: A) -> FnNumber1<A> {
     FnNumber1("HEX2DEC", x)
@@ -578,15 +650,19 @@ pub fn hex2dec<A: TextOrNumber>(x: A) -> FnNumber1<A> {
 
 /// Converts a hexadecimal number (40th bit is sign) to base 8 (whose 30th bit 
 /// is sign)
-/// Syntax: HEX2OCT( X TextOrNumber; )
 ///
-/// Constraints:
+/// __Syntax__: 
+/// ```ods
+///     HEX2OCT( X TextOrNumber )
+/// ```
+///
+/// __Constraints__:
 /// X shall contain hexadecimal digits (no spaces or other characters), and 
 /// shall contain at least one hexadecimal digit. When considered as Number, 
 /// INT(X) = X. Evaluators may evaluate expressions where X has 1 to 10 
 /// (inclusive) hexadecimal digits, base 10 value of X is -2 29 < X < 2 29 -1.
 ///
-/// Semantics:
+/// __Semantics__:
 /// Converts given hexadecimal number into octal (base 8) equivalent. If given 
 /// Text, the text is considered a hexadecimal number representation; if its 
 /// 40th bit is 1, it is considered a negative number. It is 
@@ -602,7 +678,7 @@ pub fn hex2dec<A: TextOrNumber>(x: A) -> FnNumber1<A> {
 /// digits. If there are more digits than specified by the Digits parameter, 
 /// the results are implementation-defined.
 ///
-/// See also: "INT", 
+/// __See also__: "INT", 
 #[inline]
 pub fn hex2oct<A: TextOrNumber>(x: A) -> FnText1<A> {
     FnText1("HEX2OCT", x)
@@ -610,15 +686,19 @@ pub fn hex2oct<A: TextOrNumber>(x: A) -> FnText1<A> {
 
 /// Converts a hexadecimal number (40th bit is sign) to base 8 (whose 30th bit 
 /// is sign)
-/// Syntax: HEX2OCT( X TextOrNumber;[; Digits Number] )
 ///
-/// Constraints:
+/// __Syntax__: 
+/// ```ods
+///     HEX2OCT( X TextOrNumber; Digits Number )
+/// ```
+///
+/// __Constraints__:
 /// X shall contain hexadecimal digits (no spaces or other characters), and 
 /// shall contain at least one hexadecimal digit. When considered as Number, 
 /// INT(X) = X. Evaluators may evaluate expressions where X has 1 to 10 
 /// (inclusive) hexadecimal digits, base 10 value of X is -2 29 < X < 2 29 -1.
 ///
-/// Semantics:
+/// __Semantics__:
 /// Converts given hexadecimal number into octal (base 8) equivalent. If given 
 /// Text, the text is considered a hexadecimal number representation; if its 
 /// 40th bit is 1, it is considered a negative number. It is 
@@ -634,7 +714,7 @@ pub fn hex2oct<A: TextOrNumber>(x: A) -> FnText1<A> {
 /// digits. If there are more digits than specified by the Digits parameter, 
 /// the results are implementation-defined.
 ///
-/// See also: "INT", 
+/// __See also__: "INT", 
 #[inline]
 pub fn hex2oct_<A: TextOrNumber, B: Number>(x: A, digits: B) -> FnText2<A, B> {
     FnText2("HEX2OCT", x, digits)
@@ -642,15 +722,19 @@ pub fn hex2oct_<A: TextOrNumber, B: Number>(x: A, digits: B) -> FnText2<A, B> {
 
 /// Converts an octal number (30th bit is sign) to base 2 (whose 10th bit is 
 /// sign)
-/// Syntax: OCT2BIN( X TextOrNumber; )
 ///
-/// Constraints:
+/// __Syntax__: 
+/// ```ods
+///     OCT2BIN( X TextOrNumber )
+/// ```
+///
+/// __Constraints__:
 /// X shall contain only octal digits (no space or other characters), and shall 
 /// contain at least one octal digit. When considered as a Number, INT(X) = X. 
 /// Evaluators may evaluate expressions where X is considered in base 10, -512 
 /// ≤ X ≤ 511.
 ///
-/// Semantics:
+/// __Semantics__:
 /// Converts given octal (base 8) number into binary (base 2) equivalent. If 
 /// given Text, the text is considered an octal number representation; if its 
 /// 30th bit is 1, it is considered a negative number. It is 
@@ -666,7 +750,7 @@ pub fn hex2oct_<A: TextOrNumber, B: Number>(x: A, digits: B) -> FnText2<A, B> {
 /// digits. If there are more digits than specified by the Digits parameter, 
 /// the results are implementation-defined.
 ///
-/// See also: "INT", 
+/// __See also__: "INT", 
 #[inline]
 pub fn oct2bin<A: TextOrNumber>(x: A) -> FnText1<A> {
     FnText1("OCT2BIN", x)
@@ -674,15 +758,19 @@ pub fn oct2bin<A: TextOrNumber>(x: A) -> FnText1<A> {
 
 /// Converts an octal number (30th bit is sign) to base 2 (whose 10th bit is 
 /// sign)
-/// Syntax: OCT2BIN( X TextOrNumber;[; Digits Number] )
 ///
-/// Constraints:
+/// __Syntax__: 
+/// ```ods
+///     OCT2BIN( X TextOrNumber; Digits Number )
+/// ```
+///
+/// __Constraints__:
 /// X shall contain only octal digits (no space or other characters), and shall 
 /// contain at least one octal digit. When considered as a Number, INT(X) = X. 
 /// Evaluators may evaluate expressions where X is considered in base 10, -512 
 /// ≤ X ≤ 511.
 ///
-/// Semantics:
+/// __Semantics__:
 /// Converts given octal (base 8) number into binary (base 2) equivalent. If 
 /// given Text, the text is considered an octal number representation; if its 
 /// 30th bit is 1, it is considered a negative number. It is 
@@ -698,22 +786,26 @@ pub fn oct2bin<A: TextOrNumber>(x: A) -> FnText1<A> {
 /// digits. If there are more digits than specified by the Digits parameter, 
 /// the results are implementation-defined.
 ///
-/// See also: "INT", 
+/// __See also__: "INT", 
 #[inline]
 pub fn oct2bin_<A: TextOrNumber, B: Number>(x: A, digits: B) -> FnText2<A, B> {
     FnText2("OCT2BIN", x, digits)
 }
 
 /// Converts an octal number (30th bit is sign) to decimal
-/// Syntax: OCT2DEC( X TextOrNumber; )
 ///
-/// Constraints:
+/// __Syntax__: 
+/// ```ods
+///     OCT2DEC( X TextOrNumber )
+/// ```
+///
+/// __Constraints__:
 /// X shall contain only octal digits (no space or other characters), and shall 
 /// contain at least one octal digit. When considered as a Number, INT(X) = X. 
 /// Evaluators may evaluate expressions where X shall have 1 though 10 
 /// (inclusive) octal digits.
 ///
-/// Semantics:
+/// __Semantics__:
 /// Converts given octal number into decimal equivalent. If given Text, the 
 /// text is considered a octal number representation. If X's 30th bit is 1, it 
 /// is considered a negative number. It is implementation-defined what happens 
@@ -723,7 +815,7 @@ pub fn oct2bin_<A: TextOrNumber, B: Number>(x: A, digits: B) -> FnText2<A, B> {
 /// 
 /// The resulting value is a decimal number.
 ///
-/// See also: "INT", 
+/// __See also__: "INT", 
 #[inline]
 pub fn oct2dec<A: TextOrNumber>(x: A) -> FnNumber1<A> {
     FnNumber1("OCT2DEC", x)
@@ -731,15 +823,19 @@ pub fn oct2dec<A: TextOrNumber>(x: A) -> FnNumber1<A> {
 
 /// Converts an octal number (30th bit is sign) to hexadecimal (whose 40th bit 
 /// is sign)
-/// Syntax: OCT2HEX( X TextOrNumber; )
 ///
-/// Constraints:
+/// __Syntax__: 
+/// ```ods
+///     OCT2HEX( X TextOrNumber )
+/// ```
+///
+/// __Constraints__:
 /// X shall contain only octal digits (no space or other characters), and shall 
 /// contain at least one octal digit. When considered as a Number, INT(X) = X. 
 /// Evaluators may evaluate expressions where X shall have 1 to 10 (inclusive) 
 /// octal digits.
 ///
-/// Semantics:
+/// __Semantics__:
 /// Converts given octal (base 8) number into hexadecimal (base 16) equivalent. 
 /// If given Text, the text is considered an octal number representation; if 
 /// its 30th bit is 1, it is considered a negative number. It is 
@@ -755,7 +851,7 @@ pub fn oct2dec<A: TextOrNumber>(x: A) -> FnNumber1<A> {
 /// digits. If there are more digits than specified by the Digits parameter, 
 /// the results are implementation-defined.
 ///
-/// See also: "INT", 
+/// __See also__: "INT", 
 #[inline]
 pub fn oct2hex<A: TextOrNumber>(x: A) -> FnText1<A> {
     FnText1("OCT2HEX", x)
@@ -763,15 +859,19 @@ pub fn oct2hex<A: TextOrNumber>(x: A) -> FnText1<A> {
 
 /// Converts an octal number (30th bit is sign) to hexadecimal (whose 40th bit 
 /// is sign)
-/// Syntax: OCT2HEX( X TextOrNumber;[; Digits Number] )
 ///
-/// Constraints:
+/// __Syntax__: 
+/// ```ods
+///     OCT2HEX( X TextOrNumber; Digits Number )
+/// ```
+///
+/// __Constraints__:
 /// X shall contain only octal digits (no space or other characters), and shall 
 /// contain at least one octal digit. When considered as a Number, INT(X) = X. 
 /// Evaluators may evaluate expressions where X shall have 1 to 10 (inclusive) 
 /// octal digits.
 ///
-/// Semantics:
+/// __Semantics__:
 /// Converts given octal (base 8) number into hexadecimal (base 16) equivalent. 
 /// If given Text, the text is considered an octal number representation; if 
 /// its 30th bit is 1, it is considered a negative number. It is 
@@ -787,20 +887,24 @@ pub fn oct2hex<A: TextOrNumber>(x: A) -> FnText1<A> {
 /// digits. If there are more digits than specified by the Digits parameter, 
 /// the results are implementation-defined.
 ///
-/// See also: "INT", 
+/// __See also__: "INT", 
 #[inline]
 pub fn oct2hex_<A: TextOrNumber, B: Number>(x: A, digits: B) -> FnText2<A, B> {
     FnText2("OCT2HEX", x, digits)
 }
 
 /// Convert to Roman numerals
-/// Syntax: ROMAN( N Integer; )
 ///
-/// Constraints:
+/// __Syntax__: 
+/// ```ods
+///     ROMAN( N Integer )
+/// ```
+///
+/// __Constraints__:
 /// N ≥ 0, N < 4000, 0 ≤ Format ≤ 4, ISLOGICAL(1) or 
 /// NOT(ISLOGICAL(Format))
 ///
-/// Semantics:
+/// __Semantics__:
 /// Return the Roman numeral representation of N. Format specifies the level of 
 /// conciseness, and defaults to 0, the classic representation, with larger 
 /// numbers requiring increasing conciseness.
@@ -822,20 +926,24 @@ pub fn oct2hex_<A: TextOrNumber, B: Number>(x: A, digits: B) -> FnText2<A, B> {
 /// Evaluators that accept negative values of N should include a negative sign 
 /// (“-”) as the first character.
 ///
-/// See also: "Infix Operator \"&\"", "ISLOGICAL", "ARABIC", 
+/// __See also__: "Infix Operator \"&\"", "ISLOGICAL", "ARABIC", 
 #[inline]
 pub fn roman<A: Number>(n: A) -> FnText1<A> {
     FnText1("ROMAN", n)
 }
 
 /// Convert to Roman numerals
-/// Syntax: ROMAN( N Integer;[; Format Integer] )
 ///
-/// Constraints:
+/// __Syntax__: 
+/// ```ods
+///     ROMAN( N Integer; Format Integer )
+/// ```
+///
+/// __Constraints__:
 /// N ≥ 0, N < 4000, 0 ≤ Format ≤ 4, ISLOGICAL(1) or 
 /// NOT(ISLOGICAL(Format))
 ///
-/// Semantics:
+/// __Semantics__:
 /// Return the Roman numeral representation of N. Format specifies the level of 
 /// conciseness, and defaults to 0, the classic representation, with larger 
 /// numbers requiring increasing conciseness.
@@ -857,7 +965,7 @@ pub fn roman<A: Number>(n: A) -> FnText1<A> {
 /// Evaluators that accept negative values of N should include a negative sign 
 /// (“-”) as the first character.
 ///
-/// See also: "Infix Operator \"&\"", "ISLOGICAL", "ARABIC", 
+/// __See also__: "Infix Operator \"&\"", "ISLOGICAL", "ARABIC", 
 #[inline]
 pub fn roman_<A: Number>(n: A, format: RomanStyle) -> FnText2<A, RomanStyle> {
     FnText2("ROMAN", n, format)

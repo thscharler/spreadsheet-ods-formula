@@ -12,16 +12,20 @@ use crate::db::*;
 
 /// Finds the average of values in a given field from the records (rows) in a 
 /// database that match a search criteria.
-/// Syntax: DAVERAGE( D Database;; F Field;; C Criteria; )
 ///
-/// Constraints:
+/// __Syntax__: 
+/// ```ods
+///     DAVERAGE( D Database; F Field; C Criteria )
+/// ```
+///
+/// __Constraints__:
 /// None
 ///
-/// Semantics:
+/// __Semantics__:
 /// Perform AVERAGE on data records in database D field F that match criteria 
 /// C.
 ///
-/// See also: "AVERAGE", "COUNT", "DSUM", "DCOUNT", "SUM", 
+/// __See also__: "AVERAGE", "COUNT", "DSUM", "DCOUNT", "SUM", 
 #[inline]
 pub fn daverage<A: Database, B: Field, C: Criteria>(d: A, f: B, c: C) -> FnNumber3<A, B, C> {
     FnNumber3("DAVERAGE", d, f, c)
@@ -29,17 +33,21 @@ pub fn daverage<A: Database, B: Field, C: Criteria>(d: A, f: B, c: C) -> FnNumbe
 
 /// Counts the number of records (rows) in a database that match a search 
 /// criteria and contain numerical values.
-/// Syntax: DCOUNT( D Database;[; F Field]; C Criteria; )
 ///
-/// Constraints:
+/// __Syntax__: 
+/// ```ods
+///     DCOUNT( D Database[; F Field]; C Criteria )
+/// ```
+///
+/// __Constraints__:
 /// None
 ///
-/// Semantics:
+/// __Semantics__:
 /// Perform COUNT on data records in database D field F that match criteria C. 
 /// If the Field argument is omitted, DCOUNT returns the count of all records 
 /// that satisfy Criteria C.
 ///
-/// See also: "COUNT", "COUNTA", "DCOUNTA", "DSUM", 
+/// __See also__: "COUNT", "COUNTA", "DCOUNTA", "DSUM", 
 #[inline]
 pub fn dcount<A: Database, B: Field, C: Criteria>(d: A, f: Option<B>, c: C) -> FnNumber3<A, Option<B>, C> {
     FnNumber3("DCOUNT", d, f, c)
@@ -47,17 +55,21 @@ pub fn dcount<A: Database, B: Field, C: Criteria>(d: A, f: Option<B>, c: C) -> F
 
 /// Counts the number of records (rows) in a database that match a search 
 /// criteria and contain values (as COUNTA).
-/// Syntax: DCOUNTA( D Database;[; F Field]; C Criteria; )
 ///
-/// Constraints:
+/// __Syntax__: 
+/// ```ods
+///     DCOUNTA( D Database[; F Field]; C Criteria )
+/// ```
+///
+/// __Constraints__:
 /// None
 ///
-/// Semantics:
+/// __Semantics__:
 /// Perform COUNTA on data records in database D field F that match criteria C. 
 /// If the Field argument is omitted, DCOUNTA returns the count of all records 
 /// that satisfy criteria C.
 ///
-/// See also: "COUNT", "COUNTA", "DCOUNT", "DSUM", 
+/// __See also__: "COUNT", "COUNTA", "DCOUNT", "DSUM", 
 #[inline]
 pub fn dcounta<A: Database, B: Field, C: Criteria>(d: A, f: Option<B>, c: C) -> FnNumber3<A, Option<B>, C> {
     FnNumber3("DCOUNTA", d, f, c)
@@ -65,17 +77,21 @@ pub fn dcounta<A: Database, B: Field, C: Criteria>(d: A, f: Option<B>, c: C) -> 
 
 /// Gets the single value in the field from the single record (row) in a 
 /// database that matches a search criteria.
-/// Syntax: DGET( D Database;; F Field;; C Criteria; )
 ///
-/// Constraints:
+/// __Syntax__: 
+/// ```ods
+///     DGET( D Database; F Field; C Criteria )
+/// ```
+///
+/// __Constraints__:
 /// None
 ///
-/// Semantics:
+/// __Semantics__:
 /// Extracts the value in field F of the one data record in database D that 
 /// matches criteria C. If no records match, or more than one matches, it 
 /// returns an Error.
 ///
-/// See also: "DMAX", "DMIN", "DSUM", 
+/// __See also__: "DMAX", "DMIN", "DSUM", 
 #[inline]
 pub fn dget<A: Database, B: Field, C: Criteria>(d: A, f: B, c: C) -> FnNumber3<A, B, C> {
     FnNumber3("DGET", d, f, c)
@@ -83,16 +99,20 @@ pub fn dget<A: Database, B: Field, C: Criteria>(d: A, f: B, c: C) -> FnNumber3<A
 
 /// Finds the maximum value in a given field from the records (rows) in a 
 /// database that match a search criteria.
-/// Syntax: DMAX( D Database;; F Field;; C Criteria; )
 ///
-/// Constraints:
+/// __Syntax__: 
+/// ```ods
+///     DMAX( D Database; F Field; C Criteria )
+/// ```
+///
+/// __Constraints__:
 /// None
 ///
-/// Semantics:
+/// __Semantics__:
 /// Perform MAX on only the data records in database D field F that match 
 /// criteria C.
 ///
-/// See also: "MAX", "DMIN", "MIN", 
+/// __See also__: "MAX", "DMIN", "MIN", 
 #[inline]
 pub fn dmax<A: Database, B: Field, C: Criteria>(d: A, f: B, c: C) -> FnNumber3<A, B, C> {
     FnNumber3("DMAX", d, f, c)
@@ -100,16 +120,20 @@ pub fn dmax<A: Database, B: Field, C: Criteria>(d: A, f: B, c: C) -> FnNumber3<A
 
 /// Finds the minimum value in a given field from the records (rows) in a 
 /// database that match a search criteria.
-/// Syntax: DMIN( D Database;; F Field;; C Criteria; )
 ///
-/// Constraints:
+/// __Syntax__: 
+/// ```ods
+///     DMIN( D Database; F Field; C Criteria )
+/// ```
+///
+/// __Constraints__:
 /// None
 ///
-/// Semantics:
+/// __Semantics__:
 /// Perform MIN on only the data records in database D field F that match 
 /// criteria C.
 ///
-/// See also: "MIN", "DMAX", "MAX", 
+/// __See also__: "MIN", "DMAX", "MAX", 
 #[inline]
 pub fn dmin<A: Database, B: Field, C: Criteria>(d: A, f: B, c: C) -> FnNumber3<A, B, C> {
     FnNumber3("DMIN", d, f, c)
@@ -117,16 +141,20 @@ pub fn dmin<A: Database, B: Field, C: Criteria>(d: A, f: B, c: C) -> FnNumber3<A
 
 /// Finds the product of values in a given field from the records (rows) in a 
 /// database that match a search criteria.
-/// Syntax: DPRODUCT( D Database;; F Field;; C Criteria; )
 ///
-/// Constraints:
+/// __Syntax__: 
+/// ```ods
+///     DPRODUCT( D Database; F Field; C Criteria )
+/// ```
+///
+/// __Constraints__:
 /// None
 ///
-/// Semantics:
+/// __Semantics__:
 /// Multiply together only the data records in database D field F that match 
 /// criteria C.
 ///
-/// See also: "SUM", "DSUM", 
+/// __See also__: "SUM", "DSUM", 
 #[inline]
 pub fn dproduct<A: Database, B: Field, C: Criteria>(d: A, f: B, c: C) -> FnNumber3<A, B, C> {
     FnNumber3("DPRODUCT", d, f, c)
@@ -134,16 +162,20 @@ pub fn dproduct<A: Database, B: Field, C: Criteria>(d: A, f: B, c: C) -> FnNumbe
 
 /// Finds the sample standard deviation in a given field from the records 
 /// (rows) in a database that match a search criteria.
-/// Syntax: DSTDEV( D Database;; F Field;; C Criteria; )
 ///
-/// Constraints:
+/// __Syntax__: 
+/// ```ods
+///     DSTDEV( D Database; F Field; C Criteria )
+/// ```
+///
+/// __Constraints__:
 /// None
 ///
-/// Semantics:
+/// __Semantics__:
 /// Perform STDEV on only the data records in database D field F that match 
 /// criteria C.
 ///
-/// See also: "STDEV", "DSTDEVP", 
+/// __See also__: "STDEV", "DSTDEVP", 
 #[inline]
 pub fn dstdev<A: Database, B: Field, C: Criteria>(d: A, f: B, c: C) -> FnNumber3<A, B, C> {
     FnNumber3("DSTDEV", d, f, c)
@@ -151,16 +183,20 @@ pub fn dstdev<A: Database, B: Field, C: Criteria>(d: A, f: B, c: C) -> FnNumber3
 
 /// Finds the population standard deviation in a given field from the records 
 /// (rows) in a database that match a search criteria.
-/// Syntax: DSTDEVP( D Database;; F Field;; C Criteria; )
 ///
-/// Constraints:
+/// __Syntax__: 
+/// ```ods
+///     DSTDEVP( D Database; F Field; C Criteria )
+/// ```
+///
+/// __Constraints__:
 /// None
 ///
-/// Semantics:
+/// __Semantics__:
 /// Perform STDEVP on only the data records in database D field F that match 
 /// criteria C.
 ///
-/// See also: "STDEVP", "DSTDEV", 
+/// __See also__: "STDEVP", "DSTDEV", 
 #[inline]
 pub fn dstdevp<A: Database, B: Field, C: Criteria>(d: A, f: B, c: C) -> FnNumber3<A, B, C> {
     FnNumber3("DSTDEVP", d, f, c)
@@ -168,16 +204,20 @@ pub fn dstdevp<A: Database, B: Field, C: Criteria>(d: A, f: B, c: C) -> FnNumber
 
 /// Finds the sum of values in a given field from the records (rows) in a 
 /// database that match a search criteria.
-/// Syntax: DSUM( D Database;; F Field;; C Criteria; )
 ///
-/// Constraints:
+/// __Syntax__: 
+/// ```ods
+///     DSUM( D Database; F Field; C Criteria )
+/// ```
+///
+/// __Constraints__:
 /// None
 ///
-/// Semantics:
+/// __Semantics__:
 /// Perform SUM on only the data records in database D field F that match 
 /// criteria C.
 ///
-/// See also: "SUM", "DMIN", "DMAX", 
+/// __See also__: "SUM", "DMIN", "DMAX", 
 #[inline]
 pub fn dsum<A: Database, B: Field, C: Criteria>(d: A, f: B, c: C) -> FnNumber3<A, B, C> {
     FnNumber3("DSUM", d, f, c)
@@ -185,16 +225,20 @@ pub fn dsum<A: Database, B: Field, C: Criteria>(d: A, f: B, c: C) -> FnNumber3<A
 
 /// Finds the sample variance in a given field from the records (rows) in a 
 /// database that match a search criteria.
-/// Syntax: DVAR( D Database;; F Field;; C Criteria; )
 ///
-/// Constraints:
+/// __Syntax__: 
+/// ```ods
+///     DVAR( D Database; F Field; C Criteria )
+/// ```
+///
+/// __Constraints__:
 /// None
 ///
-/// Semantics:
+/// __Semantics__:
 /// Perform VAR on only the data records in database D field F that match 
 /// criteria C.
 ///
-/// See also: "VAR", "DVARP", 
+/// __See also__: "VAR", "DVARP", 
 #[inline]
 pub fn dvar<A: Database, B: Field, C: Criteria>(d: A, f: B, c: C) -> FnNumber3<A, B, C> {
     FnNumber3("DVAR", d, f, c)
@@ -202,16 +246,20 @@ pub fn dvar<A: Database, B: Field, C: Criteria>(d: A, f: B, c: C) -> FnNumber3<A
 
 /// Finds the population variance in a given field from the records (rows) in a 
 /// database that match a search criteria.
-/// Syntax: DVARP( D Database;; F Field;; C Criteria; )
 ///
-/// Constraints:
+/// __Syntax__: 
+/// ```ods
+///     DVARP( D Database; F Field; C Criteria )
+/// ```
+///
+/// __Constraints__:
 /// None
 ///
-/// Semantics:
+/// __Semantics__:
 /// Perform VARP on only the data records in database D field F that match 
 /// criteria C.
 ///
-/// See also: "VARP", "DVAR", 
+/// __See also__: "VARP", "DVAR", 
 #[inline]
 pub fn dvarp<A: Database, B: Field, C: Criteria>(d: A, f: B, c: C) -> FnNumber3<A, B, C> {
     FnNumber3("DVARP", d, f, c)

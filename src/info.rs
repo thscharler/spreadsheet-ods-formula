@@ -7,6 +7,7 @@ pub use crate::generated::info::*;
 use crate::{Any, Criterion, FnNumberVar, Reference};
 use std::fmt::Write;
 
+/// Parameter for CELL()
 pub enum CellInfo {
     Address,
     Col,
@@ -49,6 +50,7 @@ impl Any for CellInfo {
     }
 }
 
+/// Parameter for INFO()
 pub enum InfoInfo {
     Directory,
     MemAvail,

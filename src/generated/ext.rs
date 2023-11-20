@@ -7,12 +7,16 @@ use crate::*;
 use crate::ext::*;
 
 /// Returns data from a DDE request
-/// Syntax: DDE( Server Text;; Topic Text;; Item Text; )
 ///
-/// Constraints:
+/// __Syntax__: 
+/// ```ods
+///     DDE( Server Text; Topic Text; Item Text )
+/// ```
+///
+/// __Constraints__:
 /// None
 ///
-/// Semantics:
+/// __Semantics__:
 /// Performs a DDE request and returns its result. The request invokes the 
 /// service Server on the topic named as Topic, requesting that it reply with 
 /// the information on Item.
@@ -40,12 +44,16 @@ pub fn dde<A: Text, B: Text, C: Text>(server: A, topic: B, item: C) -> FnText3<A
 }
 
 /// Returns data from a DDE request
-/// Syntax: DDE( Server Text;; Topic Text;; Item Text;[; Mode Integer] )
 ///
-/// Constraints:
+/// __Syntax__: 
+/// ```ods
+///     DDE( Server Text; Topic Text; Item Text; Mode Integer )
+/// ```
+///
+/// __Constraints__:
 /// None
 ///
-/// Semantics:
+/// __Semantics__:
 /// Performs a DDE request and returns its result. The request invokes the 
 /// service Server on the topic named as Topic, requesting that it reply with 
 /// the information on Item.
@@ -73,12 +81,16 @@ pub fn dde_<A: Text, B: Text, C: Text, D: Number>(server: A, topic: B, item: C, 
 }
 
 /// Creation of a hyperlink involving an evaluated expression.
-/// Syntax: HYPERLINK( IRI Text; )
 ///
-/// Constraints:
+/// __Syntax__: 
+/// ```ods
+///     HYPERLINK( IRI Text )
+/// ```
+///
+/// __Constraints__:
 /// None
 ///
-/// Semantics:
+/// __Semantics__:
 /// The default for the second argument is the value of the first argument. The 
 /// second argument value is returned.
 /// 
@@ -92,12 +104,16 @@ pub fn hyperlink<A: Text>(i_r_i: A) -> FnText1<A> {
 }
 
 /// Creation of a hyperlink involving an evaluated expression.
-/// Syntax: HYPERLINK( IRI Text;[; FunctionResult Text|Number] )
 ///
-/// Constraints:
+/// __Syntax__: 
+/// ```ods
+///     HYPERLINK( IRI Text; FunctionResult Text|Number )
+/// ```
+///
+/// __Constraints__:
 /// None
 ///
-/// Semantics:
+/// __Semantics__:
 /// The default for the second argument is the value of the first argument. The 
 /// second argument value is returned.
 /// 

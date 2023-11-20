@@ -9,29 +9,37 @@ use crate::*;
 use crate::bit::*;
 
 /// Returns bitwise “and” of its parameters
-/// Syntax: BITAND( X Integer;; Y Integer; )
 ///
-/// Constraints:
+/// __Syntax__: 
+/// ```ods
+///     BITAND( X Integer; Y Integer )
+/// ```
+///
+/// __Constraints__:
 /// X ≥ 0, Y ≥ 0
 ///
-/// Semantics:
+/// __Semantics__:
 /// Returns bitwise “and” of its parameters. In the result, each bit 
 /// position is 1 if and only if all parameters' bits at that position are also 
 /// 1; else it is 0.
 ///
-/// See also: "BITOR", "BITXOR", "AND", 
+/// __See also__: "BITOR", "BITXOR", "AND", 
 #[inline]
 pub fn bitand<A: Number, B: Number>(x: A, y: B) -> FnNumber2<A, B> {
     FnNumber2("BITAND", x, y)
 }
 
 /// Returns left shift of value X by N bits (“<<”)
-/// Syntax: BITLSHIFT( X Integer;; N Integer; )
 ///
-/// Constraints:
+/// __Syntax__: 
+/// ```ods
+///     BITLSHIFT( X Integer; N Integer )
+/// ```
+///
+/// __Constraints__:
 /// X ≥ 0
 ///
-/// Semantics:
+/// __Semantics__:
 /// Returns left shift of value X by N bit positions:
 /// 
 /// •If N < 0, return BITRSHIFT(X,-N)
@@ -40,36 +48,44 @@ pub fn bitand<A: Number, B: Number>(x: A, y: B) -> FnNumber2<A, B> {
 /// 
 /// •if N > 0, return X * 2^N
 ///
-/// See also: "BITAND", "BITXOR", "BITRSHIFT", 
+/// __See also__: "BITAND", "BITXOR", "BITRSHIFT", 
 #[inline]
 pub fn bitlshift<A: Number, B: Number>(x: A, n: B) -> FnNumber2<A, B> {
     FnNumber2("BITLSHIFT", x, n)
 }
 
 /// Returns bitwise “or” of its parameters
-/// Syntax: BITOR( X Integer;; Y Integer; )
 ///
-/// Constraints:
+/// __Syntax__: 
+/// ```ods
+///     BITOR( X Integer; Y Integer )
+/// ```
+///
+/// __Constraints__:
 /// X ≥ 0, Y ≥ 0
 ///
-/// Semantics:
+/// __Semantics__:
 /// Returns bitwise “or” of its parameters. In the result, each bit 
 /// position is 1 if any of its parameters' bits at that position are also 1; 
 /// else it is 0.
 ///
-/// See also: "BITAND", "BITXOR", "AND", 
+/// __See also__: "BITAND", "BITXOR", "AND", 
 #[inline]
 pub fn bitor<A: Number, B: Number>(x: A, y: B) -> FnNumber2<A, B> {
     FnNumber2("BITOR", x, y)
 }
 
 /// Returns right shift of value X by N bits (“>>”)
-/// Syntax: BITRSHIFT( X Integer;; N Integer; )
 ///
-/// Constraints:
+/// __Syntax__: 
+/// ```ods
+///     BITRSHIFT( X Integer; N Integer )
+/// ```
+///
+/// __Constraints__:
 /// X ≥ 0
 ///
-/// Semantics:
+/// __Semantics__:
 /// Returns right shift of value X by N bit positions:
 /// 
 /// •If N < 0, return BITLSHIFT(X,-N)
@@ -78,24 +94,28 @@ pub fn bitor<A: Number, B: Number>(x: A, y: B) -> FnNumber2<A, B> {
 /// 
 /// •if N > 0, return INT(X / 2^N)
 ///
-/// See also: "BITAND", "BITXOR", "BITLSHIFT", "INT", 
+/// __See also__: "BITAND", "BITXOR", "BITLSHIFT", "INT", 
 #[inline]
 pub fn bitrshift<A: Number, B: Number>(x: A, n: B) -> FnNumber2<A, B> {
     FnNumber2("BITRSHIFT", x, n)
 }
 
 /// Returns bitwise “exclusive or” of its parameters
-/// Syntax: BITXOR( X Integer;; Y Integer; )
 ///
-/// Constraints:
+/// __Syntax__: 
+/// ```ods
+///     BITXOR( X Integer; Y Integer )
+/// ```
+///
+/// __Constraints__:
 /// X ≥ 0, Y ≥ 0
 ///
-/// Semantics:
+/// __Semantics__:
 /// Returns bitwise “exclusive or” (xor) of its parameters. In the result, 
 /// each bit position is 1 if one or the other parameters' bits at that 
 /// position are 1; else it is 0.
 ///
-/// See also: "BITAND", "BITOR", "OR", 
+/// __See also__: "BITAND", "BITOR", "OR", 
 #[inline]
 pub fn bitxor<A: Number, B: Number>(x: A, y: B) -> FnNumber2<A, B> {
     FnNumber2("BITXOR", x, y)

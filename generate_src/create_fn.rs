@@ -28,7 +28,7 @@ fn main() -> Result<(), DError> {
 
                 println!("{:?}", mod_.name);
 
-                file.replace(File::create(format!("generated/{}", mod_file(&mod_)?))?);
+                file.replace(File::create(format!("src/generated/{}", mod_file(&mod_)?))?);
                 let f = file.as_mut().expect("file");
 
                 generate_mod(f, &mod_)?;
@@ -113,41 +113,44 @@ pub fn generate_fn(f: &mut File, fun: &Func) -> Result<(), DError> {
         }
     }
 
-    write!(f, "/// Syntax: {}(", fun.fun)?;
+    writeln!(f, "///")?;
+    writeln!(f, "/// __Syntax__: ")?;
+    writeln!(f, "/// ```ods")?;
+    write!(f, "///     {}(", fun.fun)?;
     for (i, arg) in fun.args.iter().enumerate() {
-        if arg.opt || arg.vol {
+        if arg.opt {
             if i > 0 {
                 write!(f, "[; ")?;
             } else {
                 write!(f, "[ ")?;
             }
-            write!(f, "{} {}]", arg.ident, arg.type_)?;
+            write!(f, "{}: {}]", arg.ident, arg.type_)?;
         } else if arg.rep {
             if i > 0 {
                 write!(f, "{{; ")?;
             } else {
                 write!(f, "{{ ")?;
             }
-            write!(f, "{} {}}}+", arg.ident, arg.type_)?;
+            write!(f, "{}: {}}}+", arg.ident, arg.type_)?;
         } else {
             if i > 0 {
                 write!(f, "; ")?;
             } else {
                 write!(f, " ")?;
             }
-            write!(f, "{} {};", arg.ident, arg.type_)?;
+            write!(f, "{}: {}", arg.ident, arg.type_)?;
         }
     }
     if fun.etc {
         write!(f, "...")?;
     }
-    write!(f, " )")?;
-    writeln!(f)?;
+    writeln!(f, " )")?;
+    writeln!(f, "/// ```")?;
 
     if let Some(extra0) = &fun.extra0 {
         if extra0.len() > 0 {
             writeln!(f, "///")?;
-            writeln!(f, "/// Arguments:")?;
+            writeln!(f, "/// __Arguments__:")?;
             for l in extra0.lines() {
                 writeln!(f, "/// {}", l)?;
             }
@@ -157,7 +160,7 @@ pub fn generate_fn(f: &mut File, fun: &Func) -> Result<(), DError> {
     if let Some(constraints) = &fun.constraints {
         if constraints.len() > 0 {
             writeln!(f, "///")?;
-            writeln!(f, "/// Constraints:")?;
+            writeln!(f, "/// __Constraints__:")?;
             for l in constraints.lines() {
                 writeln!(f, "/// {}", l)?;
             }
@@ -167,7 +170,7 @@ pub fn generate_fn(f: &mut File, fun: &Func) -> Result<(), DError> {
     if let Some(extra1) = &fun.extra1 {
         if extra1.len() > 0 {
             writeln!(f, "///")?;
-            writeln!(f, "/// Info2:")?;
+            writeln!(f, "/// __Info2__:")?;
             for l in extra1.lines() {
                 writeln!(f, "/// {}", l)?;
             }
@@ -177,7 +180,7 @@ pub fn generate_fn(f: &mut File, fun: &Func) -> Result<(), DError> {
     if let Some(semantics) = &fun.semantics {
         if semantics.len() > 0 {
             writeln!(f, "///")?;
-            writeln!(f, "/// Semantics:")?;
+            writeln!(f, "/// __Semantics__:")?;
             for l in semantics.lines() {
                 writeln!(f, "/// {}", l)?;
             }
@@ -187,7 +190,7 @@ pub fn generate_fn(f: &mut File, fun: &Func) -> Result<(), DError> {
     if let Some(note) = &fun.note {
         if note.len() > 0 {
             writeln!(f, "///")?;
-            writeln!(f, "/// Note:")?;
+            writeln!(f, "/// __Note__:")?;
             for l in note.lines() {
                 writeln!(f, "/// {}", l)?;
             }
@@ -196,7 +199,7 @@ pub fn generate_fn(f: &mut File, fun: &Func) -> Result<(), DError> {
 
     if !fun.see_also.fnname.is_empty() {
         writeln!(f, "///")?;
-        write!(f, "/// See also: ")?;
+        write!(f, "/// __See also__: ")?;
         for l in &fun.see_also.fnname {
             write!(f, "{:?}, ", l)?;
         }

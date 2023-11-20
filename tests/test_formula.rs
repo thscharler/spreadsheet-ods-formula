@@ -3,7 +3,7 @@ use spreadsheet_ods::{CellRange, CellRef};
 use spreadsheet_ods_formula::date::{Days360Method, WeekdayMethod};
 use spreadsheet_ods_formula::prelude::*;
 use spreadsheet_ods_formula::{
-    formula, p, CriterionCmp, FArray, FCriterion, FMatrix, FnAny0, ValNumber,
+    cell, formula, p, CriterionCmp, FArray, FCriterion, FMatrix, FnAny0, ValNumber,
 };
 use spreadsheet_ods_formula::{num, of};
 
@@ -233,7 +233,7 @@ fn test_math() {
     ))))
     .q(Q);
 
-    test_ok(formula(of::sumif(
+    test_ok(formula(of::sumif_(
         CellRange::local(0, 0, 99, 99),
         (CriterionCmp::Eq, 1001),
         Some(CellRange::local(101, 0, 199, 99)),

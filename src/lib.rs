@@ -1,3 +1,84 @@
+//!
+//! This library provides functions that map to ODS-functions.
+//!
+//! ```
+//! use spreadsheet_ods::CellRef;
+//! use spreadsheet_ods_formula::{cell, formula, of};
+//!
+//! let f = formula(of::sin(cell!(0,0)));
+//!
+//! assert_eq!(f, "of:=SIN([.A1])");
+//! ```
+//!
+//! All functions use traits to somewhat constrain the allowed parameter-types. There are quite a
+//! lot of traits to map the possible parameter types of ods-functions. By the nature of
+//! spreadsheets this is a rather loose mapping anyway.
+//!
+//! * Basic types ixx, uxx, bool, str, String and Cow<str> have the appropriate traits.
+//!   The common operators are overloaded too. With the caveat that the first parameter
+//!   must be created via the num() function.
+//!
+//! * Expressions in parentheses must use the p()-function.
+//!
+//! ```
+//! use spreadsheet_ods_formula::{formula, num, of, p};
+//!
+//! let f = formula(num(33) * p(of::sqrt(2) + of::sqrt(3)));
+//! ```
+//!
+//! * CellRef and CellRange are imported from spreadsheet-ods. There is also a cell!() macro.
+//!
+//! ```
+//! use spreadsheet_ods_formula::{cell, formula};
+//!
+//! let f = formula(cell!(0, 0));
+//! println!("{}", f);
+//! let f = formula(cell!("Table1" => 4, 4));
+//! println!("{}", f);
+//! let f = formula(cell!(0, 0, 4, 4));
+//! println!("{}", f);
+//! ```
+//!
+//! * ODS operators are mapped with the AnyOp, TextOp, NumberOp, LogicalOp and ReferenceOp traits.
+//!
+//! ```
+//! use spreadsheet_ods_formula::{cell, formula};
+//! use spreadsheet_ods_formula::{ReferenceOp};
+//!
+//! let f = formula(cell!(0, 0, 4, 4).refcat(cell!(8, 8, 12, 12)));
+//! println!("{}", f);
+//! ```
+//!
+//! * Tuples are used for Sequences. They are formatted as inline-arrays.
+//!
+//! ```
+//! use spreadsheet_ods_formula::{cell, formula, of};
+//!
+//! let f = formula(of::networkdays__(
+//!      cell!(5, 5),
+//!      cell!(9, 9),
+//!      (9, 9, 9),
+//!      (0, 0, 0, 0, 0, 1, 0),
+//! ));
+//! ```
+//!
+//! * FMatrix and FArray for inline arrays and matrizes.
+//!
+//! ```
+//! use spreadsheet_ods_formula::{cell, FArray, formula, of};
+//!
+//! let f = formula(of::networkdays__(
+//!      cell!(5, 5),
+//!      cell!(9, 9),
+//!      FArray([9, 9, 9]),
+//!      FArray([0, 0, 0, 0, 0, 1, 0]),
+//! ));
+//! ```
+//!
+//!
+//!
+//!
+
 use spreadsheet_ods::{CellRange, CellRef};
 use std::borrow::Borrow;
 use std::borrow::Cow;
@@ -35,51 +116,78 @@ pub mod prelude {
 
 /// All functions in one module, and also all families of functions.
 pub mod of {
+    #[doc(inline)]
     pub use crate::cmp::*;
+    #[doc(inline)]
     pub use crate::op::*;
 
+    #[doc(inline)]
     pub use crate::bit::*;
+    #[doc(inline)]
     pub use crate::complex::*;
+    #[doc(inline)]
     pub use crate::conv::*;
+    #[doc(inline)]
     pub use crate::date::*;
+    #[doc(inline)]
     pub use crate::db::*;
+    #[doc(inline)]
     pub use crate::ext::*;
+    #[doc(inline)]
     pub use crate::fin::*;
+    #[doc(inline)]
     pub use crate::info::*;
+    #[doc(inline)]
     pub use crate::logic::*;
+    #[doc(inline)]
     pub use crate::lookup::*;
+    #[doc(inline)]
     pub use crate::math::*;
+    #[doc(inline)]
     pub use crate::matrix::*;
+    #[doc(inline)]
     pub use crate::round::*;
+    #[doc(inline)]
     pub use crate::stat::*;
+    #[doc(inline)]
     pub use crate::text::*;
+    #[doc(inline)]
     pub use crate::textb::*;
+
+    #[doc(inline)]
     pub use crate::{
         bit, complex, conv, date, db, ext, fin, info, logic, lookup, math, matrix, round, stat,
         text, textb,
     };
+    #[doc(inline)]
     pub use crate::{cmp, op};
 }
 
 // -----------------------------------------------------------------------
 
-/// Base trait for any part of a formula.
+/// Trait for any part of the formula.
+///
+/// This trait is used to create the string-repr of the formula.
 pub trait Any {
     /// Output to a formula.
     fn formula(&self, buf: &mut String);
 }
+
 /// Numeric parameter.
 pub trait Number: Any {}
 /// Text parameter.
 pub trait Text: Any {}
 /// Logical parameter.
 pub trait Logical: Any {}
+/// A date/time parameter.
+pub trait DateTime: Any {}
 /// Reference parameter.
 pub trait Reference: Any {}
 /// Matrix parameter.
 pub trait Matrix: Any {}
 /// Array parameter.
 pub trait Array: Any {}
+
 /// Alias for a cell reference. A cell range containing headers and a data set.
 pub trait Database: Any {}
 /// Filter/Search criterion.
@@ -92,16 +200,14 @@ pub trait Sequence: Any {}
 pub trait Scalar: Any {}
 /// A field denominator for a db.
 pub trait Field: Any {}
-/// A date/time parameter.
-pub trait DateTime: Any {}
 
-/// Text or Number
+/// Text or Number parameter.
 pub trait TextOrNumber: Any {}
-/// Reference or Array
+/// Reference or Array parameter.
 pub trait ReferenceOrArray: Any {}
-// Reference or Text
+/// Reference or Text parameter.
 pub trait TextOrReference: Any {}
-// Number or Array
+/// Number or Array parameter.
 pub trait NumberOrArray: Any {}
 
 // -----------------------------------------------------------------------
@@ -271,6 +377,7 @@ macro_rules! any_struct {
 
         /// A newtype wrapper for a simple value.
         /// Useful in combination with overloaded operators.
+        #[doc(hidden)]
         #[derive(Debug)]
         pub struct $t<A:Any>(pub A);
 
@@ -285,6 +392,7 @@ macro_rules! any_struct {
     (OP $t:ident) => {
 
         /// Operator definition.
+        #[doc(hidden)]
         #[derive(Debug)]
         pub struct $t<A:Any, B:Any>(
             pub A,
@@ -305,6 +413,7 @@ macro_rules! any_struct {
     (VAR $t:ident) => {
 
         /// Function with variable number of parameters.
+       #[doc(hidden)]
         pub struct $t(
             pub &'static str,
             pub Vec<Box<dyn Any>>
@@ -330,6 +439,7 @@ macro_rules! any_struct {
 
         /// Parameterless function.
         #[derive(Debug)]
+        #[doc(hidden)]
         pub struct $t(
             pub &'static str
         );
@@ -348,6 +458,7 @@ macro_rules! any_struct {
 
         /// Function with parameters.
         #[derive(Debug)]
+        #[doc(hidden)]
         pub struct $t<$tname0: Any+'static $(,$tname: Any+'static)*>(
             pub &'static str,
             pub $tname0
@@ -418,8 +529,8 @@ macro_rules! fn_any {
     };
 }
 
-fn_any!(VAL ValAny);
-fn_any!(OP OpAny);
+// fn_any!(VAL ValAny);
+// fn_any!(OP OpAny);
 fn_any!(VAR FnAnyVar);
 fn_any!(FnAny0);
 fn_any!(FnAny1: A);
@@ -427,7 +538,6 @@ fn_any!(FnAny2: A B 2);
 fn_any!(FnAny3: A B 2 C 3);
 fn_any!(FnAny4: A B 2 C 3 D 4);
 fn_any!(FnAny5: A B 2 C 3 D 4 E 5);
-fn_any!(FnAny6: A B 2 C 3 D 4 E 5 F 6);
 
 macro_rules! fn_number {
     (VAL $t:ident) => {
@@ -535,16 +645,15 @@ macro_rules! fn_text {
     };
 }
 
-fn_text!(VAL ValText);
+// fn_text!(VAL ValText);
 fn_text!(OP OpText);
 fn_text!(VAR FnTextVar);
-fn_text!(FnText0);
+// fn_text!(FnText0);
 fn_text!(FnText1: A);
 fn_text!(FnText2: A B 2);
 fn_text!(FnText3: A B 2 C 3);
 fn_text!(FnText4: A B 2 C 3 D 4);
 fn_text!(FnText5: A B 2 C 3 D 4 E 5);
-fn_text!(FnText6: A B 2 C 3 D 4 E 5 F 6);
 
 macro_rules! fn_logical {
     (VAL $t:ident) => {
@@ -589,16 +698,12 @@ macro_rules! fn_logical {
     };
 }
 
-fn_logical!(VAL ValLogical);
+// fn_logical!(VAL ValLogical);
 fn_logical!(OP OpLogical);
-fn_logical!(VAR FnLogicalVar);
+// fn_logical!(VAR FnLogicalVar);
 fn_logical!(FnLogical0);
 fn_logical!(FnLogical1: A);
 fn_logical!(FnLogical2: A B 2);
-fn_logical!(FnLogical3: A B 2 C 3);
-fn_logical!(FnLogical4: A B 2 C 3 D 4);
-fn_logical!(FnLogical5: A B 2 C 3 D 4 E 5);
-fn_logical!(FnLogical6: A B 2 C 3 D 4 E 5 F 6);
 
 macro_rules! fn_matrix {
     (VAL $t:ident) => {
@@ -633,10 +738,10 @@ macro_rules! fn_matrix {
     };
 }
 
-fn_matrix!(VAL ValMatrix);
-fn_matrix!(OP OpMatrix);
-fn_matrix!(VAR FnMatrixVar);
-fn_matrix!(FnMatrix0);
+// fn_matrix!(VAL ValMatrix);
+// fn_matrix!(OP OpMatrix);
+// fn_matrix!(VAR FnMatrixVar);
+// fn_matrix!(FnMatrix0);
 fn_matrix!(FnMatrix1: A);
 fn_matrix!(FnMatrix2: A B 2);
 
@@ -703,16 +808,15 @@ macro_rules! fn_reference {
     };
 }
 
-fn_reference!(VAL ValReference);
+// fn_reference!(VAL ValReference);
 fn_reference!(OP OpReference);
-fn_reference!(VAR FnReferenceVar);
-fn_reference!(FnReference0);
+// fn_reference!(VAR FnReferenceVar);
+// fn_reference!(FnReference0);
 fn_reference!(FnReference1: A);
 fn_reference!(FnReference2: A B 2);
 fn_reference!(FnReference3: A B 2 C 3);
 fn_reference!(FnReference4: A B 2 C 3 D 4);
 fn_reference!(FnReference5: A B 2 C 3 D 4 E 5);
-fn_reference!(FnReference6: A B 2 C 3 D 4 E 5 F 6);
 
 macro_rules! fn_array {
     (VAL $t:ident) => {
@@ -751,32 +855,16 @@ macro_rules! fn_array {
     };
 }
 
-fn_array!(VAL ValArray);
-fn_array!(OP OpArray);
-fn_array!(VAR FnArrayVar);
-fn_array!(FnArray0);
+// fn_array!(VAL ValArray);
+// fn_array!(OP OpArray);
+// fn_array!(VAR FnArrayVar);
+// fn_array!(FnArray0);
 fn_array!(FnArray1: A);
 fn_array!(FnArray2: A B 2);
 fn_array!(FnArray3: A B 2 C 3);
 fn_array!(FnArray4: A B 2 C 3 D 4);
-fn_array!(FnArray5: A B 2 C 3 D 4 E 5);
-fn_array!(FnArray6: A B 2 C 3 D 4 E 5 F 6);
 
 // -----------------------------------------------------------------------
-
-impl Any for Vec<Box<dyn Any>> {
-    #[inline]
-    fn formula(&self, buf: &mut String) {
-        for (i, v) in self.iter().enumerate() {
-            if i > 0 {
-                buf.push(';');
-            }
-            let _ = v.formula(buf);
-        }
-    }
-}
-
-impl Sequence for Vec<Box<dyn Any>> {}
 
 macro_rules! tup {
     ( $tname0:ident $($tname:tt $tnum:tt)* ) => {
@@ -784,11 +872,13 @@ macro_rules! tup {
         impl<$tname0: Any, $($tname: Any,)*> Any for ($tname0, $($tname,)*) {
             #[inline]
             fn formula(&self, buf: &mut String) {
+                buf.push('{');
                 self.0.formula(buf);
                 $(
                     buf.push(';');
                     self.$tnum.formula(buf);
                 )*
+                buf.push('}');
             }
         }
 
@@ -799,7 +889,10 @@ macro_rules! tup {
 
 impl Any for () {
     #[inline]
-    fn formula(&self, _buf: &mut String) {}
+    fn formula(&self, buf: &mut String) {
+        buf.push('{');
+        buf.push('}');
+    }
 }
 impl Sequence for () {}
 
@@ -916,6 +1009,7 @@ impl<A: Any> Criterion for (CriterionCmp, A) {}
 
 // -----------------------------------------------------------------------
 
+/// Matrix value.
 pub struct FMatrix<T: Any, const N: usize, const M: usize>(pub [[T; M]; N]);
 
 impl<T: Any, const N: usize, const M: usize> Any for FMatrix<T, N, M> {
@@ -939,6 +1033,7 @@ impl<T: Any, const N: usize, const M: usize> Any for FMatrix<T, N, M> {
 
 impl<T: Any, const N: usize, const M: usize> Matrix for FMatrix<T, N, M> {}
 
+/// Array.
 pub struct FArray<T: Any, const N: usize>(pub [T; N]);
 
 impl<T: Any, const N: usize> Any for FArray<T, N> {
@@ -956,34 +1051,11 @@ impl<T: Any, const N: usize> Any for FArray<T, N> {
 }
 
 impl<T: Any, const N: usize> Array for FArray<T, N> {}
+impl<T: Any, const N: usize> Sequence for FArray<T, N> {}
 impl<T: Any, const N: usize> ReferenceOrArray for FArray<T, N> {}
 impl<T: Any, const N: usize> NumberOrArray for FArray<T, N> {}
 
 // -----------------------------------------------------------------------
-
-impl<T: Any + ?Sized> Any for Box<T> {
-    #[inline]
-    fn formula(&self, buf: &mut String) {
-        self.as_ref().formula(buf);
-    }
-}
-impl<T: Number + Any + ?Sized> Number for Box<T> {}
-impl<T: Text + Any + ?Sized> Text for Box<T> {}
-impl<T: Logical + Any + ?Sized> Logical for Box<T> {}
-impl<T: Reference + Any + ?Sized> Reference for Box<T> {}
-impl<T: Matrix + Any + ?Sized> Matrix for Box<T> {}
-impl<T: Array + Any + ?Sized> Array for Box<T> {}
-impl<T: Database + Any + ?Sized> Database for Box<T> {}
-impl<T: Criterion + Any + ?Sized> Criterion for Box<T> {}
-impl<T: Criteria + Any + ?Sized> Criteria for Box<T> {}
-impl<T: Sequence + Any + ?Sized + 'static> Sequence for Box<T> {}
-impl<T: Scalar + Any + ?Sized> Scalar for Box<T> {}
-impl<T: Field + Any + ?Sized> Field for Box<T> {}
-impl<T: DateTime + Any + ?Sized> DateTime for Box<T> {}
-impl<T: TextOrNumber + Any + ?Sized> TextOrNumber for Box<T> {}
-impl<T: ReferenceOrArray + Any + ?Sized> ReferenceOrArray for Box<T> {}
-impl<T: TextOrReference + Any + ?Sized> TextOrReference for Box<T> {}
-impl<T: NumberOrArray + Any + ?Sized> NumberOrArray for Box<T> {}
 
 impl<T: Any + Sized> Any for Option<T> {
     #[inline]
@@ -994,28 +1066,27 @@ impl<T: Any + Sized> Any for Option<T> {
     }
 }
 
-// impl<T: Number + Any + Sized> Number for Option<T> {}
-// impl<T: Text + Any + Sized> Text for Option<T> {}
-// impl<T: Logical + Any + Sized> Logical for Option<T> {}
-// impl<T: Reference + Any + Sized> Reference for Option<T> {}
-// impl<T: Matrix + Any + Sized> Matrix for Option<T> {}
-// impl<T: Array + Any + Sized> Array for Option<T> {}
-// impl<T: Database + Any + Sized> Database for Option<T> {}
-// impl<T: Criterion + Any + Sized> Criterion for Option<T> {}
-// impl<T: Criteria + Any + Sized> Criteria for Option<T> {}
-// impl<T: Sequence + Any + Sized> Sequence for Option<T> {}
-// impl<T: Scalar + Any + Sized> Scalar for Option<T> {}
-// impl<T: Field + Any + Sized> Field for Option<T> {}
-// impl<T: DateTime + Any + Sized> DateTime for Option<T> {}
-// impl<T: TextOrNumber + Any + Sized> TextOrNumber for Option<T> {}
-// impl<T: ReferenceOrArray + Any + Sized> ReferenceOrArray for Option<T> {}
-// impl<T: TextOrReference + Any + Sized> TextOrReference for Option<T> {}
-// impl<T: NumberOrArray + Any + Sized> NumberOrArray for Option<T> {}
+impl<T: Number + Any + Sized> Number for Option<T> {}
+impl<T: Text + Any + Sized> Text for Option<T> {}
+impl<T: Logical + Any + Sized> Logical for Option<T> {}
+impl<T: Reference + Any + Sized> Reference for Option<T> {}
+impl<T: Matrix + Any + Sized> Matrix for Option<T> {}
+impl<T: Array + Any + Sized> Array for Option<T> {}
+impl<T: Database + Any + Sized> Database for Option<T> {}
+impl<T: Criterion + Any + Sized> Criterion for Option<T> {}
+impl<T: Criteria + Any + Sized> Criteria for Option<T> {}
+impl<T: Sequence + Any + Sized> Sequence for Option<T> {}
+impl<T: Scalar + Any + Sized> Scalar for Option<T> {}
+impl<T: Field + Any + Sized> Field for Option<T> {}
+impl<T: DateTime + Any + Sized> DateTime for Option<T> {}
+impl<T: TextOrNumber + Any + Sized> TextOrNumber for Option<T> {}
+impl<T: ReferenceOrArray + Any + Sized> ReferenceOrArray for Option<T> {}
+impl<T: TextOrReference + Any + Sized> TextOrReference for Option<T> {}
+impl<T: NumberOrArray + Any + Sized> NumberOrArray for Option<T> {}
 
 // -----------------------------------------------------------------------
 
-/// An expression in parentheses.
-/// Use p() / parentheses() to create one.
+/// An expression in parentheses. Use p() to create one.
 #[derive(Debug)]
 pub struct FParentheses<A>(A);
 impl<A: Any> Any for FParentheses<A> {
@@ -1085,6 +1156,7 @@ value_number!(usize);
 value_number!(f32);
 value_number!(f64);
 
+/// Creates a formula-number from a rust number literal.
 #[inline]
 pub fn num<A: Number>(n: A) -> ValNumber<A> {
     ValNumber(n)
@@ -1265,8 +1337,8 @@ macro_rules! number_op {
     };
 }
 
-number_op!(ValAny<A>);
-number_op!(OpAny<A, B>);
+// number_op!(ValAny<A>);
+// number_op!(OpAny<A, B>);
 number_op!(FnAnyVar);
 number_op!(FnAny0);
 number_op!(FnAny1<A>);
@@ -1274,7 +1346,6 @@ number_op!(FnAny2<A, B>);
 number_op!(FnAny3<A, B, C>);
 number_op!(FnAny4<A, B, C, D>);
 number_op!(FnAny5<A, B, C, D, E>);
-number_op!(FnAny6<A, B, C, D, E, F>);
 
 number_op!(ValNumber<A>);
 number_op!(OpNumber<A, B>);
@@ -1290,27 +1361,22 @@ number_op!(FnNumber7<A, B, C, D, E, F, G>);
 number_op!(FnNumber8<A, B, C, D, E, F, G, H>);
 number_op!(FnNumber9<A, B, C, D, E, F, G, H, I>);
 
-number_op!(ValLogical<A>);
+// number_op!(ValLogical<A>);
 number_op!(OpLogical<A, B>);
-number_op!(FnLogicalVar);
+// number_op!(FnLogicalVar);
 number_op!(FnLogical0);
 number_op!(FnLogical1<A>);
 number_op!(FnLogical2<A, B>);
-number_op!(FnLogical3<A, B, C>);
-number_op!(FnLogical4<A, B, C, D>);
-number_op!(FnLogical5<A, B, C, D, E>);
-number_op!(FnLogical6<A, B, C, D, E, F>);
 
-number_op!(ValReference<A>);
+// number_op!(ValReference<A>);
 number_op!(OpReference<A, B>);
-number_op!(FnReferenceVar);
-number_op!(FnReference0);
+// number_op!(FnReferenceVar);
+// number_op!(FnReference0);
 number_op!(FnReference1<A>);
 number_op!(FnReference2<A, B>);
 number_op!(FnReference3<A, B, C>);
 number_op!(FnReference4<A, B, C, D>);
 number_op!(FnReference5<A, B, C, D, E>);
-number_op!(FnReference6<A, B, C, D, E, F>);
 
 number_op!(FParentheses<A>);
 
@@ -1329,16 +1395,15 @@ macro_rules! text_op {
     }
 }
 
-text_op!(ValText<A>);
+// text_op!(ValText<A>);
 text_op!(OpText<A, B>);
 text_op!(FnTextVar);
-text_op!(FnText0);
+// text_op!(FnText0);
 text_op!(FnText1<A>);
 text_op!(FnText2<A, B>);
 text_op!(FnText3<A, B, C>);
 text_op!(FnText4<A, B, C, D>);
 text_op!(FnText5<A, B, C, D, E>);
-text_op!(FnText6<A, B, C, D, E, F>);
 
 // -----------------------------------------------------------------------
 
@@ -1349,4 +1414,23 @@ pub fn formula<T: Any>(f: T) -> String {
     buf.push_str("of:=");
     let _ = f.formula(&mut buf);
     buf
+}
+
+// -----------------------------------------------------------------------
+
+/// Macro for cell-references.
+#[macro_export]
+macro_rules! cell {
+    ($row:expr, $col:expr) => {
+        spreadsheet_ods::CellRef::local($row, $col)
+    };
+    ($row:expr, $col:expr, $row2:expr, $col2:expr) => {
+        spreadsheet_ods::CellRange::local($row, $col, $row2, $col2)
+    };
+    ($table:expr => $row:expr, $col:expr) => {
+        spreadsheet_ods::CellRef::remote($table, $row, $col)
+    };
+    ($table:expr => $row:expr, $col:expr, $row2:expr, $col2:expr) => {
+        spreadsheet_ods::CellRange::remote($table, $row, $col, $row2, $col2)
+    };
 }

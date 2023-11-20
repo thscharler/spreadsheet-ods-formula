@@ -1,8 +1,12 @@
+//!
+//! Conversion functions.
+//!
+
 use crate::Any;
 
 pub use crate::generated::conv::*;
 
-/// Method for ROMAN()
+/// Parameter for ROMAN().
 pub enum RomanStyle {
     /// Only subtract powers of 10, not L or V, and only if the next
     /// number is not more than 10 times greater. A number

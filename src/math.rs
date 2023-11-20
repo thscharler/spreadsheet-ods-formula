@@ -7,6 +7,7 @@ pub use crate::generated::math::*;
 use crate::{Any, Criterion, FnNumberVar, Reference};
 use std::fmt::Write;
 
+/// Parameter for CONVERT().
 pub enum BaseUnit {
     UKAcre,
     USAcre,
@@ -219,6 +220,7 @@ impl Any for BaseUnit {
     }
 }
 
+/// Parameter for CONVERT().
 pub enum DecimalPrefix {
     Yotta,
     Zetta,
@@ -267,6 +269,7 @@ impl Any for DecimalPrefix {
     }
 }
 
+/// Parameter for CONVERT().
 pub enum BinaryPrefix {
     Yobi,
     Zebi,
@@ -293,6 +296,7 @@ impl Any for BinaryPrefix {
     }
 }
 
+/// Parameter for CONVERT().
 pub enum ConvertUnit {
     Unit(BaseUnit),
     SI(DecimalPrefix, BaseUnit),
@@ -317,6 +321,7 @@ impl Any for ConvertUnit {
     }
 }
 
+/// Parameter for SUBTOTAL().
 pub enum SubtotalFunction {
     Average,
     Count,

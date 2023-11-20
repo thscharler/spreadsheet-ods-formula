@@ -1,10 +1,16 @@
+//!
+//! Financial functions.
+//!
+
 use crate::Any;
 use std::fmt::Write;
 
 pub use crate::generated::fin::*;
 
+#[doc(inline)]
 pub use crate::date::YearFracMethod;
 
+/// Parameter for many fin functions.
 pub enum Frequency {
     Annual,
     Semiannual,
@@ -27,7 +33,7 @@ impl Any for Frequency {
     }
 }
 
-/// Method for CUMIPMT()
+/// Parameter for CUMIPMT()
 pub enum MaturityDate {
     ///
     DueAtEnd,
@@ -44,7 +50,7 @@ impl Any for MaturityDate {
     }
 }
 
-/// Method for CUMIPMT()
+/// Parameter for CUMIPMT()
 pub enum PayType {
     ///
     DueAtEnd,

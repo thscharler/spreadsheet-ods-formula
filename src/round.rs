@@ -7,6 +7,7 @@ pub use crate::generated::round::*;
 use crate::Any;
 use std::fmt::Write;
 
+/// Parameter for CEILING() and FLOOR().
 pub enum RoundingMode {
     AwayFrom0,
     TowardsPlusInf,

@@ -1,3 +1,7 @@
+//!
+//! Statistical functions.
+//!
+
 use crate::{Any, Criterion, FnNumberVar, Reference};
 
 pub use crate::generated::stat::*;

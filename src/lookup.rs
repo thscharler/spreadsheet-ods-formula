@@ -7,6 +7,7 @@ pub use crate::generated::lookup::*;
 use crate::{Any, FnAny2, FnAnyVar, Reference, Scalar, Text};
 use std::fmt::Write;
 
+/// Parameter for ADDRESS().
 pub enum AddressAbs {
     RowAbsColAbs,
     RowAbsColRel,
@@ -29,6 +30,7 @@ impl Any for AddressAbs {
     }
 }
 
+/// Parameter for MATCH().
 pub enum MatchType {
     MaxInDescendingList,
     ExactMatch,
