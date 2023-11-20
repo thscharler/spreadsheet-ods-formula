@@ -61,10 +61,10 @@ fn main() -> Result<(), DError> {
 }
 
 fn generate_mod(f: &mut File, m: &Mod) -> Result<(), DError> {
-    // for l in m.desc.lines() {
-    //     writeln!(f, "//! {}", l)?;
-    // }
-    // writeln!(f)?;
+    for l in m.desc.lines() {
+        writeln!(f, "//! {}", l)?;
+    }
+    writeln!(f)?;
 
     writeln!(f, "use crate::*;")?;
     writeln!(f, "#[allow(unused_imports)]")?;
@@ -107,67 +107,101 @@ pub fn generate_fn_family(f: &mut File, fun: &mut Func) -> Result<(), DError> {
 pub fn generate_fn(f: &mut File, fun: &Func) -> Result<(), DError> {
     writeln!(f)?;
 
-    // if fun.summary.len() > 0 {
-    //     for l in fun.summary.lines() {
-    //         writeln!(f, "/// {}", l)?;
-    //     }
-    // }
-    //
-    // if let Some(extra0) = &fun.extra0 {
-    //     if extra0.len() > 0 {
-    //         writeln!(f, "///")?;
-    //         writeln!(f, "/// Arguments:")?;
-    //         for l in extra0.lines() {
-    //             writeln!(f, "/// {}", l)?;
-    //         }
-    //     }
-    // }
-    //
-    // if let Some(constraints) = &fun.constraints {
-    //     if constraints.len() > 0 {
-    //         writeln!(f, "///")?;
-    //         writeln!(f, "/// Constraints:")?;
-    //         for l in constraints.lines() {
-    //             writeln!(f, "/// {}", l)?;
-    //         }
-    //     }
-    // }
-    //
-    // if let Some(extra1) = &fun.extra1 {
-    //     if extra1.len() > 0 {
-    //         writeln!(f, "///")?;
-    //         writeln!(f, "/// Info2:")?;
-    //         for l in extra1.lines() {
-    //             writeln!(f, "/// {}", l)?;
-    //         }
-    //     }
-    // }
-    //
-    // if fun.semantics.len() > 0 {
-    //     writeln!(f, "///")?;
-    //     writeln!(f, "/// Semantics:")?;
-    //     for l in fun.semantics.lines() {
-    //         writeln!(f, "/// {}", l)?;
-    //     }
-    // }
-    //
-    // if let Some(note) = &fun.note {
-    //     if note.len() > 0 {
-    //         writeln!(f, "///")?;
-    //         writeln!(f, "/// Note:")?;
-    //         for l in note.lines() {
-    //             writeln!(f, "/// {}", l)?;
-    //         }
-    //     }
-    // }
-    //
-    // if !fun.see_also.fnname.is_empty() {
-    //     writeln!(f, "///")?;
-    //     write!(f, "/// See also: ")?;
-    //     for l in &fun.see_also.fnname {
-    //         write!(f, "{:?}, ", l)?;
-    //     }
-    // }
+    if fun.summary.len() > 0 {
+        for l in fun.summary.lines() {
+            writeln!(f, "/// {}", l)?;
+        }
+    }
+
+    write!(f, "/// Syntax: {}(", fun.fun)?;
+    for (i, arg) in fun.args.iter().enumerate() {
+        if arg.opt || arg.vol {
+            if i > 0 {
+                write!(f, "[; ")?;
+            } else {
+                write!(f, "[ ")?;
+            }
+            write!(f, "{} {}]", arg.ident, arg.type_)?;
+        } else if arg.rep {
+            if i > 0 {
+                write!(f, "{{; ")?;
+            } else {
+                write!(f, "{{ ")?;
+            }
+            write!(f, "{} {}}}+", arg.ident, arg.type_)?;
+        } else {
+            if i > 0 {
+                write!(f, "; ")?;
+            } else {
+                write!(f, " ")?;
+            }
+            write!(f, "{} {};", arg.ident, arg.type_)?;
+        }
+    }
+    if fun.etc {
+        write!(f, "...")?;
+    }
+    write!(f, " )")?;
+    writeln!(f)?;
+
+    if let Some(extra0) = &fun.extra0 {
+        if extra0.len() > 0 {
+            writeln!(f, "///")?;
+            writeln!(f, "/// Arguments:")?;
+            for l in extra0.lines() {
+                writeln!(f, "/// {}", l)?;
+            }
+        }
+    }
+
+    if let Some(constraints) = &fun.constraints {
+        if constraints.len() > 0 {
+            writeln!(f, "///")?;
+            writeln!(f, "/// Constraints:")?;
+            for l in constraints.lines() {
+                writeln!(f, "/// {}", l)?;
+            }
+        }
+    }
+
+    if let Some(extra1) = &fun.extra1 {
+        if extra1.len() > 0 {
+            writeln!(f, "///")?;
+            writeln!(f, "/// Info2:")?;
+            for l in extra1.lines() {
+                writeln!(f, "/// {}", l)?;
+            }
+        }
+    }
+
+    if let Some(semantics) = &fun.semantics {
+        if semantics.len() > 0 {
+            writeln!(f, "///")?;
+            writeln!(f, "/// Semantics:")?;
+            for l in semantics.lines() {
+                writeln!(f, "/// {}", l)?;
+            }
+        }
+    }
+
+    if let Some(note) = &fun.note {
+        if note.len() > 0 {
+            writeln!(f, "///")?;
+            writeln!(f, "/// Note:")?;
+            for l in note.lines() {
+                writeln!(f, "/// {}", l)?;
+            }
+        }
+    }
+
+    if !fun.see_also.fnname.is_empty() {
+        writeln!(f, "///")?;
+        write!(f, "/// See also: ")?;
+        for l in &fun.see_also.fnname {
+            write!(f, "{:?}, ", l)?;
+        }
+        writeln!(f)?;
+    }
 
     writeln!(f, "#[inline]")?;
     writeln!(
