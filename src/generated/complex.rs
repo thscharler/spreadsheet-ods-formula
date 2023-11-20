@@ -2,158 +2,137 @@ use crate::*;
 #[allow(unused_imports)]
 use crate::complex::*;
 
-/// Creates a complex number from a given real coefficient and imaginary coefficient.
 #[inline]
-pub fn complex<A: Number, B: Number>(real: A, imag: B) -> FnNumber2<A, B> {
-    FnNumber2("COMPLEX", real, imag)
+pub fn complex<A: Number, B: Number>(real: A, imaginary: B) -> FnNumber2<A, B> {
+    FnNumber2("COMPLEX", real, imaginary)
 }
 
-/// Returns the absolute value of a complex number.
 #[inline]
-pub fn imabs<A: Number>(v: A) -> FnNumber1<A> {
-    FnNumber1("IMABS", v)
+pub fn complex_<A: Number, B: Number, C: Text>(real: A, imaginary: B, suffix: C) -> FnNumber3<A, B, C> {
+    FnNumber3("COMPLEX", real, imaginary, suffix)
 }
 
-/// Returns the imaginary coefficient of a complex number.
 #[inline]
-pub fn imaginary<A: Number>(v: A) -> FnNumber1<A> {
-    FnNumber1("IMAGINARY", v)
+pub fn imabs<A: Number>(x: A) -> FnNumber1<A> {
+    FnNumber1("IMABS", x)
 }
 
-/// Returns the complex argument of a complex number
 #[inline]
-pub fn imargument<A: Number>(v: A) -> FnNumber1<A> {
-    FnNumber1("IMARGUMENT", v)
+pub fn imaginary<A: Number>(x: A) -> FnNumber1<A> {
+    FnNumber1("IMAGINARY", x)
 }
 
-/// Returns the complex conjugate of a complex number.
 #[inline]
-pub fn imconjugate<A: Number>(v: A) -> FnNumber1<A> {
-    FnNumber1("IMCONJUGATE", v)
+pub fn imargument<A: Number>(x: A) -> FnNumber1<A> {
+    FnNumber1("IMARGUMENT", x)
 }
 
-/// Returns the cosine of a complex number.
 #[inline]
-pub fn imcos<A: Number>(v: A) -> FnNumber1<A> {
-    FnNumber1("IMCOS", v)
+pub fn imconjugate<A: Number>(x: A) -> FnNumber1<A> {
+    FnNumber1("IMCONJUGATE", x)
 }
 
-/// Returns the hyperbolic cosine of a complex number.
 #[inline]
-pub fn imcosh<A: Number>(v: A) -> FnNumber1<A> {
-    FnNumber1("IMCOSH", v)
+pub fn imcos<A: Number>(x: A) -> FnNumber1<A> {
+    FnNumber1("IMCOS", x)
 }
 
-/// Returns the cotangent of a complex number.
 #[inline]
-pub fn imcot<A: Number>(v: A) -> FnNumber1<A> {
-    FnNumber1("IMCOT", v)
+pub fn imcosh<A: Number>(n: A) -> FnNumber1<A> {
+    FnNumber1("IMCOSH", n)
 }
 
-/// Returns the cosecant of a complex number
 #[inline]
-pub fn imcsc<A: Number>(v: A) -> FnNumber1<A> {
-    FnNumber1("IMCSC", v)
+pub fn imcot<A: Number>(n: A) -> FnNumber1<A> {
+    FnNumber1("IMCOT", n)
 }
 
-/// Returns the hyperbolic cosecant of a complex number.
 #[inline]
-pub fn imcsch<A: Number>(v: A) -> FnNumber1<A> {
-    FnNumber1("IMCSCH", v)
+pub fn imcsc<A: Number>(n: A) -> FnNumber1<A> {
+    FnNumber1("IMCSC", n)
 }
 
-/// Divides the first number by the second.
+#[inline]
+pub fn imcsch<A: Number>(n: A) -> FnNumber1<A> {
+    FnNumber1("IMCSCH", n)
+}
+
 #[inline]
 pub fn imdiv<A: Number, B: Number>(x: A, y: B) -> FnNumber2<A, B> {
     FnNumber2("IMDIV", x, y)
 }
 
-/// Returns the exponent of e and a complex number.
 #[inline]
-pub fn imexp<A: Number>(v: A) -> FnNumber1<A> {
-    FnNumber1("IMEXP", v)
+pub fn imexp<A: Number>(x: A) -> FnNumber1<A> {
+    FnNumber1("IMEXP", x)
 }
 
-/// Returns the natural logarithm of a complex number
 #[inline]
-pub fn imln<A: Number>(v: A) -> FnNumber1<A> {
-    FnNumber1("IMLN", v)
+pub fn imln<A: Number>(x: A) -> FnNumber1<A> {
+    FnNumber1("IMLN", x)
 }
 
-/// Returns the common logarithm of a comp
 #[inline]
-pub fn imlog10<A: Number>(v: A) -> FnNumber1<A> {
-    FnNumber1("IMLOG10", v)
+pub fn imlog10<A: Number>(x: A) -> FnNumber1<A> {
+    FnNumber1("IMLOG10", x)
 }
 
-/// Returns the binary logarithm of a complex number.
 #[inline]
-pub fn imlog2<A: Number>(v: A) -> FnNumber1<A> {
-    FnNumber1("IMLOG2", v)
+pub fn imlog2<A: Number>(x: A) -> FnNumber1<A> {
+    FnNumber1("IMLOG2", x)
 }
 
-/// Returns the complex number X raised to the Yth power.
 #[inline]
 pub fn impower<A: Number, B: Number>(x: A, y: B) -> FnNumber2<A, B> {
     FnNumber2("IMPOWER", x, y)
 }
 
-/// Returns the product of complex numbers.
 #[inline]
-pub fn improduct<A: Sequence>(seq: A) -> FnNumber1<A> {
-    FnNumber1("IMPRODUCT", seq)
+pub fn improduct<A: Sequence>(n: A) -> FnNumber1<A> {
+    FnNumber1("IMPRODUCT", n)
 }
 
-/// Returns the real coefficient of a complex number.
 #[inline]
-pub fn imreal<A: Number>(v: A) -> FnNumber1<A> {
-    FnNumber1("IMREAL", v)
+pub fn imreal<A: Number>(n: A) -> FnNumber1<A> {
+    FnNumber1("IMREAL", n)
 }
 
-/// Returns the secant of a complex number.
 #[inline]
-pub fn imsec<A: Number>(v: A) -> FnNumber1<A> {
-    FnNumber1("IMSEC", v)
+pub fn imsin<A: Number>(n: A) -> FnNumber1<A> {
+    FnNumber1("IMSIN", n)
 }
 
-/// Returns the hyperbolic secant of a complex number.
 #[inline]
-pub fn imsech<A: Number>(v: A) -> FnNumber1<A> {
-    FnNumber1("IMSECH", v)
+pub fn imsinh<A: Number>(n: A) -> FnNumber1<A> {
+    FnNumber1("IMSINH", n)
 }
 
-/// Returns the sine of a complex number.
 #[inline]
-pub fn imsin<A: Number>(v: A) -> FnNumber1<A> {
-    FnNumber1("IMSIN", v)
+pub fn imsec<A: Number>(n: A) -> FnNumber1<A> {
+    FnNumber1("IMSEC", n)
 }
 
-/// Returns the hyperbolic sine of a complex number.
 #[inline]
-pub fn imsinh<A: Number>(v: A) -> FnNumber1<A> {
-    FnNumber1("IMSINH", v)
+pub fn imsech<A: Number>(n: A) -> FnNumber1<A> {
+    FnNumber1("IMSECH", n)
 }
 
-/// Returns the square root of a complex number
 #[inline]
-pub fn imsqrt<A: Number>(v: A) -> FnNumber1<A> {
-    FnNumber1("IMSQRT", v)
+pub fn imsqrt<A: Number>(n: A) -> FnNumber1<A> {
+    FnNumber1("IMSQRT", n)
 }
 
-/// Subtracts the second complex number from the first
 #[inline]
 pub fn imsub<A: Number, B: Number>(x: A, y: B) -> FnNumber2<A, B> {
     FnNumber2("IMSUB", x, y)
 }
 
-/// Sums (add) a set of complex numbers, including all numbers in ranges.
 #[inline]
-pub fn imsum<A: Sequence>(seq: A) -> FnNumber1<A> {
-    FnNumber1("IMSUM", seq)
+pub fn imsum<A: Sequence>(n: A) -> FnNumber1<A> {
+    FnNumber1("IMSUM", n)
 }
 
-/// Returns the tangent of a complex number
 #[inline]
-pub fn imtan<A: Number>(v: A) -> FnNumber1<A> {
-    FnNumber1("IMTAN", v)
+pub fn imtan<A: Number>(n: A) -> FnNumber1<A> {
+    FnNumber1("IMTAN", n)
 }

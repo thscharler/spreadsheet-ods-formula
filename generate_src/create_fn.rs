@@ -36,10 +36,6 @@ fn main() -> Result<(), DError> {
             Spec::Func(mut fun) => {
                 fun.mod_ = mod_name_.clone();
 
-                if fun.fun == "REPT" {
-                    println!("{:?}", fun);
-                }
-
                 // println!("{:?}", fun.name);
                 if etc_fn(&fun) {
                     println!("Don't generate etc-fn {}.", fun.fun);
@@ -541,6 +537,8 @@ mod mapp {
             "Const" => write!(buf, "const_")?,
             "Type" => write!(buf, "type_")?,
             "Yield" => write!(buf, "yield_")?,
+            "α" => write!(buf, "alpha")?,
+            "β" => write!(buf, "beta")?,
             _ => {
                 let mut last_c = ' ';
                 for (i, c) in arg.ident.chars().enumerate() {

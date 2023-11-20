@@ -6,9 +6,12 @@ use std::ops::{Add, BitAnd, BitXor, Div, Mul, Neg, Sub};
 
 mod generated;
 
-pub mod bit;
 pub mod cmp;
+pub mod op;
+
+pub mod bit;
 pub mod complex;
+pub mod conv;
 pub mod date;
 pub mod db;
 pub mod ext;
@@ -18,9 +21,10 @@ pub mod logic;
 pub mod lookup;
 pub mod math;
 pub mod matrix;
-pub mod op;
 pub mod round;
 pub mod stat;
+pub mod text;
+pub mod textb;
 
 /// The traits for this crate.
 /// And the function p() for parentheses.
@@ -31,9 +35,12 @@ pub mod prelude {
 
 /// All functions in one module, and also all families of functions.
 pub mod of {
-    pub use crate::bit::*;
     pub use crate::cmp::*;
+    pub use crate::op::*;
+
+    pub use crate::bit::*;
     pub use crate::complex::*;
+    pub use crate::conv::*;
     pub use crate::date::*;
     pub use crate::db::*;
     pub use crate::ext::*;
@@ -43,12 +50,15 @@ pub mod of {
     pub use crate::lookup::*;
     pub use crate::math::*;
     pub use crate::matrix::*;
-    pub use crate::op::*;
     pub use crate::round::*;
     pub use crate::stat::*;
+    pub use crate::text::*;
+    pub use crate::textb::*;
     pub use crate::{
-        bit, cmp, complex, date, db, ext, fin, info, logic, lookup, math, matrix, op, round, stat,
+        bit, complex, conv, date, db, ext, fin, info, logic, lookup, math, matrix, round, stat,
+        text, textb,
     };
+    pub use crate::{cmp, op};
 }
 
 // -----------------------------------------------------------------------
@@ -78,14 +88,21 @@ pub trait Criterion: Any {}
 pub trait Criteria: Any {}
 /// Sequence of values.
 pub trait Sequence: Any {}
-/// Text or Number
-pub trait TextOrNumber: Any {}
 /// A single scalar value.
 pub trait Scalar: Any {}
 /// A field denominator for a db.
 pub trait Field: Any {}
 /// A date/time parameter.
-pub trait DateTimeParam: Any {}
+pub trait DateTime: Any {}
+
+/// Text or Number
+pub trait TextOrNumber: Any {}
+/// Reference or Array
+pub trait ReferenceOrArray: Any {}
+// Reference or Text
+pub trait TextOrReference: Any {}
+// Number or Array
+pub trait NumberOrArray: Any {}
 
 // -----------------------------------------------------------------------
 
@@ -380,20 +397,24 @@ macro_rules! fn_any {
         impl $(<$l>)? Text for $t$(<$l>)?  {}
         impl $(<$l>)? Logical for $t$(<$l>)?  {}
         impl $(<$l>)? Sequence for $t$(<$l>)?  {}
-        impl $(<$l>)? TextOrNumber for $t$(<$l>)?  {}
         impl $(<$l>)? Scalar for $t$(<$l>)?  {}
         impl $(<$l>)? Field for $t$(<$l>)?  {}
-        impl $(<$l>)? DateTimeParam for $t$(<$l>)?  {}
+        impl $(<$l>)? DateTime for $t$(<$l>)?  {}
+        impl $(<$l>)? TextOrNumber for $t$(<$l>)?  {}
+        impl $(<$l>)? TextOrReference for $t$(<$l>)?  {}
+        impl $(<$l>)? NumberOrArray for $t$(<$l>)?  {}
     };
     (__IMPL $t:ident : $($l:lifetime)? $tname0:tt $($tname:tt)*) => {
         impl <$($l, )?$tname0: Any $(,$tname: Any)*> Number for $t<$($l, )?$tname0 $(,$tname)*> {}
         impl <$($l, )?$tname0: Any $(,$tname: Any)*> Text for $t<$($l, )?$tname0 $(,$tname)*> {}
         impl <$($l, )?$tname0: Any $(,$tname: Any)*> Logical for $t<$($l, )?$tname0 $(,$tname)*> {}
         impl <$($l, )?$tname0: Any $(,$tname: Any)*> Sequence for $t<$($l, )?$tname0 $(,$tname)*> {}
-        impl <$($l, )?$tname0: Any $(,$tname: Any)*> TextOrNumber for $t<$($l, )?$tname0 $(,$tname)*> {}
         impl <$($l, )?$tname0: Any $(,$tname: Any)*> Scalar for $t<$($l, )?$tname0 $(,$tname)*> {}
         impl <$($l, )?$tname0: Any $(,$tname: Any)*> Field for $t<$($l, )?$tname0 $(,$tname)*> {}
-        impl <$($l, )?$tname0: Any $(,$tname: Any)*> DateTimeParam for $t<$($l, )?$tname0 $(,$tname)*> {}
+        impl <$($l, )?$tname0: Any $(,$tname: Any)*> DateTime for $t<$($l, )?$tname0 $(,$tname)*> {}
+        impl <$($l, )?$tname0: Any $(,$tname: Any)*> TextOrNumber for $t<$($l, )?$tname0 $(,$tname)*> {}
+        impl <$($l, )?$tname0: Any $(,$tname: Any)*> TextOrReference for $t<$($l, )?$tname0 $(,$tname)*> {}
+        impl <$($l, )?$tname0: Any $(,$tname: Any)*> NumberOrArray for $t<$($l, )?$tname0 $(,$tname)*> {}
     };
 }
 
@@ -437,19 +458,21 @@ macro_rules! fn_number {
         impl $(<$l>)? Number for $t$(<$l>)?  {}
         impl $(<$l>)? Logical for $t$(<$l>)?  {}
         impl $(<$l>)? Sequence for $t$(<$l>)?  {}
-        impl $(<$l>)? TextOrNumber for $t$(<$l>)?  {}
         impl $(<$l>)? Scalar for $t$(<$l>)?  {}
         impl $(<$l>)? Field for $t$(<$l>)?  {}
-        impl $(<$l>)? DateTimeParam for $t$(<$l>)?  {}
+        impl $(<$l>)? DateTime for $t$(<$l>)?  {}
+        impl $(<$l>)? TextOrNumber for $t$(<$l>)?  {}
+        impl $(<$l>)? NumberOrArray for $t$(<$l>)?  {}
     };
     (__IMPL $t:ident : $($l:lifetime)? $tname0:tt $($tname:tt)*) => {
         impl <$($l, )?$tname0: Any $(,$tname: Any)*> Number for $t<$($l, )?$tname0 $(,$tname)*> {}
         impl <$($l, )?$tname0: Any $(,$tname: Any)*> Logical for $t<$($l, )?$tname0 $(,$tname)*> {}
         impl <$($l, )?$tname0: Any $(,$tname: Any)*> Sequence for $t<$($l, )?$tname0 $(,$tname)*> {}
-        impl <$($l, )?$tname0: Any $(,$tname: Any)*> TextOrNumber for $t<$($l, )?$tname0 $(,$tname)*> {}
         impl <$($l, )?$tname0: Any $(,$tname: Any)*> Scalar for $t<$($l, )?$tname0 $(,$tname)*> {}
         impl <$($l, )?$tname0: Any $(,$tname: Any)*> Field for $t<$($l, )?$tname0 $(,$tname)*> {}
-        impl <$($l, )?$tname0: Any $(,$tname: Any)*> DateTimeParam for $t<$($l, )?$tname0 $(,$tname)*> {}
+        impl <$($l, )?$tname0: Any $(,$tname: Any)*> DateTime for $t<$($l, )?$tname0 $(,$tname)*> {}
+        impl <$($l, )?$tname0: Any $(,$tname: Any)*> TextOrNumber for $t<$($l, )?$tname0 $(,$tname)*> {}
+        impl <$($l, )?$tname0: Any $(,$tname: Any)*> NumberOrArray for $t<$($l, )?$tname0 $(,$tname)*> {}
     };
 }
 
@@ -464,6 +487,8 @@ fn_number!(FnNumber4: A B 2 C 3 D 4);
 fn_number!(FnNumber5: A B 2 C 3 D 4 E 5);
 fn_number!(FnNumber6: A B 2 C 3 D 4 E 5 F 6);
 fn_number!(FnNumber7: A B 2 C 3 D 4 E 5 F 6 G 7);
+fn_number!(FnNumber8: A B 2 C 3 D 4 E 5 F 6 G 7 H 8);
+fn_number!(FnNumber9: A B 2 C 3 D 4 E 5 F 6 G 7 H 8 I 9);
 
 macro_rules! fn_text {
     (VAL $t:ident) => {
@@ -493,18 +518,20 @@ macro_rules! fn_text {
     (__IMPL $t:ident : $($l:lifetime)?) => {
         impl $(<$l>)? Text for $t$(<$l>)?  {}
         impl $(<$l>)? Sequence for $t$(<$l>)?  {}
-        impl $(<$l>)? TextOrNumber for $t$(<$l>)?  {}
         impl $(<$l>)? Scalar for $t$(<$l>)?  {}
         impl $(<$l>)? Field for $t$(<$l>)?  {}
-        impl $(<$l>)? DateTimeParam for $t$(<$l>)?  {}
+        impl $(<$l>)? DateTime for $t$(<$l>)?  {}
+        impl $(<$l>)? TextOrNumber for $t$(<$l>)?  {}
+        impl $(<$l>)? TextOrReference for $t$(<$l>)?  {}
     };
     (__IMPL $t:ident : $($l:lifetime)? $tname0:tt $($tname:tt)*) => {
         impl <$($l, )?$tname0: Any $(,$tname: Any)*> Text for $t<$($l, )?$tname0 $(,$tname)*> {}
         impl <$($l, )?$tname0: Any $(,$tname: Any)*> Sequence for $t<$($l, )?$tname0 $(,$tname)*> {}
-        impl <$($l, )?$tname0: Any $(,$tname: Any)*> TextOrNumber for $t<$($l, )?$tname0 $(,$tname)*> {}
         impl <$($l, )?$tname0: Any $(,$tname: Any)*> Scalar for $t<$($l, )?$tname0 $(,$tname)*> {}
         impl <$($l, )?$tname0: Any $(,$tname: Any)*> Field for $t<$($l, )?$tname0 $(,$tname)*> {}
-        impl <$($l, )?$tname0: Any $(,$tname: Any)*> DateTimeParam for $t<$($l, )?$tname0 $(,$tname)*> {}
+        impl <$($l, )?$tname0: Any $(,$tname: Any)*> DateTime for $t<$($l, )?$tname0 $(,$tname)*> {}
+        impl <$($l, )?$tname0: Any $(,$tname: Any)*> TextOrNumber for $t<$($l, )?$tname0 $(,$tname)*> {}
+        impl <$($l, )?$tname0: Any $(,$tname: Any)*> TextOrReference for $t<$($l, )?$tname0 $(,$tname)*> {}
     };
 }
 
@@ -548,15 +575,17 @@ macro_rules! fn_logical {
         impl $(<$l>)? Number for $t$(<$l>)?  {}
         impl $(<$l>)? Logical for $t$(<$l>)?  {}
         impl $(<$l>)? Sequence for $t$(<$l>)?  {}
-        impl $(<$l>)? TextOrNumber for $t$(<$l>)?  {}
         impl $(<$l>)? Scalar for $t$(<$l>)?  {}
+        impl $(<$l>)? TextOrNumber for $t$(<$l>)?  {}
+        impl $(<$l>)? NumberOrArray for $t$(<$l>)?  {}
     };
     (__IMPL $t:ident : $($l:lifetime)? $tname0:tt $($tname:tt)*) => {
         impl <$($l, )?$tname0: Any $(,$tname: Any)*> Number for $t<$($l, )?$tname0 $(,$tname)*> {}
         impl <$($l, )?$tname0: Any $(,$tname: Any)*> Logical for $t<$($l, )?$tname0 $(,$tname)*> {}
         impl <$($l, )?$tname0: Any $(,$tname: Any)*> Sequence for $t<$($l, )?$tname0 $(,$tname)*> {}
-        impl <$($l, )?$tname0: Any $(,$tname: Any)*> TextOrNumber for $t<$($l, )?$tname0 $(,$tname)*> {}
         impl <$($l, )?$tname0: Any $(,$tname: Any)*> Scalar for $t<$($l, )?$tname0 $(,$tname)*> {}
+        impl <$($l, )?$tname0: Any $(,$tname: Any)*> TextOrNumber for $t<$($l, )?$tname0 $(,$tname)*> {}
+        impl <$($l, )?$tname0: Any $(,$tname: Any)*> NumberOrArray for $t<$($l, )?$tname0 $(,$tname)*> {}
     };
 }
 
@@ -609,6 +638,7 @@ fn_matrix!(OP OpMatrix);
 fn_matrix!(VAR FnMatrixVar);
 fn_matrix!(FnMatrix0);
 fn_matrix!(FnMatrix1: A);
+fn_matrix!(FnMatrix2: A B 2);
 
 macro_rules! fn_reference {
     (VAL $t:ident) => {
@@ -645,10 +675,13 @@ macro_rules! fn_reference {
         impl $(<$l>)? Database for $t$(<$l>)?  {}
         impl $(<$l>)? Criteria for $t$(<$l>)?  {}
         impl $(<$l>)? Sequence for $t$(<$l>)?  {}
-        impl $(<$l>)? TextOrNumber for $t$(<$l>)?  {}
         impl $(<$l>)? Scalar for $t$(<$l>)?  {}
         impl $(<$l>)? Field for $t$(<$l>)?  {}
-        impl $(<$l>)? DateTimeParam for $t$(<$l>)?  {}
+        impl $(<$l>)? DateTime for $t$(<$l>)?  {}
+        impl $(<$l>)? TextOrNumber for $t$(<$l>)?  {}
+        impl $(<$l>)? ReferenceOrArray for $t$(<$l>)?  {}
+        impl $(<$l>)? TextOrReference for $t$(<$l>)?  {}
+        impl $(<$l>)? NumberOrArray for $t$(<$l>)?  {}
     };
     (__IMPL $t:ident : $($l:lifetime)? $tname0:tt $($tname:tt)*) => {
         impl <$($l, )?$tname0: Any $(,$tname: Any)*> Number for $t<$($l, )?$tname0 $(,$tname)*> {}
@@ -660,10 +693,13 @@ macro_rules! fn_reference {
         impl <$($l, )?$tname0: Any $(,$tname: Any)*> Database for $t<$($l, )?$tname0 $(,$tname)*> {}
         impl <$($l, )?$tname0: Any $(,$tname: Any)*> Criteria for $t<$($l, )?$tname0 $(,$tname)*> {}
         impl <$($l, )?$tname0: Any $(,$tname: Any)*> Sequence for $t<$($l, )?$tname0 $(,$tname)*> {}
-        impl <$($l, )?$tname0: Any $(,$tname: Any)*> TextOrNumber for $t<$($l, )?$tname0 $(,$tname)*> {}
         impl <$($l, )?$tname0: Any $(,$tname: Any)*> Scalar for $t<$($l, )?$tname0 $(,$tname)*> {}
         impl <$($l, )?$tname0: Any $(,$tname: Any)*> Field for $t<$($l, )?$tname0 $(,$tname)*> {}
-        impl <$($l, )?$tname0: Any $(,$tname: Any)*> DateTimeParam for $t<$($l, )?$tname0 $(,$tname)*> {}
+        impl <$($l, )?$tname0: Any $(,$tname: Any)*> DateTime for $t<$($l, )?$tname0 $(,$tname)*> {}
+        impl <$($l, )?$tname0: Any $(,$tname: Any)*> TextOrNumber for $t<$($l, )?$tname0 $(,$tname)*> {}
+        impl <$($l, )?$tname0: Any $(,$tname: Any)*> ReferenceOrArray for $t<$($l, )?$tname0 $(,$tname)*> {}
+        impl <$($l, )?$tname0: Any $(,$tname: Any)*> TextOrReference for $t<$($l, )?$tname0 $(,$tname)*> {}
+        impl <$($l, )?$tname0: Any $(,$tname: Any)*> NumberOrArray for $t<$($l, )?$tname0 $(,$tname)*> {}
     };
 }
 
@@ -705,9 +741,13 @@ macro_rules! fn_array {
     };
     (__IMPL $t:ident : $($l:lifetime)?) => {
         impl $(<$l>)? Array for $t$(<$l>)?  {}
+        impl $(<$l>)? ReferenceOrArray for $t$(<$l>)?  {}
+        impl $(<$l>)? NumberOrArray for $t$(<$l>)?  {}
     };
     (__IMPL $t:ident : $($l:lifetime)? $tname0:tt $($tname:tt)*) => {
         impl <$($l, )?$tname0: Any $(,$tname: Any)*> Array for $t<$($l, )?$tname0 $(,$tname)*> {}
+        impl <$($l, )?$tname0: Any $(,$tname: Any)*> ReferenceOrArray for $t<$($l, )?$tname0 $(,$tname)*> {}
+        impl <$($l, )?$tname0: Any $(,$tname: Any)*> NumberOrArray for $t<$($l, )?$tname0 $(,$tname)*> {}
     };
 }
 
@@ -916,6 +956,8 @@ impl<T: Any, const N: usize> Any for FArray<T, N> {
 }
 
 impl<T: Any, const N: usize> Array for FArray<T, N> {}
+impl<T: Any, const N: usize> ReferenceOrArray for FArray<T, N> {}
+impl<T: Any, const N: usize> NumberOrArray for FArray<T, N> {}
 
 // -----------------------------------------------------------------------
 
@@ -935,10 +977,13 @@ impl<T: Database + Any + ?Sized> Database for Box<T> {}
 impl<T: Criterion + Any + ?Sized> Criterion for Box<T> {}
 impl<T: Criteria + Any + ?Sized> Criteria for Box<T> {}
 impl<T: Sequence + Any + ?Sized + 'static> Sequence for Box<T> {}
-impl<T: TextOrNumber + Any + ?Sized> TextOrNumber for Box<T> {}
 impl<T: Scalar + Any + ?Sized> Scalar for Box<T> {}
 impl<T: Field + Any + ?Sized> Field for Box<T> {}
-impl<T: DateTimeParam + Any + ?Sized> DateTimeParam for Box<T> {}
+impl<T: DateTime + Any + ?Sized> DateTime for Box<T> {}
+impl<T: TextOrNumber + Any + ?Sized> TextOrNumber for Box<T> {}
+impl<T: ReferenceOrArray + Any + ?Sized> ReferenceOrArray for Box<T> {}
+impl<T: TextOrReference + Any + ?Sized> TextOrReference for Box<T> {}
+impl<T: NumberOrArray + Any + ?Sized> NumberOrArray for Box<T> {}
 
 impl<T: Any + Sized> Any for Option<T> {
     #[inline]
@@ -959,10 +1004,13 @@ impl<T: Any + Sized> Any for Option<T> {
 // impl<T: Criterion + Any + Sized> Criterion for Option<T> {}
 // impl<T: Criteria + Any + Sized> Criteria for Option<T> {}
 // impl<T: Sequence + Any + Sized> Sequence for Option<T> {}
-// impl<T: TextOrNumber + Any + Sized> TextOrNumber for Option<T> {}
 // impl<T: Scalar + Any + Sized> Scalar for Option<T> {}
 // impl<T: Field + Any + Sized> Field for Option<T> {}
-// impl<T: DateTimeParam + Any + Sized> DateTimeParam for Option<T> {}
+// impl<T: DateTime + Any + Sized> DateTime for Option<T> {}
+// impl<T: TextOrNumber + Any + Sized> TextOrNumber for Option<T> {}
+// impl<T: ReferenceOrArray + Any + Sized> ReferenceOrArray for Option<T> {}
+// impl<T: TextOrReference + Any + Sized> TextOrReference for Option<T> {}
+// impl<T: NumberOrArray + Any + Sized> NumberOrArray for Option<T> {}
 
 // -----------------------------------------------------------------------
 
@@ -987,10 +1035,13 @@ impl<A: Array> Array for FParentheses<A> {}
 impl<A: Database> Database for FParentheses<A> {}
 impl<A: Criteria> Criteria for FParentheses<A> {}
 impl<A: Sequence> Sequence for FParentheses<A> {}
-impl<A: TextOrNumber> TextOrNumber for FParentheses<A> {}
 impl<A: Scalar> Scalar for FParentheses<A> {}
 impl<A: Field> Field for FParentheses<A> {}
-impl<A: DateTimeParam> DateTimeParam for FParentheses<A> {}
+impl<A: DateTime> DateTime for FParentheses<A> {}
+impl<A: TextOrNumber> TextOrNumber for FParentheses<A> {}
+impl<A: ReferenceOrArray> ReferenceOrArray for FParentheses<A> {}
+impl<A: TextOrReference> TextOrReference for FParentheses<A> {}
+impl<A: NumberOrArray> NumberOrArray for FParentheses<A> {}
 
 /// Creates an expression in parentheses.
 #[inline]
@@ -1011,10 +1062,11 @@ macro_rules! value_number {
         impl Number for $t {}
         impl Logical for $t {}
         impl Sequence for $t {}
-        impl TextOrNumber for $t {}
         impl Scalar for $t {}
         impl Field for $t {}
-        impl DateTimeParam for $t {}
+        impl DateTime for $t {}
+        impl TextOrNumber for $t {}
+        impl NumberOrArray for $t {}
     };
 }
 
@@ -1048,6 +1100,7 @@ impl Number for bool {}
 impl Logical for bool {}
 impl Sequence for bool {}
 impl Scalar for bool {}
+impl NumberOrArray for bool {}
 
 impl Any for &str {
     #[inline]
@@ -1070,10 +1123,11 @@ impl Any for &str {
 }
 impl Text for &str {}
 impl Sequence for &str {}
-impl TextOrNumber for &str {}
 impl Scalar for &str {}
 impl Field for &str {}
-impl DateTimeParam for &str {}
+impl DateTime for &str {}
+impl TextOrNumber for &str {}
+impl TextOrReference for &str {}
 
 impl<'a> Any for Cow<'a, str> {
     #[inline]
@@ -1084,10 +1138,11 @@ impl<'a> Any for Cow<'a, str> {
 }
 impl<'a> Text for Cow<'a, str> {}
 impl<'a> Sequence for Cow<'a, str> {}
-impl<'a> TextOrNumber for Cow<'a, str> {}
 impl<'a> Scalar for Cow<'a, str> {}
 impl<'a> Field for Cow<'a, str> {}
-impl<'a> DateTimeParam for Cow<'a, str> {}
+impl<'a> DateTime for Cow<'a, str> {}
+impl<'a> TextOrNumber for Cow<'a, str> {}
+impl<'a> TextOrReference for Cow<'a, str> {}
 
 impl Any for String {
     #[inline]
@@ -1097,10 +1152,11 @@ impl Any for String {
 }
 impl Text for String {}
 impl Sequence for String {}
-impl TextOrNumber for String {}
 impl Scalar for String {}
 impl Field for String {}
-impl DateTimeParam for String {}
+impl DateTime for String {}
+impl TextOrNumber for String {}
+impl TextOrReference for String {}
 
 impl Any for CellRef {
     #[inline]
@@ -1117,10 +1173,13 @@ impl Array for CellRef {}
 impl Database for CellRef {}
 impl Criteria for CellRef {}
 impl Sequence for CellRef {}
-impl TextOrNumber for CellRef {}
 impl Scalar for CellRef {}
 impl Field for CellRef {}
-impl DateTimeParam for CellRef {}
+impl DateTime for CellRef {}
+impl TextOrNumber for CellRef {}
+impl ReferenceOrArray for CellRef {}
+impl TextOrReference for CellRef {}
+impl NumberOrArray for CellRef {}
 
 impl Any for CellRange {
     #[inline]
@@ -1137,10 +1196,13 @@ impl Array for CellRange {}
 impl Database for CellRange {}
 impl Criteria for CellRange {}
 impl Sequence for CellRange {}
-impl TextOrNumber for CellRange {}
 impl Scalar for CellRange {}
 impl Field for CellRange {}
-impl DateTimeParam for CellRange {}
+impl DateTime for CellRange {}
+impl TextOrNumber for CellRange {}
+impl ReferenceOrArray for CellRange {}
+impl TextOrReference for CellRange {}
+impl NumberOrArray for CellRange {}
 
 // -----------------------------------------------------------------------
 
@@ -1225,6 +1287,8 @@ number_op!(FnNumber4<A, B, C, D>);
 number_op!(FnNumber5<A, B, C, D, E>);
 number_op!(FnNumber6<A, B, C, D, E, F>);
 number_op!(FnNumber7<A, B, C, D, E, F, G>);
+number_op!(FnNumber8<A, B, C, D, E, F, G, H>);
+number_op!(FnNumber9<A, B, C, D, E, F, G, H, I>);
 
 number_op!(ValLogical<A>);
 number_op!(OpLogical<A, B>);

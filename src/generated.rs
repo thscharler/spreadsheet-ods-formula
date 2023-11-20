@@ -1,7 +1,9 @@
 pub mod bit;
 pub mod complex;
+pub mod conv;
 pub mod date;
 pub mod db;
+pub mod ext;
 pub mod fin;
 pub mod info;
 pub mod logic;
@@ -10,3 +12,5 @@ pub mod math;
 pub mod matrix;
 pub mod round;
 pub mod stat;
+pub mod text;
+pub mod textb;
