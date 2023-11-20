@@ -10,7 +10,7 @@ use crate::complex::*;
 ///
 /// __Syntax__: 
 /// ```ods
-///     COMPLEX( Real Number; Imaginary Number )
+///     COMPLEX( Real: Number; Imaginary: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -30,7 +30,7 @@ pub fn complex<A: Number, B: Number>(real: A, imaginary: B) -> FnNumber2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     COMPLEX( Real Number; Imaginary Number; Suffix Text )
+///     COMPLEX( Real: Number; Imaginary: Number; Suffix: Text )
 /// ```
 ///
 /// __Constraints__:
@@ -49,7 +49,7 @@ pub fn complex_<A: Number, B: Number, C: Text>(real: A, imaginary: B, suffix: C)
 ///
 /// __Syntax__: 
 /// ```ods
-///     IMABS( X Complex )
+///     IMABS( X: Complex )
 /// ```
 ///
 /// __Constraints__:
@@ -69,7 +69,7 @@ pub fn imabs<A: Number>(x: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     IMAGINARY( X Complex )
+///     IMAGINARY( X: Complex )
 /// ```
 ///
 /// __Constraints__:
@@ -88,7 +88,7 @@ pub fn imaginary<A: Number>(x: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     IMARGUMENT( X Complex )
+///     IMARGUMENT( X: Complex )
 /// ```
 ///
 /// __Constraints__:
@@ -109,7 +109,7 @@ pub fn imargument<A: Number>(x: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     IMCONJUGATE( X Complex )
+///     IMCONJUGATE( X: Complex )
 /// ```
 ///
 /// __Constraints__:
@@ -126,7 +126,7 @@ pub fn imconjugate<A: Number>(x: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     IMCOS( X Complex )
+///     IMCOS( X: Complex )
 /// ```
 ///
 /// __Constraints__:
@@ -145,7 +145,7 @@ pub fn imcos<A: Number>(x: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     IMCOSH( N Complex )
+///     IMCOSH( N: Complex )
 /// ```
 ///
 /// __Constraints__:
@@ -162,7 +162,7 @@ pub fn imcosh<A: Number>(n: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     IMCOT( N Complex )
+///     IMCOT( N: Complex )
 /// ```
 ///
 /// __Constraints__:
@@ -183,7 +183,7 @@ pub fn imcot<A: Number>(n: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     IMCSC( N Complex )
+///     IMCSC( N: Complex )
 /// ```
 ///
 /// __Constraints__:
@@ -204,7 +204,7 @@ pub fn imcsc<A: Number>(n: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     IMCSCH( N Complex )
+///     IMCSCH( N: Complex )
 /// ```
 ///
 /// __Constraints__:
@@ -225,7 +225,7 @@ pub fn imcsch<A: Number>(n: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     IMDIV( X Complex; Y Complex )
+///     IMDIV( X: Complex; Y: Complex )
 /// ```
 ///
 /// __Constraints__:
@@ -246,7 +246,7 @@ pub fn imdiv<A: Number, B: Number>(x: A, y: B) -> FnNumber2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     IMEXP( X Complex )
+///     IMEXP( X: Complex )
 /// ```
 ///
 /// __Constraints__:
@@ -266,7 +266,7 @@ pub fn imexp<A: Number>(x: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     IMLN( X Complex )
+///     IMLN( X: Complex )
 /// ```
 ///
 /// __Constraints__:
@@ -285,7 +285,7 @@ pub fn imln<A: Number>(x: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     IMLOG10( X Complex )
+///     IMLOG10( X: Complex )
 /// ```
 ///
 /// __Constraints__:
@@ -304,7 +304,7 @@ pub fn imlog10<A: Number>(x: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     IMLOG2( X Complex )
+///     IMLOG2( X: Complex )
 /// ```
 ///
 /// __Constraints__:
@@ -323,7 +323,7 @@ pub fn imlog2<A: Number>(x: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     IMPOWER( X Complex; Y Complex )
+///     IMPOWER( X: Complex; Y: Complex )
 /// ```
 ///
 /// __Constraints__:
@@ -345,7 +345,7 @@ pub fn impower<A: Number, B: Number>(x: A, y: B) -> FnNumber2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     IMPRODUCT({ N ComplexSequence}+ )
+///     IMPRODUCT({ N: ComplexSequence}+ )
 /// ```
 ///
 /// __Constraints__:
@@ -366,7 +366,7 @@ pub fn improduct<A: Sequence>(n: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     IMREAL( N Complex )
+///     IMREAL( N: Complex )
 /// ```
 ///
 /// __Constraints__:
@@ -385,7 +385,7 @@ pub fn imreal<A: Number>(n: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     IMSIN( N Complex )
+///     IMSIN( N: Complex )
 /// ```
 ///
 /// __Constraints__:
@@ -404,7 +404,7 @@ pub fn imsin<A: Number>(n: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     IMSINH( N Complex )
+///     IMSINH( N: Complex )
 /// ```
 ///
 /// __Constraints__:
@@ -421,7 +421,7 @@ pub fn imsinh<A: Number>(n: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     IMSEC( N Complex )
+///     IMSEC( N: Complex )
 /// ```
 ///
 /// __Constraints__:
@@ -442,7 +442,7 @@ pub fn imsec<A: Number>(n: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     IMSECH( N Complex )
+///     IMSECH( N: Complex )
 /// ```
 ///
 /// __Constraints__:
@@ -463,7 +463,7 @@ pub fn imsech<A: Number>(n: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     IMSQRT( N Complex )
+///     IMSQRT( N: Complex )
 /// ```
 ///
 /// __Constraints__:
@@ -484,7 +484,7 @@ pub fn imsqrt<A: Number>(n: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     IMSUB( X Complex; Y Complex )
+///     IMSUB( X: Complex; Y: Complex )
 /// ```
 ///
 /// __Constraints__:
@@ -503,7 +503,7 @@ pub fn imsub<A: Number, B: Number>(x: A, y: B) -> FnNumber2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     IMSUM({ N ComplexSequence}+ )
+///     IMSUM({ N: ComplexSequence}+ )
 /// ```
 ///
 /// __Constraints__:
@@ -527,7 +527,7 @@ pub fn imsum<A: Sequence>(n: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     IMTAN( N Complex )
+///     IMTAN( N: Complex )
 /// ```
 ///
 /// __Constraints__:

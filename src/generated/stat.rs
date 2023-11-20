@@ -11,7 +11,7 @@ use crate::stat::*;
 ///
 /// __Syntax__: 
 /// ```ods
-///     AVEDEV({ N NumberSequenceList}+ )
+///     AVEDEV({ N: NumberSequenceList}+ )
 /// ```
 ///
 /// __Constraints__:
@@ -31,7 +31,7 @@ pub fn avedev<A: Sequence>(n: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     AVERAGE({ N NumberSequence}+ )
+///     AVERAGE({ N: NumberSequence}+ )
 /// ```
 ///
 /// __Constraints__:
@@ -50,7 +50,7 @@ pub fn average<A: Sequence>(n: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     AVERAGEA({ N Any}+ )
+///     AVERAGEA({ N: Any}+ )
 /// ```
 ///
 /// __Constraints__:
@@ -72,7 +72,7 @@ pub fn averagea<A: Sequence>(n: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     AVERAGEIF( R Reference; C Criterion )
+///     AVERAGEIF( R: Reference; C: Criterion )
 /// ```
 ///
 /// __Constraints__:
@@ -101,7 +101,7 @@ pub fn averageif<A: Reference, B: Criterion>(r: A, c: B) -> FnNumber2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     AVERAGEIF( R Reference; C Criterion; A Reference )
+///     AVERAGEIF( R: Reference; C: Criterion; A: Reference )
 /// ```
 ///
 /// __Constraints__:
@@ -131,7 +131,7 @@ pub fn averageif_<A: Reference, B: Criterion, C: Reference>(r: A, c: B, a: C) ->
 ///
 /// __Syntax__: 
 /// ```ods
-///     BETADIST( x Number; α Number; β Number )
+///     BETADIST( x: Number; α: Number; β: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -168,7 +168,7 @@ pub fn betadist<A: Number, B: Number, C: Number>(x: A, alpha: B, beta: C) -> FnN
 ///
 /// __Syntax__: 
 /// ```ods
-///     BETADIST( x Number; α Number; β Number; a Number )
+///     BETADIST( x: Number; α: Number; β: Number; a: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -205,7 +205,7 @@ pub fn betadist_<A: Number, B: Number, C: Number, D: Number>(x: A, alpha: B, bet
 ///
 /// __Syntax__: 
 /// ```ods
-///     BETADIST( x Number; α Number; β Number; a Number; b Number )
+///     BETADIST( x: Number; α: Number; β: Number; a: Number; b: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -242,7 +242,7 @@ pub fn betadist__<A: Number, B: Number, C: Number, D: Number, E: Number>(x: A, a
 ///
 /// __Syntax__: 
 /// ```ods
-///     BETADIST( x Number; α Number; β Number; a Number; b Number; Cumulative Logical )
+///     BETADIST( x: Number; α: Number; β: Number; a: Number; b: Number; Cumulative: Logical )
 /// ```
 ///
 /// __Constraints__:
@@ -278,7 +278,7 @@ pub fn betadist___<A: Number, B: Number, C: Number, D: Number, E: Number, F: Log
 ///
 /// __Syntax__: 
 /// ```ods
-///     BETAINV( P Number; α Number; β Number )
+///     BETAINV( P: Number; α: Number; β: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -298,7 +298,7 @@ pub fn betainv<A: Number, B: Number, C: Number>(p: A, alpha: B, beta: C) -> FnNu
 ///
 /// __Syntax__: 
 /// ```ods
-///     BETAINV( P Number; α Number; β Number; A Number )
+///     BETAINV( P: Number; α: Number; β: Number; A: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -318,7 +318,7 @@ pub fn betainv_<A: Number, B: Number, C: Number, D: Number>(p: A, alpha: B, beta
 ///
 /// __Syntax__: 
 /// ```ods
-///     BETAINV( P Number; α Number; β Number; A Number; B Number )
+///     BETAINV( P: Number; α: Number; β: Number; A: Number; B: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -338,7 +338,7 @@ pub fn betainv__<A: Number, B: Number, C: Number, D: Number, E: Number>(p: A, al
 ///
 /// __Syntax__: 
 /// ```ods
-///     BINOM.DIST.RANGE( N Integer; P Number; S Integer )
+///     BINOM.DIST.RANGE( N: Integer; P: Number; S: Integer )
 /// ```
 ///
 /// __Constraints__:
@@ -365,7 +365,7 @@ pub fn binom_dist_range<A: Number, B: Number, C: Number>(n: A, p: B, s: C) -> Fn
 ///
 /// __Syntax__: 
 /// ```ods
-///     BINOM.DIST.RANGE( N Integer; P Number; S Integer; S2 Integer )
+///     BINOM.DIST.RANGE( N: Integer; P: Number; S: Integer; S2: Integer )
 /// ```
 ///
 /// __Constraints__:
@@ -392,7 +392,7 @@ pub fn binom_dist_range_<A: Number, B: Number, C: Number, D: Number>(n: A, p: B,
 ///
 /// __Syntax__: 
 /// ```ods
-///     BINOMDIST( S Integer; N Integer; P Number; Cumulative Logical )
+///     BINOMDIST( S: Integer; N: Integer; P: Number; Cumulative: Logical )
 /// ```
 ///
 /// __Constraints__:
@@ -413,7 +413,7 @@ pub fn binomdist<A: Number, B: Number, C: Number, D: Logical>(s: A, n: B, p: C, 
 ///
 /// __Syntax__: 
 /// ```ods
-///     LEGACY.CHIDIST( X Number; DegreesOfFreedom Number )
+///     LEGACY.CHIDIST( X: Number; DegreesOfFreedom: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -436,7 +436,7 @@ pub fn legacy_chidist<A: Number, B: Number>(x: A, degrees_of_freedom: B) -> FnNu
 ///
 /// __Syntax__: 
 /// ```ods
-///     CHISQDIST( X Number; DegreesOfFreedom Number )
+///     CHISQDIST( X: Number; DegreesOfFreedom: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -464,7 +464,7 @@ pub fn chisqdist<A: Number, B: Number>(x: A, degrees_of_freedom: B) -> FnNumber2
 ///
 /// __Syntax__: 
 /// ```ods
-///     CHISQDIST( X Number; DegreesOfFreedom Number; Cumulative Logical )
+///     CHISQDIST( X: Number; DegreesOfFreedom: Number; Cumulative: Logical )
 /// ```
 ///
 /// __Constraints__:
@@ -491,7 +491,7 @@ pub fn chisqdist_<A: Number, B: Number, C: Logical>(x: A, degrees_of_freedom: B,
 ///
 /// __Syntax__: 
 /// ```ods
-///     LEGACY.CHIINV( P Number; DegreesOfFreedom Number )
+///     LEGACY.CHIINV( P: Number; DegreesOfFreedom: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -511,7 +511,7 @@ pub fn legacy_chiinv<A: Number, B: Number>(p: A, degrees_of_freedom: B) -> FnNum
 ///
 /// __Syntax__: 
 /// ```ods
-///     CHISQINV( P Number; DegreesOfFreedom Number )
+///     CHISQINV( P: Number; DegreesOfFreedom: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -531,7 +531,7 @@ pub fn chisqinv<A: Number, B: Number>(p: A, degrees_of_freedom: B) -> FnNumber2<
 ///
 /// __Syntax__: 
 /// ```ods
-///     LEGACY.CHITEST( A Array; E Array )
+///     LEGACY.CHITEST( A: Array; E: Array )
 /// ```
 ///
 /// __Constraints__:
@@ -564,7 +564,7 @@ pub fn legacy_chitest<A: Array, B: Array>(a: A, e: B) -> FnNumber2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     CONFIDENCE( Alpha Number; Stddev Number; Size Number )
+///     CONFIDENCE( Alpha: Number; Stddev: Number; Size: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -584,7 +584,7 @@ pub fn confidence<A: Number, B: Number, C: Number>(alpha: A, stddev: B, size: C)
 ///
 /// __Syntax__: 
 /// ```ods
-///     CORREL( N1 Array; N2 Array )
+///     CORREL( N1: Array; N2: Array )
 /// ```
 ///
 /// __Constraints__:
@@ -608,7 +608,7 @@ pub fn correl<A: Array, B: Array>(n1: A, n2: B) -> FnNumber2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     COVAR( N1 Array; N2 Array )
+///     COVAR( N1: Array; N2: Array )
 /// ```
 ///
 /// __Constraints__:
@@ -637,7 +637,7 @@ pub fn covar<A: Array, B: Array>(n1: A, n2: B) -> FnNumber2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     CRITBINOM( Trials Number; SP Number; Alpha Number )
+///     CRITBINOM( Trials: Number; SP: Number; Alpha: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -659,7 +659,7 @@ pub fn critbinom<A: Number, B: Number, C: Number>(trials: A, s_p: B, alpha: C) -
 ///
 /// __Syntax__: 
 /// ```ods
-///     DEVSQ({ N NumberSequence}+ )
+///     DEVSQ({ N: NumberSequence}+ )
 /// ```
 ///
 /// __Semantics__:
@@ -676,7 +676,7 @@ pub fn devsq<A: Sequence>(n: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     EXPONDIST( X Number; λ Number )
+///     EXPONDIST( X: Number; λ: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -700,7 +700,7 @@ pub fn expondist<A: Number, B: Number>(x: A, λ: B) -> FnNumber2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     EXPONDIST( X Number; λ Number; Cumulative Logical )
+///     EXPONDIST( X: Number; λ: Number; Cumulative: Logical )
 /// ```
 ///
 /// __Constraints__:
@@ -724,7 +724,7 @@ pub fn expondist_<A: Number, B: Number, C: Logical>(x: A, λ: B, cumulative: C) 
 ///
 /// __Syntax__: 
 /// ```ods
-///     FDIST( X Number; R1 Number; R2 Number )
+///     FDIST( X: Number; R1: Number; R2: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -759,7 +759,7 @@ pub fn fdist<A: Number, B: Number, C: Number>(x: A, r1: B, r2: C) -> FnNumber3<A
 ///
 /// __Syntax__: 
 /// ```ods
-///     FDIST( X Number; R1 Number; R2 Number; Cumulative Logical )
+///     FDIST( X: Number; R1: Number; R2: Number; Cumulative: Logical )
 /// ```
 ///
 /// __Constraints__:
@@ -794,7 +794,7 @@ pub fn fdist_<A: Number, B: Number, C: Number, D: Logical>(x: A, r1: B, r2: C, c
 ///
 /// __Syntax__: 
 /// ```ods
-///     LEGACY.FDIST( X Number; R1 Number; R2 Number )
+///     LEGACY.FDIST( X: Number; R1: Number; R2: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -818,7 +818,7 @@ pub fn legacy_fdist<A: Number, B: Number, C: Number>(x: A, r1: B, r2: C) -> FnNu
 ///
 /// __Syntax__: 
 /// ```ods
-///     FINV( P Number; R1 Number; R2 Number )
+///     FINV( P: Number; R1: Number; R2: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -837,7 +837,7 @@ pub fn finv<A: Number, B: Number, C: Number>(p: A, r1: B, r2: C) -> FnNumber3<A,
 ///
 /// __Syntax__: 
 /// ```ods
-///     LEGACY.FINV( P Number; R1 Number; R2 Number )
+///     LEGACY.FINV( P: Number; R1: Number; R2: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -857,7 +857,7 @@ pub fn legacy_finv<A: Number, B: Number, C: Number>(p: A, r1: B, r2: C) -> FnNum
 ///
 /// __Syntax__: 
 /// ```ods
-///     FISHER( R Number )
+///     FISHER( R: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -881,7 +881,7 @@ pub fn fisher<A: Number>(r: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     FISHERINV( R Number )
+///     FISHERINV( R: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -902,7 +902,7 @@ pub fn fisherinv<A: Number>(r: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     FORECAST( Value Number; Data_Y Array; Data_X Array )
+///     FORECAST( Value: Number; Data_Y: Array; Data_X: Array )
 /// ```
 ///
 /// __Constraints__:
@@ -931,7 +931,7 @@ pub fn forecast<A: Number, B: Array, C: Array>(value: A, data_y: B, data_x: C) -
 ///
 /// __Syntax__: 
 /// ```ods
-///     FREQUENCY( Data NumberSequenceList; Bins NumberSequenceList )
+///     FREQUENCY( Data: NumberSequenceList; Bins: NumberSequenceList )
 /// ```
 ///
 /// __Constraints__:
@@ -965,7 +965,7 @@ pub fn frequency<A: Sequence, B: Sequence>(data: A, bins: B) -> FnArray2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     FTEST( Data_1 NumberSequence; Data_2 NumberSequence )
+///     FTEST( Data_1: NumberSequence; Data_2: NumberSequence )
 /// ```
 ///
 /// __Constraints__:
@@ -1003,7 +1003,7 @@ pub fn ftest<A: Sequence, B: Sequence>(data_1: A, data_2: B) -> FnNumber2<A, B> 
 ///
 /// __Syntax__: 
 /// ```ods
-///     GAMMADIST( X Number; α Number; β Number )
+///     GAMMADIST( X: Number; α: Number; β: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -1029,7 +1029,7 @@ pub fn gammadist<A: Number, B: Number, C: Number>(x: A, alpha: B, beta: C) -> Fn
 ///
 /// __Syntax__: 
 /// ```ods
-///     GAMMADIST( X Number; α Number; β Number; Cumulative Logical )
+///     GAMMADIST( X: Number; α: Number; β: Number; Cumulative: Logical )
 /// ```
 ///
 /// __Constraints__:
@@ -1054,7 +1054,7 @@ pub fn gammadist_<A: Number, B: Number, C: Number, D: Logical>(x: A, alpha: B, b
 ///
 /// __Syntax__: 
 /// ```ods
-///     GAMMAINV( P Number; α Number; β Number )
+///     GAMMAINV( P: Number; α: Number; β: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -1073,7 +1073,7 @@ pub fn gammainv<A: Number, B: Number, C: Number>(p: A, alpha: B, beta: C) -> FnN
 ///
 /// __Syntax__: 
 /// ```ods
-///     GAUSS( X Number )
+///     GAUSS( X: Number )
 /// ```
 ///
 /// __Semantics__:
@@ -1089,7 +1089,7 @@ pub fn gauss<A: Number>(x: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     GEOMEAN({ N NumberSequenceList}+ )
+///     GEOMEAN({ N: NumberSequenceList}+ )
 /// ```
 ///
 /// __Semantics__:
@@ -1107,7 +1107,7 @@ pub fn geomean<A: Sequence>(n: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     GROWTH( KnownY Array )
+///     GROWTH( KnownY: Array )
 /// ```
 ///
 /// __Constraints__:
@@ -1160,7 +1160,7 @@ pub fn growth<A: Array>(known_y: A) -> FnArray1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     GROWTH( KnownY Array; KnownX Array )
+///     GROWTH( KnownY: Array; KnownX: Array )
 /// ```
 ///
 /// __Constraints__:
@@ -1213,7 +1213,7 @@ pub fn growth_<A: Array, B: Array>(known_y: A, known_x: B) -> FnArray2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     GROWTH( KnownY Array; KnownX Array; NewX Array )
+///     GROWTH( KnownY: Array; KnownX: Array; NewX: Array )
 /// ```
 ///
 /// __Constraints__:
@@ -1266,7 +1266,7 @@ pub fn growth__<A: Array, B: Array, C: Array>(known_y: A, known_x: B, new_x: C) 
 ///
 /// __Syntax__: 
 /// ```ods
-///     GROWTH( KnownY Array; KnownX Array; NewX Array; Const Logical )
+///     GROWTH( KnownY: Array; KnownX: Array; NewX: Array; Const: Logical )
 /// ```
 ///
 /// __Constraints__:
@@ -1319,7 +1319,7 @@ pub fn growth___<A: Array, B: Array, C: Array, D: Logical>(known_y: A, known_x: 
 ///
 /// __Syntax__: 
 /// ```ods
-///     HARMEAN({ N NumberSequenceList}+ )
+///     HARMEAN({ N: NumberSequenceList}+ )
 /// ```
 ///
 /// __Semantics__:
@@ -1339,7 +1339,7 @@ pub fn harmean<A: Sequence>(n: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     HYPGEOMDIST( X Integer; T Integer; M Integer; N Integer )
+///     HYPGEOMDIST( X: Integer; T: Integer; M: Integer; N: Integer )
 /// ```
 ///
 /// __Constraints__:
@@ -1374,7 +1374,7 @@ pub fn hypgeomdist<A: Number, B: Number, C: Number, D: Number>(x: A, t: B, m: C,
 ///
 /// __Syntax__: 
 /// ```ods
-///     HYPGEOMDIST( X Integer; T Integer; M Integer; N Integer; Cumulative Logical )
+///     HYPGEOMDIST( X: Integer; T: Integer; M: Integer; N: Integer; Cumulative: Logical )
 /// ```
 ///
 /// __Constraints__:
@@ -1408,7 +1408,7 @@ pub fn hypgeomdist_<A: Number, B: Number, C: Number, D: Number, E: Logical>(x: A
 ///
 /// __Syntax__: 
 /// ```ods
-///     INTERCEPT( Data_Y Array; Data_X Array )
+///     INTERCEPT( Data_Y: Array; Data_X: Array )
 /// ```
 ///
 /// __Constraints__:
@@ -1432,7 +1432,7 @@ pub fn intercept<A: Array, B: Array>(data_y: A, data_x: B) -> FnNumber2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     KURT({ X NumberSequenceList}+ )
+///     KURT({ X: NumberSequenceList}+ )
 /// ```
 ///
 /// __Constraints__:
@@ -1458,7 +1458,7 @@ pub fn kurt<A: Sequence>(x: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     LARGE( List NumberSequenceList; N Number|Array )
+///     LARGE( List: NumberSequenceList; N: Number|Array )
 /// ```
 ///
 /// __Constraints__:
@@ -1479,7 +1479,7 @@ pub fn large<A: Sequence, B: NumberOrArray>(list: A, n: B) -> FnArray2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     LINEST( KnownY Array )
+///     LINEST( KnownY: Array )
 /// ```
 ///
 /// __Constraints__:
@@ -1516,7 +1516,7 @@ pub fn linest<A: Array>(known_y: A) -> FnArray1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     LINEST( KnownY Array; KnownX Array )
+///     LINEST( KnownY: Array; KnownX: Array )
 /// ```
 ///
 /// __Constraints__:
@@ -1553,7 +1553,7 @@ pub fn linest_<A: Array, B: Array>(known_y: A, known_x: B) -> FnArray2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     LINEST( KnownY Array; KnownX Array; Const Logical )
+///     LINEST( KnownY: Array; KnownX: Array; Const: Logical )
 /// ```
 ///
 /// __Constraints__:
@@ -1590,7 +1590,7 @@ pub fn linest__<A: Array, B: Array, C: Logical>(known_y: A, known_x: B, const_: 
 ///
 /// __Syntax__: 
 /// ```ods
-///     LINEST( KnownY Array; KnownX Array; Const Logical; Stats Logical )
+///     LINEST( KnownY: Array; KnownX: Array; Const: Logical; Stats: Logical )
 /// ```
 ///
 /// __Constraints__:
@@ -1628,7 +1628,7 @@ pub fn linest___<A: Array, B: Array, C: Logical, D: Logical>(known_y: A, known_x
 ///
 /// __Syntax__: 
 /// ```ods
-///     LOGEST( KnownY Array )
+///     LOGEST( KnownY: Array )
 /// ```
 ///
 /// __Constraints__:
@@ -1666,7 +1666,7 @@ pub fn logest<A: Array>(known_y: A) -> FnArray1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     LOGEST( KnownY Array; KnownX Array )
+///     LOGEST( KnownY: Array; KnownX: Array )
 /// ```
 ///
 /// __Constraints__:
@@ -1704,7 +1704,7 @@ pub fn logest_<A: Array, B: Array>(known_y: A, known_x: B) -> FnArray2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     LOGEST( KnownY Array; KnownX Array; Const Logical )
+///     LOGEST( KnownY: Array; KnownX: Array; Const: Logical )
 /// ```
 ///
 /// __Constraints__:
@@ -1742,7 +1742,7 @@ pub fn logest__<A: Array, B: Array, C: Logical>(known_y: A, known_x: B, const_: 
 ///
 /// __Syntax__: 
 /// ```ods
-///     LOGEST( KnownY Array; KnownX Array; Const Logical; Stats Logical )
+///     LOGEST( KnownY: Array; KnownX: Array; Const: Logical; Stats: Logical )
 /// ```
 ///
 /// __Constraints__:
@@ -1778,7 +1778,7 @@ pub fn logest___<A: Array, B: Array, C: Logical, D: Logical>(known_y: A, known_x
 ///
 /// __Syntax__: 
 /// ```ods
-///     LOGINV( P Number )
+///     LOGINV( P: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -1798,7 +1798,7 @@ pub fn loginv<A: Number>(p: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     LOGINV( P Number; Mean Number )
+///     LOGINV( P: Number; Mean: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -1818,7 +1818,7 @@ pub fn loginv_<A: Number, B: Number>(p: A, mean: B) -> FnNumber2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     LOGINV( P Number; Mean Number; StandardDeviation Number )
+///     LOGINV( P: Number; Mean: Number; StandardDeviation: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -1840,7 +1840,7 @@ pub fn loginv__<A: Number, B: Number, C: Number>(p: A, mean: B, standard_deviati
 ///
 /// __Syntax__: 
 /// ```ods
-///     LOGNORMDIST( X Number )
+///     LOGNORMDIST( X: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -1863,7 +1863,7 @@ pub fn lognormdist<A: Number>(x: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     LOGNORMDIST( X Number; μ Number )
+///     LOGNORMDIST( X: Number; μ: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -1886,7 +1886,7 @@ pub fn lognormdist_<A: Number, B: Number>(x: A, μ: B) -> FnNumber2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     LOGNORMDIST( X Number; μ Number; σ Number )
+///     LOGNORMDIST( X: Number; μ: Number; σ: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -1909,7 +1909,7 @@ pub fn lognormdist__<A: Number, B: Number, C: Number>(x: A, μ: B, σ: C) -> FnN
 ///
 /// __Syntax__: 
 /// ```ods
-///     LOGNORMDIST( X Number; μ Number; σ Number; Cumulative Logical )
+///     LOGNORMDIST( X: Number; μ: Number; σ: Number; Cumulative: Logical )
 /// ```
 ///
 /// __Constraints__:
@@ -1930,7 +1930,7 @@ pub fn lognormdist___<A: Number, B: Number, C: Number, D: Logical>(x: A, μ: B, 
 ///
 /// __Syntax__: 
 /// ```ods
-///     MAX({ N NumberSequenceList}+ )
+///     MAX({ N: NumberSequenceList}+ )
 /// ```
 ///
 /// __Constraints__:
@@ -1952,7 +1952,7 @@ pub fn max<A: Sequence>(n: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     MAXA({ N Any}+ )
+///     MAXA({ N: Any}+ )
 /// ```
 ///
 /// __Constraints__:
@@ -1974,7 +1974,7 @@ pub fn maxa<A: Sequence>(n: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     MEDIAN({ X NumberSequenceList}+ )
+///     MEDIAN({ X: NumberSequenceList}+ )
 /// ```
 ///
 /// __Semantics__:
@@ -1991,7 +1991,7 @@ pub fn median<A: Sequence>(x: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     MIN({ N NumberSequenceList}+ )
+///     MIN({ N: NumberSequenceList}+ )
 /// ```
 ///
 /// __Constraints__:
@@ -2014,7 +2014,7 @@ pub fn min<A: Sequence>(n: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     MINA({ N Any}+ )
+///     MINA({ N: Any}+ )
 /// ```
 ///
 /// __Constraints__:
@@ -2037,7 +2037,7 @@ pub fn mina<A: Sequence>(n: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     MODE({ N NumberSequence}+ )
+///     MODE({ N: NumberSequence}+ )
 /// ```
 ///
 /// __Semantics__:
@@ -2054,7 +2054,7 @@ pub fn mode<A: Sequence>(n: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     NEGBINOMDIST( X Integer; R Integer; Prob Number )
+///     NEGBINOMDIST( X: Integer; R: Integer; Prob: Number )
 /// ```
 ///
 /// __Arguments__:
@@ -2091,7 +2091,7 @@ pub fn negbinomdist<A: Number, B: Number, C: Number>(x: A, r: B, prob: C) -> FnN
 ///
 /// __Syntax__: 
 /// ```ods
-///     NORMDIST( X Number; Mean Number; StandardDeviation Number )
+///     NORMDIST( X: Number; Mean: Number; StandardDeviation: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -2116,7 +2116,7 @@ pub fn normdist<A: Number, B: Number, C: Number>(x: A, mean: B, standard_deviati
 ///
 /// __Syntax__: 
 /// ```ods
-///     NORMDIST( X Number; Mean Number; StandardDeviation Number; Cumulative Logical )
+///     NORMDIST( X: Number; Mean: Number; StandardDeviation: Number; Cumulative: Logical )
 /// ```
 ///
 /// __Constraints__:
@@ -2139,7 +2139,7 @@ pub fn normdist_<A: Number, B: Number, C: Number, D: Logical>(x: A, mean: B, sta
 ///
 /// __Syntax__: 
 /// ```ods
-///     NORMINV( P Number; Mean Number; StandardDeviation Number )
+///     NORMINV( P: Number; Mean: Number; StandardDeviation: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -2160,7 +2160,7 @@ pub fn norminv<A: Number, B: Number, C: Number>(p: A, mean: B, standard_deviatio
 ///
 /// __Syntax__: 
 /// ```ods
-///     LEGACY.NORMSDIST( X Number )
+///     LEGACY.NORMSDIST( X: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -2181,7 +2181,7 @@ pub fn legacy_normsdist<A: Number>(x: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     LEGACY.NORMSINV( P Number )
+///     LEGACY.NORMSINV( P: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -2200,7 +2200,7 @@ pub fn legacy_normsinv<A: Number>(p: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     PEARSON( IndependentValues Array; DependentValues Array )
+///     PEARSON( IndependentValues: Array; DependentValues: Array )
 /// ```
 ///
 /// __Constraints__:
@@ -2229,7 +2229,7 @@ pub fn pearson<A: Array, B: Array>(independent_values: A, dependent_values: B) -
 ///
 /// __Syntax__: 
 /// ```ods
-///     PERCENTILE( Data NumberSequenceList; X Number )
+///     PERCENTILE( Data: NumberSequenceList; X: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -2262,7 +2262,7 @@ pub fn percentile<A: Sequence, B: Number>(data: A, x: B) -> FnNumber2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     PERCENTRANK( Data NumberSequenceList; X Number )
+///     PERCENTRANK( Data: NumberSequenceList; X: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -2308,7 +2308,7 @@ pub fn percentrank<A: Sequence, B: Number>(data: A, x: B) -> FnNumber2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     PERCENTRANK( Data NumberSequenceList; X Number; Significance Integer )
+///     PERCENTRANK( Data: NumberSequenceList; X: Number; Significance: Integer )
 /// ```
 ///
 /// __Constraints__:
@@ -2354,7 +2354,7 @@ pub fn percentrank_<A: Sequence, B: Number, C: Number>(data: A, x: B, significan
 ///
 /// __Syntax__: 
 /// ```ods
-///     PERMUT( N Integer; K Integer )
+///     PERMUT( N: Integer; K: Integer )
 /// ```
 ///
 /// __Constraints__:
@@ -2372,7 +2372,7 @@ pub fn permut<A: Number, B: Number>(n: A, k: B) -> FnNumber2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     PERMUTATIONA( Total Integer; Chosen Integer )
+///     PERMUTATIONA( Total: Integer; Chosen: Integer )
 /// ```
 ///
 /// __Constraints__:
@@ -2392,7 +2392,7 @@ pub fn permutationa<A: Number, B: Number>(total: A, chosen: B) -> FnNumber2<A, B
 ///
 /// __Syntax__: 
 /// ```ods
-///     PHI( N Number )
+///     PHI( N: Number )
 /// ```
 ///
 /// __Semantics__:
@@ -2409,7 +2409,7 @@ pub fn phi<A: Number>(n: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     POISSON( X Integer; λ Number )
+///     POISSON( X: Integer; λ: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -2429,7 +2429,7 @@ pub fn poisson<A: Number, B: Number>(x: A, λ: B) -> FnNumber2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     POISSON( X Integer; λ Number; Cumulative Logical )
+///     POISSON( X: Integer; λ: Number; Cumulative: Logical )
 /// ```
 ///
 /// __Constraints__:
@@ -2449,7 +2449,7 @@ pub fn poisson_<A: Number, B: Number, C: Logical>(x: A, λ: B, cumulative: C) ->
 ///
 /// __Syntax__: 
 /// ```ods
-///     PROB( Data Array; Probability Array; Start Number )
+///     PROB( Data: Array; Probability: Array; Start: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -2503,7 +2503,7 @@ pub fn prob<A: Array, B: Array, C: Number>(data: A, probability: B, start: C) ->
 ///
 /// __Syntax__: 
 /// ```ods
-///     PROB( Data Array; Probability Array; Start Number; End Number )
+///     PROB( Data: Array; Probability: Array; Start: Number; End: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -2556,7 +2556,7 @@ pub fn prob_<A: Array, B: Array, C: Number, D: Number>(data: A, probability: B, 
 ///
 /// __Syntax__: 
 /// ```ods
-///     QUARTILE( Data NumberSequence; Quart Integer )
+///     QUARTILE( Data: NumberSequence; Quart: Integer )
 /// ```
 ///
 /// __Constraints__:
@@ -2599,7 +2599,7 @@ pub fn quartile<A: Sequence, B: Number>(data: A, quart: B) -> FnNumber2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     RANK( Value Number; Data NumberSequenceList )
+///     RANK( Value: Number; Data: NumberSequenceList )
 /// ```
 ///
 /// __Constraints__:
@@ -2628,7 +2628,7 @@ pub fn rank<A: Number, B: Sequence>(value: A, data: B) -> FnNumber2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     RANK( Value Number; Data NumberSequenceList; Order Number )
+///     RANK( Value: Number; Data: NumberSequenceList; Order: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -2657,7 +2657,7 @@ pub fn rank_<A: Number, B: Sequence, C: Number>(value: A, data: B, order: C) -> 
 ///
 /// __Syntax__: 
 /// ```ods
-///     RSQ( ArrayY Array; ArrayX Array )
+///     RSQ( ArrayY: Array; ArrayX: Array )
 /// ```
 ///
 /// __Constraints__:
@@ -2691,7 +2691,7 @@ pub fn rsq<A: Array, B: Array>(array_y: A, array_x: B) -> FnNumber2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     SKEW({ Sample NumberSequenceList}+ )
+///     SKEW({ Sample: NumberSequenceList}+ )
 /// ```
 ///
 /// __Constraints__:
@@ -2714,7 +2714,7 @@ pub fn skew<A: Sequence>(sample: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     SKEWP({ Population NumberSequence}+ )
+///     SKEWP({ Population: NumberSequence}+ )
 /// ```
 ///
 /// __Constraints__:
@@ -2736,7 +2736,7 @@ pub fn skewp<A: Sequence>(population: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     SLOPE( Y Array; X Array )
+///     SLOPE( Y: Array; X: Array )
 /// ```
 ///
 /// __Constraints__:
@@ -2759,7 +2759,7 @@ pub fn slope<A: Array, B: Array>(y: A, x: B) -> FnNumber2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     SMALL( List NumberSequenceList; N Integer|Array )
+///     SMALL( List: NumberSequenceList; N: Integer|Array )
 /// ```
 ///
 /// __Constraints__:
@@ -2779,7 +2779,7 @@ pub fn small<A: Sequence, B: NumberOrArray>(list: A, n: B) -> FnArray2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     STANDARDIZE( Value Number; Mean Number; Sigma Number )
+///     STANDARDIZE( Value: Number; Mean: Number; Sigma: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -2798,7 +2798,7 @@ pub fn standardize<A: Number, B: Number, C: Number>(value: A, mean: B, sigma: C)
 ///
 /// __Syntax__: 
 /// ```ods
-///     STDEV({ N NumberSequenceList}+ )
+///     STDEV({ N: NumberSequenceList}+ )
 /// ```
 ///
 /// __Constraints__:
@@ -2822,7 +2822,7 @@ pub fn stdev<A: Sequence>(n: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     STDEVA({ Sample Any}+ )
+///     STDEVA({ Sample: Any}+ )
 /// ```
 ///
 /// __Constraints__:
@@ -2853,7 +2853,7 @@ pub fn stdeva<A: Sequence>(sample: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     STDEVP({ N NumberSequence}+ )
+///     STDEVP({ N: NumberSequence}+ )
 /// ```
 ///
 /// __Constraints__:
@@ -2876,7 +2876,7 @@ pub fn stdevp<A: Sequence>(n: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     STDEVPA({ Sample Any}+ )
+///     STDEVPA({ Sample: Any}+ )
 /// ```
 ///
 /// __Constraints__:
@@ -2910,7 +2910,7 @@ pub fn stdevpa<A: Sequence>(sample: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     STEYX( MeasuredY Array; X Array )
+///     STEYX( MeasuredY: Array; X: Array )
 /// ```
 ///
 /// __Constraints__:
@@ -2935,7 +2935,7 @@ pub fn steyx<A: Array, B: Array>(measured_y: A, x: B) -> FnNumber2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     LEGACY.TDIST( X Number; Df Integer; Tails Integer )
+///     LEGACY.TDIST( X: Number; Df: Integer; Tails: Integer )
 /// ```
 ///
 /// __Constraints__:
@@ -2959,7 +2959,7 @@ pub fn legacy_tdist<A: Number, B: Number, C: Number>(x: A, df: B, tails: C) -> F
 ///
 /// __Syntax__: 
 /// ```ods
-///     TINV( Probability Number; DegreeOfFreedom Integer )
+///     TINV( Probability: Number; DegreeOfFreedom: Integer )
 /// ```
 ///
 /// __Constraints__:
@@ -2978,7 +2978,7 @@ pub fn tinv<A: Number, B: Number>(probability: A, degree_of_freedom: B) -> FnNum
 ///
 /// __Syntax__: 
 /// ```ods
-///     TREND( KnownY Array )
+///     TREND( KnownY: Array )
 /// ```
 ///
 /// __Constraints__:
@@ -3029,7 +3029,7 @@ pub fn trend<A: Array>(known_y: A) -> FnArray1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     TREND( KnownY Array; KnownX Array )
+///     TREND( KnownY: Array; KnownX: Array )
 /// ```
 ///
 /// __Constraints__:
@@ -3080,7 +3080,7 @@ pub fn trend_<A: Array, B: Array>(known_y: A, known_x: B) -> FnArray2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     TREND( KnownY Array; KnownX Array; NewX Array )
+///     TREND( KnownY: Array; KnownX: Array; NewX: Array )
 /// ```
 ///
 /// __Constraints__:
@@ -3131,7 +3131,7 @@ pub fn trend__<A: Array, B: Array, C: Array>(known_y: A, known_x: B, new_x: C) -
 ///
 /// __Syntax__: 
 /// ```ods
-///     TREND( KnownY Array; KnownX Array; NewX Array; Const Logical )
+///     TREND( KnownY: Array; KnownX: Array; NewX: Array; Const: Logical )
 /// ```
 ///
 /// __Constraints__:
@@ -3183,7 +3183,7 @@ pub fn trend___<A: Array, B: Array, C: Array, D: Logical>(known_y: A, known_x: B
 ///
 /// __Syntax__: 
 /// ```ods
-///     TRIMMEAN( DataSet NumberSequenceList; CutOffFraction Number )
+///     TRIMMEAN( DataSet: NumberSequenceList; CutOffFraction: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -3209,7 +3209,7 @@ pub fn trimmean<A: Sequence, B: Number>(data_set: A, cut_off_fraction: B) -> FnN
 ///
 /// __Syntax__: 
 /// ```ods
-///     TTEST( X Array; Y Array; Tails Integer; Type Integer )
+///     TTEST( X: Array; Y: Array; Tails: Integer; Type: Integer )
 /// ```
 ///
 /// __Constraints__:
@@ -3270,7 +3270,7 @@ pub fn ttest<A: Array, B: Array, C: Number, D: Number>(x: A, y: B, tails: C, typ
 ///
 /// __Syntax__: 
 /// ```ods
-///     VAR({ N NumberSequence}+ )
+///     VAR({ N: NumberSequence}+ )
 /// ```
 ///
 /// __Constraints__:
@@ -3294,7 +3294,7 @@ pub fn var<A: Sequence>(n: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     VARA({ Sample Any}+ )
+///     VARA({ Sample: Any}+ )
 /// ```
 ///
 /// __Constraints__:
@@ -3327,7 +3327,7 @@ pub fn vara<A: Sequence>(sample: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     VARP({ N NumberSequence}+ )
+///     VARP({ N: NumberSequence}+ )
 /// ```
 ///
 /// __Constraints__:
@@ -3352,7 +3352,7 @@ pub fn varp<A: Sequence>(n: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     VARPA({ Sample Any}+ )
+///     VARPA({ Sample: Any}+ )
 /// ```
 ///
 /// __Constraints__:
@@ -3385,7 +3385,7 @@ pub fn varpa<A: Sequence>(sample: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     WEIBULL( Value Number; Shape Number; Scale Number; Cumulative Logical )
+///     WEIBULL( Value: Number; Shape: Number; Scale: Number; Cumulative: Logical )
 /// ```
 ///
 /// __Constraints__:
@@ -3410,7 +3410,7 @@ pub fn weibull<A: Number, B: Number, C: Number, D: Logical>(value: A, shape: B, 
 ///
 /// __Syntax__: 
 /// ```ods
-///     ZTEST( Sample NumberSequenceList; Mean Number )
+///     ZTEST( Sample: NumberSequenceList; Mean: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -3437,7 +3437,7 @@ pub fn ztest<A: Sequence, B: Number>(sample: A, mean: B) -> FnNumber2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     ZTEST( Sample NumberSequenceList; Mean Number; Sigma Number )
+///     ZTEST( Sample: NumberSequenceList; Mean: Number; Sigma: Number )
 /// ```
 ///
 /// __Constraints__:

@@ -15,7 +15,7 @@ use crate::db::*;
 ///
 /// __Syntax__: 
 /// ```ods
-///     DAVERAGE( D Database; F Field; C Criteria )
+///     DAVERAGE( D: Database; F: Field; C: Criteria )
 /// ```
 ///
 /// __Constraints__:
@@ -36,7 +36,7 @@ pub fn daverage<A: Database, B: Field, C: Criteria>(d: A, f: B, c: C) -> FnNumbe
 ///
 /// __Syntax__: 
 /// ```ods
-///     DCOUNT( D Database[; F Field]; C Criteria )
+///     DCOUNT( D: Database[; F: Field]; C: Criteria )
 /// ```
 ///
 /// __Constraints__:
@@ -58,7 +58,7 @@ pub fn dcount<A: Database, B: Field, C: Criteria>(d: A, f: Option<B>, c: C) -> F
 ///
 /// __Syntax__: 
 /// ```ods
-///     DCOUNTA( D Database[; F Field]; C Criteria )
+///     DCOUNTA( D: Database[; F: Field]; C: Criteria )
 /// ```
 ///
 /// __Constraints__:
@@ -80,7 +80,7 @@ pub fn dcounta<A: Database, B: Field, C: Criteria>(d: A, f: Option<B>, c: C) -> 
 ///
 /// __Syntax__: 
 /// ```ods
-///     DGET( D Database; F Field; C Criteria )
+///     DGET( D: Database; F: Field; C: Criteria )
 /// ```
 ///
 /// __Constraints__:
@@ -102,7 +102,7 @@ pub fn dget<A: Database, B: Field, C: Criteria>(d: A, f: B, c: C) -> FnNumber3<A
 ///
 /// __Syntax__: 
 /// ```ods
-///     DMAX( D Database; F Field; C Criteria )
+///     DMAX( D: Database; F: Field; C: Criteria )
 /// ```
 ///
 /// __Constraints__:
@@ -123,7 +123,7 @@ pub fn dmax<A: Database, B: Field, C: Criteria>(d: A, f: B, c: C) -> FnNumber3<A
 ///
 /// __Syntax__: 
 /// ```ods
-///     DMIN( D Database; F Field; C Criteria )
+///     DMIN( D: Database; F: Field; C: Criteria )
 /// ```
 ///
 /// __Constraints__:
@@ -144,7 +144,7 @@ pub fn dmin<A: Database, B: Field, C: Criteria>(d: A, f: B, c: C) -> FnNumber3<A
 ///
 /// __Syntax__: 
 /// ```ods
-///     DPRODUCT( D Database; F Field; C Criteria )
+///     DPRODUCT( D: Database; F: Field; C: Criteria )
 /// ```
 ///
 /// __Constraints__:
@@ -165,7 +165,7 @@ pub fn dproduct<A: Database, B: Field, C: Criteria>(d: A, f: B, c: C) -> FnNumbe
 ///
 /// __Syntax__: 
 /// ```ods
-///     DSTDEV( D Database; F Field; C Criteria )
+///     DSTDEV( D: Database; F: Field; C: Criteria )
 /// ```
 ///
 /// __Constraints__:
@@ -186,7 +186,7 @@ pub fn dstdev<A: Database, B: Field, C: Criteria>(d: A, f: B, c: C) -> FnNumber3
 ///
 /// __Syntax__: 
 /// ```ods
-///     DSTDEVP( D Database; F Field; C Criteria )
+///     DSTDEVP( D: Database; F: Field; C: Criteria )
 /// ```
 ///
 /// __Constraints__:
@@ -207,7 +207,7 @@ pub fn dstdevp<A: Database, B: Field, C: Criteria>(d: A, f: B, c: C) -> FnNumber
 ///
 /// __Syntax__: 
 /// ```ods
-///     DSUM( D Database; F Field; C Criteria )
+///     DSUM( D: Database; F: Field; C: Criteria )
 /// ```
 ///
 /// __Constraints__:
@@ -228,7 +228,7 @@ pub fn dsum<A: Database, B: Field, C: Criteria>(d: A, f: B, c: C) -> FnNumber3<A
 ///
 /// __Syntax__: 
 /// ```ods
-///     DVAR( D Database; F Field; C Criteria )
+///     DVAR( D: Database; F: Field; C: Criteria )
 /// ```
 ///
 /// __Constraints__:
@@ -249,7 +249,7 @@ pub fn dvar<A: Database, B: Field, C: Criteria>(d: A, f: B, c: C) -> FnNumber3<A
 ///
 /// __Syntax__: 
 /// ```ods
-///     DVARP( D Database; F Field; C Criteria )
+///     DVARP( D: Database; F: Field; C: Criteria )
 /// ```
 ///
 /// __Constraints__:

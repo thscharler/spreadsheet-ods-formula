@@ -22,7 +22,7 @@ use crate::fin::*;
 ///
 /// __Syntax__: 
 /// ```ods
-///     ACCRINT( Issue DateParam; First DateParam; Settlement DateParam; Coupon Number; Par Number; Frequency Integer )
+///     ACCRINT( Issue: DateParam; First: DateParam; Settlement: DateParam; Coupon: Number; Par: Number; Frequency: Integer )
 /// ```
 ///
 /// __Constraints__:
@@ -70,7 +70,7 @@ pub fn accrint<A: DateTime, B: DateTime, C: DateTime, D: Number, E: Number>(issu
 ///
 /// __Syntax__: 
 /// ```ods
-///     ACCRINT( Issue DateParam; First DateParam; Settlement DateParam; Coupon Number; Par Number; Frequency Integer; B Basis )
+///     ACCRINT( Issue: DateParam; First: DateParam; Settlement: DateParam; Coupon: Number; Par: Number; Frequency: Integer; B: Basis )
 /// ```
 ///
 /// __Constraints__:
@@ -118,7 +118,7 @@ pub fn accrint_<A: DateTime, B: DateTime, C: DateTime, D: Number, E: Number>(iss
 ///
 /// __Syntax__: 
 /// ```ods
-///     ACCRINT( Issue DateParam; First DateParam; Settlement DateParam; Coupon Number; Par Number; Frequency Integer; B Basis; CalcMethod Logical )
+///     ACCRINT( Issue: DateParam; First: DateParam; Settlement: DateParam; Coupon: Number; Par: Number; Frequency: Integer; B: Basis; CalcMethod: Logical )
 /// ```
 ///
 /// __Constraints__:
@@ -165,7 +165,7 @@ pub fn accrint__<A: DateTime, B: DateTime, C: DateTime, D: Number, E: Number, F:
 ///
 /// __Syntax__: 
 /// ```ods
-///     ACCRINTM( Issue DateParam; Settlement DateParam; Coupon Number; Par Number )
+///     ACCRINTM( Issue: DateParam; Settlement: DateParam; Coupon: Number; Par: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -195,7 +195,7 @@ pub fn accrintm<A: DateTime, B: DateTime, C: Number, D: Number>(issue: A, settle
 ///
 /// __Syntax__: 
 /// ```ods
-///     ACCRINTM( Issue DateParam; Settlement DateParam; Coupon Number; Par Number; B Basis )
+///     ACCRINTM( Issue: DateParam; Settlement: DateParam; Coupon: Number; Par: Number; B: Basis )
 /// ```
 ///
 /// __Constraints__:
@@ -226,7 +226,7 @@ pub fn accrintm_<A: DateTime, B: DateTime, C: Number, D: Number>(issue: A, settl
 ///
 /// __Syntax__: 
 /// ```ods
-///     AMORLINC( Cost Number; PurchaseDate DateParam; FirstPeriodEndDate DateParam; Salvage Number; Period Integer; Rate Number )
+///     AMORLINC( Cost: Number; PurchaseDate: DateParam; FirstPeriodEndDate: DateParam; Salvage: Number; Period: Integer; Rate: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -278,7 +278,7 @@ pub fn amorlinc<A: Number, B: DateTime, C: DateTime, D: Number, E: Number, F: Nu
 ///
 /// __Syntax__: 
 /// ```ods
-///     AMORLINC( Cost Number; PurchaseDate DateParam; FirstPeriodEndDate DateParam; Salvage Number; Period Integer; Rate Number; B Basis )
+///     AMORLINC( Cost: Number; PurchaseDate: DateParam; FirstPeriodEndDate: DateParam; Salvage: Number; Period: Integer; Rate: Number; B: Basis )
 /// ```
 ///
 /// __Constraints__:
@@ -330,7 +330,7 @@ pub fn amorlinc_<A: Number, B: DateTime, C: DateTime, D: Number, E: Number, F: N
 ///
 /// __Syntax__: 
 /// ```ods
-///     COUPDAYBS( Settlement DateParam; Maturity DateParam; Frequency Integer )
+///     COUPDAYBS( Settlement: DateParam; Maturity: DateParam; Frequency: Integer )
 /// ```
 ///
 /// __Constraints__:
@@ -361,7 +361,7 @@ pub fn coupdaybs<A: DateTime, B: DateTime>(settlement: A, maturity: B, frequency
 ///
 /// __Syntax__: 
 /// ```ods
-///     COUPDAYBS( Settlement DateParam; Maturity DateParam; Frequency Integer; B Basis )
+///     COUPDAYBS( Settlement: DateParam; Maturity: DateParam; Frequency: Integer; B: Basis )
 /// ```
 ///
 /// __Constraints__:
@@ -392,7 +392,7 @@ pub fn coupdaybs_<A: DateTime, B: DateTime>(settlement: A, maturity: B, frequenc
 ///
 /// __Syntax__: 
 /// ```ods
-///     COUPDAYS( Settlement DateParam; Maturity DateParam; Frequency Integer )
+///     COUPDAYS( Settlement: DateParam; Maturity: DateParam; Frequency: Integer )
 /// ```
 ///
 /// __Constraints__:
@@ -423,7 +423,7 @@ pub fn coupdays<A: DateTime, B: DateTime>(settlement: A, maturity: B, frequency:
 ///
 /// __Syntax__: 
 /// ```ods
-///     COUPDAYS( Settlement DateParam; Maturity DateParam; Frequency Integer; B Basis )
+///     COUPDAYS( Settlement: DateParam; Maturity: DateParam; Frequency: Integer; B: Basis )
 /// ```
 ///
 /// __Constraints__:
@@ -454,7 +454,7 @@ pub fn coupdays_<A: DateTime, B: DateTime>(settlement: A, maturity: B, frequency
 ///
 /// __Syntax__: 
 /// ```ods
-///     COUPDAYNC( Settlement DateParam; Maturity DateParam; Frequency Integer )
+///     COUPDAYNC( Settlement: DateParam; Maturity: DateParam; Frequency: Integer )
 /// ```
 ///
 /// __Constraints__:
@@ -485,7 +485,7 @@ pub fn coupdaync<A: DateTime, B: DateTime>(settlement: A, maturity: B, frequency
 ///
 /// __Syntax__: 
 /// ```ods
-///     COUPDAYNC( Settlement DateParam; Maturity DateParam; Frequency Integer; B Basis )
+///     COUPDAYNC( Settlement: DateParam; Maturity: DateParam; Frequency: Integer; B: Basis )
 /// ```
 ///
 /// __Constraints__:
@@ -515,7 +515,7 @@ pub fn coupdaync_<A: DateTime, B: DateTime>(settlement: A, maturity: B, frequenc
 ///
 /// __Syntax__: 
 /// ```ods
-///     COUPNCD( Settlement DateParam; Maturity DateParam; Frequency Integer )
+///     COUPNCD( Settlement: DateParam; Maturity: DateParam; Frequency: Integer )
 /// ```
 ///
 /// __Constraints__:
@@ -541,7 +541,7 @@ pub fn coupncd<A: DateTime, B: DateTime>(settlement: A, maturity: B, frequency: 
 ///
 /// __Syntax__: 
 /// ```ods
-///     COUPNCD( Settlement DateParam; Maturity DateParam; Frequency Integer; B Basis )
+///     COUPNCD( Settlement: DateParam; Maturity: DateParam; Frequency: Integer; B: Basis )
 /// ```
 ///
 /// __Constraints__:
@@ -568,7 +568,7 @@ pub fn coupncd_<A: DateTime, B: DateTime>(settlement: A, maturity: B, frequency:
 ///
 /// __Syntax__: 
 /// ```ods
-///     COUPNUM( Settlement DateParam; Maturity DateParam; Frequency Integer )
+///     COUPNUM( Settlement: DateParam; Maturity: DateParam; Frequency: Integer )
 /// ```
 ///
 /// __Constraints__:
@@ -593,7 +593,7 @@ pub fn coupnum<A: DateTime, B: DateTime>(settlement: A, maturity: B, frequency: 
 ///
 /// __Syntax__: 
 /// ```ods
-///     COUPNUM( Settlement DateParam; Maturity DateParam; Frequency Integer; B Basis )
+///     COUPNUM( Settlement: DateParam; Maturity: DateParam; Frequency: Integer; B: Basis )
 /// ```
 ///
 /// __Constraints__:
@@ -617,7 +617,7 @@ pub fn coupnum_<A: DateTime, B: DateTime>(settlement: A, maturity: B, frequency:
 ///
 /// __Syntax__: 
 /// ```ods
-///     COUPPCD( Settlement DateParam; Maturity DateParam; Frequency Integer )
+///     COUPPCD( Settlement: DateParam; Maturity: DateParam; Frequency: Integer )
 /// ```
 ///
 /// __Constraints__:
@@ -643,7 +643,7 @@ pub fn couppcd<A: DateTime, B: DateTime>(settlement: A, maturity: B, frequency: 
 ///
 /// __Syntax__: 
 /// ```ods
-///     COUPPCD( Settlement DateParam; Maturity DateParam; Frequency Integer; B Basis )
+///     COUPPCD( Settlement: DateParam; Maturity: DateParam; Frequency: Integer; B: Basis )
 /// ```
 ///
 /// __Constraints__:
@@ -669,7 +669,7 @@ pub fn couppcd_<A: DateTime, B: DateTime>(settlement: A, maturity: B, frequency:
 ///
 /// __Syntax__: 
 /// ```ods
-///     CUMIPMT( Rate Number; Periods Number; Value Number; Start Integer; End Integer; Type Integer )
+///     CUMIPMT( Rate: Number; Periods: Number; Value: Number; Start: Integer; End: Integer; Type: Integer )
 /// ```
 ///
 /// __Constraints__:
@@ -704,7 +704,7 @@ pub fn cumipmt<A: Number, B: Number, C: Number, D: Number, E: Number>(rate: A, p
 ///
 /// __Syntax__: 
 /// ```ods
-///     CUMPRINC( Rate Number; Periods Number; Value Number; Start Integer; End Integer; Type Integer )
+///     CUMPRINC( Rate: Number; Periods: Number; Value: Number; Start: Integer; End: Integer; Type: Integer )
 /// ```
 ///
 /// __Constraints__:
@@ -735,7 +735,7 @@ pub fn cumprinc<A: Number, B: Number, C: Number, D: Number, E: Number>(rate: A, 
 ///
 /// __Syntax__: 
 /// ```ods
-///     DB( Cost Number; Salvage Number; LifeTime Integer; Period Number )
+///     DB( Cost: Number; Salvage: Number; LifeTime: Integer; Period: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -790,7 +790,7 @@ pub fn db<A: Number, B: Number, C: Number, D: Number>(cost: A, salvage: B, life_
 ///
 /// __Syntax__: 
 /// ```ods
-///     DB( Cost Number; Salvage Number; LifeTime Integer; Period Number; Month Number )
+///     DB( Cost: Number; Salvage: Number; LifeTime: Integer; Period: Number; Month: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -845,7 +845,7 @@ pub fn db_<A: Number, B: Number, C: Number, D: Number, E: Number>(cost: A, salva
 ///
 /// __Syntax__: 
 /// ```ods
-///     DDB( Cost Number; Salvage Number; LifeTime Number; Period Number )
+///     DDB( Cost: Number; Salvage: Number; LifeTime: Number; Period: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -898,7 +898,7 @@ pub fn ddb<A: Number, B: Number, C: Number, D: Number>(cost: A, salvage: B, life
 ///
 /// __Syntax__: 
 /// ```ods
-///     DDB( Cost Number; Salvage Number; LifeTime Number; Period Number; DeclinationFactor Number )
+///     DDB( Cost: Number; Salvage: Number; LifeTime: Number; Period: Number; DeclinationFactor: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -951,7 +951,7 @@ pub fn ddb_<A: Number, B: Number, C: Number, D: Number, E: Number>(cost: A, salv
 ///
 /// __Syntax__: 
 /// ```ods
-///     DISC( Settlement DateParam; Maturity DateParam; Price Number; Redemption Number )
+///     DISC( Settlement: DateParam; Maturity: DateParam; Price: Number; Redemption: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -980,7 +980,7 @@ pub fn disc<A: DateTime, B: DateTime, C: Number, D: Number>(settlement: A, matur
 ///
 /// __Syntax__: 
 /// ```ods
-///     DISC( Settlement DateParam; Maturity DateParam; Price Number; Redemption Number; B Basis )
+///     DISC( Settlement: DateParam; Maturity: DateParam; Price: Number; Redemption: Number; B: Basis )
 /// ```
 ///
 /// __Constraints__:
@@ -1009,7 +1009,7 @@ pub fn disc_<A: DateTime, B: DateTime, C: Number, D: Number>(settlement: A, matu
 ///
 /// __Syntax__: 
 /// ```ods
-///     DOLLARDE( Fractional Number; Denominator Integer )
+///     DOLLARDE( Fractional: Number; Denominator: Integer )
 /// ```
 ///
 /// __Constraints__:
@@ -1032,7 +1032,7 @@ pub fn dollarde<A: Number, B: Number>(fractional: A, denominator: B) -> FnNumber
 ///
 /// __Syntax__: 
 /// ```ods
-///     DOLLARFR( Decimal Number; Denominator Integer )
+///     DOLLARFR( Decimal: Number; Denominator: Integer )
 /// ```
 ///
 /// __Constraints__:
@@ -1055,7 +1055,7 @@ pub fn dollarfr<A: Number, B: Number>(decimal: A, denominator: B) -> FnNumber2<A
 ///
 /// __Syntax__: 
 /// ```ods
-///     DURATION( Settlement Date; Maturity Date; Coupon Number; Yield Number; Frequency Number )
+///     DURATION( Settlement: Date; Maturity: Date; Coupon: Number; Yield: Number; Frequency: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -1086,7 +1086,7 @@ pub fn duration<A: DateTime, B: DateTime, C: Number, D: Number>(settlement: A, m
 ///
 /// __Syntax__: 
 /// ```ods
-///     DURATION( Settlement Date; Maturity Date; Coupon Number; Yield Number; Frequency Number; B Basis )
+///     DURATION( Settlement: Date; Maturity: Date; Coupon: Number; Yield: Number; Frequency: Number; B: Basis )
 /// ```
 ///
 /// __Constraints__:
@@ -1117,7 +1117,7 @@ pub fn duration_<A: DateTime, B: DateTime, C: Number, D: Number>(settlement: A, 
 ///
 /// __Syntax__: 
 /// ```ods
-///     EFFECT( Rate Number; Payments Integer )
+///     EFFECT( Rate: Number; Payments: Integer )
 /// ```
 ///
 /// __Constraints__:
@@ -1143,7 +1143,7 @@ pub fn effect<A: Number, B: Number>(rate: A, payments: B) -> FnNumber2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     FV( Rate Number; Nper Number; Payment Number )
+///     FV( Rate: Number; Nper: Number; Payment: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -1175,7 +1175,7 @@ pub fn fv<A: Number, B: Number, C: Number>(rate: A, nper: B, payment: C) -> FnNu
 ///
 /// __Syntax__: 
 /// ```ods
-///     FV( Rate Number; Nper Number; Payment Number; Pv Number )
+///     FV( Rate: Number; Nper: Number; Payment: Number; Pv: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -1207,7 +1207,7 @@ pub fn fv_<A: Number, B: Number, C: Number, D: Number>(rate: A, nper: B, payment
 ///
 /// __Syntax__: 
 /// ```ods
-///     FV( Rate Number; Nper Number; Payment Number; Pv Number; PayType Number )
+///     FV( Rate: Number; Nper: Number; Payment: Number; Pv: Number; PayType: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -1240,7 +1240,7 @@ pub fn fv__<A: Number, B: Number, C: Number, D: Number, E: Number>(rate: A, nper
 ///
 /// __Syntax__: 
 /// ```ods
-///     FVSCHEDULE( Principal Number; Schedule NumberSequence )
+///     FVSCHEDULE( Principal: Number; Schedule: NumberSequence )
 /// ```
 ///
 /// __Constraints__:
@@ -1260,7 +1260,7 @@ pub fn fvschedule<A: Number, B: Sequence>(principal: A, schedule: B) -> FnNumber
 ///
 /// __Syntax__: 
 /// ```ods
-///     INTRATE( Settlement Date; Maturity Date; Investment Number; Redemption Number )
+///     INTRATE( Settlement: Date; Maturity: Date; Investment: Number; Redemption: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -1294,7 +1294,7 @@ pub fn intrate<A: DateTime, B: DateTime, C: Number, D: Number>(settlement: A, ma
 ///
 /// __Syntax__: 
 /// ```ods
-///     INTRATE( Settlement Date; Maturity Date; Investment Number; Redemption Number; Basis Basis )
+///     INTRATE( Settlement: Date; Maturity: Date; Investment: Number; Redemption: Number; Basis: Basis )
 /// ```
 ///
 /// __Constraints__:
@@ -1328,7 +1328,7 @@ pub fn intrate_<A: DateTime, B: DateTime, C: Number, D: Number>(settlement: A, m
 ///
 /// __Syntax__: 
 /// ```ods
-///     IPMT( Rate Number; Period Number; Nper Number; PV Number )
+///     IPMT( Rate: Number; Period: Number; Nper: Number; PV: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -1365,7 +1365,7 @@ pub fn ipmt<A: Number, B: Number, C: Number, D: Number>(rate: A, period: B, nper
 ///
 /// __Syntax__: 
 /// ```ods
-///     IPMT( Rate Number; Period Number; Nper Number; PV Number; FV Number )
+///     IPMT( Rate: Number; Period: Number; Nper: Number; PV: Number; FV: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -1402,7 +1402,7 @@ pub fn ipmt_<A: Number, B: Number, C: Number, D: Number, E: Number>(rate: A, per
 ///
 /// __Syntax__: 
 /// ```ods
-///     IPMT( Rate Number; Period Number; Nper Number; PV Number; FV Number; Type Number )
+///     IPMT( Rate: Number; Period: Number; Nper: Number; PV: Number; FV: Number; Type: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -1439,7 +1439,7 @@ pub fn ipmt__<A: Number, B: Number, C: Number, D: Number, E: Number, F: Number>(
 ///
 /// __Syntax__: 
 /// ```ods
-///     IRR( Values NumberSequence )
+///     IRR( Values: NumberSequence )
 /// ```
 ///
 /// __Constraints__:
@@ -1469,7 +1469,7 @@ pub fn irr<A: Sequence>(values: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     IRR( Values NumberSequence; Guess Number )
+///     IRR( Values: NumberSequence; Guess: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -1499,7 +1499,7 @@ pub fn irr_<A: Sequence, B: Number>(values: A, guess: B) -> FnNumber2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     ISPMT( Rate Number; Period Number; Nper Number; Pv Number )
+///     ISPMT( Rate: Number; Period: Number; Nper: Number; Pv: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -1528,7 +1528,7 @@ pub fn ispmt<A: Number, B: Number, C: Number, D: Number>(rate: A, period: B, npe
 ///
 /// __Syntax__: 
 /// ```ods
-///     MDURATION( Settlement Date; Maturity Date; Coupon Number; Yield Number; Frequency Number )
+///     MDURATION( Settlement: Date; Maturity: Date; Coupon: Number; Yield: Number; Frequency: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -1562,7 +1562,7 @@ pub fn mduration<A: DateTime, B: DateTime, C: Number, D: Number>(settlement: A, 
 ///
 /// __Syntax__: 
 /// ```ods
-///     MDURATION( Settlement Date; Maturity Date; Coupon Number; Yield Number; Frequency Number; B Basis )
+///     MDURATION( Settlement: Date; Maturity: Date; Coupon: Number; Yield: Number; Frequency: Number; B: Basis )
 /// ```
 ///
 /// __Constraints__:
@@ -1596,7 +1596,7 @@ pub fn mduration_<A: DateTime, B: DateTime, C: Number, D: Number>(settlement: A,
 ///
 /// __Syntax__: 
 /// ```ods
-///     MIRR( Values Array; Investment Number; ReinvestRate Number )
+///     MIRR( Values: Array; Investment: Number; ReinvestRate: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -1623,7 +1623,7 @@ pub fn mirr<A: Array, B: Number, C: Number>(values: A, investment: B, reinvest_r
 ///
 /// __Syntax__: 
 /// ```ods
-///     NOMINAL( EffectiveRate Number; CompoundingPeriods Integer )
+///     NOMINAL( EffectiveRate: Number; CompoundingPeriods: Integer )
 /// ```
 ///
 /// __Constraints__:
@@ -1652,7 +1652,7 @@ pub fn nominal<A: Number, B: Number>(effective_rate: A, compounding_periods: B) 
 ///
 /// __Syntax__: 
 /// ```ods
-///     NPER( Rate Number; Payment Number; Pv Number )
+///     NPER( Rate: Number; Payment: Number; Pv: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -1695,7 +1695,7 @@ pub fn nper<A: Number, B: Number, C: Number>(rate: A, payment: B, pv: C) -> FnNu
 ///
 /// __Syntax__: 
 /// ```ods
-///     NPER( Rate Number; Payment Number; Pv Number; Fv Number )
+///     NPER( Rate: Number; Payment: Number; Pv: Number; Fv: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -1738,7 +1738,7 @@ pub fn nper_<A: Number, B: Number, C: Number, D: Number>(rate: A, payment: B, pv
 ///
 /// __Syntax__: 
 /// ```ods
-///     NPER( Rate Number; Payment Number; Pv Number; Fv Number; PayType Number )
+///     NPER( Rate: Number; Payment: Number; Pv: Number; Fv: Number; PayType: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -1781,7 +1781,7 @@ pub fn nper__<A: Number, B: Number, C: Number, D: Number>(rate: A, payment: B, p
 ///
 /// __Syntax__: 
 /// ```ods
-///     NPV( Rate Number{; Values NumberSequenceList}+ )
+///     NPV( Rate: Number{; Values: NumberSequenceList}+ )
 /// ```
 ///
 /// __Constraints__:
@@ -1808,7 +1808,7 @@ pub fn npv<A: Number, B: Sequence>(rate: A, values: B) -> FnNumber2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     ODDFPRICE( Settlement DateParam; Maturity DateParam; Issue DateParam; First DateParam; Rate Number; Yield Number; Redemption Number; Frequency Number )
+///     ODDFPRICE( Settlement: DateParam; Maturity: DateParam; Issue: DateParam; First: DateParam; Rate: Number; Yield: Number; Redemption: Number; Frequency: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -1847,7 +1847,7 @@ pub fn oddfprice<A: DateTime, B: DateTime, C: DateTime, D: DateTime, E: Number, 
 ///
 /// __Syntax__: 
 /// ```ods
-///     ODDFPRICE( Settlement DateParam; Maturity DateParam; Issue DateParam; First DateParam; Rate Number; Yield Number; Redemption Number; Frequency Number; B Basis )
+///     ODDFPRICE( Settlement: DateParam; Maturity: DateParam; Issue: DateParam; First: DateParam; Rate: Number; Yield: Number; Redemption: Number; Frequency: Number; B: Basis )
 /// ```
 ///
 /// __Constraints__:
@@ -1886,7 +1886,7 @@ pub fn oddfprice_<A: DateTime, B: DateTime, C: DateTime, D: DateTime, E: Number,
 ///
 /// __Syntax__: 
 /// ```ods
-///     ODDFYIELD( Settlement DateParam; Maturity DateParam; Issue DateParam; First DateParam; Rate Number; Price Number; Redemption Number; Frequency Number )
+///     ODDFYIELD( Settlement: DateParam; Maturity: DateParam; Issue: DateParam; First: DateParam; Rate: Number; Price: Number; Redemption: Number; Frequency: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -1926,7 +1926,7 @@ pub fn oddfyield<A: DateTime, B: DateTime, C: DateTime, D: DateTime, E: Number, 
 ///
 /// __Syntax__: 
 /// ```ods
-///     ODDFYIELD( Settlement DateParam; Maturity DateParam; Issue DateParam; First DateParam; Rate Number; Price Number; Redemption Number; Frequency Number; B Basis )
+///     ODDFYIELD( Settlement: DateParam; Maturity: DateParam; Issue: DateParam; First: DateParam; Rate: Number; Price: Number; Redemption: Number; Frequency: Number; B: Basis )
 /// ```
 ///
 /// __Constraints__:
@@ -1966,7 +1966,7 @@ pub fn oddfyield_<A: DateTime, B: DateTime, C: DateTime, D: DateTime, E: Number,
 ///
 /// __Syntax__: 
 /// ```ods
-///     ODDLPRICE( Settlement DateParam; Maturity DateParam; Last DateParam; Rate Number; AnnualYield Number; Redemption Number; Frequency Number )
+///     ODDLPRICE( Settlement: DateParam; Maturity: DateParam; Last: DateParam; Rate: Number; AnnualYield: Number; Redemption: Number; Frequency: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -2005,7 +2005,7 @@ pub fn oddlprice<A: DateTime, B: DateTime, C: DateTime, D: Number, E: Number, F:
 ///
 /// __Syntax__: 
 /// ```ods
-///     ODDLPRICE( Settlement DateParam; Maturity DateParam; Last DateParam; Rate Number; AnnualYield Number; Redemption Number; Frequency Number; B Basis )
+///     ODDLPRICE( Settlement: DateParam; Maturity: DateParam; Last: DateParam; Rate: Number; AnnualYield: Number; Redemption: Number; Frequency: Number; B: Basis )
 /// ```
 ///
 /// __Constraints__:
@@ -2043,7 +2043,7 @@ pub fn oddlprice_<A: DateTime, B: DateTime, C: DateTime, D: Number, E: Number, F
 ///
 /// __Syntax__: 
 /// ```ods
-///     ODDLYIELD( Settlement DateParam; Maturity DateParam; Last DateParam; Rate Number; Price Number; Redemption Number; Frequency Number )
+///     ODDLYIELD( Settlement: DateParam; Maturity: DateParam; Last: DateParam; Rate: Number; Price: Number; Redemption: Number; Frequency: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -2079,7 +2079,7 @@ pub fn oddlyield<A: DateTime, B: DateTime, C: DateTime, D: Number, E: Number, F:
 ///
 /// __Syntax__: 
 /// ```ods
-///     ODDLYIELD( Settlement DateParam; Maturity DateParam; Last DateParam; Rate Number; Price Number; Redemption Number; Frequency Number; B Basis )
+///     ODDLYIELD( Settlement: DateParam; Maturity: DateParam; Last: DateParam; Rate: Number; Price: Number; Redemption: Number; Frequency: Number; B: Basis )
 /// ```
 ///
 /// __Constraints__:
@@ -2116,7 +2116,7 @@ pub fn oddlyield_<A: DateTime, B: DateTime, C: DateTime, D: Number, E: Number, F
 ///
 /// __Syntax__: 
 /// ```ods
-///     PDURATION( Rate Number; CurrentValue Number; SpecifiedValue Number )
+///     PDURATION( Rate: Number; CurrentValue: Number; SpecifiedValue: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -2143,7 +2143,7 @@ pub fn pduration<A: Number, B: Number, C: Number>(rate: A, current_value: B, spe
 ///
 /// __Syntax__: 
 /// ```ods
-///     PMT( Rate Number; Nper Integer; Pv Number )
+///     PMT( Rate: Number; Nper: Integer; Pv: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -2180,7 +2180,7 @@ pub fn pmt<A: Number, B: Number, C: Number>(rate: A, nper: B, pv: C) -> FnNumber
 ///
 /// __Syntax__: 
 /// ```ods
-///     PMT( Rate Number; Nper Integer; Pv Number; Fv Number )
+///     PMT( Rate: Number; Nper: Integer; Pv: Number; Fv: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -2217,7 +2217,7 @@ pub fn pmt_<A: Number, B: Number, C: Number, D: Number>(rate: A, nper: B, pv: C,
 ///
 /// __Syntax__: 
 /// ```ods
-///     PMT( Rate Number; Nper Integer; Pv Number; Fv Number; PayType Number )
+///     PMT( Rate: Number; Nper: Integer; Pv: Number; Fv: Number; PayType: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -2255,7 +2255,7 @@ pub fn pmt__<A: Number, B: Number, C: Number, D: Number, E: Number>(rate: A, npe
 ///
 /// __Syntax__: 
 /// ```ods
-///     PPMT( Rate Number; Period Integer; Nper Integer; Present Number )
+///     PPMT( Rate: Number; Period: Integer; Nper: Integer; Present: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -2289,7 +2289,7 @@ pub fn ppmt<A: Number, B: Number, C: Number, D: Number>(rate: A, period: B, nper
 ///
 /// __Syntax__: 
 /// ```ods
-///     PPMT( Rate Number; Period Integer; Nper Integer; Present Number; Future Number )
+///     PPMT( Rate: Number; Period: Integer; Nper: Integer; Present: Number; Future: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -2323,7 +2323,7 @@ pub fn ppmt_<A: Number, B: Number, C: Number, D: Number, E: Number>(rate: A, per
 ///
 /// __Syntax__: 
 /// ```ods
-///     PPMT( Rate Number; Period Integer; Nper Integer; Present Number; Future Number; Type Number )
+///     PPMT( Rate: Number; Period: Integer; Nper: Integer; Present: Number; Future: Number; Type: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -2357,7 +2357,7 @@ pub fn ppmt__<A: Number, B: Number, C: Number, D: Number, E: Number, F: Number>(
 ///
 /// __Syntax__: 
 /// ```ods
-///     PRICE( Settlement DateParam; Maturity DateParam; Rate Number; AnnualYield Number; Redemption Number; Frequency Number )
+///     PRICE( Settlement: DateParam; Maturity: DateParam; Rate: Number; AnnualYield: Number; Redemption: Number; Frequency: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -2401,7 +2401,7 @@ pub fn price<A: DateTime, B: DateTime, C: Number, D: Number, E: Number>(settleme
 ///
 /// __Syntax__: 
 /// ```ods
-///     PRICE( Settlement DateParam; Maturity DateParam; Rate Number; AnnualYield Number; Redemption Number; Frequency Number; Bas Basis )
+///     PRICE( Settlement: DateParam; Maturity: DateParam; Rate: Number; AnnualYield: Number; Redemption: Number; Frequency: Number; Bas: Basis )
 /// ```
 ///
 /// __Constraints__:
@@ -2445,7 +2445,7 @@ pub fn price_<A: DateTime, B: DateTime, C: Number, D: Number, E: Number>(settlem
 ///
 /// __Syntax__: 
 /// ```ods
-///     PRICEDISC( Settlement DateParam; Maturity DateParam; Discount Number; Redemption Number )
+///     PRICEDISC( Settlement: DateParam; Maturity: DateParam; Discount: Number; Redemption: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -2475,7 +2475,7 @@ pub fn pricedisc<A: DateTime, B: DateTime, C: Number, D: Number>(settlement: A, 
 ///
 /// __Syntax__: 
 /// ```ods
-///     PRICEDISC( Settlement DateParam; Maturity DateParam; Discount Number; Redemption Number; B Basis )
+///     PRICEDISC( Settlement: DateParam; Maturity: DateParam; Discount: Number; Redemption: Number; B: Basis )
 /// ```
 ///
 /// __Constraints__:
@@ -2505,7 +2505,7 @@ pub fn pricedisc_<A: DateTime, B: DateTime, C: Number, D: Number>(settlement: A,
 ///
 /// __Syntax__: 
 /// ```ods
-///     PRICEMAT( Settlement DateParam; Maturity DateParam; Issue DateParam; Rate Number; AnnualYield Number )
+///     PRICEMAT( Settlement: DateParam; Maturity: DateParam; Issue: DateParam; Rate: Number; AnnualYield: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -2539,7 +2539,7 @@ pub fn pricemat<A: DateTime, B: DateTime, C: DateTime, D: Number, E: Number>(set
 ///
 /// __Syntax__: 
 /// ```ods
-///     PRICEMAT( Settlement DateParam; Maturity DateParam; Issue DateParam; Rate Number; AnnualYield Number; B Basis )
+///     PRICEMAT( Settlement: DateParam; Maturity: DateParam; Issue: DateParam; Rate: Number; AnnualYield: Number; B: Basis )
 /// ```
 ///
 /// __Constraints__:
@@ -2572,7 +2572,7 @@ pub fn pricemat_<A: DateTime, B: DateTime, C: DateTime, D: Number, E: Number>(se
 ///
 /// __Syntax__: 
 /// ```ods
-///     PV( Rate Number; Nper Number; Payment Number )
+///     PV( Rate: Number; Nper: Number; Payment: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -2606,7 +2606,7 @@ pub fn pv<A: Number, B: Number, C: Number>(rate: A, nper: B, payment: C) -> FnNu
 ///
 /// __Syntax__: 
 /// ```ods
-///     PV( Rate Number; Nper Number; Payment Number; Fv Number )
+///     PV( Rate: Number; Nper: Number; Payment: Number; Fv: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -2640,7 +2640,7 @@ pub fn pv_<A: Number, B: Number, C: Number, D: Number>(rate: A, nper: B, payment
 ///
 /// __Syntax__: 
 /// ```ods
-///     PV( Rate Number; Nper Number; Payment Number; Fv Number; PayType Number )
+///     PV( Rate: Number; Nper: Number; Payment: Number; Fv: Number; PayType: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -2674,7 +2674,7 @@ pub fn pv__<A: Number, B: Number, C: Number, D: Number, E: Number>(rate: A, nper
 ///
 /// __Syntax__: 
 /// ```ods
-///     RATE( Nper Number; Payment Number; Pv Number )
+///     RATE( Nper: Number; Payment: Number; Pv: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -2709,7 +2709,7 @@ pub fn rate<A: Number, B: Number, C: Number>(nper: A, payment: B, pv: C) -> FnNu
 ///
 /// __Syntax__: 
 /// ```ods
-///     RATE( Nper Number; Payment Number; Pv Number; Fv Number )
+///     RATE( Nper: Number; Payment: Number; Pv: Number; Fv: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -2744,7 +2744,7 @@ pub fn rate_<A: Number, B: Number, C: Number, D: Number>(nper: A, payment: B, pv
 ///
 /// __Syntax__: 
 /// ```ods
-///     RATE( Nper Number; Payment Number; Pv Number; Fv Number; PayType Number )
+///     RATE( Nper: Number; Payment: Number; Pv: Number; Fv: Number; PayType: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -2779,7 +2779,7 @@ pub fn rate__<A: Number, B: Number, C: Number, D: Number, E: Number>(nper: A, pa
 ///
 /// __Syntax__: 
 /// ```ods
-///     RATE( Nper Number; Payment Number; Pv Number; Fv Number; PayType Number; Guess Number )
+///     RATE( Nper: Number; Payment: Number; Pv: Number; Fv: Number; PayType: Number; Guess: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -2814,7 +2814,7 @@ pub fn rate___<A: Number, B: Number, C: Number, D: Number, E: Number, F: Number>
 ///
 /// __Syntax__: 
 /// ```ods
-///     RECEIVED( Settlement DateParam; Maturity DateParam; Investment Number; Discount Number )
+///     RECEIVED( Settlement: DateParam; Maturity: DateParam; Investment: Number; Discount: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -2845,7 +2845,7 @@ pub fn received<A: DateTime, B: DateTime, C: Number, D: Number>(settlement: A, m
 ///
 /// __Syntax__: 
 /// ```ods
-///     RECEIVED( Settlement DateParam; Maturity DateParam; Investment Number; Discount Number; B Basis )
+///     RECEIVED( Settlement: DateParam; Maturity: DateParam; Investment: Number; Discount: Number; B: Basis )
 /// ```
 ///
 /// __Constraints__:
@@ -2876,7 +2876,7 @@ pub fn received_<A: DateTime, B: DateTime, C: Number, D: Number>(settlement: A, 
 ///
 /// __Syntax__: 
 /// ```ods
-///     RRI( Nper Number; Pv Number; Fv Number )
+///     RRI( Nper: Number; Pv: Number; Fv: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -2897,7 +2897,7 @@ pub fn rri<A: Number, B: Number, C: Number>(nper: A, pv: B, fv: C) -> FnNumber3<
 ///
 /// __Syntax__: 
 /// ```ods
-///     SLN( Cost Number; Salvage Number; LifeTime Number )
+///     SLN( Cost: Number; Salvage: Number; LifeTime: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -2925,7 +2925,7 @@ pub fn sln<A: Number, B: Number, C: Number>(cost: A, salvage: B, life_time: C) -
 ///
 /// __Syntax__: 
 /// ```ods
-///     SYD( Cost Number; Salvage Number; LifeTime Number; Period Number )
+///     SYD( Cost: Number; Salvage: Number; LifeTime: Number; Period: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -2956,7 +2956,7 @@ pub fn syd<A: Number, B: Number, C: Number, D: Number>(cost: A, salvage: B, life
 ///
 /// __Syntax__: 
 /// ```ods
-///     TBILLEQ( Settlement DateParam; Maturity DateParam; Discount Number )
+///     TBILLEQ( Settlement: DateParam; Maturity: DateParam; Discount: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -2987,7 +2987,7 @@ pub fn tbilleq<A: DateTime, B: DateTime, C: Number>(settlement: A, maturity: B, 
 ///
 /// __Syntax__: 
 /// ```ods
-///     TBILLPRICE( Settlement DateParam; Maturity DateParam; Discount Number )
+///     TBILLPRICE( Settlement: DateParam; Maturity: DateParam; Discount: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -3013,7 +3013,7 @@ pub fn tbillprice<A: DateTime, B: DateTime, C: Number>(settlement: A, maturity: 
 ///
 /// __Syntax__: 
 /// ```ods
-///     TBILLYIELD( Settlement DateParam; Maturity DateParam; Price Number )
+///     TBILLYIELD( Settlement: DateParam; Maturity: DateParam; Price: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -3041,7 +3041,7 @@ pub fn tbillyield<A: DateTime, B: DateTime, C: Number>(settlement: A, maturity: 
 ///
 /// __Syntax__: 
 /// ```ods
-///     VDB( Cost Number; Salvage Number; LifeTime Number; StartPeriod Number; EndPeriod Number )
+///     VDB( Cost: Number; Salvage: Number; LifeTime: Number; StartPeriod: Number; EndPeriod: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -3108,7 +3108,7 @@ pub fn vdb<A: Number, B: Number, C: Number, D: Number, E: Number>(cost: A, salva
 ///
 /// __Syntax__: 
 /// ```ods
-///     VDB( Cost Number; Salvage Number; LifeTime Number; StartPeriod Number; EndPeriod Number; DepreciationFactor Number )
+///     VDB( Cost: Number; Salvage: Number; LifeTime: Number; StartPeriod: Number; EndPeriod: Number; DepreciationFactor: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -3175,7 +3175,7 @@ pub fn vdb_<A: Number, B: Number, C: Number, D: Number, E: Number, F: Number>(co
 ///
 /// __Syntax__: 
 /// ```ods
-///     VDB( Cost Number; Salvage Number; LifeTime Number; StartPeriod Number; EndPeriod Number; DepreciationFactor Number; NoSwitch Logical )
+///     VDB( Cost: Number; Salvage: Number; LifeTime: Number; StartPeriod: Number; EndPeriod: Number; DepreciationFactor: Number; NoSwitch: Logical )
 /// ```
 ///
 /// __Constraints__:
@@ -3241,7 +3241,7 @@ pub fn vdb__<A: Number, B: Number, C: Number, D: Number, E: Number, F: Number, G
 ///
 /// __Syntax__: 
 /// ```ods
-///     XIRR( Values NumberSequence; Dates DateSequence )
+///     XIRR( Values: NumberSequence; Dates: DateSequence )
 /// ```
 ///
 /// __Constraints__:
@@ -3281,7 +3281,7 @@ pub fn xirr<A: Sequence, B: Sequence>(values: A, dates: B) -> FnNumber2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     XIRR( Values NumberSequence; Dates DateSequence; Guess Number )
+///     XIRR( Values: NumberSequence; Dates: DateSequence; Guess: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -3320,7 +3320,7 @@ pub fn xirr_<A: Sequence, B: Sequence, C: Number>(values: A, dates: B, guess: C)
 ///
 /// __Syntax__: 
 /// ```ods
-///     XNPV( Rate Number; Values Reference|Array; Dates Reference|Array )
+///     XNPV( Rate: Number; Values: Reference|Array; Dates: Reference|Array )
 /// ```
 ///
 /// __Constraints__:
@@ -3362,7 +3362,7 @@ pub fn xnpv<A: Number, B: ReferenceOrArray, C: ReferenceOrArray>(rate: A, values
 ///
 /// __Syntax__: 
 /// ```ods
-///     YIELD( Settlement DateParam; Maturity DateParam; Rate Number; Price Number; Redemption Number; Frequency Number )
+///     YIELD( Settlement: DateParam; Maturity: DateParam; Rate: Number; Price: Number; Redemption: Number; Frequency: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -3397,7 +3397,7 @@ pub fn yield_<A: DateTime, B: DateTime, C: Number, D: Number, E: Number>(settlem
 ///
 /// __Syntax__: 
 /// ```ods
-///     YIELD( Settlement DateParam; Maturity DateParam; Rate Number; Price Number; Redemption Number; Frequency Number; B Basis )
+///     YIELD( Settlement: DateParam; Maturity: DateParam; Rate: Number; Price: Number; Redemption: Number; Frequency: Number; B: Basis )
 /// ```
 ///
 /// __Constraints__:
@@ -3433,7 +3433,7 @@ pub fn yield__<A: DateTime, B: DateTime, C: Number, D: Number, E: Number>(settle
 ///
 /// __Syntax__: 
 /// ```ods
-///     YIELDDISC( Settlement DateParam; Maturity DateParam; Price Number; Redemption Number )
+///     YIELDDISC( Settlement: DateParam; Maturity: DateParam; Price: Number; Redemption: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -3465,7 +3465,7 @@ pub fn yielddisc<A: DateTime, B: DateTime, C: Number, D: Number>(settlement: A, 
 ///
 /// __Syntax__: 
 /// ```ods
-///     YIELDDISC( Settlement DateParam; Maturity DateParam; Price Number; Redemption Number; B Basis )
+///     YIELDDISC( Settlement: DateParam; Maturity: DateParam; Price: Number; Redemption: Number; B: Basis )
 /// ```
 ///
 /// __Constraints__:
@@ -3497,7 +3497,7 @@ pub fn yielddisc_<A: DateTime, B: DateTime, C: Number, D: Number>(settlement: A,
 ///
 /// __Syntax__: 
 /// ```ods
-///     YIELDMAT( Settlement DateParam; Maturity DateParam; Issue DateParam; Rate Number; Price Number )
+///     YIELDMAT( Settlement: DateParam; Maturity: DateParam; Issue: DateParam; Rate: Number; Price: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -3529,7 +3529,7 @@ pub fn yieldmat<A: DateTime, B: DateTime, C: DateTime, D: Number, E: Number>(set
 ///
 /// __Syntax__: 
 /// ```ods
-///     YIELDMAT( Settlement DateParam; Maturity DateParam; Issue DateParam; Rate Number; Price Number; B Basis )
+///     YIELDMAT( Settlement: DateParam; Maturity: DateParam; Issue: DateParam; Rate: Number; Price: Number; B: Basis )
 /// ```
 ///
 /// __Constraints__:

@@ -11,7 +11,7 @@ use crate::lookup::*;
 ///
 /// __Syntax__: 
 /// ```ods
-///     ADDRESS( Row Integer; Column Integer )
+///     ADDRESS( Row: Integer; Column: Integer )
 /// ```
 ///
 /// __Constraints__:
@@ -40,7 +40,7 @@ pub fn address<A: Number, B: Number>(row: A, column: B) -> FnText2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     ADDRESS( Row Integer; Column Integer; Abs Integer )
+///     ADDRESS( Row: Integer; Column: Integer; Abs: Integer )
 /// ```
 ///
 /// __Constraints__:
@@ -69,7 +69,7 @@ pub fn address_<A: Number, B: Number>(row: A, column: B, abs: AddressAbs) -> FnT
 ///
 /// __Syntax__: 
 /// ```ods
-///     ADDRESS( Row Integer; Column Integer; Abs Integer; A1Style Logical )
+///     ADDRESS( Row: Integer; Column: Integer; Abs: Integer; A1Style: Logical )
 /// ```
 ///
 /// __Constraints__:
@@ -98,7 +98,7 @@ pub fn address__<A: Number, B: Number, C: Logical>(row: A, column: B, abs: Addre
 ///
 /// __Syntax__: 
 /// ```ods
-///     ADDRESS( Row Integer; Column Integer; Abs Integer; A1Style Logical; Sheet Text )
+///     ADDRESS( Row: Integer; Column: Integer; Abs: Integer; A1Style: Logical; Sheet: Text )
 /// ```
 ///
 /// __Constraints__:
@@ -127,7 +127,7 @@ pub fn address___<A: Number, B: Number, C: Logical, D: Text>(row: A, column: B, 
 ///
 /// __Syntax__: 
 /// ```ods
-///     CHOOSE( Index Integer{; Value Any}+ )
+///     CHOOSE( Index: Integer{; Value: Any}+ )
 /// ```
 ///
 /// __Constraints__:
@@ -152,7 +152,7 @@ pub fn choose<A: Number, B: Sequence>(index: A, value: B) -> FnAny2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     HLOOKUP( Lookup Any; DataSource Reference|Array; Row Integer )
+///     HLOOKUP( Lookup: Any; DataSource: Reference|Array; Row: Integer )
 /// ```
 ///
 /// __Constraints__:
@@ -199,7 +199,7 @@ pub fn hlookup<A: Any, B: ReferenceOrArray, C: Number>(lookup: A, data_source: B
 ///
 /// __Syntax__: 
 /// ```ods
-///     HLOOKUP( Lookup Any; DataSource Reference|Array; Row Integer; RangeLookup Logical )
+///     HLOOKUP( Lookup: Any; DataSource: Reference|Array; Row: Integer; RangeLookup: Logical )
 /// ```
 ///
 /// __Constraints__:
@@ -246,7 +246,7 @@ pub fn hlookup_<A: Any, B: ReferenceOrArray, C: Number, D: Logical>(lookup: A, d
 ///
 /// __Syntax__: 
 /// ```ods
-///     INDEX( DataSource ReferenceList|Array )
+///     INDEX( DataSource: ReferenceList|Array )
 /// ```
 ///
 /// __Constraints__:
@@ -289,7 +289,7 @@ pub fn index<A: ReferenceOrArray>(data_source: A) -> FnAny1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     INDEX( DataSource ReferenceList|Array; Row Integer )
+///     INDEX( DataSource: ReferenceList|Array; Row: Integer )
 /// ```
 ///
 /// __Constraints__:
@@ -332,7 +332,7 @@ pub fn index_<A: ReferenceOrArray, B: Number>(data_source: A, row: B) -> FnAny2<
 ///
 /// __Syntax__: 
 /// ```ods
-///     INDEX( DataSource ReferenceList|Array; Row Integer; Column Integer )
+///     INDEX( DataSource: ReferenceList|Array; Row: Integer; Column: Integer )
 /// ```
 ///
 /// __Constraints__:
@@ -375,7 +375,7 @@ pub fn index__<A: ReferenceOrArray, B: Number, C: Number>(data_source: A, row: B
 ///
 /// __Syntax__: 
 /// ```ods
-///     INDEX( DataSource ReferenceList|Array; Row Integer; Column Integer; AreaNumber Integer )
+///     INDEX( DataSource: ReferenceList|Array; Row: Integer; Column: Integer; AreaNumber: Integer )
 /// ```
 ///
 /// __Constraints__:
@@ -417,7 +417,7 @@ pub fn index___<A: ReferenceOrArray, B: Number, C: Number, D: Number>(data_sourc
 ///
 /// __Syntax__: 
 /// ```ods
-///     INDIRECT( Ref Text )
+///     INDIRECT( Ref: Text )
 /// ```
 ///
 /// __Constraints__:
@@ -444,7 +444,7 @@ pub fn indirect<A: Text>(ref_: A) -> FnReference1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     INDIRECT( Ref Text; A1 Logical )
+///     INDIRECT( Ref: Text; A1: Logical )
 /// ```
 ///
 /// __Constraints__:
@@ -472,7 +472,7 @@ pub fn indirect_<A: Text, B: Logical>(ref_: A, a1: B) -> FnReference2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     LOOKUP( Find Any; Searched Reference|Array )
+///     LOOKUP( Find: Any; Searched: Reference|Array )
 /// ```
 ///
 /// __Constraints__:
@@ -550,7 +550,7 @@ pub fn lookup<A: Any, B: ReferenceOrArray>(find: A, searched: B) -> FnAny2<A, B>
 ///
 /// __Syntax__: 
 /// ```ods
-///     LOOKUP( Find Any; Searched Reference|Array; Results Reference|Array )
+///     LOOKUP( Find: Any; Searched: Reference|Array; Results: Reference|Array )
 /// ```
 ///
 /// __Constraints__:
@@ -628,7 +628,7 @@ pub fn lookup_<A: Any, B: ReferenceOrArray, C: ReferenceOrArray>(find: A, search
 ///
 /// __Syntax__: 
 /// ```ods
-///     MATCH( Search Scalar; SearchRegion Reference|Array )
+///     MATCH( Search: Scalar; SearchRegion: Reference|Array )
 /// ```
 ///
 /// __Constraints__:
@@ -687,7 +687,7 @@ pub fn match_<A: Scalar, B: ReferenceOrArray>(search: A, search_region: B) -> Fn
 ///
 /// __Syntax__: 
 /// ```ods
-///     MATCH( Search Scalar; SearchRegion Reference|Array; MatchType Integer )
+///     MATCH( Search: Scalar; SearchRegion: Reference|Array; MatchType: Integer )
 /// ```
 ///
 /// __Constraints__:
@@ -746,7 +746,7 @@ pub fn match__<A: Scalar, B: ReferenceOrArray>(search: A, search_region: B, matc
 ///
 /// __Syntax__: 
 /// ```ods
-///     MULTIPLE.OPERATIONS( FormulaCell Reference; RowCell Reference; RowReplacement Reference )
+///     MULTIPLE.OPERATIONS( FormulaCell: Reference; RowCell: Reference; RowReplacement: Reference )
 /// ```
 ///
 /// __Semantics__:
@@ -784,7 +784,7 @@ pub fn multiple_operations<A: Reference, B: Reference, C: Reference>(formula_cel
 ///
 /// __Syntax__: 
 /// ```ods
-///     MULTIPLE.OPERATIONS( FormulaCell Reference; RowCell Reference; RowReplacement Reference; ColumnCell Reference )
+///     MULTIPLE.OPERATIONS( FormulaCell: Reference; RowCell: Reference; RowReplacement: Reference; ColumnCell: Reference )
 /// ```
 ///
 /// __Semantics__:
@@ -822,7 +822,7 @@ pub fn multiple_operations_<A: Reference, B: Reference, C: Reference, D: Referen
 ///
 /// __Syntax__: 
 /// ```ods
-///     MULTIPLE.OPERATIONS( FormulaCell Reference; RowCell Reference; RowReplacement Reference; ColumnCell Reference; ColumnReplacement Reference )
+///     MULTIPLE.OPERATIONS( FormulaCell: Reference; RowCell: Reference; RowReplacement: Reference; ColumnCell: Reference; ColumnReplacement: Reference )
 /// ```
 ///
 /// __Semantics__:
@@ -859,7 +859,7 @@ pub fn multiple_operations__<A: Reference, B: Reference, C: Reference, D: Refere
 ///
 /// __Syntax__: 
 /// ```ods
-///     OFFSET( R Reference; RowOffset Integer; ColumnOffset Integer )
+///     OFFSET( R: Reference; RowOffset: Integer; ColumnOffset: Integer )
 /// ```
 ///
 /// __Constraints__:
@@ -884,7 +884,7 @@ pub fn offset<A: Reference, B: Number, C: Number>(r: A, row_offset: B, column_of
 ///
 /// __Syntax__: 
 /// ```ods
-///     OFFSET( R Reference; RowOffset Integer; ColumnOffset Integer; NewHeight Integer )
+///     OFFSET( R: Reference; RowOffset: Integer; ColumnOffset: Integer; NewHeight: Integer )
 /// ```
 ///
 /// __Constraints__:
@@ -909,7 +909,7 @@ pub fn offset_<A: Reference, B: Number, C: Number, D: Number>(r: A, row_offset: 
 ///
 /// __Syntax__: 
 /// ```ods
-///     OFFSET( R Reference; RowOffset Integer; ColumnOffset Integer; NewHeight Integer; NewWidth Integer )
+///     OFFSET( R: Reference; RowOffset: Integer; ColumnOffset: Integer; NewHeight: Integer; NewWidth: Integer )
 /// ```
 ///
 /// __Constraints__:
@@ -935,7 +935,7 @@ pub fn offset__<A: Reference, B: Number, C: Number, D: Number, E: Number>(r: A, 
 ///
 /// __Syntax__: 
 /// ```ods
-///     VLOOKUP( Lookup Any; DataSource Reference|Array; Column Integer )
+///     VLOOKUP( Lookup: Any; DataSource: Reference|Array; Column: Integer )
 /// ```
 ///
 /// __Constraints__:
@@ -984,7 +984,7 @@ pub fn vlookup<A: Any, B: ReferenceOrArray, C: Number>(lookup: A, data_source: B
 ///
 /// __Syntax__: 
 /// ```ods
-///     VLOOKUP( Lookup Any; DataSource Reference|Array; Column Integer; RangeLookup Logical )
+///     VLOOKUP( Lookup: Any; DataSource: Reference|Array; Column: Integer; RangeLookup: Logical )
 /// ```
 ///
 /// __Constraints__:

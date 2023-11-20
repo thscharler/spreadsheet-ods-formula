@@ -18,7 +18,7 @@ use crate::matrix::*;
 ///
 /// __Syntax__: 
 /// ```ods
-///     MDETERM( A Array )
+///     MDETERM( A: Array )
 /// ```
 ///
 /// __Constraints__:
@@ -43,7 +43,7 @@ pub fn mdeterm<A: Matrix>(a: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     MINVERSE( A Array )
+///     MINVERSE( A: Array )
 /// ```
 ///
 /// __Constraints__:
@@ -67,7 +67,7 @@ pub fn minverse<A: Matrix>(a: A) -> FnMatrix1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     MMULT( A Array; B Array )
+///     MMULT( A: Array; B: Array )
 /// ```
 ///
 /// __Constraints__:
@@ -88,7 +88,7 @@ pub fn mmult<A: Matrix, B: Matrix>(a: A, b: B) -> FnMatrix2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     MUNIT( N Integer )
+///     MUNIT( N: Integer )
 /// ```
 ///
 /// __Constraints__:
@@ -105,7 +105,7 @@ pub fn munit<A: Number>(n: A) -> FnMatrix1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     TRANSPOSE( A Array )
+///     TRANSPOSE( A: Array )
 /// ```
 ///
 /// __Constraints__:

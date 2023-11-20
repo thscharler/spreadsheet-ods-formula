@@ -13,7 +13,7 @@ use crate::math::*;
 ///
 /// __Syntax__: 
 /// ```ods
-///     ABS( N Number )
+///     ABS( N: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -33,7 +33,7 @@ pub fn abs<A: Number>(n: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     ACOS( N Number )
+///     ACOS( N: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -54,7 +54,7 @@ pub fn acos<A: Number>(n: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     ACOSH( N Number )
+///     ACOSH( N: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -74,7 +74,7 @@ pub fn acosh<A: Number>(n: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     ACOT( N Number )
+///     ACOT( N: Number )
 /// ```
 ///
 /// __Semantics__:
@@ -92,7 +92,7 @@ pub fn acot<A: Number>(n: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     ACOTH( N Number )
+///     ACOTH( N: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -113,7 +113,7 @@ pub fn acoth<A: Number>(n: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     ASIN( N Number )
+///     ASIN( N: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -134,7 +134,7 @@ pub fn asin<A: Number>(n: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     ASINH( N Number )
+///     ASINH( N: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -154,7 +154,7 @@ pub fn asinh<A: Number>(n: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     ATAN( N Number )
+///     ATAN( N: Number )
 /// ```
 ///
 /// __Semantics__:
@@ -175,7 +175,7 @@ pub fn atan<A: Number>(n: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     ATAN2( x Number; y Number )
+///     ATAN2( x: Number; y: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -200,7 +200,7 @@ pub fn atan2<A: Number, B: Number>(x: A, y: B) -> FnNumber2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     ATANH( N Number )
+///     ATANH( N: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -219,7 +219,7 @@ pub fn atanh<A: Number>(n: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     BESSELI( X Number; N Number )
+///     BESSELI( X: Number; N: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -240,7 +240,7 @@ pub fn besseli<A: Number, B: Number>(x: A, n: B) -> FnNumber2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     BESSELJ( X Number; N Number )
+///     BESSELJ( X: Number; N: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -261,7 +261,7 @@ pub fn besselj<A: Number, B: Number>(x: A, n: B) -> FnNumber2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     BESSELK( X Number; N Number )
+///     BESSELK( X: Number; N: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -283,7 +283,7 @@ pub fn besselk<A: Number, B: Number>(x: A, n: B) -> FnNumber2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     BESSELY( X Number; N Number )
+///     BESSELY( X: Number; N: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -305,7 +305,7 @@ pub fn bessely<A: Number, B: Number>(x: A, n: B) -> FnNumber2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     COMBIN( N Integer; R Integer )
+///     COMBIN( N: Integer; R: Integer )
 /// ```
 ///
 /// __Constraints__:
@@ -331,7 +331,7 @@ pub fn combin<A: Number, B: Number>(n: A, r: B) -> FnNumber2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     COMBINA( N Integer; M Integer )
+///     COMBINA( N: Integer; M: Integer )
 /// ```
 ///
 /// __Constraints__:
@@ -353,7 +353,7 @@ pub fn combina<A: Number, B: Number>(n: A, m: B) -> FnNumber2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     CONVERT( N Number; From Text; Into Text )
+///     CONVERT( N: Number; From: Text; Into: Text )
 /// ```
 ///
 /// __Constraints__:
@@ -421,7 +421,7 @@ pub fn convert<A: Number>(n: A, from: ConvertUnit, into: ConvertUnit) -> FnNumbe
 ///
 /// __Syntax__: 
 /// ```ods
-///     COS( N Number )
+///     COS( N: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -440,7 +440,7 @@ pub fn cos<A: Number>(n: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     COSH( N Number )
+///     COSH( N: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -462,7 +462,7 @@ pub fn cosh<A: Number>(n: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     COT( N Number )
+///     COT( N: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -483,7 +483,7 @@ pub fn cot<A: Number>(n: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     COTH( N Number )
+///     COTH( N: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -503,7 +503,7 @@ pub fn coth<A: Number>(n: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     CSC( N Number )
+///     CSC( N: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -525,7 +525,7 @@ pub fn csc<A: Number>(n: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     CSCH( N Number )
+///     CSCH( N: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -547,7 +547,7 @@ pub fn csch<A: Number>(n: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     DEGREES( N Number )
+///     DEGREES( N: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -567,7 +567,7 @@ pub fn degrees<A: Number>(n: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     DELTA( X Number )
+///     DELTA( X: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -586,7 +586,7 @@ pub fn delta<A: Number>(x: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     DELTA( X Number; Y Number )
+///     DELTA( X: Number; Y: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -605,7 +605,7 @@ pub fn delta_<A: Number, B: Number>(x: A, y: B) -> FnNumber2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     ERF( Z0 Number )
+///     ERF( Z0: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -626,7 +626,7 @@ pub fn erf<A: Number>(z0: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     ERF( Z0 Number; Z1 Number )
+///     ERF( Z0: Number; Z1: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -647,7 +647,7 @@ pub fn erf_<A: Number, B: Number>(z0: A, z1: B) -> FnNumber2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     ERFC( Z Number )
+///     ERFC( Z: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -668,7 +668,7 @@ pub fn erfc<A: Number>(z: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     EUROCONVERT( N Number; From Text; To Text )
+///     EUROCONVERT( N: Number; From: Text; To: Text )
 /// ```
 ///
 /// __Constraints__:
@@ -722,7 +722,7 @@ pub fn euroconvert<A: Number, B: Text, C: Text>(n: A, from: B, to: C) -> FnNumbe
 ///
 /// __Syntax__: 
 /// ```ods
-///     EUROCONVERT( N Number; From Text; To Text; FullPrecision Logical )
+///     EUROCONVERT( N: Number; From: Text; To: Text; FullPrecision: Logical )
 /// ```
 ///
 /// __Constraints__:
@@ -776,7 +776,7 @@ pub fn euroconvert_<A: Number, B: Text, C: Text, D: Logical>(n: A, from: B, to: 
 ///
 /// __Syntax__: 
 /// ```ods
-///     EUROCONVERT( N Number; From Text; To Text; FullPrecision Logical; TriangulationPrecision Integer )
+///     EUROCONVERT( N: Number; From: Text; To: Text; FullPrecision: Logical; TriangulationPrecision: Integer )
 /// ```
 ///
 /// __Constraints__:
@@ -828,7 +828,7 @@ pub fn euroconvert__<A: Number, B: Text, C: Text, D: Logical, E: Number>(n: A, f
 ///
 /// __Syntax__: 
 /// ```ods
-///     EVEN( N Number )
+///     EVEN( N: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -848,7 +848,7 @@ pub fn even<A: Number>(n: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     EXP( X Number )
+///     EXP( X: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -867,7 +867,7 @@ pub fn exp<A: Number>(x: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     FACT( F Integer )
+///     FACT( F: Integer )
 /// ```
 ///
 /// __Constraints__:
@@ -888,7 +888,7 @@ pub fn fact<A: Number>(f: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     FACTDOUBLE( F Integer )
+///     FACTDOUBLE( F: Integer )
 /// ```
 ///
 /// __Constraints__:
@@ -910,7 +910,7 @@ pub fn factdouble<A: Number>(f: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     GAMMA( N Number )
+///     GAMMA( N: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -932,7 +932,7 @@ pub fn gamma<A: Number>(n: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     GAMMALN( X Number )
+///     GAMMALN( X: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -951,7 +951,7 @@ pub fn gammaln<A: Number>(x: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     GCD({ X NumberSequenceList}+ )
+///     GCD({ X: NumberSequenceList}+ )
 /// ```
 ///
 /// __Constraints__:
@@ -976,7 +976,7 @@ pub fn gcd<A: Sequence>(x: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     GESTEP( X Number )
+///     GESTEP( X: Number )
 /// ```
 ///
 /// __Semantics__:
@@ -993,7 +993,7 @@ pub fn gestep<A: Number>(x: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     GESTEP( X Number; Step Number )
+///     GESTEP( X: Number; Step: Number )
 /// ```
 ///
 /// __Semantics__:
@@ -1009,7 +1009,7 @@ pub fn gestep_<A: Number, B: Number>(x: A, step: B) -> FnNumber2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     LCM({ X NumberSequenceList}+ )
+///     LCM({ X: NumberSequenceList}+ )
 /// ```
 ///
 /// __Constraints__:
@@ -1030,7 +1030,7 @@ pub fn lcm<A: Sequence>(x: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     LN( X Number )
+///     LN( X: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -1049,7 +1049,7 @@ pub fn ln<A: Number>(x: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     LOG( N Number )
+///     LOG( N: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -1069,7 +1069,7 @@ pub fn log<A: Number>(n: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     LOG( N Number; Base Number )
+///     LOG( N: Number; Base: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -1089,7 +1089,7 @@ pub fn log_<A: Number, B: Number>(n: A, base: B) -> FnNumber2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     LOG10( N Number )
+///     LOG10( N: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -1108,7 +1108,7 @@ pub fn log10<A: Number>(n: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     MOD( A Number; B Number )
+///     MOD( A: Number; B: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -1127,7 +1127,7 @@ pub fn mod_<A: Number, B: Number>(a: A, b: B) -> FnNumber2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     MULTINOMIAL({ A NumberSequence}+ )
+///     MULTINOMIAL({ A: NumberSequence}+ )
 /// ```
 ///
 /// __Constraints__:
@@ -1148,7 +1148,7 @@ pub fn multinomial<A: Sequence>(a: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     ODD( N Number )
+///     ODD( N: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -1190,7 +1190,7 @@ pub fn pi() -> FnNumber0 {
 ///
 /// __Syntax__: 
 /// ```ods
-///     POWER( A Number; B Number )
+///     POWER( A: Number; B: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -1216,7 +1216,7 @@ pub fn power<A: Number, B: Number>(a: A, b: B) -> FnNumber2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     PRODUCT({ N NumberSequenceList}+ )
+///     PRODUCT({ N: NumberSequenceList}+ )
 /// ```
 ///
 /// __Constraints__:
@@ -1236,7 +1236,7 @@ pub fn product<A: Sequence>(n: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     QUOTIENT( A Number; B Number )
+///     QUOTIENT( A: Number; B: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -1255,7 +1255,7 @@ pub fn quotient<A: Number, B: Number>(a: A, b: B) -> FnNumber2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     RADIANS( N Number )
+///     RADIANS( N: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -1294,7 +1294,7 @@ pub fn rand() -> FnNumber0 {
 ///
 /// __Syntax__: 
 /// ```ods
-///     RANDBETWEEN( A Integer; B Integer )
+///     RANDBETWEEN( A: Integer; B: Integer )
 /// ```
 ///
 /// __Constraints__:
@@ -1315,7 +1315,7 @@ pub fn randbetween<A: Number, B: Number>(a: A, b: B) -> FnNumber2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     SEC( N Number )
+///     SEC( N: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -1336,7 +1336,7 @@ pub fn sec<A: Number>(n: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     SERIESSUM( X Number; N Number; M Number; Coefficients Array )
+///     SERIESSUM( X: Number; N: Number; M: Number; Coefficients: Array )
 /// ```
 ///
 /// __Arguments__:
@@ -1374,7 +1374,7 @@ pub fn seriessum<A: Number, B: Number, C: Number, D: Array>(x: A, n: B, m: C, co
 ///
 /// __Syntax__: 
 /// ```ods
-///     SIGN( N Number )
+///     SIGN( N: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -1393,7 +1393,7 @@ pub fn sign<A: Number>(n: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     SIN( N Number )
+///     SIN( N: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -1412,7 +1412,7 @@ pub fn sin<A: Number>(n: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     SINH( N Number )
+///     SINH( N: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -1434,7 +1434,7 @@ pub fn sinh<A: Number>(n: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     SECH( N Number )
+///     SECH( N: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -1456,7 +1456,7 @@ pub fn sech<A: Number>(n: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     SQRT( N Number )
+///     SQRT( N: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -1477,7 +1477,7 @@ pub fn sqrt<A: Number>(n: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     SQRTPI( N Number )
+///     SQRTPI( N: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -1499,7 +1499,7 @@ pub fn sqrtpi<A: Number>(n: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     SUBTOTAL( Function Integer; Sequence NumberSequence )
+///     SUBTOTAL( Function: Integer; Sequence: NumberSequence )
 /// ```
 ///
 /// __Constraints__:
@@ -1529,7 +1529,7 @@ pub fn subtotal<A: Sequence>(function: SubtotalFunction, sequence: A) -> FnNumbe
 ///
 /// __Syntax__: 
 /// ```ods
-///     SUM({ N NumberSequenceList}+ )
+///     SUM({ N: NumberSequenceList}+ )
 /// ```
 ///
 /// __Constraints__:
@@ -1549,7 +1549,7 @@ pub fn sum<A: Sequence>(n: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     SUMIF( R ReferenceList|Reference; C Criterion )
+///     SUMIF( R: ReferenceList|Reference; C: Criterion )
 /// ```
 ///
 /// __Constraints__:
@@ -1585,7 +1585,7 @@ pub fn sumif<A: Reference, B: Criterion>(r: A, c: B) -> FnNumber2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     SUMIF( R ReferenceList|Reference; C Criterion; S Reference )
+///     SUMIF( R: ReferenceList|Reference; C: Criterion; S: Reference )
 /// ```
 ///
 /// __Constraints__:
@@ -1621,7 +1621,7 @@ pub fn sumif_<A: Reference, B: Criterion, C: Reference>(r: A, c: B, s: C) -> FnN
 ///
 /// __Syntax__: 
 /// ```ods
-///     SUMPRODUCT({ A Array}+ )
+///     SUMPRODUCT({ A: Array}+ )
 /// ```
 ///
 /// __Constraints__:
@@ -1643,7 +1643,7 @@ pub fn sumproduct<A: Sequence>(a: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     SUMSQ({ N NumberSequence}+ )
+///     SUMSQ({ N: NumberSequence}+ )
 /// ```
 ///
 /// __Constraints__:
@@ -1663,7 +1663,7 @@ pub fn sumsq<A: Sequence>(n: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     SUMX2MY2( A Array; B Array )
+///     SUMX2MY2( A: Array; B: Array )
 /// ```
 ///
 /// __Constraints__:
@@ -1681,7 +1681,7 @@ pub fn sumx2my2<A: Array, B: Array>(a: A, b: B) -> FnNumber2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     SUMX2PY2( A Array; B Array )
+///     SUMX2PY2( A: Array; B: Array )
 /// ```
 ///
 /// __Constraints__:
@@ -1698,7 +1698,7 @@ pub fn sumx2py2<A: Array, B: Array>(a: A, b: B) -> FnNumber2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     SUMXMY2( A Array; B Array )
+///     SUMXMY2( A: Array; B: Array )
 /// ```
 ///
 /// __Constraints__:
@@ -1716,7 +1716,7 @@ pub fn sumxmy2<A: Array, B: Array>(a: A, b: B) -> FnNumber2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     TAN( N Number )
+///     TAN( N: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -1737,7 +1737,7 @@ pub fn tan<A: Number>(n: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     TANH( N Number )
+///     TANH( N: Number )
 /// ```
 ///
 /// __Constraints__:

@@ -10,7 +10,7 @@ use crate::ext::*;
 ///
 /// __Syntax__: 
 /// ```ods
-///     DDE( Server Text; Topic Text; Item Text )
+///     DDE( Server: Text; Topic: Text; Item: Text )
 /// ```
 ///
 /// __Constraints__:
@@ -47,7 +47,7 @@ pub fn dde<A: Text, B: Text, C: Text>(server: A, topic: B, item: C) -> FnText3<A
 ///
 /// __Syntax__: 
 /// ```ods
-///     DDE( Server Text; Topic Text; Item Text; Mode Integer )
+///     DDE( Server: Text; Topic: Text; Item: Text; Mode: Integer )
 /// ```
 ///
 /// __Constraints__:
@@ -84,7 +84,7 @@ pub fn dde_<A: Text, B: Text, C: Text, D: Number>(server: A, topic: B, item: C, 
 ///
 /// __Syntax__: 
 /// ```ods
-///     HYPERLINK( IRI Text )
+///     HYPERLINK( IRI: Text )
 /// ```
 ///
 /// __Constraints__:
@@ -107,7 +107,7 @@ pub fn hyperlink<A: Text>(i_r_i: A) -> FnText1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     HYPERLINK( IRI Text; FunctionResult Text|Number )
+///     HYPERLINK( IRI: Text; FunctionResult: Text|Number )
 /// ```
 ///
 /// __Constraints__:

@@ -27,7 +27,7 @@ use crate::conv::*;
 ///
 /// __Syntax__: 
 /// ```ods
-///     ARABIC( X Text )
+///     ARABIC( X: Text )
 /// ```
 ///
 /// __Constraints__:
@@ -59,7 +59,7 @@ pub fn arabic<A: Text>(x: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     BASE( X Integer; Radix Integer )
+///     BASE( X: Integer; Radix: Integer )
 /// ```
 ///
 /// __Constraints__:
@@ -87,7 +87,7 @@ pub fn base<A: Number, B: Number>(x: A, radix: B) -> FnText2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     BASE( X Integer; Radix Integer; MinimumLength Integer )
+///     BASE( X: Integer; Radix: Integer; MinimumLength: Integer )
 /// ```
 ///
 /// __Constraints__:
@@ -116,7 +116,7 @@ pub fn base_<A: Number, B: Number, C: Number>(x: A, radix: B, minimum_length: C)
 ///
 /// __Syntax__: 
 /// ```ods
-///     BIN2DEC( X TextOrNumber )
+///     BIN2DEC( X: TextOrNumber )
 /// ```
 ///
 /// __Constraints__:
@@ -150,7 +150,7 @@ pub fn bin2dec<A: TextOrNumber>(x: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     BIN2HEX( X TextOrNumber )
+///     BIN2HEX( X: TextOrNumber )
 /// ```
 ///
 /// __Constraints__:
@@ -194,7 +194,7 @@ pub fn bin2hex<A: TextOrNumber>(x: A) -> FnText1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     BIN2HEX( X TextOrNumber; Digits Number )
+///     BIN2HEX( X: TextOrNumber; Digits: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -238,7 +238,7 @@ pub fn bin2hex_<A: TextOrNumber, B: Number>(x: A, digits: B) -> FnText2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     BIN2OCT( X TextOrNumber )
+///     BIN2OCT( X: TextOrNumber )
 /// ```
 ///
 /// __Constraints__:
@@ -281,7 +281,7 @@ pub fn bin2oct<A: TextOrNumber>(x: A) -> FnText1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     BIN2OCT( X TextOrNumber; Digits Number )
+///     BIN2OCT( X: TextOrNumber; Digits: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -323,7 +323,7 @@ pub fn bin2oct_<A: TextOrNumber, B: Number>(x: A, digits: B) -> FnText2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     DEC2BIN( X TextOrNumber )
+///     DEC2BIN( X: TextOrNumber )
 /// ```
 ///
 /// __Constraints__:
@@ -356,7 +356,7 @@ pub fn dec2bin<A: TextOrNumber>(x: A) -> FnText1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     DEC2BIN( X TextOrNumber; Digits Number )
+///     DEC2BIN( X: TextOrNumber; Digits: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -389,7 +389,7 @@ pub fn dec2bin_<A: TextOrNumber, B: Number>(x: A, digits: B) -> FnText2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     DEC2HEX( X TextOrNumber )
+///     DEC2HEX( X: TextOrNumber )
 /// ```
 ///
 /// __Constraints__:
@@ -423,7 +423,7 @@ pub fn dec2hex<A: TextOrNumber>(x: A) -> FnText1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     DEC2HEX( X TextOrNumber; Digits Number )
+///     DEC2HEX( X: TextOrNumber; Digits: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -457,7 +457,7 @@ pub fn dec2hex_<A: TextOrNumber, B: Number>(x: A, digits: B) -> FnText2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     DEC2OCT( X TextOrNumber )
+///     DEC2OCT( X: TextOrNumber )
 /// ```
 ///
 /// __Constraints__:
@@ -490,7 +490,7 @@ pub fn dec2oct<A: TextOrNumber>(x: A) -> FnText1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     DEC2OCT( X TextOrNumber; Digits Number )
+///     DEC2OCT( X: TextOrNumber; Digits: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -523,7 +523,7 @@ pub fn dec2oct_<A: TextOrNumber, B: Number>(x: A, digits: B) -> FnText2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     DECIMAL( X Text; Radix Integer )
+///     DECIMAL( X: Text; Radix: Integer )
 /// ```
 ///
 /// __Constraints__:
@@ -552,7 +552,7 @@ pub fn decimal<A: Text, B: Number>(x: A, radix: B) -> FnNumber2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     HEX2BIN( X TextOrNumber )
+///     HEX2BIN( X: TextOrNumber )
 /// ```
 ///
 /// __Constraints__:
@@ -588,7 +588,7 @@ pub fn hex2bin<A: TextOrNumber>(x: A) -> FnText1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     HEX2BIN( X TextOrNumber; Digits Number )
+///     HEX2BIN( X: TextOrNumber; Digits: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -623,7 +623,7 @@ pub fn hex2bin_<A: TextOrNumber, B: Number>(x: A, digits: B) -> FnText2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     HEX2DEC( X TextOrNumber )
+///     HEX2DEC( X: TextOrNumber )
 /// ```
 ///
 /// __Constraints__:
@@ -653,7 +653,7 @@ pub fn hex2dec<A: TextOrNumber>(x: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     HEX2OCT( X TextOrNumber )
+///     HEX2OCT( X: TextOrNumber )
 /// ```
 ///
 /// __Constraints__:
@@ -689,7 +689,7 @@ pub fn hex2oct<A: TextOrNumber>(x: A) -> FnText1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     HEX2OCT( X TextOrNumber; Digits Number )
+///     HEX2OCT( X: TextOrNumber; Digits: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -725,7 +725,7 @@ pub fn hex2oct_<A: TextOrNumber, B: Number>(x: A, digits: B) -> FnText2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     OCT2BIN( X TextOrNumber )
+///     OCT2BIN( X: TextOrNumber )
 /// ```
 ///
 /// __Constraints__:
@@ -761,7 +761,7 @@ pub fn oct2bin<A: TextOrNumber>(x: A) -> FnText1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     OCT2BIN( X TextOrNumber; Digits Number )
+///     OCT2BIN( X: TextOrNumber; Digits: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -796,7 +796,7 @@ pub fn oct2bin_<A: TextOrNumber, B: Number>(x: A, digits: B) -> FnText2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     OCT2DEC( X TextOrNumber )
+///     OCT2DEC( X: TextOrNumber )
 /// ```
 ///
 /// __Constraints__:
@@ -826,7 +826,7 @@ pub fn oct2dec<A: TextOrNumber>(x: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     OCT2HEX( X TextOrNumber )
+///     OCT2HEX( X: TextOrNumber )
 /// ```
 ///
 /// __Constraints__:
@@ -862,7 +862,7 @@ pub fn oct2hex<A: TextOrNumber>(x: A) -> FnText1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     OCT2HEX( X TextOrNumber; Digits Number )
+///     OCT2HEX( X: TextOrNumber; Digits: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -897,7 +897,7 @@ pub fn oct2hex_<A: TextOrNumber, B: Number>(x: A, digits: B) -> FnText2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     ROMAN( N Integer )
+///     ROMAN( N: Integer )
 /// ```
 ///
 /// __Constraints__:
@@ -936,7 +936,7 @@ pub fn roman<A: Number>(n: A) -> FnText1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     ROMAN( N Integer; Format Integer )
+///     ROMAN( N: Integer; Format: Integer )
 /// ```
 ///
 /// __Constraints__:

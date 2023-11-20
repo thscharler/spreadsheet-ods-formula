@@ -8,7 +8,7 @@ use crate::round::*;
 ///
 /// __Syntax__: 
 /// ```ods
-///     CEILING( N Number )
+///     CEILING( N: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -43,7 +43,7 @@ pub fn ceiling<A: Number>(n: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     CEILING( N Number; Significance Number )
+///     CEILING( N: Number; Significance: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -78,7 +78,7 @@ pub fn ceiling_<A: Number, B: Number>(n: A, significance: B) -> FnNumber2<A, B> 
 ///
 /// __Syntax__: 
 /// ```ods
-///     CEILING( N Number; Significance Number; Mode Number )
+///     CEILING( N: Number; Significance: Number; Mode: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -112,7 +112,7 @@ pub fn ceiling__<A: Number, B: Number>(n: A, significance: B, mode: RoundingMode
 ///
 /// __Syntax__: 
 /// ```ods
-///     INT( N Number )
+///     INT( N: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -133,7 +133,7 @@ pub fn int<A: Number>(n: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     FLOOR( N Number )
+///     FLOOR( N: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -168,7 +168,7 @@ pub fn floor<A: Number>(n: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     FLOOR( N Number; Significance Number )
+///     FLOOR( N: Number; Significance: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -203,7 +203,7 @@ pub fn floor_<A: Number, B: Number>(n: A, significance: B) -> FnNumber2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     FLOOR( N Number; Significance Number; Mode Number )
+///     FLOOR( N: Number; Significance: Number; Mode: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -237,7 +237,7 @@ pub fn floor__<A: Number, B: Number>(n: A, significance: B, mode: RoundingMode) 
 ///
 /// __Syntax__: 
 /// ```ods
-///     MROUND( A Number; B Number )
+///     MROUND( A: Number; B: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -261,7 +261,7 @@ pub fn mround<A: Number, B: Number>(a: A, b: B) -> FnNumber2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     ROUND( X Number )
+///     ROUND( X: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -288,7 +288,7 @@ pub fn round<A: Number>(x: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     ROUND( X Number; Digits Number )
+///     ROUND( X: Number; Digits: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -315,7 +315,7 @@ pub fn round_<A: Number, B: Number>(x: A, digits: B) -> FnNumber2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     ROUNDDOWN( X Number )
+///     ROUNDDOWN( X: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -340,7 +340,7 @@ pub fn rounddown<A: Number>(x: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     ROUNDDOWN( X Number; Digits Integer )
+///     ROUNDDOWN( X: Number; Digits: Integer )
 /// ```
 ///
 /// __Constraints__:
@@ -365,7 +365,7 @@ pub fn rounddown_<A: Number, B: Number>(x: A, digits: B) -> FnNumber2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     ROUNDUP( X Number )
+///     ROUNDUP( X: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -390,7 +390,7 @@ pub fn roundup<A: Number>(x: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     ROUNDUP( X Number; Digits Integer )
+///     ROUNDUP( X: Number; Digits: Integer )
 /// ```
 ///
 /// __Constraints__:
@@ -414,7 +414,7 @@ pub fn roundup_<A: Number, B: Number>(x: A, digits: B) -> FnNumber2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     TRUNC( A Number; B Integer )
+///     TRUNC( A: Number; B: Integer )
 /// ```
 ///
 /// __Constraints__:

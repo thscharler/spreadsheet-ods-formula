@@ -13,7 +13,7 @@ use std::io::Write;
 fn main() -> Result<(), DError> {
     let mut txt = Vec::new();
 
-    let mut f = File::open("spec.txt")?;
+    let mut f = File::open("tests/spec.txt")?;
     f.read_to_end(&mut txt)?;
 
     let txt = String::from_utf8_lossy(txt.as_ref());

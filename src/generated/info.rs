@@ -11,7 +11,7 @@ use crate::info::*;
 ///
 /// __Syntax__: 
 /// ```ods
-///     AREAS( R ReferenceList )
+///     AREAS( R: ReferenceList )
 /// ```
 ///
 /// __Constraints__:
@@ -30,7 +30,7 @@ pub fn areas<A: Reference>(r: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     CELL( Info_Type Text )
+///     CELL( Info_Type: Text )
 /// ```
 ///
 /// __Constraints__:
@@ -54,7 +54,7 @@ pub fn cell<>(info_type: CellInfo) -> FnAny1<CellInfo> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     CELL( Info_Type Text; R Reference )
+///     CELL( Info_Type: Text; R: Reference )
 /// ```
 ///
 /// __Constraints__:
@@ -100,7 +100,7 @@ pub fn column() -> FnNumber0 {
 ///
 /// __Syntax__: 
 /// ```ods
-///     COLUMN( R Reference )
+///     COLUMN( R: Reference )
 /// ```
 ///
 /// __Constraints__:
@@ -122,7 +122,7 @@ pub fn column_<A: Reference>(r: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     COLUMNS( R Reference|Array )
+///     COLUMNS( R: Reference|Array )
 /// ```
 ///
 /// __Constraints__:
@@ -142,7 +142,7 @@ pub fn columns<A: ReferenceOrArray>(r: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     COUNT({ N NumberSequenceList}+ )
+///     COUNT({ N: NumberSequenceList}+ )
 /// ```
 ///
 /// __Constraints__:
@@ -164,7 +164,7 @@ pub fn count<A: Sequence>(n: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     COUNTA({ AnyValue Any}+ )
+///     COUNTA({ AnyValue: Any}+ )
 /// ```
 ///
 /// __Constraints__:
@@ -191,7 +191,7 @@ pub fn counta<A: Sequence>(any_value: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     COUNTBLANK( R ReferenceList )
+///     COUNTBLANK( R: ReferenceList )
 /// ```
 ///
 /// __Constraints__:
@@ -218,7 +218,7 @@ pub fn countblank<A: Reference>(r: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     COUNTIF( R ReferenceList; C Criterion )
+///     COUNTIF( R: ReferenceList; C: Criterion )
 /// ```
 ///
 /// __Constraints__:
@@ -242,7 +242,7 @@ pub fn countif<A: Reference, B: Criterion>(r: A, c: B) -> FnNumber2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     ERROR.TYPE( E Error )
+///     ERROR.TYPE( E: Error )
 /// ```
 ///
 /// __Constraints__:
@@ -265,7 +265,7 @@ pub fn error_type<A: Any>(e: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     FORMULA( X Reference )
+///     FORMULA( X: Reference )
 /// ```
 ///
 /// __Constraints__:
@@ -287,7 +287,7 @@ pub fn formula<A: Reference>(x: A) -> FnText1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     INFO( Category Text )
+///     INFO( Category: Text )
 /// ```
 ///
 /// __Constraints__:
@@ -306,7 +306,7 @@ pub fn info<>(category: InfoInfo) -> FnAny1<InfoInfo> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     ISBLANK( X Scalar )
+///     ISBLANK( X: Scalar )
 /// ```
 ///
 /// __Constraints__:
@@ -329,7 +329,7 @@ pub fn isblank<A: Scalar>(x: A) -> FnLogical1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     ISERR( X Scalar )
+///     ISERR( X: Scalar )
 /// ```
 ///
 /// __Constraints__:
@@ -355,7 +355,7 @@ pub fn iserr<A: Scalar>(x: A) -> FnLogical1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     ISERROR( X Scalar )
+///     ISERROR( X: Scalar )
 /// ```
 ///
 /// __Constraints__:
@@ -376,7 +376,7 @@ pub fn iserror<A: Scalar>(x: A) -> FnLogical1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     ISEVEN( X Number )
+///     ISEVEN( X: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -399,7 +399,7 @@ pub fn iseven<A: Number>(x: A) -> FnLogical1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     ISFORMULA( X Reference )
+///     ISFORMULA( X: Reference )
 /// ```
 ///
 /// __Constraints__:
@@ -422,7 +422,7 @@ pub fn isformula<A: Reference>(x: A) -> FnLogical1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     ISLOGICAL( X Scalar )
+///     ISLOGICAL( X: Scalar )
 /// ```
 ///
 /// __Constraints__:
@@ -443,7 +443,7 @@ pub fn islogical<A: Scalar>(x: A) -> FnLogical1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     ISNA( X Scalar )
+///     ISNA( X: Scalar )
 /// ```
 ///
 /// __Constraints__:
@@ -464,7 +464,7 @@ pub fn isna<A: Scalar>(x: A) -> FnLogical1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     ISNONTEXT( X Scalar )
+///     ISNONTEXT( X: Scalar )
 /// ```
 ///
 /// __Constraints__:
@@ -488,7 +488,7 @@ pub fn isnontext<A: Scalar>(x: A) -> FnLogical1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     ISNUMBER( X Scalar )
+///     ISNUMBER( X: Scalar )
 /// ```
 ///
 /// __Constraints__:
@@ -509,7 +509,7 @@ pub fn isnumber<A: Scalar>(x: A) -> FnLogical1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     ISODD( X Number )
+///     ISODD( X: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -532,7 +532,7 @@ pub fn isodd<A: Number>(x: A) -> FnLogical1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     ISREF( X Any )
+///     ISREF( X: Any )
 /// ```
 ///
 /// __Constraints__:
@@ -558,7 +558,7 @@ pub fn isref<A: Any>(x: A) -> FnLogical1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     ISTEXT( X Scalar )
+///     ISTEXT( X: Scalar )
 /// ```
 ///
 /// __Constraints__:
@@ -581,7 +581,7 @@ pub fn istext<A: Scalar>(x: A) -> FnLogical1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     N( X Any )
+///     N( X: Any )
 /// ```
 ///
 /// __Constraints__:
@@ -622,7 +622,7 @@ pub fn na() -> FnAny0 {
 ///
 /// __Syntax__: 
 /// ```ods
-///     NUMBERVALUE( X Text )
+///     NUMBERVALUE( X: Text )
 /// ```
 ///
 /// __Constraints__:
@@ -666,7 +666,7 @@ pub fn numbervalue<A: Text>(x: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     NUMBERVALUE( X Text; DecimalSeparator Text )
+///     NUMBERVALUE( X: Text; DecimalSeparator: Text )
 /// ```
 ///
 /// __Constraints__:
@@ -710,7 +710,7 @@ pub fn numbervalue_<A: Text, B: Text>(x: A, decimal_separator: B) -> FnNumber2<A
 ///
 /// __Syntax__: 
 /// ```ods
-///     NUMBERVALUE( X Text; DecimalSeparator Text; GroupSeparator Text )
+///     NUMBERVALUE( X: Text; DecimalSeparator: Text; GroupSeparator: Text )
 /// ```
 ///
 /// __Constraints__:
@@ -775,7 +775,7 @@ pub fn row() -> FnNumber0 {
 ///
 /// __Syntax__: 
 /// ```ods
-///     ROW( R Reference )
+///     ROW( R: Reference )
 /// ```
 ///
 /// __Constraints__:
@@ -796,7 +796,7 @@ pub fn row_<A: Reference>(r: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     ROWS( R Reference|Array )
+///     ROWS( R: Reference|Array )
 /// ```
 ///
 /// __Constraints__:
@@ -851,7 +851,7 @@ pub fn sheet() -> FnNumber0 {
 ///
 /// __Syntax__: 
 /// ```ods
-///     SHEET( R Text|Reference )
+///     SHEET( R: Text|Reference )
 /// ```
 ///
 /// __Constraints__:
@@ -908,7 +908,7 @@ pub fn sheets() -> FnNumber0 {
 ///
 /// __Syntax__: 
 /// ```ods
-///     SHEETS( R Reference )
+///     SHEETS( R: Reference )
 /// ```
 ///
 /// __Constraints__:
@@ -931,7 +931,7 @@ pub fn sheets_<A: Reference>(r: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     TYPE( Value Any )
+///     TYPE( Value: Any )
 /// ```
 ///
 /// __Constraints__:
@@ -957,7 +957,7 @@ pub fn type_<A: Any>(value: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     VALUE( X Text )
+///     VALUE( X: Text )
 /// ```
 ///
 /// __Constraints__:

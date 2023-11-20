@@ -17,7 +17,7 @@ use crate::textb::*;
 ///
 /// __Syntax__: 
 /// ```ods
-///     FINDB( Search Text; T Text )
+///     FINDB( Search: Text; T: Text )
 /// ```
 ///
 /// __Semantics__:
@@ -33,7 +33,7 @@ pub fn findb<A: Text, B: Text>(search: A, t: B) -> FnNumber2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     FINDB( Search Text; T Text; Start BytePosition )
+///     FINDB( Search: Text; T: Text; Start: BytePosition )
 /// ```
 ///
 /// __Semantics__:
@@ -50,7 +50,7 @@ pub fn findb_<A: Text, B: Text, C: Number>(search: A, t: B, start: C) -> FnNumbe
 ///
 /// __Syntax__: 
 /// ```ods
-///     LEFTB( T Text )
+///     LEFTB( T: Text )
 /// ```
 ///
 /// __Semantics__:
@@ -67,7 +67,7 @@ pub fn leftb<A: Text>(t: A) -> FnText1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     LEFTB( T Text; Length ByteLength )
+///     LEFTB( T: Text; Length: ByteLength )
 /// ```
 ///
 /// __Semantics__:
@@ -83,7 +83,7 @@ pub fn leftb_<A: Text, B: Number>(t: A, length: B) -> FnText2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     LENB( T Text )
+///     LENB( T: Text )
 /// ```
 ///
 /// __Constraints__:
@@ -103,7 +103,7 @@ pub fn lenb<A: Text>(t: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     MIDB( T Text; Start BytePosition; Length ByteLength )
+///     MIDB( T: Text; Start: BytePosition; Length: ByteLength )
 /// ```
 ///
 /// __Constraints__:
@@ -123,7 +123,7 @@ pub fn midb<A: Text, B: Number, C: Number>(t: A, start: B, length: C) -> FnText3
 ///
 /// __Syntax__: 
 /// ```ods
-///     REPLACEB( T Text; Start BytePosition; Len ByteLength; New Text )
+///     REPLACEB( T: Text; Start: BytePosition; Len: ByteLength; New: Text )
 /// ```
 ///
 /// __Semantics__:
@@ -140,7 +140,7 @@ pub fn replaceb<A: Text, B: Number, C: Number, D: Text>(t: A, start: B, len: C, 
 ///
 /// __Syntax__: 
 /// ```ods
-///     RIGHTB( T Text )
+///     RIGHTB( T: Text )
 /// ```
 ///
 /// __Semantics__:
@@ -157,7 +157,7 @@ pub fn rightb<A: Text>(t: A) -> FnText1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     RIGHTB( T Text; Length ByteLength )
+///     RIGHTB( T: Text; Length: ByteLength )
 /// ```
 ///
 /// __Semantics__:
@@ -173,7 +173,7 @@ pub fn rightb_<A: Text, B: Number>(t: A, length: B) -> FnText2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     SEARCHB( Search Text; T Text )
+///     SEARCHB( Search: Text; T: Text )
 /// ```
 ///
 /// __Semantics__:
@@ -189,7 +189,7 @@ pub fn searchb<A: Text, B: Text>(search: A, t: B) -> FnNumber2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     SEARCHB( Search Text; T Text; Start BytePosition )
+///     SEARCHB( Search: Text; T: Text; Start: BytePosition )
 /// ```
 ///
 /// __Semantics__:

@@ -19,7 +19,7 @@ use crate::logic::*;
 ///
 /// __Syntax__: 
 /// ```ods
-///     AND({ L Logical|NumberSequenceList}+ )
+///     AND({ L: Logical|NumberSequenceList}+ )
 /// ```
 ///
 /// __Constraints__:
@@ -66,7 +66,7 @@ pub fn false_() -> FnLogical0 {
 ///
 /// __Syntax__: 
 /// ```ods
-///     IFERROR( X Any; Alternative Any )
+///     IFERROR( X: Any; Alternative: Any )
 /// ```
 ///
 /// __Constraints__:
@@ -89,7 +89,7 @@ pub fn iferror<A: Any, B: Any>(x: A, alternative: B) -> FnAny2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     IFNA( X Any; Alternative Any )
+///     IFNA( X: Any; Alternative: Any )
 /// ```
 ///
 /// __Constraints__:
@@ -112,7 +112,7 @@ pub fn ifna<A: Any, B: Any>(x: A, alternative: B) -> FnAny2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     NOT( L Logical )
+///     NOT( L: Logical )
 /// ```
 ///
 /// __Constraints__:
@@ -132,7 +132,7 @@ pub fn not<A: Logical>(l: A) -> FnLogical1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     OR({ L Logical|NumberSequenceList}+ )
+///     OR({ L: Logical|NumberSequenceList}+ )
 /// ```
 ///
 /// __Constraints__:
@@ -182,7 +182,7 @@ pub fn true_() -> FnLogical0 {
 ///
 /// __Syntax__: 
 /// ```ods
-///     XOR({ L Logical}+ )
+///     XOR({ L: Logical}+ )
 /// ```
 ///
 /// __Constraints__:

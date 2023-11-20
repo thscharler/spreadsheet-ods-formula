@@ -7,7 +7,7 @@ use crate::text::*;
 ///
 /// __Syntax__: 
 /// ```ods
-///     ASC( T Text )
+///     ASC( T: Text )
 /// ```
 ///
 /// __Constraints__:
@@ -43,7 +43,7 @@ pub fn asc<A: Text>(t: A) -> FnText1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     CHAR( N Number )
+///     CHAR( N: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -75,7 +75,7 @@ pub fn char<A: Number>(n: A) -> FnText1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     CLEAN( T Text )
+///     CLEAN( T: Text )
 /// ```
 ///
 /// __Semantics__:
@@ -97,7 +97,7 @@ pub fn clean<A: Text>(t: A) -> FnText1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     CODE( T Text )
+///     CODE( T: Text )
 /// ```
 ///
 /// __Constraints__:
@@ -127,7 +127,7 @@ pub fn code<A: Text>(t: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     CONCATENATE({ T Text}+ )
+///     CONCATENATE({ T: Text}+ )
 /// ```
 ///
 /// __Constraints__:
@@ -146,7 +146,7 @@ pub fn concatenate<A: Sequence>(t: A) -> FnText1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     DOLLAR( N Number )
+///     DOLLAR( N: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -166,7 +166,7 @@ pub fn dollar<A: Number>(n: A) -> FnText1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     DOLLAR( N Number; D Integer )
+///     DOLLAR( N: Number; D: Integer )
 /// ```
 ///
 /// __Constraints__:
@@ -186,7 +186,7 @@ pub fn dollar_<A: Number, B: Number>(n: A, d: B) -> FnText2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     EXACT( T1 Text; T2 Text )
+///     EXACT( T1: Text; T2: Text )
 /// ```
 ///
 /// __Constraints__:
@@ -206,7 +206,7 @@ pub fn exact<A: Text, B: Text>(t1: A, t2: B) -> FnLogical2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     FIND( Search Text; T Text )
+///     FIND( Search: Text; T: Text )
 /// ```
 ///
 /// __Constraints__:
@@ -228,7 +228,7 @@ pub fn find<A: Text, B: Text>(search: A, t: B) -> FnNumber2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     FIND( Search Text; T Text; Start Integer )
+///     FIND( Search: Text; T: Text; Start: Integer )
 /// ```
 ///
 /// __Constraints__:
@@ -251,7 +251,7 @@ pub fn find_<A: Text, B: Text, C: Number>(search: A, t: B, start: C) -> FnNumber
 ///
 /// __Syntax__: 
 /// ```ods
-///     FIXED( N Number )
+///     FIXED( N: Number )
 /// ```
 ///
 /// __Constraints__:
@@ -277,7 +277,7 @@ pub fn fixed<A: Number>(n: A) -> FnText1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     FIXED( N Number; D Integer )
+///     FIXED( N: Number; D: Integer )
 /// ```
 ///
 /// __Constraints__:
@@ -303,7 +303,7 @@ pub fn fixed_<A: Number, B: Number>(n: A, d: B) -> FnText2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     FIXED( N Number; D Integer; OmitSeparators Logical )
+///     FIXED( N: Number; D: Integer; OmitSeparators: Logical )
 /// ```
 ///
 /// __Constraints__:
@@ -328,7 +328,7 @@ pub fn fixed__<A: Number, B: Number, C: Logical>(n: A, d: B, omit_separators: C)
 ///
 /// __Syntax__: 
 /// ```ods
-///     JIS( T Text )
+///     JIS( T: Text )
 /// ```
 ///
 /// __Constraints__:
@@ -359,7 +359,7 @@ pub fn jis<A: Text>(t: A) -> FnText1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     LEFT( T Text )
+///     LEFT( T: Text )
 /// ```
 ///
 /// __Constraints__:
@@ -386,7 +386,7 @@ pub fn left<A: Text>(t: A) -> FnText1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     LEFT( T Text; Length Integer )
+///     LEFT( T: Text; Length: Integer )
 /// ```
 ///
 /// __Constraints__:
@@ -413,7 +413,7 @@ pub fn left_<A: Text, B: Number>(t: A, length: B) -> FnText2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     LEN( T Text )
+///     LEN( T: Text )
 /// ```
 ///
 /// __Constraints__:
@@ -437,7 +437,7 @@ pub fn len<A: Text>(t: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     LOWER( T Text )
+///     LOWER( T: Text )
 /// ```
 ///
 /// __Constraints__:
@@ -467,7 +467,7 @@ pub fn lower<A: Text>(t: A) -> FnText1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     MID( T Text; Start Integer; Length Integer )
+///     MID( T: Text; Start: Integer; Length: Integer )
 /// ```
 ///
 /// __Constraints__:
@@ -497,7 +497,7 @@ pub fn mid<A: Text, B: Number, C: Number>(t: A, start: B, length: C) -> FnText3<
 ///
 /// __Syntax__: 
 /// ```ods
-///     PROPER( T Text )
+///     PROPER( T: Text )
 /// ```
 ///
 /// __Constraints__:
@@ -530,7 +530,7 @@ pub fn proper<A: Text>(t: A) -> FnText1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     REPLACE( T Text; Start Number; Count Number; New Text )
+///     REPLACE( T: Text; Start: Number; Count: Number; New: Text )
 /// ```
 ///
 /// __Constraints__:
@@ -558,7 +558,7 @@ pub fn replace<A: Text, B: Number, C: Number, D: Text>(t: A, start: B, count: C,
 ///
 /// __Syntax__: 
 /// ```ods
-///     REPT( T Text; Count Integer )
+///     REPT( T: Text; Count: Integer )
 /// ```
 ///
 /// __Constraints__:
@@ -578,7 +578,7 @@ pub fn rept<A: Text, B: Number>(t: A, count: B) -> FnText2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     RIGHT( T Text )
+///     RIGHT( T: Text )
 /// ```
 ///
 /// __Constraints__:
@@ -604,7 +604,7 @@ pub fn right<A: Text>(t: A) -> FnText1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     RIGHT( T Text; Length Integer )
+///     RIGHT( T: Text; Length: Integer )
 /// ```
 ///
 /// __Constraints__:
@@ -630,7 +630,7 @@ pub fn right_<A: Text, B: Number>(t: A, length: B) -> FnText2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     SEARCH( Search Text; T Text )
+///     SEARCH( Search: Text; T: Text )
 /// ```
 ///
 /// __Constraints__:
@@ -654,7 +654,7 @@ pub fn search<A: Text, B: Text>(search: A, t: B) -> FnNumber2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     SEARCH( Search Text; T Text; Start Integer )
+///     SEARCH( Search: Text; T: Text; Start: Integer )
 /// ```
 ///
 /// __Constraints__:
@@ -678,7 +678,7 @@ pub fn search_<A: Text, B: Text, C: Number>(search: A, t: B, start: C) -> FnNumb
 ///
 /// __Syntax__: 
 /// ```ods
-///     SUBSTITUTE( T Text; Old Text; New Text )
+///     SUBSTITUTE( T: Text; Old: Text; New: Text )
 /// ```
 ///
 /// __Constraints__:
@@ -702,7 +702,7 @@ pub fn substitute<A: Text, B: Text, C: Text>(t: A, old: B, new: C) -> FnText3<A,
 ///
 /// __Syntax__: 
 /// ```ods
-///     SUBSTITUTE( T Text; Old Text; New Text; Which Integer )
+///     SUBSTITUTE( T: Text; Old: Text; New: Text; Which: Integer )
 /// ```
 ///
 /// __Constraints__:
@@ -726,7 +726,7 @@ pub fn substitute_<A: Text, B: Text, C: Text, D: Number>(t: A, old: B, new: C, w
 ///
 /// __Syntax__: 
 /// ```ods
-///     T( X Any )
+///     T( X: Any )
 /// ```
 ///
 /// __Constraints__:
@@ -748,7 +748,7 @@ pub fn t<A: Any>(x: A) -> FnText1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     TEXT( X Scalar; FormatCode Text )
+///     TEXT( X: Scalar; FormatCode: Text )
 /// ```
 ///
 /// __Constraints__:
@@ -770,7 +770,7 @@ pub fn text<A: Scalar, B: Text>(x: A, format_code: B) -> FnText2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     TRIM( T Text )
+///     TRIM( T: Text )
 /// ```
 ///
 /// __Constraints__:
@@ -794,7 +794,7 @@ pub fn trim<A: Text>(t: A) -> FnText1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     UNICHAR( N Integer )
+///     UNICHAR( N: Integer )
 /// ```
 ///
 /// __Constraints__:
@@ -819,7 +819,7 @@ pub fn unichar<A: Number>(n: A) -> FnText1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     UNICODE( T Text )
+///     UNICODE( T: Text )
 /// ```
 ///
 /// __Constraints__:
@@ -842,7 +842,7 @@ pub fn unicode<A: Text>(t: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     UPPER( T Text )
+///     UPPER( T: Text )
 /// ```
 ///
 /// __Constraints__:

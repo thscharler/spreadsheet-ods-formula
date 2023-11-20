@@ -12,7 +12,7 @@ use crate::bit::*;
 ///
 /// __Syntax__: 
 /// ```ods
-///     BITAND( X Integer; Y Integer )
+///     BITAND( X: Integer; Y: Integer )
 /// ```
 ///
 /// __Constraints__:
@@ -33,7 +33,7 @@ pub fn bitand<A: Number, B: Number>(x: A, y: B) -> FnNumber2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     BITLSHIFT( X Integer; N Integer )
+///     BITLSHIFT( X: Integer; N: Integer )
 /// ```
 ///
 /// __Constraints__:
@@ -58,7 +58,7 @@ pub fn bitlshift<A: Number, B: Number>(x: A, n: B) -> FnNumber2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     BITOR( X Integer; Y Integer )
+///     BITOR( X: Integer; Y: Integer )
 /// ```
 ///
 /// __Constraints__:
@@ -79,7 +79,7 @@ pub fn bitor<A: Number, B: Number>(x: A, y: B) -> FnNumber2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     BITRSHIFT( X Integer; N Integer )
+///     BITRSHIFT( X: Integer; N: Integer )
 /// ```
 ///
 /// __Constraints__:
@@ -104,7 +104,7 @@ pub fn bitrshift<A: Number, B: Number>(x: A, n: B) -> FnNumber2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     BITXOR( X Integer; Y Integer )
+///     BITXOR( X: Integer; Y: Integer )
 /// ```
 ///
 /// __Constraints__:
