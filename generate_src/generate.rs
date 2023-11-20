@@ -98,7 +98,7 @@ struct OdsFn {
 impl From<&StringRecord> for OdsFn {
     fn from(r: &StringRecord) -> Self {
         let mut args = Vec::new();
-        for n in 0..7 {
+        for n in 0..8 {
             let arg = &r[4 + 3 * n];
             let typ = &r[4 + 3 * n + 1];
             let opt = &r[4 + 3 * n + 2];
@@ -171,7 +171,7 @@ fn build_from_csv() -> Result<(), DError> {
         }
         let m = mods.get_mut(fnr.module.as_str()).expect("module");
 
-        generate_all_fn(&fnr, m)?;
+        generate_all_fn(fnr, m)?;
     }
 
     for v in mods.values() {
@@ -189,31 +189,32 @@ fn init_module(m: &mut Module) -> Result<(), DError> {
     Ok(())
 }
 
-fn generate_all_fn(fnr: &OdsFn, m: &mut Module) -> Result<(), DError> {
-    let mut n_vol = 1;
-    for x in &fnr.args {
-        if x.vol {
-            n_vol += 1;
+fn generate_all_fn(mut fun: OdsFn, m: &mut Module) -> Result<(), DError> {
+    let mut args = Vec::new();
+
+    // pop trailing optionals.
+    loop {
+        if let Some(arg) = fun.args.pop() {
+            if arg.vol {
+                args.push(arg);
+            } else {
+                fun.args.push(arg);
+                break;
+            }
+        } else {
+            break;
         }
     }
 
-    let mut ff = fnr.clone();
-    while n_vol > 0 {
-        ff.fname = format!("{}{}", fnr.fname, "_".repeat(n_vol - 1));
+    // reinstate one arg and generate.
+    loop {
+        generate_fn(&fun, m)?;
 
-        generate_fn(&ff, m)?;
-
-        n_vol -= 1;
-
-        if n_vol > 0 {
-            if let Some(v) = ff.args.pop() {
-                if !v.vol {
-                    return Err(DError::from(DErrorString(format!(
-                        "Invalid VOL in function {}. Must be trailing.",
-                        ff.func
-                    ))));
-                }
-            }
+        if let Some(arg) = args.pop() {
+            fun.args.push(arg);
+            fun.fname.push('_');
+        } else {
+            break;
         }
     }
 
@@ -222,7 +223,7 @@ fn generate_all_fn(fnr: &OdsFn, m: &mut Module) -> Result<(), DError> {
 
 fn generate_fn(fnr: &OdsFn, m: &mut Module) -> Result<(), DError> {
     writeln!(m.gen, "")?;
-    writeln!(m.gen, "/// {}", fnr.doc)?;
+    // writeln!(m.gen, "/// {}", fnr.doc)?;
     writeln!(m.gen, "#[inline]")?;
     writeln!(
         m.gen,
@@ -364,7 +365,7 @@ fn gen_type_arg(fnr: &OdsFn) -> Result<String, DError> {
     Ok(buf)
 }
 
-const TYPE_VARS: [&str; 7] = ["A", "B", "C", "D", "E", "F", "G"];
+const TYPE_VARS: [&str; 8] = ["A", "B", "C", "D", "E", "F", "G", "H"];
 
 fn gen_struct(fnr: &OdsFn) -> Result<String, DError> {
     match fnr.result.as_str() {
@@ -377,6 +378,7 @@ fn gen_struct(fnr: &OdsFn) -> Result<String, DError> {
             5 => Ok("FnNumber5".into()),
             6 => Ok("FnNumber6".into()),
             7 => Ok("FnNumber7".into()),
+            8 => Ok("FnNumber8".into()),
             _ => Err(DErrorString(format!("Number args > 7 for {}", fnr.func)).into()),
         },
         "Reference" => match fnr.args.len() {
@@ -418,6 +420,7 @@ fn gen_struct(fnr: &OdsFn) -> Result<String, DError> {
         "Matrix" => match fnr.args.len() {
             0 => Ok("FnMatrix0".into()),
             1 => Ok("FnMatrix1".into()),
+            2 => Ok("FnMatrix2".into()),
             _ => Err(DErrorString(format!("Matrix args > 1 for {}", fnr.func)).into()),
         },
         "Array" => match fnr.args.len() {
@@ -436,8 +439,8 @@ fn gen_struct(fnr: &OdsFn) -> Result<String, DError> {
 fn is_trait(arg: &OdsArg) -> bool {
     match arg.typ.as_str() {
         "Any" | "Number" | "Text" | "Logical" | "Reference" | "Matrix" | "Criterion"
-        | "Sequence" | "TextOrNumber" | "Scalar" | "Field" | "DateTimeParam" | "Array"
-        | "Database" | "Criteria" => true,
+        | "Sequence" | "TextOrNumber" | "Scalar" | "Field" | "DateTime" | "Array" | "Database"
+        | "Criteria" | "ReferenceOrArray" | "TextOrReference" | "NumberOrArray" => true,
         _ => false,
     }
 }

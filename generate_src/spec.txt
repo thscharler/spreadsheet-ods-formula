@@ -1598,7 +1598,7 @@ See also ACCRINTM 6.12.3, YEARFRAC 6.10.24
 
 Summary: Calculates the accrued interest for securities that pay at maturity.
 
-Syntax: ACCRINT( DateParam Issue ; DateParam Settlement ; Number Coupon ; Number Par [ ; Basis B = 0 ] )
+Syntax: ACCRINTM( DateParam Issue ; DateParam Settlement ; Number Coupon ; Number Par [ ; Basis B = 0 ] )
 
 Returns: Currency
 
@@ -2435,9 +2435,11 @@ Semantics: Computes the number of payment periods for an investment. The paramet
 
 If Rate is 0, then NPER solves this equation:
 
+** Some equitation **
 
 If Rate is non-zero, then NPER solves this equation:
 
+** Some equitation **
 
 Evaluators claiming to support the “Medium” or “Large” set shall support negative rates; evaluators only claiming to support the “Small” set need not.
 
@@ -2834,7 +2836,7 @@ See also FV 6.12.20, NPER 6.12.29, PMT 6.12.36, PV 6.12.41, RATE 6.12.42
 
 Summary: Compute the amount of depreciation at a given period of time using the straight-line depreciation method.
 
-Syntax: DDB( Number Cost ; Number Salvage ; Number LifeTime )
+Syntax: SLN( Number Cost ; Number Salvage ; Number LifeTime )
 
 Returns: Currency
 
@@ -3577,7 +3579,7 @@ See also ISTEXT 6.13.25, ISNUMBER 6.13.22
 
 Summary: Return TRUE if the parameter has type Error and is #N/A, else return FALSE.
 
-Syntax: ISERR( Scalar X )
+Syntax: ISNA( Scalar X )
 
 Returns: Logical
 
@@ -4169,219 +4171,6 @@ If calls to MULTIPLE.OPERATIONS are encountered in dependencies, replacements of
 
 Note: The function may be used to create tables of expressions that depend on two input parameters.
 
-Example: FormulaCell is B5, RowCell is B3, ColumnCell is B2
-
-Table 22 - MULTIPLE.OPERATIONS
-
-
-
-
-col_B
-
-
-col_C
-
-
-col_D
-
-
-col_E
-
-
-col_F
-
-row_2
-
-
-1
-
-
-
-
-
-1
-
-
-2
-
-
-3
-
-row_3
-
-
-1
-
-
-1
-
-
-=MULTIPLE.OPERATIONS($B$5;$B$3;$C3;$B$2;D$2)
-
-
-=MULTIPLE.OPERATIONS($B$5;$B$3;$C3;$B$2;E$2)
-
-
-=MULTIPLE.OPERATIONS($B$5;$B$3;$C3;$B$2;F$2)
-
-row_4
-
-
-=B2+B3
-
-
-2
-
-
-=MULTIPLE.OPERATIONS($B$5;$B$3;$C4;$B$2;D$2)
-
-
-=MULTIPLE.OPERATIONS($B$5;$B$3;$C4;$B$2;E$2)
-
-
-=MULTIPLE.OPERATIONS($B$5;$B$3;$C4;$B$2;F$2)
-
-row_5
-
-
-=B2*B3+B4
-
-
-3
-
-
-=MULTIPLE.OPERATIONS($B$5;$B$3;$C5;$B$2;D$2)
-
-
-=MULTIPLE.OPERATIONS($B$5;$B$3;$C5;$B$2;E$2)
-
-
-=MULTIPLE.OPERATIONS($B$5;$B$3;$C5;$B$2;F$2)
-
-
-
-
-
-
-
-4
-
-
-=MULTIPLE.OPERATIONS($B$5;$B$3;$C6;$B$2;D$2)
-
-
-=MULTIPLE.OPERATIONS($B$5;$B$3;$C6;$B$2;E$2)
-
-
-=MULTIPLE.OPERATIONS($B$5;$B$3;$C6;$B$2;F$2)
-
-Result:
-
-Table 23 - MULTIPLE.OPERATIONS
-
-
-
-
-col_B
-
-
-col_C
-
-
-col_D
-
-
-col_E
-
-
-col_F
-
-row_2
-
-
-1
-
-
-
-
-
-1
-
-
-2
-
-
-3
-
-row_3
-
-
-1
-
-
-1
-
-
-3
-
-
-5
-
-
-7
-
-row_4
-
-
-2
-
-
-2
-
-
-5
-
-
-8
-
-
-11
-
-row_5
-
-
-3
-
-
-3
-
-
-7
-
-
-11
-
-
-15
-
-
-
-
-
-
-
-4
-
-
-9
-
-
-14
-
-
-19
-
-Note that although only cell B5 is passed as the FormulaCell parameter, also the references to B2 and B3 of the formula in cell B4 are replaced, because B5 depends on B4.
 6.14.11 OFFSET
 
 Summary: Modifies a reference's position and dimension.
@@ -5954,248 +5743,6 @@ If an evaluator does not support the parameters FullPrecision and TriangulationP
 
 Semantics: Returns the given money value of a conversion from From currency into To currency. Both From and To shall be the official [ISO4217] abbreviation for the given currency; note that these are in upper case, but the function accepts lower case or mixed case as well. If From and To are equal currencies, the value N is returned, no precision or triangulation is applied.
 
-The function shall use the rates of exchange as set by the European Commission, as follows:
-
-Table 27 - EUROCONVERT
-
-From
-
-
-To
-
-
-Rate
-
-
-Currency
-
-
-Decimals
-
-"EUR"
-
-
-"ATS"
-
-
-13.7603
-
-
-Austrian Schilling
-
-
-2
-
-"EUR"
-
-
-"BEF"
-
-
-40.3399
-
-
-Belgian Franc
-
-
-0
-
-"EUR"
-
-
-"DEM"
-
-
-1.95583
-
-
-German Mark
-
-
-2
-
-"EUR"
-
-
-"ESP"
-
-
-166.386
-
-
-Spanish Peseta
-
-
-0
-
-"EUR"
-
-
-"FIM"
-
-
-5.94573
-
-
-Finnish Markka
-
-
-2
-
-"EUR"
-
-
-"FRF"
-
-
-6.55957
-
-
-French Franc
-
-
-2
-
-"EUR"
-
-
-"IEP"
-
-
-0.787564
-
-
-Irish Pound
-
-
-2
-
-"EUR"
-
-
-"ITL"
-
-
-1936.27
-
-
-Italian Lira
-
-
-0
-
-"EUR"
-
-
-"LUF"
-
-
-40.3399
-
-
-Luxembourg Franc
-
-
-0
-
-"EUR"
-
-
-"NLG"
-
-
-2.20371
-
-
-Dutch Guilder
-
-
-2
-
-"EUR"
-
-
-"PTE"
-
-
-200.482
-
-
-Portuguese Escudo
-
-
-2
-
-"EUR"
-
-
-"GRD"
-
-
-340.750
-
-
-Greek Drachma
-
-
-2
-
-"EUR"
-
-
-"SIT"
-
-
-239.640
-
-
-Slovenian Tolar
-
-
-2
-
-“EUR”
-
-
-“MTL”
-
-
-0.429300
-
-
-Maltese Lira
-
-
-2
-
-“EUR”
-
-
-“CYP”
-
-
-0.585274
-
-
-Cypriot Pound
-
-
-2
-
-"EUR"
-
-
-"SKK"
-
-
-30.1260
-
-
-Slovak Koruna
-
-
-2
-
 As new member countries adopt the Euro, new conversion rates will become active and evaluators may add them using the respective [ISO4217] codes and fixed rates as defined by the European Council, on the basis of a European Commission proposal.
 
 Note:
@@ -6206,7 +5753,7 @@ If FullPrecision is omitted or FALSE, the result is rounded according to the dec
 
 If TriangulationPrecision is given and ≥ 3, the intermediate result of a triangular conversion (currency1,EUR,currency2) is rounded to that precision. If TriangulationPrecision is omitted, the intermediate result is not rounded. Also if To currency is “EUR”, TriangulationPrecision precision is used as if triangulation was needed and conversion from EUR to EUR was applied.
 
-See also CONVERT
+See also CONVERT 6.16.18
 6.16.30 EVEN
 
 Summary: Rounds a number up to the nearest even integer. Rounding is away from zero.
@@ -6650,104 +6197,6 @@ Semantics: Computes a given function on a number sequence. The function is denot
     •are in a row that is hidden by a table:visibility=”filter” attribute of the <table:table-row> element (OpenDocument, Part 3, 19.754).
 
     •are in a row that is hidden by a table:visibility=”collapse” attribute of the <table:table-row> element if the function ID is one of 101...111.
-
-Table 28 - SUBTOTAL
-
-Function
-
-
-Exclude hidden by filter
-
-
-Exclude hidden by filter or collapsed
-
-AVERAGE
-
-
-1
-
-
-101
-
-COUNT
-
-
-2
-
-
-102
-
-COUNTA
-
-
-3
-
-
-103
-
-MAX
-
-
-4
-
-
-104
-
-MIN
-
-
-5
-
-
-105
-
-PRODUCT
-
-
-6
-
-
-106
-
-STDEV
-
-
-7
-
-
-107
-
-STDEVP
-
-
-8
-
-
-108
-
-SUM
-
-
-9
-
-
-109
-
-VAR
-
-
-10
-
-
-110
-
-VARP
-
-
-11
-
-
-111
 
 See also SUM 6.16.61, AVERAGE 6.18.3
 6.16.61 SUM
@@ -10092,7 +9541,7 @@ See also LEFT 6.20.12, LEN 6.20.13, MID 6.20.15, RIGHT 6.20.19, SUBSTITUTE 6.20.
 
 Summary: Return text repeated Count times.
 
-Syntax: T( Text T ; Integer Count )
+Syntax: REPT( Text T ; Integer Count )
 
 Returns: Text
 
