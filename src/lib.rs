@@ -74,10 +74,38 @@
 //!      FArray([0, 0, 0, 0, 0, 1, 0]),
 //! ));
 //! ```
-//!
-//!
-//!
-//!
+
+#![allow(clippy::too_many_arguments)]
+#![warn(absolute_paths_not_starting_with_crate)]
+// NO #![warn(box_pointers)]
+#![warn(elided_lifetimes_in_paths)]
+#![warn(explicit_outlives_requirements)]
+#![warn(keyword_idents)]
+#![warn(macro_use_extern_crate)]
+#![warn(meta_variable_misuse)]
+#![warn(missing_abi)]
+// NOT_ACCURATE #![warn(missing_copy_implementations)]
+// #![warn(missing_debug_implementations)]
+// #![warn(missing_docs)]
+// NO #![warn(non_ascii_idents)]
+#![warn(noop_method_call)]
+// NO #![warn(or_patterns_back_compat)]
+#![warn(pointer_structural_match)]
+#![warn(semicolon_in_expressions_from_macros)]
+// NOT_ACCURATE #![warn(single_use_lifetimes)]
+#![warn(trivial_casts)]
+#![warn(trivial_numeric_casts)]
+#![warn(unreachable_pub)]
+// #![warn(unsafe_code)]
+#![warn(unsafe_op_in_unsafe_fn)]
+#![warn(unstable_features)]
+// NO #![warn(unused_crate_dependencies)]
+// NO #![warn(unused_extern_crates)]
+#![warn(unused_import_braces)]
+#![warn(unused_lifetimes)]
+#![warn(unused_qualifications)]
+// NO #![warn(unused_results)]
+#![warn(variant_size_differences)]
 
 use spreadsheet_ods::{CellRange, CellRef};
 use std::borrow::Borrow;
@@ -413,7 +441,7 @@ macro_rules! any_struct {
     (VAR $t:ident) => {
 
         /// Function with variable number of parameters.
-       #[doc(hidden)]
+        #[doc(hidden)]
         pub struct $t(
             pub &'static str,
             pub Vec<Box<dyn Any>>
@@ -1010,6 +1038,7 @@ impl<A: Any> Criterion for (CriterionCmp, A) {}
 // -----------------------------------------------------------------------
 
 /// Matrix value.
+#[derive(Debug)]
 pub struct FMatrix<T: Any, const N: usize, const M: usize>(pub [[T; M]; N]);
 
 impl<T: Any, const N: usize, const M: usize> Any for FMatrix<T, N, M> {
@@ -1034,6 +1063,7 @@ impl<T: Any, const N: usize, const M: usize> Any for FMatrix<T, N, M> {
 impl<T: Any, const N: usize, const M: usize> Matrix for FMatrix<T, N, M> {}
 
 /// Array.
+#[derive(Debug)]
 pub struct FArray<T: Any, const N: usize>(pub [T; N]);
 
 impl<T: Any, const N: usize> Any for FArray<T, N> {
@@ -1412,7 +1442,7 @@ text_op!(FnText5<A, B, C, D, E>);
 pub fn formula<T: Any>(f: T) -> String {
     let mut buf = String::new();
     buf.push_str("of:=");
-    let _ = f.formula(&mut buf);
+    f.formula(&mut buf);
     buf
 }
 

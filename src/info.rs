@@ -8,6 +8,7 @@ use crate::{Any, Criterion, FnNumberVar, Reference};
 use std::fmt::Write;
 
 /// Parameter for CELL()
+#[derive(Debug)]
 pub enum CellInfo {
     Address,
     Col,
@@ -51,6 +52,7 @@ impl Any for CellInfo {
 }
 
 /// Parameter for INFO()
+#[derive(Debug)]
 pub enum InfoInfo {
     Directory,
     MemAvail,
@@ -90,11 +92,11 @@ impl Any for InfoInfo {
 pub fn countifs<R: Reference + 'static, C: Criterion + 'static, const N: usize>(
     list: [(R, C); N],
 ) -> FnNumberVar {
-    let mut param = Vec::new();
+    let mut param: Vec<Box<dyn Any>> = Vec::new();
 
     for (r, c) in list {
-        param.push(Box::new(r) as Box<dyn Any>);
-        param.push(Box::new(c) as Box<dyn Any>);
+        param.push(Box::new(r));
+        param.push(Box::new(c));
     }
 
     FnNumberVar("COUNTIFS", param)

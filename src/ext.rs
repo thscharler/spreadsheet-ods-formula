@@ -7,6 +7,7 @@ use crate::{Any, FnNumber4, Text};
 pub use crate::generated::ext::*;
 
 /// Parameter for DDE()
+#[derive(Debug)]
 pub enum DDEConversion {
     NumberLocalized,
     NumberEnUS,

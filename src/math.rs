@@ -8,6 +8,7 @@ use crate::{Any, Criterion, FnNumberVar, Reference};
 use std::fmt::Write;
 
 /// Parameter for CONVERT().
+#[derive(Debug)]
 pub enum BaseUnit {
     UKAcre,
     USAcre,
@@ -221,6 +222,7 @@ impl Any for BaseUnit {
 }
 
 /// Parameter for CONVERT().
+#[derive(Debug)]
 pub enum DecimalPrefix {
     Yotta,
     Zetta,
@@ -270,6 +272,7 @@ impl Any for DecimalPrefix {
 }
 
 /// Parameter for CONVERT().
+#[derive(Debug)]
 pub enum BinaryPrefix {
     Yobi,
     Zebi,
@@ -297,6 +300,7 @@ impl Any for BinaryPrefix {
 }
 
 /// Parameter for CONVERT().
+#[derive(Debug)]
 pub enum ConvertUnit {
     Unit(BaseUnit),
     SI(DecimalPrefix, BaseUnit),
@@ -304,6 +308,7 @@ pub enum ConvertUnit {
 }
 
 impl Any for ConvertUnit {
+    #[inline]
     fn formula(&self, buf: &mut String) {
         match self {
             ConvertUnit::Unit(v) => {
@@ -322,6 +327,7 @@ impl Any for ConvertUnit {
 }
 
 /// Parameter for SUBTOTAL().
+#[derive(Debug)]
 pub enum SubtotalFunction {
     Average,
     Count,
@@ -390,12 +396,12 @@ pub fn sumifs<
     range: A,
     list: [(R, C); N],
 ) -> FnNumberVar {
-    let mut param = Vec::new();
+    let mut param: Vec<Box<dyn Any>> = Vec::new();
 
-    param.push(Box::new(range) as Box<dyn Any>);
+    param.push(Box::new(range));
     for (r, c) in list {
-        param.push(Box::new(r) as Box<dyn Any>);
-        param.push(Box::new(c) as Box<dyn Any>);
+        param.push(Box::new(r));
+        param.push(Box::new(c));
     }
 
     FnNumberVar("SUMIFS", param)

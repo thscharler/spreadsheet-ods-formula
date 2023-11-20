@@ -11,6 +11,7 @@ pub use crate::generated::fin::*;
 pub use crate::date::YearFracMethod;
 
 /// Parameter for many fin functions.
+#[derive(Debug)]
 pub enum Frequency {
     Annual,
     Semiannual,
@@ -34,6 +35,7 @@ impl Any for Frequency {
 }
 
 /// Parameter for CUMIPMT()
+#[derive(Debug)]
 pub enum MaturityDate {
     ///
     DueAtEnd,
@@ -51,6 +53,7 @@ impl Any for MaturityDate {
 }
 
 /// Parameter for CUMIPMT()
+#[derive(Debug)]
 pub enum PayType {
     ///
     DueAtEnd,

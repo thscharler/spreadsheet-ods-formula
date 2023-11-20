@@ -8,6 +8,7 @@ use crate::{Any, FnAny2, FnAnyVar, Reference, Scalar, Text};
 use std::fmt::Write;
 
 /// Parameter for ADDRESS().
+#[derive(Debug)]
 pub enum AddressAbs {
     RowAbsColAbs,
     RowAbsColRel,
@@ -31,6 +32,7 @@ impl Any for AddressAbs {
 }
 
 /// Parameter for MATCH().
+#[derive(Debug)]
 pub enum MatchType {
     MaxInDescendingList,
     ExactMatch,
@@ -70,14 +72,14 @@ pub fn getpivotdata_fields<
     table: B,
     fields: [(F, S); N],
 ) -> FnAnyVar {
-    let mut param = Vec::new();
+    let mut param: Vec<Box<dyn Any>> = Vec::new();
 
-    param.push(Box::new(datafield) as Box<dyn Any>);
-    param.push(Box::new(table) as Box<dyn Any>);
+    param.push(Box::new(datafield));
+    param.push(Box::new(table));
 
     for (n, sc) in fields {
-        param.push(Box::new(n) as Box<dyn Any>);
-        param.push(Box::new(sc) as Box<dyn Any>);
+        param.push(Box::new(n));
+        param.push(Box::new(sc));
     }
 
     FnAnyVar("GETPIVOTDATA", param)

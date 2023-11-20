@@ -7,6 +7,7 @@ use crate::Any;
 pub use crate::generated::conv::*;
 
 /// Parameter for ROMAN().
+#[derive(Debug)]
 pub enum RomanStyle {
     /// Only subtract powers of 10, not L or V, and only if the next
     /// number is not more than 10 times greater. A number

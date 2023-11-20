@@ -7,6 +7,7 @@ pub use crate::generated::date::*;
 use crate::Any;
 
 /// Parameter for DATEDIF()
+#[derive(Debug)]
 pub enum DateDifMethod {
     /// Years
     Years,
@@ -36,6 +37,7 @@ impl Any for DateDifMethod {
 }
 
 /// Parameter for DAYS360()
+#[derive(Debug)]
 pub enum Days360Method {
     /// NASD Method
     USNasd,
@@ -53,6 +55,7 @@ impl Any for Days360Method {
 }
 
 /// Parameter for WEEKDAY()
+#[derive(Debug)]
 pub enum WeekdayMethod {
     /// Monday first, value 0.
     Monday0,
@@ -88,6 +91,7 @@ impl Any for WeekdayMethod {
 }
 
 /// Parameter for WEEKNUM()
+#[derive(Debug)]
 pub enum WeeknumMethod {
     /// First week contains Jan 1, week starts on Monday.
     Jan1WeekMonday,
@@ -123,6 +127,7 @@ impl Any for WeeknumMethod {
 }
 
 /// Parameter for YEARFRAC()
+#[derive(Debug)]
 pub enum YearFracMethod {
     ///
     USNasd30_360,
