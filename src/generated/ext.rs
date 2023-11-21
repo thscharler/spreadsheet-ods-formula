@@ -8,6 +8,8 @@ use crate::ext::*;
 
 /// Returns data from a DDE request
 ///
+/// [documentfoundation->DDE](https://wiki.documentfoundation.org/Documentation/Calc_Functions/DDE)
+///
 /// __Syntax__: 
 /// ```ods
 ///     DDE( Server: Text; Topic: Text; Item: Text )
@@ -38,12 +40,16 @@ use crate::ext::*;
 /// The DDE function is non-portable because it depends on availability of 
 /// external programs (server parameter) and their interpretation of the topic 
 /// and item parameters.
+///
+/// __See also__: [crate::of::dde_()], 
 #[inline]
 pub fn dde<A: Text, B: Text, C: Text>(server: A, topic: B, item: C) -> FnText3<A, B, C> {
     FnText3("DDE", server, topic, item)
 }
 
 /// Returns data from a DDE request
+///
+/// [documentfoundation->DDE](https://wiki.documentfoundation.org/Documentation/Calc_Functions/DDE)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -75,12 +81,16 @@ pub fn dde<A: Text, B: Text, C: Text>(server: A, topic: B, item: C) -> FnText3<A
 /// The DDE function is non-portable because it depends on availability of 
 /// external programs (server parameter) and their interpretation of the topic 
 /// and item parameters.
+///
+/// __See also__: [crate::of::dde()], 
 #[inline]
 pub fn dde_<A: Text, B: Text, C: Text, D: Number>(server: A, topic: B, item: C, mode: D) -> FnText4<A, B, C, D> {
     FnText4("DDE", server, topic, item, mode)
 }
 
 /// Creation of a hyperlink involving an evaluated expression.
+///
+/// [documentfoundation->HYPERLINK](https://wiki.documentfoundation.org/Documentation/Calc_Functions/HYPERLINK)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -98,12 +108,16 @@ pub fn dde_<A: Text, B: Text, C: Text, D: Number>(server: A, topic: B, item: C, 
 /// HYPERLINK function calls as calling for an implementation-dependent 
 /// creation of a hypertext link based on the expression containing the 
 /// HYPERLINK function calls.
+///
+/// __See also__: [crate::of::hyperlink_()], 
 #[inline]
 pub fn hyperlink<A: Text>(i_r_i: A) -> FnText1<A> {
     FnText1("HYPERLINK", i_r_i)
 }
 
 /// Creation of a hyperlink involving an evaluated expression.
+///
+/// [documentfoundation->HYPERLINK](https://wiki.documentfoundation.org/Documentation/Calc_Functions/HYPERLINK)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -121,6 +135,8 @@ pub fn hyperlink<A: Text>(i_r_i: A) -> FnText1<A> {
 /// HYPERLINK function calls as calling for an implementation-dependent 
 /// creation of a hypertext link based on the expression containing the 
 /// HYPERLINK function calls.
+///
+/// __See also__: [crate::of::hyperlink()], 
 #[inline]
 pub fn hyperlink_<A: Text, B: TextOrNumber>(i_r_i: A, function_result: B) -> FnText2<A, B> {
     FnText2("HYPERLINK", i_r_i, function_result)

@@ -25,6 +25,8 @@ use crate::conv::*;
 
 /// Convert Roman numerals to Number.
 ///
+/// [documentfoundation->ARABIC](https://wiki.documentfoundation.org/Documentation/Calc_Functions/ARABIC)
+///
 /// __Syntax__: 
 /// ```ods
 ///     ARABIC( X: Text )
@@ -49,13 +51,15 @@ use crate::conv::*;
 /// 
 /// If X is an empty string, 0 is returned.
 ///
-/// __See also__: "Infix Operator \"&\"", "ROMAN", 
+/// __See also__: [crate::of::infix operator "&"()], [crate::of::roman()], 
 #[inline]
 pub fn arabic<A: Text>(x: A) -> FnNumber1<A> {
     FnNumber1("ARABIC", x)
 }
 
 /// Converts a number into a text representation with the given base.
+///
+/// [documentfoundation->BASE](https://wiki.documentfoundation.org/Documentation/Calc_Functions/BASE)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -77,13 +81,15 @@ pub fn arabic<A: Text>(x: A) -> FnNumber1<A> {
 /// characters long. If the text is longer than the MinimumLength argument, the 
 /// MinimumLength parameter is ignored.
 ///
-/// __See also__: "DECIMAL", 
+/// __See also__: [crate::of::decimal()], [crate::of::base_()], 
 #[inline]
 pub fn base<A: Number, B: Number>(x: A, radix: B) -> FnText2<A, B> {
     FnText2("BASE", x, radix)
 }
 
 /// Converts a number into a text representation with the given base.
+///
+/// [documentfoundation->BASE](https://wiki.documentfoundation.org/Documentation/Calc_Functions/BASE)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -105,7 +111,7 @@ pub fn base<A: Number, B: Number>(x: A, radix: B) -> FnText2<A, B> {
 /// characters long. If the text is longer than the MinimumLength argument, the 
 /// MinimumLength parameter is ignored.
 ///
-/// __See also__: "DECIMAL", 
+/// __See also__: [crate::of::decimal()], [crate::of::base()], 
 #[inline]
 pub fn base_<A: Number, B: Number, C: Number>(x: A, radix: B, minimum_length: C) -> FnText3<A, B, C> {
     FnText3("BASE", x, radix, minimum_length)
@@ -113,6 +119,8 @@ pub fn base_<A: Number, B: Number, C: Number>(x: A, radix: B, minimum_length: C)
 
 /// Converts a binary (base 2) number (up to 10 digits) to its decimal 
 /// equivalent
+///
+/// [documentfoundation->BIN2DEC](https://wiki.documentfoundation.org/Documentation/Calc_Functions/BIN2DEC)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -139,7 +147,7 @@ pub fn base_<A: Number, B: Number, C: Number>(x: A, radix: B, minimum_length: C)
 /// implementation-defined what happens if an evaluator is given an empty 
 /// string; evaluators may return an Error or 0 in such cases.
 ///
-/// __See also__: "INT", 
+/// __See also__: [crate::of::int()], 
 #[inline]
 pub fn bin2dec<A: TextOrNumber>(x: A) -> FnNumber1<A> {
     FnNumber1("BIN2DEC", x)
@@ -147,6 +155,8 @@ pub fn bin2dec<A: TextOrNumber>(x: A) -> FnNumber1<A> {
 
 /// Converts a binary (base 2) number (10th bit is sign) to its hexadecimal 
 /// equivalent
+///
+/// [documentfoundation->BIN2HEX](https://wiki.documentfoundation.org/Documentation/Calc_Functions/BIN2HEX)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -183,7 +193,7 @@ pub fn bin2dec<A: TextOrNumber>(x: A) -> FnNumber1<A> {
 /// than the Digits parameter specifies, the results are 
 /// implementation-defined.
 ///
-/// __See also__: "INT", 
+/// __See also__: [crate::of::int()], [crate::of::bin2hex_()], 
 #[inline]
 pub fn bin2hex<A: TextOrNumber>(x: A) -> FnText1<A> {
     FnText1("BIN2HEX", x)
@@ -191,6 +201,8 @@ pub fn bin2hex<A: TextOrNumber>(x: A) -> FnText1<A> {
 
 /// Converts a binary (base 2) number (10th bit is sign) to its hexadecimal 
 /// equivalent
+///
+/// [documentfoundation->BIN2HEX](https://wiki.documentfoundation.org/Documentation/Calc_Functions/BIN2HEX)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -227,7 +239,7 @@ pub fn bin2hex<A: TextOrNumber>(x: A) -> FnText1<A> {
 /// than the Digits parameter specifies, the results are 
 /// implementation-defined.
 ///
-/// __See also__: "INT", 
+/// __See also__: [crate::of::int()], [crate::of::bin2hex()], 
 #[inline]
 pub fn bin2hex_<A: TextOrNumber, B: Number>(x: A, digits: B) -> FnText2<A, B> {
     FnText2("BIN2HEX", x, digits)
@@ -235,6 +247,8 @@ pub fn bin2hex_<A: TextOrNumber, B: Number>(x: A, digits: B) -> FnText2<A, B> {
 
 /// Converts a binary (base 2) number (10th bit is sign) to its octal (base 8) 
 /// equivalent
+///
+/// [documentfoundation->BIN2OCT](https://wiki.documentfoundation.org/Documentation/Calc_Functions/BIN2OCT)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -270,7 +284,7 @@ pub fn bin2hex_<A: TextOrNumber, B: Number>(x: A, digits: B) -> FnText2<A, B> {
 /// are more digits than specified by the Digits parameter, its results are 
 /// implementation-defined.
 ///
-/// __See also__: "INT", 
+/// __See also__: [crate::of::int()], [crate::of::bin2oct_()], 
 #[inline]
 pub fn bin2oct<A: TextOrNumber>(x: A) -> FnText1<A> {
     FnText1("BIN2OCT", x)
@@ -278,6 +292,8 @@ pub fn bin2oct<A: TextOrNumber>(x: A) -> FnText1<A> {
 
 /// Converts a binary (base 2) number (10th bit is sign) to its octal (base 8) 
 /// equivalent
+///
+/// [documentfoundation->BIN2OCT](https://wiki.documentfoundation.org/Documentation/Calc_Functions/BIN2OCT)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -313,13 +329,15 @@ pub fn bin2oct<A: TextOrNumber>(x: A) -> FnText1<A> {
 /// are more digits than specified by the Digits parameter, its results are 
 /// implementation-defined.
 ///
-/// __See also__: "INT", 
+/// __See also__: [crate::of::int()], [crate::of::bin2oct()], 
 #[inline]
 pub fn bin2oct_<A: TextOrNumber, B: Number>(x: A, digits: B) -> FnText2<A, B> {
     FnText2("BIN2OCT", x, digits)
 }
 
 /// Converts a decimal number to base 2 (whose 10th bit is sign)
+///
+/// [documentfoundation->DEC2BIN](https://wiki.documentfoundation.org/Documentation/Calc_Functions/DEC2BIN)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -346,13 +364,15 @@ pub fn bin2oct_<A: TextOrNumber, B: Number>(x: A, digits: B) -> FnText2<A, B> {
 /// digits than specified by the Digits parameter, the results are 
 /// implementation-defined.
 ///
-/// __See also__: "INT", 
+/// __See also__: [crate::of::int()], [crate::of::dec2bin_()], 
 #[inline]
 pub fn dec2bin<A: TextOrNumber>(x: A) -> FnText1<A> {
     FnText1("DEC2BIN", x)
 }
 
 /// Converts a decimal number to base 2 (whose 10th bit is sign)
+///
+/// [documentfoundation->DEC2BIN](https://wiki.documentfoundation.org/Documentation/Calc_Functions/DEC2BIN)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -379,13 +399,15 @@ pub fn dec2bin<A: TextOrNumber>(x: A) -> FnText1<A> {
 /// digits than specified by the Digits parameter, the results are 
 /// implementation-defined.
 ///
-/// __See also__: "INT", 
+/// __See also__: [crate::of::int()], [crate::of::dec2bin()], 
 #[inline]
 pub fn dec2bin_<A: TextOrNumber, B: Number>(x: A, digits: B) -> FnText2<A, B> {
     FnText2("DEC2BIN", x, digits)
 }
 
 /// Converts a decimal number to base 16 (whose 40th bit is sign)
+///
+/// [documentfoundation->DEC2HEX](https://wiki.documentfoundation.org/Documentation/Calc_Functions/DEC2HEX)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -413,13 +435,15 @@ pub fn dec2bin_<A: TextOrNumber, B: Number>(x: A, digits: B) -> FnText2<A, B> {
 /// more digits than specified by the Digits parameter, the results are 
 /// implementation-defined.
 ///
-/// __See also__: "INT", 
+/// __See also__: [crate::of::int()], [crate::of::dec2hex_()], 
 #[inline]
 pub fn dec2hex<A: TextOrNumber>(x: A) -> FnText1<A> {
     FnText1("DEC2HEX", x)
 }
 
 /// Converts a decimal number to base 16 (whose 40th bit is sign)
+///
+/// [documentfoundation->DEC2HEX](https://wiki.documentfoundation.org/Documentation/Calc_Functions/DEC2HEX)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -447,13 +471,15 @@ pub fn dec2hex<A: TextOrNumber>(x: A) -> FnText1<A> {
 /// more digits than specified by the Digits parameter, the results are 
 /// implementation-defined.
 ///
-/// __See also__: "INT", 
+/// __See also__: [crate::of::int()], [crate::of::dec2hex()], 
 #[inline]
 pub fn dec2hex_<A: TextOrNumber, B: Number>(x: A, digits: B) -> FnText2<A, B> {
     FnText2("DEC2HEX", x, digits)
 }
 
 /// Converts a decimal number to base 8 (whose 30th bit is sign)
+///
+/// [documentfoundation->DEC2OCT](https://wiki.documentfoundation.org/Documentation/Calc_Functions/DEC2OCT)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -480,13 +506,15 @@ pub fn dec2hex_<A: TextOrNumber, B: Number>(x: A, digits: B) -> FnText2<A, B> {
 /// than specified by the Digits parameter, the results are 
 /// implementation-defined.
 ///
-/// __See also__: "INT", "OCT2DEC", 
+/// __See also__: [crate::of::int()], [crate::of::oct2dec()], [crate::of::dec2oct_()], 
 #[inline]
 pub fn dec2oct<A: TextOrNumber>(x: A) -> FnText1<A> {
     FnText1("DEC2OCT", x)
 }
 
 /// Converts a decimal number to base 8 (whose 30th bit is sign)
+///
+/// [documentfoundation->DEC2OCT](https://wiki.documentfoundation.org/Documentation/Calc_Functions/DEC2OCT)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -513,13 +541,15 @@ pub fn dec2oct<A: TextOrNumber>(x: A) -> FnText1<A> {
 /// than specified by the Digits parameter, the results are 
 /// implementation-defined.
 ///
-/// __See also__: "INT", "OCT2DEC", 
+/// __See also__: [crate::of::int()], [crate::of::oct2dec()], [crate::of::dec2oct()], 
 #[inline]
 pub fn dec2oct_<A: TextOrNumber, B: Number>(x: A, digits: B) -> FnText2<A, B> {
     FnText2("DEC2OCT", x, digits)
 }
 
 /// Converts text representing a number in a given base into a base 10 number.
+///
+/// [documentfoundation->DECIMAL](https://wiki.documentfoundation.org/Documentation/Calc_Functions/DECIMAL)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -537,11 +567,11 @@ pub fn dec2oct_<A: TextOrNumber, B: Number>(x: A, digits: B) -> FnText2<A, B> {
 /// 
 /// An Error is returned if X has characters that do not belong in base Radix. 
 /// However, leading spaces and tabs in X are always ignored. If Radix is 16, a 
-/// leading regular expression “0?[Xx]” is ignored, as is a trailing letter 
-/// H or h. If Radix is 2, the letter b or B at the end is ignored (if 
+/// leading regular expression “0?\[Xx\]” is ignored, as is a trailing 
+/// letter H or h. If Radix is 2, the letter b or B at the end is ignored (if 
 /// present).
 ///
-/// __See also__: "BASE", 
+/// __See also__: [crate::of::base()], 
 #[inline]
 pub fn decimal<A: Text, B: Number>(x: A, radix: B) -> FnNumber2<A, B> {
     FnNumber2("DECIMAL", x, radix)
@@ -549,6 +579,8 @@ pub fn decimal<A: Text, B: Number>(x: A, radix: B) -> FnNumber2<A, B> {
 
 /// Converts a hexadecimal number (40th bit is sign) to base 2 (whose 10th bit 
 /// is sign)
+///
+/// [documentfoundation->HEX2BIN](https://wiki.documentfoundation.org/Documentation/Calc_Functions/HEX2BIN)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -577,7 +609,7 @@ pub fn decimal<A: Text, B: Number>(x: A, radix: B) -> FnNumber2<A, B> {
 /// digits. If there are more digits than specified by the Digits parameter, 
 /// the results are implementation-defined.
 ///
-/// __See also__: "INT", 
+/// __See also__: [crate::of::int()], [crate::of::hex2bin_()], 
 #[inline]
 pub fn hex2bin<A: TextOrNumber>(x: A) -> FnText1<A> {
     FnText1("HEX2BIN", x)
@@ -585,6 +617,8 @@ pub fn hex2bin<A: TextOrNumber>(x: A) -> FnText1<A> {
 
 /// Converts a hexadecimal number (40th bit is sign) to base 2 (whose 10th bit 
 /// is sign)
+///
+/// [documentfoundation->HEX2BIN](https://wiki.documentfoundation.org/Documentation/Calc_Functions/HEX2BIN)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -613,13 +647,15 @@ pub fn hex2bin<A: TextOrNumber>(x: A) -> FnText1<A> {
 /// digits. If there are more digits than specified by the Digits parameter, 
 /// the results are implementation-defined.
 ///
-/// __See also__: "INT", 
+/// __See also__: [crate::of::int()], [crate::of::hex2bin()], 
 #[inline]
 pub fn hex2bin_<A: TextOrNumber, B: Number>(x: A, digits: B) -> FnText2<A, B> {
     FnText2("HEX2BIN", x, digits)
 }
 
 /// Converts a hexadecimal number (40th bit is sign) to decimal
+///
+/// [documentfoundation->HEX2DEC](https://wiki.documentfoundation.org/Documentation/Calc_Functions/HEX2DEC)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -642,7 +678,7 @@ pub fn hex2bin_<A: TextOrNumber, B: Number>(x: A, digits: B) -> FnText2<A, B> {
 /// 
 /// The resulting value is a decimal number.
 ///
-/// __See also__: "INT", 
+/// __See also__: [crate::of::int()], 
 #[inline]
 pub fn hex2dec<A: TextOrNumber>(x: A) -> FnNumber1<A> {
     FnNumber1("HEX2DEC", x)
@@ -650,6 +686,8 @@ pub fn hex2dec<A: TextOrNumber>(x: A) -> FnNumber1<A> {
 
 /// Converts a hexadecimal number (40th bit is sign) to base 8 (whose 30th bit 
 /// is sign)
+///
+/// [documentfoundation->HEX2OCT](https://wiki.documentfoundation.org/Documentation/Calc_Functions/HEX2OCT)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -678,7 +716,7 @@ pub fn hex2dec<A: TextOrNumber>(x: A) -> FnNumber1<A> {
 /// digits. If there are more digits than specified by the Digits parameter, 
 /// the results are implementation-defined.
 ///
-/// __See also__: "INT", 
+/// __See also__: [crate::of::int()], [crate::of::hex2oct_()], 
 #[inline]
 pub fn hex2oct<A: TextOrNumber>(x: A) -> FnText1<A> {
     FnText1("HEX2OCT", x)
@@ -686,6 +724,8 @@ pub fn hex2oct<A: TextOrNumber>(x: A) -> FnText1<A> {
 
 /// Converts a hexadecimal number (40th bit is sign) to base 8 (whose 30th bit 
 /// is sign)
+///
+/// [documentfoundation->HEX2OCT](https://wiki.documentfoundation.org/Documentation/Calc_Functions/HEX2OCT)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -714,7 +754,7 @@ pub fn hex2oct<A: TextOrNumber>(x: A) -> FnText1<A> {
 /// digits. If there are more digits than specified by the Digits parameter, 
 /// the results are implementation-defined.
 ///
-/// __See also__: "INT", 
+/// __See also__: [crate::of::int()], [crate::of::hex2oct()], 
 #[inline]
 pub fn hex2oct_<A: TextOrNumber, B: Number>(x: A, digits: B) -> FnText2<A, B> {
     FnText2("HEX2OCT", x, digits)
@@ -722,6 +762,8 @@ pub fn hex2oct_<A: TextOrNumber, B: Number>(x: A, digits: B) -> FnText2<A, B> {
 
 /// Converts an octal number (30th bit is sign) to base 2 (whose 10th bit is 
 /// sign)
+///
+/// [documentfoundation->OCT2BIN](https://wiki.documentfoundation.org/Documentation/Calc_Functions/OCT2BIN)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -750,7 +792,7 @@ pub fn hex2oct_<A: TextOrNumber, B: Number>(x: A, digits: B) -> FnText2<A, B> {
 /// digits. If there are more digits than specified by the Digits parameter, 
 /// the results are implementation-defined.
 ///
-/// __See also__: "INT", 
+/// __See also__: [crate::of::int()], [crate::of::oct2bin_()], 
 #[inline]
 pub fn oct2bin<A: TextOrNumber>(x: A) -> FnText1<A> {
     FnText1("OCT2BIN", x)
@@ -758,6 +800,8 @@ pub fn oct2bin<A: TextOrNumber>(x: A) -> FnText1<A> {
 
 /// Converts an octal number (30th bit is sign) to base 2 (whose 10th bit is 
 /// sign)
+///
+/// [documentfoundation->OCT2BIN](https://wiki.documentfoundation.org/Documentation/Calc_Functions/OCT2BIN)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -786,13 +830,15 @@ pub fn oct2bin<A: TextOrNumber>(x: A) -> FnText1<A> {
 /// digits. If there are more digits than specified by the Digits parameter, 
 /// the results are implementation-defined.
 ///
-/// __See also__: "INT", 
+/// __See also__: [crate::of::int()], [crate::of::oct2bin()], 
 #[inline]
 pub fn oct2bin_<A: TextOrNumber, B: Number>(x: A, digits: B) -> FnText2<A, B> {
     FnText2("OCT2BIN", x, digits)
 }
 
 /// Converts an octal number (30th bit is sign) to decimal
+///
+/// [documentfoundation->OCT2DEC](https://wiki.documentfoundation.org/Documentation/Calc_Functions/OCT2DEC)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -815,7 +861,7 @@ pub fn oct2bin_<A: TextOrNumber, B: Number>(x: A, digits: B) -> FnText2<A, B> {
 /// 
 /// The resulting value is a decimal number.
 ///
-/// __See also__: "INT", 
+/// __See also__: [crate::of::int()], 
 #[inline]
 pub fn oct2dec<A: TextOrNumber>(x: A) -> FnNumber1<A> {
     FnNumber1("OCT2DEC", x)
@@ -823,6 +869,8 @@ pub fn oct2dec<A: TextOrNumber>(x: A) -> FnNumber1<A> {
 
 /// Converts an octal number (30th bit is sign) to hexadecimal (whose 40th bit 
 /// is sign)
+///
+/// [documentfoundation->OCT2HEX](https://wiki.documentfoundation.org/Documentation/Calc_Functions/OCT2HEX)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -851,7 +899,7 @@ pub fn oct2dec<A: TextOrNumber>(x: A) -> FnNumber1<A> {
 /// digits. If there are more digits than specified by the Digits parameter, 
 /// the results are implementation-defined.
 ///
-/// __See also__: "INT", 
+/// __See also__: [crate::of::int()], [crate::of::oct2hex_()], 
 #[inline]
 pub fn oct2hex<A: TextOrNumber>(x: A) -> FnText1<A> {
     FnText1("OCT2HEX", x)
@@ -859,6 +907,8 @@ pub fn oct2hex<A: TextOrNumber>(x: A) -> FnText1<A> {
 
 /// Converts an octal number (30th bit is sign) to hexadecimal (whose 40th bit 
 /// is sign)
+///
+/// [documentfoundation->OCT2HEX](https://wiki.documentfoundation.org/Documentation/Calc_Functions/OCT2HEX)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -887,13 +937,15 @@ pub fn oct2hex<A: TextOrNumber>(x: A) -> FnText1<A> {
 /// digits. If there are more digits than specified by the Digits parameter, 
 /// the results are implementation-defined.
 ///
-/// __See also__: "INT", 
+/// __See also__: [crate::of::int()], [crate::of::oct2hex()], 
 #[inline]
 pub fn oct2hex_<A: TextOrNumber, B: Number>(x: A, digits: B) -> FnText2<A, B> {
     FnText2("OCT2HEX", x, digits)
 }
 
 /// Convert to Roman numerals
+///
+/// [documentfoundation->ROMAN](https://wiki.documentfoundation.org/Documentation/Calc_Functions/ROMAN)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -926,13 +978,15 @@ pub fn oct2hex_<A: TextOrNumber, B: Number>(x: A, digits: B) -> FnText2<A, B> {
 /// Evaluators that accept negative values of N should include a negative sign 
 /// (“-”) as the first character.
 ///
-/// __See also__: "Infix Operator \"&\"", "ISLOGICAL", "ARABIC", 
+/// __See also__: [crate::of::infix operator "&"()], [crate::of::islogical()], [crate::of::arabic()], [crate::of::roman_()], 
 #[inline]
 pub fn roman<A: Number>(n: A) -> FnText1<A> {
     FnText1("ROMAN", n)
 }
 
 /// Convert to Roman numerals
+///
+/// [documentfoundation->ROMAN](https://wiki.documentfoundation.org/Documentation/Calc_Functions/ROMAN)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -965,7 +1019,7 @@ pub fn roman<A: Number>(n: A) -> FnText1<A> {
 /// Evaluators that accept negative values of N should include a negative sign 
 /// (“-”) as the first character.
 ///
-/// __See also__: "Infix Operator \"&\"", "ISLOGICAL", "ARABIC", 
+/// __See also__: [crate::of::infix operator "&"()], [crate::of::islogical()], [crate::of::arabic()], [crate::of::roman()], 
 #[inline]
 pub fn roman_<A: Number>(n: A, format: RomanStyle) -> FnText2<A, RomanStyle> {
     FnText2("ROMAN", n, format)

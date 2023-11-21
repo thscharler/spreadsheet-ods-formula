@@ -16,6 +16,8 @@ use crate::matrix::*;
 
 /// Calculates the determinant of a matrix.
 ///
+/// [documentfoundation->MDETERM](https://wiki.documentfoundation.org/Documentation/Calc_Functions/MDETERM)
+///
 /// __Syntax__: 
 /// ```ods
 ///     MDETERM( A: Array )
@@ -33,13 +35,15 @@ use crate::matrix::*;
 /// an even number of transpositions), -1 otherwise. A transposition on 1, ..., 
 /// n is a permutation of 1, ..., n with exactly (n - 2) numbers fixed.
 ///
-/// __See also__: "MINVERSE", 
+/// __See also__: [crate::of::minverse()], 
 #[inline]
 pub fn mdeterm<A: Matrix>(a: A) -> FnNumber1<A> {
     FnNumber1("MDETERM", a)
 }
 
 /// Returns the inverse of a matrix.
+///
+/// [documentfoundation->MINVERSE](https://wiki.documentfoundation.org/Documentation/Calc_Functions/MINVERSE)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -57,13 +61,15 @@ pub fn mdeterm<A: Matrix>(a: A) -> FnNumber1<A> {
 /// Invertible matrices have a non-zero determinant. If the matrix is not 
 /// invertible, this function should return an Error value.
 ///
-/// __See also__: "MDETERM", 
+/// __See also__: [crate::of::mdeterm()], 
 #[inline]
 pub fn minverse<A: Matrix>(a: A) -> FnMatrix1<A> {
     FnMatrix1("MINVERSE", a)
 }
 
 /// Multiplies the matrices A and B.
+///
+/// [documentfoundation->MMULT](https://wiki.documentfoundation.org/Documentation/Calc_Functions/MMULT)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -78,13 +84,15 @@ pub fn minverse<A: Matrix>(a: A) -> FnMatrix1<A> {
 /// of the resulting matrix
 /// , are defined by:
 ///
-/// __See also__: "COLUMNS", "ROWS", 
+/// __See also__: [crate::of::columns()], [crate::of::rows()], 
 #[inline]
 pub fn mmult<A: Matrix, B: Matrix>(a: A, b: B) -> FnMatrix2<A, B> {
     FnMatrix2("MMULT", a, b)
 }
 
 /// Creates a unit matrix of a specified dimension N.
+///
+/// [documentfoundation->MUNIT](https://wiki.documentfoundation.org/Documentation/Calc_Functions/MUNIT)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -96,12 +104,16 @@ pub fn mmult<A: Matrix, B: Matrix>(a: A, b: B) -> FnMatrix2<A, B> {
 ///
 /// __Semantics__:
 /// Creates the unit matrix (identity matrix) of dimension N.
+///
+/// __See also__: 
 #[inline]
 pub fn munit<A: Number>(n: A) -> FnMatrix1<A> {
     FnMatrix1("MUNIT", n)
 }
 
 /// Returns the transpose of a matrix.
+///
+/// [documentfoundation->TRANSPOSE](https://wiki.documentfoundation.org/Documentation/Calc_Functions/TRANSPOSE)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -114,6 +126,8 @@ pub fn munit<A: Number>(n: A) -> FnMatrix1<A> {
 /// __Semantics__:
 /// Returns the transpose AT of a matrix A, i.e. rows and columns of the matrix 
 /// are exchanged.
+///
+/// __See also__: 
 #[inline]
 pub fn transpose<A: Matrix>(a: A) -> FnMatrix1<A> {
     FnMatrix1("TRANSPOSE", a)

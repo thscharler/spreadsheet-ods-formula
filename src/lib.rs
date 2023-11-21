@@ -14,7 +14,7 @@
 //! lot of traits to map the possible parameter types of ods-functions. By the nature of
 //! spreadsheets this is a rather loose mapping anyway.
 //!
-//! * Basic types ixx, uxx, bool, str, String and Cow<str> have the appropriate traits.
+//! * Basic types ixx, uxx, bool, str, String and `Cow<str>` have the appropriate traits.
 //!   The common operators are overloaded too. With the caveat that the first parameter
 //!   must be created via the num() function.
 //!

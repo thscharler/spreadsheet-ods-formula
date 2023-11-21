@@ -6,6 +6,8 @@ use crate::round::*;
 /// Round a number N up to the nearest multiple of the second parameter, 
 /// significance.
 ///
+/// [documentfoundation->CEILING](https://wiki.documentfoundation.org/Documentation/Calc_Functions/CEILING)
+///
 /// __Syntax__: 
 /// ```ods
 ///     CEILING( N: Number )
@@ -32,7 +34,7 @@ use crate::round::*;
 /// operate as if there was a non-zero Mode value). These CEILING functions are 
 /// inconsistent with the standard mathematical definition of CEILING.
 ///
-/// __See also__: "FLOOR", "INT", 
+/// __See also__: [crate::of::floor()], [crate::of::int()], [crate::of::ceiling_()], [crate::of::ceiling__()], 
 #[inline]
 pub fn ceiling<A: Number>(n: A) -> FnNumber1<A> {
     FnNumber1("CEILING", n)
@@ -40,6 +42,8 @@ pub fn ceiling<A: Number>(n: A) -> FnNumber1<A> {
 
 /// Round a number N up to the nearest multiple of the second parameter, 
 /// significance.
+///
+/// [documentfoundation->CEILING](https://wiki.documentfoundation.org/Documentation/Calc_Functions/CEILING)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -67,7 +71,7 @@ pub fn ceiling<A: Number>(n: A) -> FnNumber1<A> {
 /// operate as if there was a non-zero Mode value). These CEILING functions are 
 /// inconsistent with the standard mathematical definition of CEILING.
 ///
-/// __See also__: "FLOOR", "INT", 
+/// __See also__: [crate::of::floor()], [crate::of::int()], [crate::of::ceiling()], [crate::of::ceiling__()], 
 #[inline]
 pub fn ceiling_<A: Number, B: Number>(n: A, significance: B) -> FnNumber2<A, B> {
     FnNumber2("CEILING", n, significance)
@@ -75,6 +79,8 @@ pub fn ceiling_<A: Number, B: Number>(n: A, significance: B) -> FnNumber2<A, B> 
 
 /// Round a number N up to the nearest multiple of the second parameter, 
 /// significance.
+///
+/// [documentfoundation->CEILING](https://wiki.documentfoundation.org/Documentation/Calc_Functions/CEILING)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -102,13 +108,15 @@ pub fn ceiling_<A: Number, B: Number>(n: A, significance: B) -> FnNumber2<A, B> 
 /// operate as if there was a non-zero Mode value). These CEILING functions are 
 /// inconsistent with the standard mathematical definition of CEILING.
 ///
-/// __See also__: "FLOOR", "INT", 
+/// __See also__: [crate::of::floor()], [crate::of::int()], [crate::of::ceiling()], [crate::of::ceiling_()], 
 #[inline]
 pub fn ceiling__<A: Number, B: Number>(n: A, significance: B, mode: RoundingMode) -> FnNumber3<A, B, RoundingMode> {
     FnNumber3("CEILING", n, significance, mode)
 }
 
 /// Rounds a number down to the nearest integer.
+///
+/// [documentfoundation->INT](https://wiki.documentfoundation.org/Documentation/Calc_Functions/INT)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -122,7 +130,7 @@ pub fn ceiling__<A: Number, B: Number>(n: A, significance: B, mode: RoundingMode
 /// Returns the nearest integer whose value is less than or equal to N. 
 /// Rounding is towards negative infinity.
 ///
-/// __See also__: "ROUND", "TRUNC", 
+/// __See also__: [crate::of::round()], [crate::of::trunc()], 
 #[inline]
 pub fn int<A: Number>(n: A) -> FnNumber1<A> {
     FnNumber1("INT", n)
@@ -130,6 +138,8 @@ pub fn int<A: Number>(n: A) -> FnNumber1<A> {
 
 /// Round a number N down to the nearest multiple of the second parameter, 
 /// significance.
+///
+/// [documentfoundation->FLOOR](https://wiki.documentfoundation.org/Documentation/Calc_Functions/FLOOR)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -157,7 +167,7 @@ pub fn int<A: Number>(n: A) -> FnNumber1<A> {
 /// operate as if there was a non-zero Mode value). These FLOOR functions are 
 /// inconsistent with the standard mathematical definition of FLOOR.
 ///
-/// __See also__: "CEILING", "INT", 
+/// __See also__: [crate::of::ceiling()], [crate::of::int()], [crate::of::floor_()], [crate::of::floor__()], 
 #[inline]
 pub fn floor<A: Number>(n: A) -> FnNumber1<A> {
     FnNumber1("FLOOR", n)
@@ -165,6 +175,8 @@ pub fn floor<A: Number>(n: A) -> FnNumber1<A> {
 
 /// Round a number N down to the nearest multiple of the second parameter, 
 /// significance.
+///
+/// [documentfoundation->FLOOR](https://wiki.documentfoundation.org/Documentation/Calc_Functions/FLOOR)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -192,7 +204,7 @@ pub fn floor<A: Number>(n: A) -> FnNumber1<A> {
 /// operate as if there was a non-zero Mode value). These FLOOR functions are 
 /// inconsistent with the standard mathematical definition of FLOOR.
 ///
-/// __See also__: "CEILING", "INT", 
+/// __See also__: [crate::of::ceiling()], [crate::of::int()], [crate::of::floor()], [crate::of::floor__()], 
 #[inline]
 pub fn floor_<A: Number, B: Number>(n: A, significance: B) -> FnNumber2<A, B> {
     FnNumber2("FLOOR", n, significance)
@@ -200,6 +212,8 @@ pub fn floor_<A: Number, B: Number>(n: A, significance: B) -> FnNumber2<A, B> {
 
 /// Round a number N down to the nearest multiple of the second parameter, 
 /// significance.
+///
+/// [documentfoundation->FLOOR](https://wiki.documentfoundation.org/Documentation/Calc_Functions/FLOOR)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -227,13 +241,15 @@ pub fn floor_<A: Number, B: Number>(n: A, significance: B) -> FnNumber2<A, B> {
 /// operate as if there was a non-zero Mode value). These FLOOR functions are 
 /// inconsistent with the standard mathematical definition of FLOOR.
 ///
-/// __See also__: "CEILING", "INT", 
+/// __See also__: [crate::of::ceiling()], [crate::of::int()], [crate::of::floor()], [crate::of::floor_()], 
 #[inline]
 pub fn floor__<A: Number, B: Number>(n: A, significance: B, mode: RoundingMode) -> FnNumber3<A, B, RoundingMode> {
     FnNumber3("FLOOR", n, significance, mode)
 }
 
 /// Rounds the number to given multiple.
+///
+/// [documentfoundation->MROUND](https://wiki.documentfoundation.org/Documentation/Calc_Functions/MROUND)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -250,7 +266,7 @@ pub fn floor__<A: Number, B: Number>(n: A, significance: B, mode: RoundingMode) 
 /// In less formal language, this function rounds the number A to multiples of 
 /// B.
 ///
-/// __See also__: "ABS", "INT", "ROUND", 
+/// __See also__: [crate::of::abs()], [crate::of::int()], [crate::of::round()], 
 #[inline]
 pub fn mround<A: Number, B: Number>(a: A, b: B) -> FnNumber2<A, B> {
     FnNumber2("MROUND", a, b)
@@ -258,6 +274,8 @@ pub fn mround<A: Number, B: Number>(a: A, b: B) -> FnNumber2<A, B> {
 
 /// Rounds the value X to the nearest multiple of the power of 10 specified by 
 /// Digits.
+///
+/// [documentfoundation->ROUND](https://wiki.documentfoundation.org/Documentation/Calc_Functions/ROUND)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -277,7 +295,7 @@ pub fn mround<A: Number, B: Number>(a: A, b: B) -> FnNumber2<A, B> {
 /// zero. Note that if X is a Number, and Digits ≤ 0, the results will always 
 /// be an integer (without a fractional component).
 ///
-/// __See also__: "TRUNC", "INT", 
+/// __See also__: [crate::of::trunc()], [crate::of::int()], [crate::of::round_()], 
 #[inline]
 pub fn round<A: Number>(x: A) -> FnNumber1<A> {
     FnNumber1("ROUND", x)
@@ -285,6 +303,8 @@ pub fn round<A: Number>(x: A) -> FnNumber1<A> {
 
 /// Rounds the value X to the nearest multiple of the power of 10 specified by 
 /// Digits.
+///
+/// [documentfoundation->ROUND](https://wiki.documentfoundation.org/Documentation/Calc_Functions/ROUND)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -304,7 +324,7 @@ pub fn round<A: Number>(x: A) -> FnNumber1<A> {
 /// zero. Note that if X is a Number, and Digits ≤ 0, the results will always 
 /// be an integer (without a fractional component).
 ///
-/// __See also__: "TRUNC", "INT", 
+/// __See also__: [crate::of::trunc()], [crate::of::int()], [crate::of::round()], 
 #[inline]
 pub fn round_<A: Number, B: Number>(x: A, digits: B) -> FnNumber2<A, B> {
     FnNumber2("ROUND", x, digits)
@@ -312,6 +332,8 @@ pub fn round_<A: Number, B: Number>(x: A, digits: B) -> FnNumber2<A, B> {
 
 /// Rounds the value X towards zero to the number of digits specified by 
 /// Digits.
+///
+/// [documentfoundation->ROUNDDOWN](https://wiki.documentfoundation.org/Documentation/Calc_Functions/ROUNDDOWN)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -329,7 +351,7 @@ pub fn round_<A: Number, B: Number>(x: A, digits: B) -> FnNumber2<A, B> {
 /// specified number of decimal places. If Digits is negative, round towards 
 /// zero to the left of the decimal point by -Digits places.
 ///
-/// __See also__: "TRUNC", "INT", "ROUND", "ROUNDUP", 
+/// __See also__: [crate::of::trunc()], [crate::of::int()], [crate::of::round()], [crate::of::roundup()], [crate::of::rounddown_()], 
 #[inline]
 pub fn rounddown<A: Number>(x: A) -> FnNumber1<A> {
     FnNumber1("ROUNDDOWN", x)
@@ -337,6 +359,8 @@ pub fn rounddown<A: Number>(x: A) -> FnNumber1<A> {
 
 /// Rounds the value X towards zero to the number of digits specified by 
 /// Digits.
+///
+/// [documentfoundation->ROUNDDOWN](https://wiki.documentfoundation.org/Documentation/Calc_Functions/ROUNDDOWN)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -354,7 +378,7 @@ pub fn rounddown<A: Number>(x: A) -> FnNumber1<A> {
 /// specified number of decimal places. If Digits is negative, round towards 
 /// zero to the left of the decimal point by -Digits places.
 ///
-/// __See also__: "TRUNC", "INT", "ROUND", "ROUNDUP", 
+/// __See also__: [crate::of::trunc()], [crate::of::int()], [crate::of::round()], [crate::of::roundup()], [crate::of::rounddown()], 
 #[inline]
 pub fn rounddown_<A: Number, B: Number>(x: A, digits: B) -> FnNumber2<A, B> {
     FnNumber2("ROUNDDOWN", x, digits)
@@ -362,6 +386,8 @@ pub fn rounddown_<A: Number, B: Number>(x: A, digits: B) -> FnNumber2<A, B> {
 
 /// Rounds the value X away from zero to the number of digits specified by 
 /// Digits
+///
+/// [documentfoundation->ROUNDUP](https://wiki.documentfoundation.org/Documentation/Calc_Functions/ROUNDUP)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -379,7 +405,7 @@ pub fn rounddown_<A: Number, B: Number>(x: A, digits: B) -> FnNumber2<A, B> {
 /// specified number of decimal places. If Digits is negative, round away from 
 /// zero to the left of the decimal point by -Digits places.
 ///
-/// __See also__: "TRUNC", "INT", "ROUND", "ROUNDDOWN", 
+/// __See also__: [crate::of::trunc()], [crate::of::int()], [crate::of::round()], [crate::of::rounddown()], [crate::of::roundup_()], 
 #[inline]
 pub fn roundup<A: Number>(x: A) -> FnNumber1<A> {
     FnNumber1("ROUNDUP", x)
@@ -387,6 +413,8 @@ pub fn roundup<A: Number>(x: A) -> FnNumber1<A> {
 
 /// Rounds the value X away from zero to the number of digits specified by 
 /// Digits
+///
+/// [documentfoundation->ROUNDUP](https://wiki.documentfoundation.org/Documentation/Calc_Functions/ROUNDUP)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -404,13 +432,15 @@ pub fn roundup<A: Number>(x: A) -> FnNumber1<A> {
 /// specified number of decimal places. If Digits is negative, round away from 
 /// zero to the left of the decimal point by -Digits places.
 ///
-/// __See also__: "TRUNC", "INT", "ROUND", "ROUNDDOWN", 
+/// __See also__: [crate::of::trunc()], [crate::of::int()], [crate::of::round()], [crate::of::rounddown()], [crate::of::roundup()], 
 #[inline]
 pub fn roundup_<A: Number, B: Number>(x: A, digits: B) -> FnNumber2<A, B> {
     FnNumber2("ROUNDUP", x, digits)
 }
 
 /// Truncate a number to a specified number of digits.
+///
+/// [documentfoundation->TRUNC](https://wiki.documentfoundation.org/Documentation/Calc_Functions/TRUNC)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -426,7 +456,7 @@ pub fn roundup_<A: Number, B: Number>(x: A, digits: B) -> FnNumber2<A, B> {
 /// number of decimal places. If B is negative, truncate to the left of the 
 /// decimal point.
 ///
-/// __See also__: "ROUND", "INT", 
+/// __See also__: [crate::of::round()], [crate::of::int()], 
 #[inline]
 pub fn trunc<A: Number, B: Number>(a: A, b: B) -> FnNumber2<A, B> {
     FnNumber2("TRUNC", a, b)

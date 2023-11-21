@@ -9,6 +9,8 @@ use crate::lookup::*;
 
 /// Returns a cell address (reference) as text.
 ///
+/// [documentfoundation->ADDRESS](https://wiki.documentfoundation.org/Documentation/Calc_Functions/ADDRESS)
+///
 /// __Syntax__: 
 /// ```ods
 ///     ADDRESS( Row: Integer; Column: Integer )
@@ -30,13 +32,15 @@ use crate::lookup::*;
 /// 
 /// Note that the INDIRECT function accepts this format.
 ///
-/// __See also__: "INDIRECT", 
+/// __See also__: [crate::of::indirect()], [crate::of::address_()], [crate::of::address__()], [crate::of::address___()], 
 #[inline]
 pub fn address<A: Number, B: Number>(row: A, column: B) -> FnText2<A, B> {
     FnText2("ADDRESS", row, column)
 }
 
 /// Returns a cell address (reference) as text.
+///
+/// [documentfoundation->ADDRESS](https://wiki.documentfoundation.org/Documentation/Calc_Functions/ADDRESS)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -59,13 +63,15 @@ pub fn address<A: Number, B: Number>(row: A, column: B) -> FnText2<A, B> {
 /// 
 /// Note that the INDIRECT function accepts this format.
 ///
-/// __See also__: "INDIRECT", 
+/// __See also__: [crate::of::indirect()], [crate::of::address()], [crate::of::address__()], [crate::of::address___()], 
 #[inline]
 pub fn address_<A: Number, B: Number>(row: A, column: B, abs: AddressAbs) -> FnText3<A, B, AddressAbs> {
     FnText3("ADDRESS", row, column, abs)
 }
 
 /// Returns a cell address (reference) as text.
+///
+/// [documentfoundation->ADDRESS](https://wiki.documentfoundation.org/Documentation/Calc_Functions/ADDRESS)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -88,13 +94,15 @@ pub fn address_<A: Number, B: Number>(row: A, column: B, abs: AddressAbs) -> FnT
 /// 
 /// Note that the INDIRECT function accepts this format.
 ///
-/// __See also__: "INDIRECT", 
+/// __See also__: [crate::of::indirect()], [crate::of::address()], [crate::of::address_()], [crate::of::address___()], 
 #[inline]
 pub fn address__<A: Number, B: Number, C: Logical>(row: A, column: B, abs: AddressAbs, a1_style: C) -> FnText4<A, B, AddressAbs, C> {
     FnText4("ADDRESS", row, column, abs, a1_style)
 }
 
 /// Returns a cell address (reference) as text.
+///
+/// [documentfoundation->ADDRESS](https://wiki.documentfoundation.org/Documentation/Calc_Functions/ADDRESS)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -117,13 +125,15 @@ pub fn address__<A: Number, B: Number, C: Logical>(row: A, column: B, abs: Addre
 /// 
 /// Note that the INDIRECT function accepts this format.
 ///
-/// __See also__: "INDIRECT", 
+/// __See also__: [crate::of::indirect()], [crate::of::address()], [crate::of::address_()], [crate::of::address__()], 
 #[inline]
 pub fn address___<A: Number, B: Number, C: Logical, D: Text>(row: A, column: B, abs: AddressAbs, a1_style: C, sheet: D) -> FnText5<A, B, AddressAbs, C, D> {
     FnText5("ADDRESS", row, column, abs, a1_style, sheet)
 }
 
 /// Uses an index to return a value from a list of values.
+///
+/// [documentfoundation->CHOOSE](https://wiki.documentfoundation.org/Documentation/Calc_Functions/CHOOSE)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -141,7 +151,7 @@ pub fn address___<A: Number, B: Number, C: Logical, D: Text>(row: A, column: B, 
 /// expressions. Expression paths of parameters other than the one chosen are 
 /// not calculated or evaluated for side effects.
 ///
-/// __See also__: "IF", 
+/// __See also__: [crate::of::if_()], 
 #[inline]
 pub fn choose<A: Number, B: Sequence>(index: A, value: B) -> FnAny2<A, B> {
     FnAny2("CHOOSE", index, value)
@@ -149,6 +159,8 @@ pub fn choose<A: Number, B: Sequence>(index: A, value: B) -> FnAny2<A, B> {
 
 /// Look for a matching value in the first row of the given table, and return 
 /// the value of the indicated row.
+///
+/// [documentfoundation->HLOOKUP](https://wiki.documentfoundation.org/Documentation/Calc_Functions/HLOOKUP)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -188,7 +200,7 @@ pub fn choose<A: Number, B: Sequence>(index: A, value: B) -> FnAny2<A, B> {
 /// HOST-USE-REGULAR-EXPRESSIONS or HOST-USE-WILDCARDS or 
 /// HOST-SEARCH-CRITERIA-MUST-APPLY-TO-WHOLE-CELL properties. 3.4
 ///
-/// __See also__: "INDEX", "MATCH", "OFFSET", "VLOOKUP", 
+/// __See also__: [crate::of::index()], [crate::of::match_()], [crate::of::offset()], [crate::of::vlookup()], [crate::of::hlookup_()], 
 #[inline]
 pub fn hlookup<A: Any, B: ReferenceOrArray, C: Number>(lookup: A, data_source: B, row: C) -> FnAny3<A, B, C> {
     FnAny3("HLOOKUP", lookup, data_source, row)
@@ -196,6 +208,8 @@ pub fn hlookup<A: Any, B: ReferenceOrArray, C: Number>(lookup: A, data_source: B
 
 /// Look for a matching value in the first row of the given table, and return 
 /// the value of the indicated row.
+///
+/// [documentfoundation->HLOOKUP](https://wiki.documentfoundation.org/Documentation/Calc_Functions/HLOOKUP)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -235,7 +249,7 @@ pub fn hlookup<A: Any, B: ReferenceOrArray, C: Number>(lookup: A, data_source: B
 /// HOST-USE-REGULAR-EXPRESSIONS or HOST-USE-WILDCARDS or 
 /// HOST-SEARCH-CRITERIA-MUST-APPLY-TO-WHOLE-CELL properties. 3.4
 ///
-/// __See also__: "INDEX", "MATCH", "OFFSET", "VLOOKUP", 
+/// __See also__: [crate::of::index()], [crate::of::match_()], [crate::of::offset()], [crate::of::vlookup()], [crate::of::hlookup()], 
 #[inline]
 pub fn hlookup_<A: Any, B: ReferenceOrArray, C: Number, D: Logical>(lookup: A, data_source: B, row: C, range_lookup: D) -> FnAny4<A, B, C, D> {
     FnAny4("HLOOKUP", lookup, data_source, row, range_lookup)
@@ -243,6 +257,8 @@ pub fn hlookup_<A: Any, B: ReferenceOrArray, C: Number, D: Logical>(lookup: A, d
 
 /// Returns a value using a row and column index value (and optionally an area 
 /// index).
+///
+/// [documentfoundation->INDEX](https://wiki.documentfoundation.org/Documentation/Calc_Functions/INDEX)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -278,7 +294,7 @@ pub fn hlookup_<A: Any, B: ReferenceOrArray, C: Number, D: Logical>(lookup: A, d
 /// If Row or Column have a value greater than the dimension of the 
 /// corresponding given area AreaNumber, an Error is returned.
 ///
-/// __See also__: "AREAS", "CHOOSE", 
+/// __See also__: [crate::of::areas()], [crate::of::choose()], [crate::of::index_()], [crate::of::index__()], [crate::of::index___()], 
 #[inline]
 pub fn index<A: ReferenceOrArray>(data_source: A) -> FnAny1<A> {
     FnAny1("INDEX", data_source)
@@ -286,6 +302,8 @@ pub fn index<A: ReferenceOrArray>(data_source: A) -> FnAny1<A> {
 
 /// Returns a value using a row and column index value (and optionally an area 
 /// index).
+///
+/// [documentfoundation->INDEX](https://wiki.documentfoundation.org/Documentation/Calc_Functions/INDEX)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -321,7 +339,7 @@ pub fn index<A: ReferenceOrArray>(data_source: A) -> FnAny1<A> {
 /// If Row or Column have a value greater than the dimension of the 
 /// corresponding given area AreaNumber, an Error is returned.
 ///
-/// __See also__: "AREAS", "CHOOSE", 
+/// __See also__: [crate::of::areas()], [crate::of::choose()], [crate::of::index()], [crate::of::index__()], [crate::of::index___()], 
 #[inline]
 pub fn index_<A: ReferenceOrArray, B: Number>(data_source: A, row: B) -> FnAny2<A, B> {
     FnAny2("INDEX", data_source, row)
@@ -329,6 +347,8 @@ pub fn index_<A: ReferenceOrArray, B: Number>(data_source: A, row: B) -> FnAny2<
 
 /// Returns a value using a row and column index value (and optionally an area 
 /// index).
+///
+/// [documentfoundation->INDEX](https://wiki.documentfoundation.org/Documentation/Calc_Functions/INDEX)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -364,7 +384,7 @@ pub fn index_<A: ReferenceOrArray, B: Number>(data_source: A, row: B) -> FnAny2<
 /// If Row or Column have a value greater than the dimension of the 
 /// corresponding given area AreaNumber, an Error is returned.
 ///
-/// __See also__: "AREAS", "CHOOSE", 
+/// __See also__: [crate::of::areas()], [crate::of::choose()], [crate::of::index()], [crate::of::index_()], [crate::of::index___()], 
 #[inline]
 pub fn index__<A: ReferenceOrArray, B: Number, C: Number>(data_source: A, row: B, column: C) -> FnAny3<A, B, C> {
     FnAny3("INDEX", data_source, row, column)
@@ -372,6 +392,8 @@ pub fn index__<A: ReferenceOrArray, B: Number, C: Number>(data_source: A, row: B
 
 /// Returns a value using a row and column index value (and optionally an area 
 /// index).
+///
+/// [documentfoundation->INDEX](https://wiki.documentfoundation.org/Documentation/Calc_Functions/INDEX)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -407,13 +429,15 @@ pub fn index__<A: ReferenceOrArray, B: Number, C: Number>(data_source: A, row: B
 /// If Row or Column have a value greater than the dimension of the 
 /// corresponding given area AreaNumber, an Error is returned.
 ///
-/// __See also__: "AREAS", "CHOOSE", 
+/// __See also__: [crate::of::areas()], [crate::of::choose()], [crate::of::index()], [crate::of::index_()], [crate::of::index__()], 
 #[inline]
 pub fn index___<A: ReferenceOrArray, B: Number, C: Number, D: Number>(data_source: A, row: B, column: C, area_number: D) -> FnAny4<A, B, C, D> {
     FnAny4("INDEX", data_source, row, column, area_number)
 }
 
 /// Return a reference given a string representation of a reference.
+///
+/// [documentfoundation->INDIRECT](https://wiki.documentfoundation.org/Documentation/Calc_Functions/INDIRECT)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -434,13 +458,15 @@ pub fn index___<A: ReferenceOrArray, B: Number, C: Number, D: Number>(data_sourc
 /// FALSE case of this INDIRECT function. Evaluators shall correctly parse the 
 /// “.” dot as the sheet name separator in the A1 = TRUE case.
 ///
-/// __See also__: "ADDRESS", 
+/// __See also__: [crate::of::address()], [crate::of::indirect_()], 
 #[inline]
 pub fn indirect<A: Text>(ref_: A) -> FnReference1<A> {
     FnReference1("INDIRECT", ref_)
 }
 
 /// Return a reference given a string representation of a reference.
+///
+/// [documentfoundation->INDIRECT](https://wiki.documentfoundation.org/Documentation/Calc_Functions/INDIRECT)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -461,7 +487,7 @@ pub fn indirect<A: Text>(ref_: A) -> FnReference1<A> {
 /// FALSE case of this INDIRECT function. Evaluators shall correctly parse the 
 /// “.” dot as the sheet name separator in the A1 = TRUE case.
 ///
-/// __See also__: "ADDRESS", 
+/// __See also__: [crate::of::address()], [crate::of::indirect()], 
 #[inline]
 pub fn indirect_<A: Text, B: Logical>(ref_: A, a1: B) -> FnReference2<A, B> {
     FnReference2("INDIRECT", ref_, a1)
@@ -469,6 +495,8 @@ pub fn indirect_<A: Text, B: Logical>(ref_: A, a1: B) -> FnReference2<A, B> {
 
 /// Look for criterion in an already-sorted array, and return a corresponding 
 /// result.
+///
+/// [documentfoundation->LOOKUP](https://wiki.documentfoundation.org/Documentation/Calc_Functions/LOOKUP)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -539,7 +567,7 @@ pub fn indirect_<A: Text, B: Logical>(ref_: A, a1: B) -> FnReference2<A, B> {
 /// HOST-USE-REGULAR-EXPRESSIONS or HOST-USE-WILDCARDS or 
 /// HOST-SEARCH-CRITERIA-MUST-APPLY-TO-WHOLE-CELL properties. 3.4
 ///
-/// __See also__: "HLOOKUP", "INDEX", "MATCH", "OFFSET", "VLOOKUP", 
+/// __See also__: [crate::of::hlookup()], [crate::of::index()], [crate::of::match_()], [crate::of::offset()], [crate::of::vlookup()], [crate::of::lookup_()], 
 #[inline]
 pub fn lookup<A: Any, B: ReferenceOrArray>(find: A, searched: B) -> FnAny2<A, B> {
     FnAny2("LOOKUP", find, searched)
@@ -547,6 +575,8 @@ pub fn lookup<A: Any, B: ReferenceOrArray>(find: A, searched: B) -> FnAny2<A, B>
 
 /// Look for criterion in an already-sorted array, and return a corresponding 
 /// result.
+///
+/// [documentfoundation->LOOKUP](https://wiki.documentfoundation.org/Documentation/Calc_Functions/LOOKUP)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -617,7 +647,7 @@ pub fn lookup<A: Any, B: ReferenceOrArray>(find: A, searched: B) -> FnAny2<A, B>
 /// HOST-USE-REGULAR-EXPRESSIONS or HOST-USE-WILDCARDS or 
 /// HOST-SEARCH-CRITERIA-MUST-APPLY-TO-WHOLE-CELL properties. 3.4
 ///
-/// __See also__: "HLOOKUP", "INDEX", "MATCH", "OFFSET", "VLOOKUP", 
+/// __See also__: [crate::of::hlookup()], [crate::of::index()], [crate::of::match_()], [crate::of::offset()], [crate::of::vlookup()], [crate::of::lookup()], 
 #[inline]
 pub fn lookup_<A: Any, B: ReferenceOrArray, C: ReferenceOrArray>(find: A, searched: B, results: C) -> FnAny3<A, B, C> {
     FnAny3("LOOKUP", find, searched, results)
@@ -625,6 +655,8 @@ pub fn lookup_<A: Any, B: ReferenceOrArray, C: ReferenceOrArray>(find: A, search
 
 /// Finds a Search item in a sequence, and returns its position (starting from 
 /// 1).
+///
+/// [documentfoundation->MATCH](https://wiki.documentfoundation.org/Documentation/Calc_Functions/MATCH)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -676,7 +708,7 @@ pub fn lookup_<A: Any, B: ReferenceOrArray, C: ReferenceOrArray>(find: A, search
 /// HOST-USE-REGULAR-EXPRESSIONS or HOST-USE-WILDCARDS or 
 /// HOST-SEARCH-CRITERIA-MUST-APPLY-TO-WHOLE-CELL properties. 3.4
 ///
-/// __See also__: "HLOOKUP", "OFFSET", "VLOOKUP", 
+/// __See also__: [crate::of::hlookup()], [crate::of::offset()], [crate::of::vlookup()], [crate::of::match__()], 
 #[inline]
 pub fn match_<A: Scalar, B: ReferenceOrArray>(search: A, search_region: B) -> FnAny2<A, B> {
     FnAny2("MATCH", search, search_region)
@@ -684,6 +716,8 @@ pub fn match_<A: Scalar, B: ReferenceOrArray>(search: A, search_region: B) -> Fn
 
 /// Finds a Search item in a sequence, and returns its position (starting from 
 /// 1).
+///
+/// [documentfoundation->MATCH](https://wiki.documentfoundation.org/Documentation/Calc_Functions/MATCH)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -735,7 +769,7 @@ pub fn match_<A: Scalar, B: ReferenceOrArray>(search: A, search_region: B) -> Fn
 /// HOST-USE-REGULAR-EXPRESSIONS or HOST-USE-WILDCARDS or 
 /// HOST-SEARCH-CRITERIA-MUST-APPLY-TO-WHOLE-CELL properties. 3.4
 ///
-/// __See also__: "HLOOKUP", "OFFSET", "VLOOKUP", 
+/// __See also__: [crate::of::hlookup()], [crate::of::offset()], [crate::of::vlookup()], [crate::of::match_()], 
 #[inline]
 pub fn match__<A: Scalar, B: ReferenceOrArray>(search: A, search_region: B, match_type: MatchType) -> FnAny3<A, B, MatchType> {
     FnAny3("MATCH", search, search_region, match_type)
@@ -743,6 +777,8 @@ pub fn match__<A: Scalar, B: ReferenceOrArray>(search: A, search_region: B, matc
 
 /// Executes a formula expression while substituting a row reference and a 
 /// column reference.
+///
+/// [documentfoundation->MULTIPLE.OPERATIONS](https://wiki.documentfoundation.org/Documentation/Calc_Functions/MULTIPLE.OPERATIONS)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -774,6 +810,8 @@ pub fn match__<A: Scalar, B: ReferenceOrArray>(search: A, search_region: B, matc
 /// __Note__:
 /// The function may be used to create tables of expressions that depend on two 
 /// input parameters.
+///
+/// __See also__: [crate::of::multiple_operations_()], [crate::of::multiple_operations__()], 
 #[inline]
 pub fn multiple_operations<A: Reference, B: Reference, C: Reference>(formula_cell: A, row_cell: B, row_replacement: C) -> FnAny3<A, B, C> {
     FnAny3("MULTIPLE.OPERATIONS", formula_cell, row_cell, row_replacement)
@@ -781,6 +819,8 @@ pub fn multiple_operations<A: Reference, B: Reference, C: Reference>(formula_cel
 
 /// Executes a formula expression while substituting a row reference and a 
 /// column reference.
+///
+/// [documentfoundation->MULTIPLE.OPERATIONS](https://wiki.documentfoundation.org/Documentation/Calc_Functions/MULTIPLE.OPERATIONS)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -812,6 +852,8 @@ pub fn multiple_operations<A: Reference, B: Reference, C: Reference>(formula_cel
 /// __Note__:
 /// The function may be used to create tables of expressions that depend on two 
 /// input parameters.
+///
+/// __See also__: [crate::of::multiple_operations()], [crate::of::multiple_operations__()], 
 #[inline]
 pub fn multiple_operations_<A: Reference, B: Reference, C: Reference, D: Reference>(formula_cell: A, row_cell: B, row_replacement: C, column_cell: D) -> FnAny4<A, B, C, D> {
     FnAny4("MULTIPLE.OPERATIONS", formula_cell, row_cell, row_replacement, column_cell)
@@ -819,6 +861,8 @@ pub fn multiple_operations_<A: Reference, B: Reference, C: Reference, D: Referen
 
 /// Executes a formula expression while substituting a row reference and a 
 /// column reference.
+///
+/// [documentfoundation->MULTIPLE.OPERATIONS](https://wiki.documentfoundation.org/Documentation/Calc_Functions/MULTIPLE.OPERATIONS)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -850,12 +894,16 @@ pub fn multiple_operations_<A: Reference, B: Reference, C: Reference, D: Referen
 /// __Note__:
 /// The function may be used to create tables of expressions that depend on two 
 /// input parameters.
+///
+/// __See also__: [crate::of::multiple_operations()], [crate::of::multiple_operations_()], 
 #[inline]
 pub fn multiple_operations__<A: Reference, B: Reference, C: Reference, D: Reference, E: Reference>(formula_cell: A, row_cell: B, row_replacement: C, column_cell: D, column_replacement: E) -> FnAny5<A, B, C, D, E> {
     FnAny5("MULTIPLE.OPERATIONS", formula_cell, row_cell, row_replacement, column_cell, column_replacement)
 }
 
 /// Modifies a reference's position and dimension.
+///
+/// [documentfoundation->OFFSET](https://wiki.documentfoundation.org/Documentation/Calc_Functions/OFFSET)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -874,13 +922,15 @@ pub fn multiple_operations__<A: Reference, B: Reference, C: Reference, D: Refere
 /// empty (two consecutive semicolons ;;) followed by a given NewWidth 
 /// argument. Returns the modified reference.
 ///
-/// __See also__: "COLUMN", "COLUMNS", "ROW", "ROWS", 
+/// __See also__: [crate::of::column()], [crate::of::columns()], [crate::of::row()], [crate::of::rows()], [crate::of::offset_()], [crate::of::offset__()], 
 #[inline]
 pub fn offset<A: Reference, B: Number, C: Number>(r: A, row_offset: B, column_offset: C) -> FnReference3<A, B, C> {
     FnReference3("OFFSET", r, row_offset, column_offset)
 }
 
 /// Modifies a reference's position and dimension.
+///
+/// [documentfoundation->OFFSET](https://wiki.documentfoundation.org/Documentation/Calc_Functions/OFFSET)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -899,13 +949,15 @@ pub fn offset<A: Reference, B: Number, C: Number>(r: A, row_offset: B, column_of
 /// empty (two consecutive semicolons ;;) followed by a given NewWidth 
 /// argument. Returns the modified reference.
 ///
-/// __See also__: "COLUMN", "COLUMNS", "ROW", "ROWS", 
+/// __See also__: [crate::of::column()], [crate::of::columns()], [crate::of::row()], [crate::of::rows()], [crate::of::offset()], [crate::of::offset__()], 
 #[inline]
 pub fn offset_<A: Reference, B: Number, C: Number, D: Number>(r: A, row_offset: B, column_offset: C, new_height: D) -> FnReference4<A, B, C, D> {
     FnReference4("OFFSET", r, row_offset, column_offset, new_height)
 }
 
 /// Modifies a reference's position and dimension.
+///
+/// [documentfoundation->OFFSET](https://wiki.documentfoundation.org/Documentation/Calc_Functions/OFFSET)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -924,7 +976,7 @@ pub fn offset_<A: Reference, B: Number, C: Number, D: Number>(r: A, row_offset: 
 /// empty (two consecutive semicolons ;;) followed by a given NewWidth 
 /// argument. Returns the modified reference.
 ///
-/// __See also__: "COLUMN", "COLUMNS", "ROW", "ROWS", 
+/// __See also__: [crate::of::column()], [crate::of::columns()], [crate::of::row()], [crate::of::rows()], [crate::of::offset()], [crate::of::offset_()], 
 #[inline]
 pub fn offset__<A: Reference, B: Number, C: Number, D: Number, E: Number>(r: A, row_offset: B, column_offset: C, new_height: D, new_width: E) -> FnReference5<A, B, C, D, E> {
     FnReference5("OFFSET", r, row_offset, column_offset, new_height, new_width)
@@ -932,6 +984,8 @@ pub fn offset__<A: Reference, B: Number, C: Number, D: Number, E: Number>(r: A, 
 
 /// Look for a matching value in the first column of the given table, and 
 /// return the value of the indicated column.
+///
+/// [documentfoundation->VLOOKUP](https://wiki.documentfoundation.org/Documentation/Calc_Functions/VLOOKUP)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -973,7 +1027,7 @@ pub fn offset__<A: Reference, B: Number, C: Number, D: Number, E: Number>(r: A, 
 /// HOST-USE-REGULAR-EXPRESSIONS or HOST-USE-WILDCARDS or 
 /// HOST-SEARCH-CRITERIA-MUST-APPLY-TO-WHOLE-CELL properties. 3.4
 ///
-/// __See also__: "HLOOKUP", "INDEX", "MATCH", "OFFSET", 
+/// __See also__: [crate::of::hlookup()], [crate::of::index()], [crate::of::match_()], [crate::of::offset()], [crate::of::vlookup_()], 
 #[inline]
 pub fn vlookup<A: Any, B: ReferenceOrArray, C: Number>(lookup: A, data_source: B, column: C) -> FnAny3<A, B, C> {
     FnAny3("VLOOKUP", lookup, data_source, column)
@@ -981,6 +1035,8 @@ pub fn vlookup<A: Any, B: ReferenceOrArray, C: Number>(lookup: A, data_source: B
 
 /// Look for a matching value in the first column of the given table, and 
 /// return the value of the indicated column.
+///
+/// [documentfoundation->VLOOKUP](https://wiki.documentfoundation.org/Documentation/Calc_Functions/VLOOKUP)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -1022,7 +1078,7 @@ pub fn vlookup<A: Any, B: ReferenceOrArray, C: Number>(lookup: A, data_source: B
 /// HOST-USE-REGULAR-EXPRESSIONS or HOST-USE-WILDCARDS or 
 /// HOST-SEARCH-CRITERIA-MUST-APPLY-TO-WHOLE-CELL properties. 3.4
 ///
-/// __See also__: "HLOOKUP", "INDEX", "MATCH", "OFFSET", 
+/// __See also__: [crate::of::hlookup()], [crate::of::index()], [crate::of::match_()], [crate::of::offset()], [crate::of::vlookup()], 
 #[inline]
 pub fn vlookup_<A: Any, B: ReferenceOrArray, C: Number, D: Logical>(lookup: A, data_source: B, column: C, range_lookup: D) -> FnAny4<A, B, C, D> {
     FnAny4("VLOOKUP", lookup, data_source, column, range_lookup)

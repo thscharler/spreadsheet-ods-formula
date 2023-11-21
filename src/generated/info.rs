@@ -9,6 +9,8 @@ use crate::info::*;
 
 /// Returns the number of areas in a given list of references.
 ///
+/// [documentfoundation->AREAS](https://wiki.documentfoundation.org/Documentation/Calc_Functions/AREAS)
+///
 /// __Syntax__: 
 /// ```ods
 ///     AREAS( R: ReferenceList )
@@ -20,13 +22,15 @@ use crate::info::*;
 /// __Semantics__:
 /// Returns the number of areas in the reference list R.
 ///
-/// __See also__: "Infix Operator Reference Concatenation", "INDEX", 
+/// __See also__: [crate::of::infix operator reference concatenation()], [crate::of::index()], 
 #[inline]
 pub fn areas<A: Reference>(r: A) -> FnNumber1<A> {
     FnNumber1("AREAS", r)
 }
 
 /// Returns information about position, formatting or contents in a reference.
+///
+/// [documentfoundation->CELL](https://wiki.documentfoundation.org/Documentation/Calc_Functions/CELL)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -45,12 +49,16 @@ pub fn areas<A: Reference>(r: A) -> FnNumber1<A> {
 /// •R : if R is a reference to a cell, it is the cell whose information will 
 /// be returned; if R is a reference to a range, the top-left cell in the range 
 /// is the selected one; if R is omitted, the current cell is used.
+///
+/// __See also__: [crate::of::cell_()], 
 #[inline]
 pub fn cell<>(info_type: CellInfo) -> FnAny1<CellInfo> {
     FnAny1("CELL", info_type)
 }
 
 /// Returns information about position, formatting or contents in a reference.
+///
+/// [documentfoundation->CELL](https://wiki.documentfoundation.org/Documentation/Calc_Functions/CELL)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -69,12 +77,16 @@ pub fn cell<>(info_type: CellInfo) -> FnAny1<CellInfo> {
 /// •R : if R is a reference to a cell, it is the cell whose information will 
 /// be returned; if R is a reference to a range, the top-left cell in the range 
 /// is the selected one; if R is omitted, the current cell is used.
+///
+/// __See also__: [crate::of::cell()], 
 #[inline]
 pub fn cell_<A: Reference>(info_type: CellInfo, r: A) -> FnAny2<CellInfo, A> {
     FnAny2("CELL", info_type, r)
 }
 
 /// Returns the column number(s) of a reference.
+///
+/// [documentfoundation->COLUMN](https://wiki.documentfoundation.org/Documentation/Calc_Functions/COLUMN)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -90,13 +102,15 @@ pub fn cell_<A: Reference>(info_type: CellInfo, r: A) -> FnAny2<CellInfo, A> {
 /// reference has multiple columns, an array of numbers is returned with all of 
 /// the columns in the reference.
 ///
-/// __See also__: "AREAS", "ROW", "SHEET", 
+/// __See also__: [crate::of::areas()], [crate::of::row()], [crate::of::sheet()], [crate::of::column_()], 
 #[inline]
 pub fn column() -> FnNumber0 {
     FnNumber0("COLUMN", )
 }
 
 /// Returns the column number(s) of a reference.
+///
+/// [documentfoundation->COLUMN](https://wiki.documentfoundation.org/Documentation/Calc_Functions/COLUMN)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -112,13 +126,15 @@ pub fn column() -> FnNumber0 {
 /// reference has multiple columns, an array of numbers is returned with all of 
 /// the columns in the reference.
 ///
-/// __See also__: "AREAS", "ROW", "SHEET", 
+/// __See also__: [crate::of::areas()], [crate::of::row()], [crate::of::sheet()], [crate::of::column()], 
 #[inline]
 pub fn column_<A: Reference>(r: A) -> FnNumber1<A> {
     FnNumber1("COLUMN", r)
 }
 
 /// Returns the number of columns in a given range.
+///
+/// [documentfoundation->COLUMNS](https://wiki.documentfoundation.org/Documentation/Calc_Functions/COLUMNS)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -132,13 +148,15 @@ pub fn column_<A: Reference>(r: A) -> FnNumber1<A> {
 /// Returns the number of columns in the range or array specified. The result 
 /// is not dependent on the cell content in the range.
 ///
-/// __See also__: "ROWS", 
+/// __See also__: [crate::of::rows()], 
 #[inline]
 pub fn columns<A: ReferenceOrArray>(r: A) -> FnNumber1<A> {
     FnNumber1("COLUMNS", r)
 }
 
 /// Count the number of Numbers provided.
+///
+/// [documentfoundation->COUNT](https://wiki.documentfoundation.org/Documentation/Calc_Functions/COUNT)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -154,13 +172,15 @@ pub fn columns<A: ReferenceOrArray>(r: A) -> FnNumber1<A> {
 /// implementation-defined what happens if 0 parameters are passed, but it 
 /// should be an Error or 0.
 ///
-/// __See also__: "COUNTA", 
+/// __See also__: [crate::of::counta()], 
 #[inline]
 pub fn count<A: Sequence>(n: A) -> FnNumber1<A> {
     FnNumber1("COUNT", n)
 }
 
 /// Count the number of non-empty values.
+///
+/// [documentfoundation->COUNTA](https://wiki.documentfoundation.org/Documentation/Calc_Functions/COUNTA)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -181,13 +201,15 @@ pub fn count<A: Sequence>(n: A) -> FnNumber1<A> {
 /// value (and not propagated as an Error). It is implementation-defined what 
 /// happens if 0 parameters are passed, but it should be an Error or 0.
 ///
-/// __See also__: "COUNT", "ISBLANK", 
+/// __See also__: [crate::of::count()], [crate::of::isblank()], 
 #[inline]
 pub fn counta<A: Sequence>(any_value: A) -> FnNumber1<A> {
     FnNumber1("COUNTA", any_value)
 }
 
 /// Count the number of blank cells.
+///
+/// [documentfoundation->COUNTBLANK](https://wiki.documentfoundation.org/Documentation/Calc_Functions/COUNTBLANK)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -208,13 +230,15 @@ pub fn counta<A: Sequence>(any_value: A) -> FnNumber1<A> {
 /// Evaluators shall support one Reference as a parameter and may support a 
 /// ReferenceList as a parameter.
 ///
-/// __See also__: "COUNT", "COUNTA", "COUNTIF", "ISBLANK", 
+/// __See also__: [crate::of::count()], [crate::of::counta()], [crate::of::countif()], [crate::of::isblank()], 
 #[inline]
 pub fn countblank<A: Reference>(r: A) -> FnNumber1<A> {
     FnNumber1("COUNTBLANK", r)
 }
 
 /// Count the number of cells in a range that meet a criteria.
+///
+/// [documentfoundation->COUNTIF](https://wiki.documentfoundation.org/Documentation/Calc_Functions/COUNTIF)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -232,13 +256,15 @@ pub fn countblank<A: Reference>(r: A) -> FnNumber1<A> {
 /// HOST-USE-REGULAR-EXPRESSIONS or HOST-USE-WILDCARDS or 
 /// HOST-SEARCH-CRITERIA-MUST-APPLY-TO-WHOLE-CELL properties. 3.4
 ///
-/// __See also__: "COUNT", "COUNTA", "COUNTBLANK", "COUNTIFS", "SUMIF", "Infix Operator \"=\"", "Infix Operator \"<>\"", "Infix Operator Ordered Comparison (\"<\", \"<=\", \">\", \">=\")", 
+/// __See also__: [crate::of::count()], [crate::of::counta()], [crate::of::countblank()], [crate::of::countifs()], [crate::of::sumif()], [crate::of::infix operator "="()], [crate::of::infix operator "<>"()], [crate::of::infix operator ordered comparison ("<", "<=", ">", ">=")()], 
 #[inline]
 pub fn countif<A: Reference, B: Criterion>(r: A, c: B) -> FnNumber2<A, B> {
     FnNumber2("COUNTIF", r, c)
 }
 
 /// Returns Number representing the specific Error type.
+///
+/// [documentfoundation->ERROR.TYPE](https://wiki.documentfoundation.org/Documentation/Calc_Functions/ERROR.TYPE)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -255,13 +281,15 @@ pub fn countif<A: Reference, B: Criterion>(r: A, c: B) -> FnNumber2<A, B> {
 /// ERROR.TYPE(NA()) returns 7, and ERROR.TYPE applied to a non-Error returns 
 /// an Error.
 ///
-/// __See also__: "NA", 
+/// __See also__: [crate::of::na()], 
 #[inline]
 pub fn error_type<A: Any>(e: A) -> FnNumber1<A> {
     FnNumber1("ERROR.TYPE", e)
 }
 
 /// Returns formula at given reference as text.
+///
+/// [documentfoundation->FORMULA](https://wiki.documentfoundation.org/Documentation/Calc_Functions/FORMULA)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -277,13 +305,15 @@ pub fn error_type<A: Any>(e: A) -> FnNumber1<A> {
 /// debugging by simplifying display of formulas in other cells. Error results 
 /// of the referred formula cell are not propagated.
 ///
-/// __See also__: "ISFORMULA", 
+/// __See also__: [crate::of::isformula()], 
 #[inline]
 pub fn formula<A: Reference>(x: A) -> FnText1<A> {
     FnText1("FORMULA", x)
 }
 
 /// Returns information about the environment.
+///
+/// [documentfoundation->INFO](https://wiki.documentfoundation.org/Documentation/Calc_Functions/INFO)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -296,13 +326,15 @@ pub fn formula<A: Reference>(x: A) -> FnText1<A> {
 /// __Semantics__:
 /// Returns information about the environment in the given category.
 ///
-/// __See also__: "CELL", 
+/// __See also__: [crate::of::cell()], 
 #[inline]
 pub fn info<>(category: InfoInfo) -> FnAny1<InfoInfo> {
     FnAny1("INFO", category)
 }
 
 /// Return TRUE if the referenced cell is blank, else return FALSE.
+///
+/// [documentfoundation->ISBLANK](https://wiki.documentfoundation.org/Documentation/Calc_Functions/ISBLANK)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -318,7 +350,7 @@ pub fn info<>(category: InfoInfo) -> FnAny1<InfoInfo> {
 /// but if it has a value, return FALSE. A cell with the empty string is not 
 /// considered blank. This function does not propagate Error values.
 ///
-/// __See also__: "ISNUMBER", "ISTEXT", 
+/// __See also__: [crate::of::isnumber()], [crate::of::istext()], 
 #[inline]
 pub fn isblank<A: Scalar>(x: A) -> FnLogical1<A> {
     FnLogical1("ISBLANK", x)
@@ -326,6 +358,8 @@ pub fn isblank<A: Scalar>(x: A) -> FnLogical1<A> {
 
 /// Return TRUE if the parameter has type Error and is not #N/A, else return 
 /// FALSE.
+///
+/// [documentfoundation->ISERR](https://wiki.documentfoundation.org/Documentation/Calc_Functions/ISERR)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -345,13 +379,15 @@ pub fn isblank<A: Scalar>(x: A) -> FnLogical1<A> {
 /// 
 /// IF(ISNA(X),FALSE(),ISERROR(X))
 ///
-/// __See also__: "ERROR.TYPE", "ISERROR", "ISNA", "ISNUMBER", "ISTEXT", "NA", 
+/// __See also__: [crate::of::error_type()], [crate::of::iserror()], [crate::of::isna()], [crate::of::isnumber()], [crate::of::istext()], [crate::of::na()], 
 #[inline]
 pub fn iserr<A: Scalar>(x: A) -> FnLogical1<A> {
     FnLogical1("ISERR", x)
 }
 
 /// Return TRUE if the parameter has type Error, else return FALSE.
+///
+/// [documentfoundation->ISERROR](https://wiki.documentfoundation.org/Documentation/Calc_Functions/ISERROR)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -366,13 +402,15 @@ pub fn iserr<A: Scalar>(x: A) -> FnLogical1<A> {
 /// function returns TRUE if given #N/A; if this is not desired, use ISERR 
 /// 6.13.15. Note that this function does not propagate Error values.
 ///
-/// __See also__: "ERROR.TYPE", "ISERR", "ISNA", "ISNUMBER", "ISTEXT", "NA", 
+/// __See also__: [crate::of::error_type()], [crate::of::iserr()], [crate::of::isna()], [crate::of::isnumber()], [crate::of::istext()], [crate::of::na()], 
 #[inline]
 pub fn iserror<A: Scalar>(x: A) -> FnLogical1<A> {
     FnLogical1("ISERROR", x)
 }
 
 /// Return TRUE if the value is even, else return FALSE.
+///
+/// [documentfoundation->ISEVEN](https://wiki.documentfoundation.org/Documentation/Calc_Functions/ISEVEN)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -389,13 +427,15 @@ pub fn iserror<A: Scalar>(x: A) -> FnLogical1<A> {
 /// either an Error or the result of converting the Logical value to a Number 
 /// (per Conversion to Number 6.3.5 ).
 ///
-/// __See also__: "ISODD", "TRUNC", 
+/// __See also__: [crate::of::isodd()], [crate::of::trunc()], 
 #[inline]
 pub fn iseven<A: Number>(x: A) -> FnLogical1<A> {
     FnLogical1("ISEVEN", x)
 }
 
 /// Return TRUE if the reference refers to a formula, else return FALSE.
+///
+/// [documentfoundation->ISFORMULA](https://wiki.documentfoundation.org/Documentation/Calc_Functions/ISFORMULA)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -412,13 +452,15 @@ pub fn iseven<A: Number>(x: A) -> FnLogical1<A> {
 /// non-reference, or a reference to more than one cell, is 
 /// implementation-defined. This function does not propagate Error values.
 ///
-/// __See also__: "ISTEXT", "ISNUMBER", 
+/// __See also__: [crate::of::istext()], [crate::of::isnumber()], 
 #[inline]
 pub fn isformula<A: Reference>(x: A) -> FnLogical1<A> {
     FnLogical1("ISFORMULA", x)
 }
 
 /// Return TRUE if the parameter has type Logical, else return FALSE.
+///
+/// [documentfoundation->ISLOGICAL](https://wiki.documentfoundation.org/Documentation/Calc_Functions/ISLOGICAL)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -433,13 +475,15 @@ pub fn isformula<A: Reference>(x: A) -> FnLogical1<A> {
 /// have a distinct Logical type will return the same value ISNUMBER(X) would 
 /// return. This function does not propagate Error values.
 ///
-/// __See also__: "ISTEXT", "ISNUMBER", 
+/// __See also__: [crate::of::istext()], [crate::of::isnumber()], 
 #[inline]
 pub fn islogical<A: Scalar>(x: A) -> FnLogical1<A> {
     FnLogical1("ISLOGICAL", x)
 }
 
 /// Return TRUE if the parameter has type Error and is #N/A, else return FALSE.
+///
+/// [documentfoundation->ISNA](https://wiki.documentfoundation.org/Documentation/Calc_Functions/ISNA)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -454,13 +498,15 @@ pub fn islogical<A: Scalar>(x: A) -> FnLogical1<A> {
 /// reference, the value being referenced is considered. This function does not 
 /// propagate Error values.
 ///
-/// __See also__: "ERROR.TYPE", "ISERROR", "ISERR", "ISNUMBER", "ISTEXT", "NA", 
+/// __See also__: [crate::of::error_type()], [crate::of::iserror()], [crate::of::iserr()], [crate::of::isnumber()], [crate::of::istext()], [crate::of::na()], 
 #[inline]
 pub fn isna<A: Scalar>(x: A) -> FnLogical1<A> {
     FnLogical1("ISNA", x)
 }
 
 /// Return TRUE if the parameter does not have type Text, else return FALSE.
+///
+/// [documentfoundation->ISNONTEXT](https://wiki.documentfoundation.org/Documentation/Calc_Functions/ISNONTEXT)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -478,13 +524,15 @@ pub fn isna<A: Scalar>(x: A) -> FnLogical1<A> {
 /// 
 /// ISNONTEXT(X) is equivalent to NOT(ISTEXT(X))
 ///
-/// __See also__: "ISNUMBER", "ISLOGICAL", "ISTEXT", "NOT", 
+/// __See also__: [crate::of::isnumber()], [crate::of::islogical()], [crate::of::istext()], [crate::of::not()], 
 #[inline]
 pub fn isnontext<A: Scalar>(x: A) -> FnLogical1<A> {
     FnLogical1("ISNONTEXT", x)
 }
 
 /// Return TRUE if the parameter has type Number, else return FALSE.
+///
+/// [documentfoundation->ISNUMBER](https://wiki.documentfoundation.org/Documentation/Calc_Functions/ISNUMBER)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -499,13 +547,15 @@ pub fn isnontext<A: Scalar>(x: A) -> FnLogical1<A> {
 /// a distinguished Logical type; in such evaluators, ISNUMBER(TRUE()) is TRUE. 
 /// This function does not propagate Error values.
 ///
-/// __See also__: "ISTEXT", "ISLOGICAL", 
+/// __See also__: [crate::of::istext()], [crate::of::islogical()], 
 #[inline]
 pub fn isnumber<A: Scalar>(x: A) -> FnLogical1<A> {
     FnLogical1("ISNUMBER", x)
 }
 
 /// Return TRUE if the value is even, else return FALSE.
+///
+/// [documentfoundation->ISODD](https://wiki.documentfoundation.org/Documentation/Calc_Functions/ISODD)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -522,13 +572,15 @@ pub fn isnumber<A: Scalar>(x: A) -> FnLogical1<A> {
 /// either an Error or the result of converting the Logical value to a Number 
 /// (per Conversion to Number 6.3.5 ).
 ///
-/// __See also__: "ISEVEN", "TRUNC", 
+/// __See also__: [crate::of::iseven()], [crate::of::trunc()], 
 #[inline]
 pub fn isodd<A: Number>(x: A) -> FnLogical1<A> {
     FnLogical1("ISODD", x)
 }
 
 /// Return TRUE if the parameter is of type reference, else return FALSE.
+///
+/// [documentfoundation->ISREF](https://wiki.documentfoundation.org/Documentation/Calc_Functions/ISREF)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -546,7 +598,7 @@ pub fn isodd<A: Number>(x: A) -> FnLogical1<A> {
 /// their results. X may be a ReferenceList, in which case ISREF returns TRUE. 
 /// This function does not propagate Error values.
 ///
-/// __See also__: "ISNUMBER", "ISTEXT", 
+/// __See also__: [crate::of::isnumber()], [crate::of::istext()], 
 #[inline]
 pub fn isref<A: Any>(x: A) -> FnLogical1<A> {
     FnLogical1("ISREF", x)
@@ -555,6 +607,8 @@ pub fn isref<A: Any>(x: A) -> FnLogical1<A> {
 /// Return TRUE if the parameter has type Text, else return FALSE.
 /// 
 /// ISTEXT(X) is equivalent to NOT(ISNONTEXT(X)).
+///
+/// [documentfoundation->ISTEXT](https://wiki.documentfoundation.org/Documentation/Calc_Functions/ISTEXT)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -571,13 +625,15 @@ pub fn isref<A: Any>(x: A) -> FnLogical1<A> {
 /// empty cell will return FALSE. Empty Cell 4.7 This function does not 
 /// propagate Error values.
 ///
-/// __See also__: "ISNONTEXT", "ISNUMBER", "ISLOGICAL", 
+/// __See also__: [crate::of::isnontext()], [crate::of::isnumber()], [crate::of::islogical()], 
 #[inline]
 pub fn istext<A: Scalar>(x: A) -> FnLogical1<A> {
     FnLogical1("ISTEXT", x)
 }
 
 /// Return the number of a value.
+///
+/// [documentfoundation->N](https://wiki.documentfoundation.org/Documentation/Calc_Functions/N)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -593,13 +649,15 @@ pub fn istext<A: Scalar>(x: A) -> FnLogical1<A> {
 /// Logical, 1 is returned if TRUE else 0 is returned. It is 
 /// implementation-defined what happens if it is provided a Text value.
 ///
-/// __See also__: "T", "VALUE", 
+/// __See also__: [crate::of::t()], [crate::of::value()], 
 #[inline]
 pub fn n<A: Any>(x: A) -> FnNumber1<A> {
     FnNumber1("N", x)
 }
 
 /// Return the constant Error value #N/A.
+///
+/// [documentfoundation->NA](https://wiki.documentfoundation.org/Documentation/Calc_Functions/NA)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -612,13 +670,15 @@ pub fn n<A: Any>(x: A) -> FnNumber1<A> {
 /// __Semantics__:
 /// This function takes no arguments and returns the Error #N/A.
 ///
-/// __See also__: "ERROR.TYPE", "ISERROR", 
+/// __See also__: [crate::of::error_type()], [crate::of::iserror()], 
 #[inline]
 pub fn na() -> FnAny0 {
     FnAny0("NA", )
 }
 
 /// Convert text to number, in a locale-independent way.
+///
+/// [documentfoundation->NUMBERVALUE](https://wiki.documentfoundation.org/Documentation/Calc_Functions/NUMBERVALUE)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -656,13 +716,15 @@ pub fn na() -> FnAny0 {
 /// 
 /// If the string is not a valid xsd:float then return an error.
 ///
-/// __See also__: "N", "T", "DATEVALUE", "TIMEVALUE", "VALUE", 
+/// __See also__: [crate::of::n()], [crate::of::t()], [crate::of::datevalue()], [crate::of::timevalue()], [crate::of::value()], [crate::of::numbervalue_()], [crate::of::numbervalue__()], 
 #[inline]
 pub fn numbervalue<A: Text>(x: A) -> FnNumber1<A> {
     FnNumber1("NUMBERVALUE", x)
 }
 
 /// Convert text to number, in a locale-independent way.
+///
+/// [documentfoundation->NUMBERVALUE](https://wiki.documentfoundation.org/Documentation/Calc_Functions/NUMBERVALUE)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -700,13 +762,15 @@ pub fn numbervalue<A: Text>(x: A) -> FnNumber1<A> {
 /// 
 /// If the string is not a valid xsd:float then return an error.
 ///
-/// __See also__: "N", "T", "DATEVALUE", "TIMEVALUE", "VALUE", 
+/// __See also__: [crate::of::n()], [crate::of::t()], [crate::of::datevalue()], [crate::of::timevalue()], [crate::of::value()], [crate::of::numbervalue()], [crate::of::numbervalue__()], 
 #[inline]
 pub fn numbervalue_<A: Text, B: Text>(x: A, decimal_separator: B) -> FnNumber2<A, B> {
     FnNumber2("NUMBERVALUE", x, decimal_separator)
 }
 
 /// Convert text to number, in a locale-independent way.
+///
+/// [documentfoundation->NUMBERVALUE](https://wiki.documentfoundation.org/Documentation/Calc_Functions/NUMBERVALUE)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -744,13 +808,15 @@ pub fn numbervalue_<A: Text, B: Text>(x: A, decimal_separator: B) -> FnNumber2<A
 /// 
 /// If the string is not a valid xsd:float then return an error.
 ///
-/// __See also__: "N", "T", "DATEVALUE", "TIMEVALUE", "VALUE", 
+/// __See also__: [crate::of::n()], [crate::of::t()], [crate::of::datevalue()], [crate::of::timevalue()], [crate::of::value()], [crate::of::numbervalue()], [crate::of::numbervalue_()], 
 #[inline]
 pub fn numbervalue__<A: Text, B: Text, C: Text>(x: A, decimal_separator: B, group_separator: C) -> FnNumber3<A, B, C> {
     FnNumber3("NUMBERVALUE", x, decimal_separator, group_separator)
 }
 
 /// Returns the row number(s) of a reference.
+///
+/// [documentfoundation->ROW](https://wiki.documentfoundation.org/Documentation/Calc_Functions/ROW)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -765,13 +831,15 @@ pub fn numbervalue__<A: Text, B: Text, C: Text>(x: A, decimal_separator: B, grou
 /// current cell is used. If a reference has multiple rows, an array of numbers 
 /// is returned with all of the rows in the reference.
 ///
-/// __See also__: "AREAS", "COLUMN", "SHEET", 
+/// __See also__: [crate::of::areas()], [crate::of::column()], [crate::of::sheet()], [crate::of::row_()], 
 #[inline]
 pub fn row() -> FnNumber0 {
     FnNumber0("ROW", )
 }
 
 /// Returns the row number(s) of a reference.
+///
+/// [documentfoundation->ROW](https://wiki.documentfoundation.org/Documentation/Calc_Functions/ROW)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -786,13 +854,15 @@ pub fn row() -> FnNumber0 {
 /// current cell is used. If a reference has multiple rows, an array of numbers 
 /// is returned with all of the rows in the reference.
 ///
-/// __See also__: "AREAS", "COLUMN", "SHEET", 
+/// __See also__: [crate::of::areas()], [crate::of::column()], [crate::of::sheet()], [crate::of::row()], 
 #[inline]
 pub fn row_<A: Reference>(r: A) -> FnNumber1<A> {
     FnNumber1("ROW", r)
 }
 
 /// Returns the number of rows in a given range.
+///
+/// [documentfoundation->ROWS](https://wiki.documentfoundation.org/Documentation/Calc_Functions/ROWS)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -805,7 +875,7 @@ pub fn row_<A: Reference>(r: A) -> FnNumber1<A> {
 /// __Semantics__:
 /// The result is not dependent on the cell content in the range.
 ///
-/// __See also__: "COLUMNS", 
+/// __See also__: [crate::of::columns()], 
 #[inline]
 pub fn rows<A: ReferenceOrArray>(r: A) -> FnNumber1<A> {
     FnNumber1("ROWS", r)
@@ -813,6 +883,8 @@ pub fn rows<A: ReferenceOrArray>(r: A) -> FnNumber1<A> {
 
 /// Returns the sheet number of the reference or the string representing a 
 /// sheet name.
+///
+/// [documentfoundation->SHEET](https://wiki.documentfoundation.org/Documentation/Calc_Functions/SHEET)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -840,7 +912,7 @@ pub fn rows<A: ReferenceOrArray>(r: A) -> FnNumber1<A> {
 /// 
 /// If the function is not evaluated within a table cell, an error is returned.
 ///
-/// __See also__: "COLUMN", "ROW", "SHEETS", 
+/// __See also__: [crate::of::column()], [crate::of::row()], [crate::of::sheets()], [crate::of::sheet_()], 
 #[inline]
 pub fn sheet() -> FnNumber0 {
     FnNumber0("SHEET", )
@@ -848,6 +920,8 @@ pub fn sheet() -> FnNumber0 {
 
 /// Returns the sheet number of the reference or the string representing a 
 /// sheet name.
+///
+/// [documentfoundation->SHEET](https://wiki.documentfoundation.org/Documentation/Calc_Functions/SHEET)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -875,13 +949,15 @@ pub fn sheet() -> FnNumber0 {
 /// 
 /// If the function is not evaluated within a table cell, an error is returned.
 ///
-/// __See also__: "COLUMN", "ROW", "SHEETS", 
+/// __See also__: [crate::of::column()], [crate::of::row()], [crate::of::sheets()], [crate::of::sheet()], 
 #[inline]
 pub fn sheet_<A: TextOrReference>(r: A) -> FnNumber1<A> {
     FnNumber1("SHEET", r)
 }
 
 /// Returns the number of sheets in a reference or current document.
+///
+/// [documentfoundation->SHEETS](https://wiki.documentfoundation.org/Documentation/Calc_Functions/SHEETS)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -898,13 +974,15 @@ pub fn sheet_<A: TextOrReference>(r: A) -> FnNumber1<A> {
 /// 
 /// Hidden sheets are not excluded from the sheet count.
 ///
-/// __See also__: "COLUMNS", "ROWS", "SHEET", 
+/// __See also__: [crate::of::columns()], [crate::of::rows()], [crate::of::sheet()], [crate::of::sheets_()], 
 #[inline]
 pub fn sheets() -> FnNumber0 {
     FnNumber0("SHEETS", )
 }
 
 /// Returns the number of sheets in a reference or current document.
+///
+/// [documentfoundation->SHEETS](https://wiki.documentfoundation.org/Documentation/Calc_Functions/SHEETS)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -921,13 +999,15 @@ pub fn sheets() -> FnNumber0 {
 /// 
 /// Hidden sheets are not excluded from the sheet count.
 ///
-/// __See also__: "COLUMNS", "ROWS", "SHEET", 
+/// __See also__: [crate::of::columns()], [crate::of::rows()], [crate::of::sheet()], [crate::of::sheets()], 
 #[inline]
 pub fn sheets_<A: Reference>(r: A) -> FnNumber1<A> {
     FnNumber1("SHEETS", r)
 }
 
 /// Returns a number indicating the type of the provided value.
+///
+/// [documentfoundation->TYPE](https://wiki.documentfoundation.org/Documentation/Calc_Functions/TYPE)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -947,13 +1027,15 @@ pub fn sheets_<A: Reference>(r: A) -> FnNumber1<A> {
 /// Reliance on the return of 4 for TYPE will impair the interoperability of a 
 /// document containing an expression that relies on that value.
 ///
-/// __See also__: "ERROR.TYPE", 
+/// __See also__: [crate::of::error_type()], 
 #[inline]
 pub fn type_<A: Any>(value: A) -> FnNumber1<A> {
     FnNumber1("TYPE", value)
 }
 
 /// Convert text to number.
+///
+/// [documentfoundation->VALUE](https://wiki.documentfoundation.org/Documentation/Calc_Functions/VALUE)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -1006,7 +1088,7 @@ pub fn type_<A: Any>(value: A) -> FnNumber1<A> {
 /// 2/24. Evaluators should accept times with fractional seconds as well when 
 /// expressed in the form HH:MM:SS.ssss...
 /// 
-/// Evaluators shall accept textual dates in [ISO8601] format (YYYY-MM-DD), 
+/// Evaluators shall accept textual dates in ISO8601 format (YYYY-MM-DD), 
 /// converting them into serial numbers based on the current epoch. Evaluators 
 /// shall, when running in the en_US locale, accept the format MM/DD/YYYY .
 /// 
@@ -1034,7 +1116,7 @@ pub fn type_<A: Any>(value: A) -> FnNumber1<A> {
 /// conversions may be locale-dependent, as long as they do not conflict with 
 /// the above. Where no conversion is determined, an Error is returned.
 ///
-/// __See also__: "N", "T", "DATEVALUE", "TIMEVALUE", "NUMBERVALUE", 
+/// __See also__: [crate::of::n()], [crate::of::t()], [crate::of::datevalue()], [crate::of::timevalue()], [crate::of::numbervalue()], 
 #[inline]
 pub fn value<A: Text>(x: A) -> FnNumber1<A> {
     FnNumber1("VALUE", x)
