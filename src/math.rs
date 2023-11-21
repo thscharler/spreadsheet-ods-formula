@@ -386,6 +386,100 @@ impl Any for SubtotalFunction {
     }
 }
 
+/// Parameter for AGGREGATE().
+#[derive(Debug)]
+pub enum AggregateFunction {
+    Average,
+    Count,
+    CountA,
+    Max,
+    Min,
+    Product,
+    StDevS,
+    StDevP,
+    Sum,
+    VarS,
+    VarP,
+    Median,
+    ModeSngl,
+    Large,
+    Small,
+    PercentileInc,
+    QuartileInc,
+    PercentileExc,
+    QuartileExc,
+}
+
+impl Any for AggregateFunction {
+    fn formula(&self, buf: &mut String) {
+        let _ = write!(
+            buf,
+            "{}",
+            match self {
+                AggregateFunction::Average => 1,
+                AggregateFunction::Count => 2,
+                AggregateFunction::CountA => 3,
+                AggregateFunction::Max => 4,
+                AggregateFunction::Min => 5,
+                AggregateFunction::Product => 6,
+                AggregateFunction::StDevS => 7,
+                AggregateFunction::StDevP => 8,
+                AggregateFunction::Sum => 9,
+                AggregateFunction::VarS => 10,
+                AggregateFunction::VarP => 11,
+                AggregateFunction::Median => 12,
+                AggregateFunction::ModeSngl => 13,
+                AggregateFunction::Large => 14,
+                AggregateFunction::Small => 15,
+                AggregateFunction::PercentileInc => 16,
+                AggregateFunction::QuartileInc => 17,
+                AggregateFunction::PercentileExc => 18,
+                AggregateFunction::QuartileExc => 19,
+            }
+        );
+    }
+}
+
+/// Parameter for AGGREGATE().
+#[derive(Debug)]
+pub enum AggregateOption {
+    /// Ignore only nested SUBTOTAL and AGGREGATE functions
+    IgnoreNSA,
+    /// Ignore only hidden rows, nested SUBTOTAL and AGGREGATE functions
+    IgnoreHNSA,
+    /// Ignore only errors, nested SUBTOTAL and AGGREGATE functions
+    IgnoreENSA,
+    /// Ignore hidden rows, errors, nested SUBTOTAL and AGGREGATE functions
+    IgnoreHENSA,
+    /// Ignore nothing
+    IgnoreNone,
+    /// Ignore only hidden rows
+    IgnoreH,
+    /// Ignore only errors
+    IgnoreE,
+    /// Ignore only hidden rows and errors
+    IgnoreHE,
+}
+
+impl Any for AggregateOption {
+    fn formula(&self, buf: &mut String) {
+        let _ = write!(
+            buf,
+            "{}",
+            match self {
+                AggregateOption::IgnoreNSA => 0,
+                AggregateOption::IgnoreHNSA => 1,
+                AggregateOption::IgnoreENSA => 2,
+                AggregateOption::IgnoreHENSA => 3,
+                AggregateOption::IgnoreNone => 4,
+                AggregateOption::IgnoreH => 5,
+                AggregateOption::IgnoreE => 6,
+                AggregateOption::IgnoreHE => 7,
+            }
+        );
+    }
+}
+
 #[inline]
 pub fn sumifs<
     A: Reference + 'static,

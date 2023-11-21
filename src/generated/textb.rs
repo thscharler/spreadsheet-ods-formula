@@ -15,6 +15,8 @@ use crate::textb::*;
 
 /// Returns the starting position of a given text, using byte positions.
 ///
+/// [documentfoundation->FINDB](https://wiki.documentfoundation.org/Documentation/Calc_Functions/FINDB)
+///
 /// __Syntax__: 
 /// ```ods
 ///     FINDB( Search: Text; T: Text )
@@ -23,13 +25,15 @@ use crate::textb::*;
 /// __Semantics__:
 /// The same as FIND, but using byte positions.
 ///
-/// __See also__: "FIND", "LEFTB", "RIGHTB", 
+/// __See also__: [crate::of::find()], [crate::of::leftb()], [crate::of::rightb()], [crate::of::findb_()], 
 #[inline]
 pub fn findb<A: Text, B: Text>(search: A, t: B) -> FnNumber2<A, B> {
     FnNumber2("FINDB", search, t)
 }
 
 /// Returns the starting position of a given text, using byte positions.
+///
+/// [documentfoundation->FINDB](https://wiki.documentfoundation.org/Documentation/Calc_Functions/FINDB)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -39,7 +43,7 @@ pub fn findb<A: Text, B: Text>(search: A, t: B) -> FnNumber2<A, B> {
 /// __Semantics__:
 /// The same as FIND, but using byte positions.
 ///
-/// __See also__: "FIND", "LEFTB", "RIGHTB", 
+/// __See also__: [crate::of::find()], [crate::of::leftb()], [crate::of::rightb()], [crate::of::findb()], 
 #[inline]
 pub fn findb_<A: Text, B: Text, C: Number>(search: A, t: B, start: C) -> FnNumber3<A, B, C> {
     FnNumber3("FINDB", search, t, start)
@@ -47,6 +51,8 @@ pub fn findb_<A: Text, B: Text, C: Number>(search: A, t: B, start: C) -> FnNumbe
 
 /// Returns a selected number of text characters from the left, using a byte 
 /// position.
+///
+/// [documentfoundation->LEFTB](https://wiki.documentfoundation.org/Documentation/Calc_Functions/LEFTB)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -56,7 +62,7 @@ pub fn findb_<A: Text, B: Text, C: Number>(search: A, t: B, start: C) -> FnNumbe
 /// __Semantics__:
 /// As LEFT, but using a byte position.
 ///
-/// __See also__: "LEFT", "RIGHT", "RIGHTB", 
+/// __See also__: [crate::of::left()], [crate::of::right()], [crate::of::rightb()], [crate::of::leftb_()], 
 #[inline]
 pub fn leftb<A: Text>(t: A) -> FnText1<A> {
     FnText1("LEFTB", t)
@@ -64,6 +70,8 @@ pub fn leftb<A: Text>(t: A) -> FnText1<A> {
 
 /// Returns a selected number of text characters from the left, using a byte 
 /// position.
+///
+/// [documentfoundation->LEFTB](https://wiki.documentfoundation.org/Documentation/Calc_Functions/LEFTB)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -73,13 +81,15 @@ pub fn leftb<A: Text>(t: A) -> FnText1<A> {
 /// __Semantics__:
 /// As LEFT, but using a byte position.
 ///
-/// __See also__: "LEFT", "RIGHT", "RIGHTB", 
+/// __See also__: [crate::of::left()], [crate::of::right()], [crate::of::rightb()], [crate::of::leftb()], 
 #[inline]
 pub fn leftb_<A: Text, B: Number>(t: A, length: B) -> FnText2<A, B> {
     FnText2("LEFTB", t, length)
 }
 
 /// Returns the length of given text in units compatible with byte positions
+///
+/// [documentfoundation->LENB](https://wiki.documentfoundation.org/Documentation/Calc_Functions/LENB)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -92,7 +102,7 @@ pub fn leftb_<A: Text, B: Number>(t: A, length: B) -> FnText2<A, B> {
 /// __Semantics__:
 /// As LEN, but compatible with byte position values.
 ///
-/// __See also__: "LEN", "LEFTB", "RIGHTB", 
+/// __See also__: [crate::of::len()], [crate::of::leftb()], [crate::of::rightb()], 
 #[inline]
 pub fn lenb<A: Text>(t: A) -> FnNumber1<A> {
     FnNumber1("LENB", t)
@@ -100,6 +110,8 @@ pub fn lenb<A: Text>(t: A) -> FnNumber1<A> {
 
 /// Returns extracted text, given an original text, starting position using a 
 /// byte position, and length.
+///
+/// [documentfoundation->MIDB](https://wiki.documentfoundation.org/Documentation/Calc_Functions/MIDB)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -112,7 +124,7 @@ pub fn lenb<A: Text>(t: A) -> FnNumber1<A> {
 /// __Semantics__:
 /// As MID, but using byte positions.
 ///
-/// __See also__: "MID", "LEFTB", "RIGHTB", "REPLACEB", 
+/// __See also__: [crate::of::mid()], [crate::of::leftb()], [crate::of::rightb()], [crate::of::replaceb()], 
 #[inline]
 pub fn midb<A: Text, B: Number, C: Number>(t: A, start: B, length: C) -> FnText3<A, B, C> {
     FnText3("MIDB", t, start, length)
@@ -120,6 +132,8 @@ pub fn midb<A: Text, B: Number, C: Number>(t: A, start: B, length: C) -> FnText3
 
 /// Returns text where an old text is replaced with a new text, using byte 
 /// positions.
+///
+/// [documentfoundation->REPLACEB](https://wiki.documentfoundation.org/Documentation/Calc_Functions/REPLACEB)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -129,7 +143,7 @@ pub fn midb<A: Text, B: Number, C: Number>(t: A, start: B, length: C) -> FnText3
 /// __Semantics__:
 /// As REPLACE, but using byte positions.
 ///
-/// __See also__: "REPLACE", "LEFTB", "RIGHTB", "MIDB", "SUBSTITUTE", 
+/// __See also__: [crate::of::replace()], [crate::of::leftb()], [crate::of::rightb()], [crate::of::midb()], [crate::of::substitute()], 
 #[inline]
 pub fn replaceb<A: Text, B: Number, C: Number, D: Text>(t: A, start: B, len: C, new: D) -> FnText4<A, B, C, D> {
     FnText4("REPLACEB", t, start, len, new)
@@ -137,6 +151,8 @@ pub fn replaceb<A: Text, B: Number, C: Number, D: Text>(t: A, start: B, len: C, 
 
 /// Returns a selected number of text characters from the right, using byte 
 /// position.
+///
+/// [documentfoundation->RIGHTB](https://wiki.documentfoundation.org/Documentation/Calc_Functions/RIGHTB)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -146,7 +162,7 @@ pub fn replaceb<A: Text, B: Number, C: Number, D: Text>(t: A, start: B, len: C, 
 /// __Semantics__:
 /// As RIGHT, but using byte positions.
 ///
-/// __See also__: "RIGHT", "LEFTB", 
+/// __See also__: [crate::of::right()], [crate::of::leftb()], [crate::of::rightb_()], 
 #[inline]
 pub fn rightb<A: Text>(t: A) -> FnText1<A> {
     FnText1("RIGHTB", t)
@@ -154,6 +170,8 @@ pub fn rightb<A: Text>(t: A) -> FnText1<A> {
 
 /// Returns a selected number of text characters from the right, using byte 
 /// position.
+///
+/// [documentfoundation->RIGHTB](https://wiki.documentfoundation.org/Documentation/Calc_Functions/RIGHTB)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -163,13 +181,15 @@ pub fn rightb<A: Text>(t: A) -> FnText1<A> {
 /// __Semantics__:
 /// As RIGHT, but using byte positions.
 ///
-/// __See also__: "RIGHT", "LEFTB", 
+/// __See also__: [crate::of::right()], [crate::of::leftb()], [crate::of::rightb()], 
 #[inline]
 pub fn rightb_<A: Text, B: Number>(t: A, length: B) -> FnText2<A, B> {
     FnText2("RIGHTB", t, length)
 }
 
 /// Returns the starting position of a given text, using byte positions.
+///
+/// [documentfoundation->SEARCHB](https://wiki.documentfoundation.org/Documentation/Calc_Functions/SEARCHB)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -179,13 +199,15 @@ pub fn rightb_<A: Text, B: Number>(t: A, length: B) -> FnText2<A, B> {
 /// __Semantics__:
 /// As SEARCH, but using byte positions.
 ///
-/// __See also__: "SEARCH", "EXACT", "FIND", "FINDB", 
+/// __See also__: [crate::of::search()], [crate::of::exact()], [crate::of::find()], [crate::of::findb()], [crate::of::searchb_()], 
 #[inline]
 pub fn searchb<A: Text, B: Text>(search: A, t: B) -> FnNumber2<A, B> {
     FnNumber2("SEARCHB", search, t)
 }
 
 /// Returns the starting position of a given text, using byte positions.
+///
+/// [documentfoundation->SEARCHB](https://wiki.documentfoundation.org/Documentation/Calc_Functions/SEARCHB)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -195,7 +217,7 @@ pub fn searchb<A: Text, B: Text>(search: A, t: B) -> FnNumber2<A, B> {
 /// __Semantics__:
 /// As SEARCH, but using byte positions.
 ///
-/// __See also__: "SEARCH", "EXACT", "FIND", "FINDB", 
+/// __See also__: [crate::of::search()], [crate::of::exact()], [crate::of::find()], [crate::of::findb()], [crate::of::searchb()], 
 #[inline]
 pub fn searchb_<A: Text, B: Text, C: Number>(search: A, t: B, start: C) -> FnNumber3<A, B, C> {
     FnNumber3("SEARCHB", search, t, start)

@@ -2,7 +2,8 @@
 
 use crate::error::DError;
 use crate::mapp::{
-    args, etc_fn, manual_fn, mod_file, mod_name, rectify_fn, ret_args, ret_type, returns, type_vars,
+    args, etc_fn, fn_name, manual_fn, mod_file, mod_name, rectify_fn, ret_args, ret_type, returns,
+    type_vars,
 };
 use crate::parse::{Func, Mod, Spec};
 use std::fs::File;
@@ -10,7 +11,51 @@ use std::io::Read;
 use std::io::Write;
 
 #[test]
-fn main() -> Result<(), DError> {
+fn print_fnlist() -> Result<(), DError> {
+    let mut txt = Vec::new();
+
+    let mut f = File::open("tests/spec.txt")?;
+    f.read_to_end(&mut txt)?;
+
+    let txt = String::from_utf8_lossy(txt.as_ref());
+
+    let mut it = txt.as_ref();
+    let mut mod_name_ = String::from("");
+    loop {
+        let (rest, spec) = parse::parse(&it).expect("mods");
+        match spec {
+            Spec::Mod(mod_) => {
+                mod_name_ = mod_name(&mod_)?.into();
+
+                println!("{:?}", mod_.name);
+            }
+            Spec::Func(mut fun) => {
+                fun.mod_ = mod_name_.clone();
+
+                print!("{:?}", fun.name);
+                if etc_fn(&fun) {
+                    println!(" -- Don't generate etc-fn {}.", fun.fun);
+                } else if manual_fn(&fun) {
+                    println!(" -- Don't generate manual-fn {}.", fun.fun);
+                } else {
+                    println!();
+                }
+            }
+            Spec::Eof => {
+                break;
+            }
+        }
+
+        it = rest;
+    }
+
+    println!("fine.");
+
+    Ok(())
+}
+
+#[test]
+fn generate() -> Result<(), DError> {
     let mut txt = Vec::new();
 
     let mut f = File::open("tests/spec.txt")?;
@@ -108,12 +153,127 @@ pub fn generate_fn_family(f: &mut File, fun: &mut Func) -> Result<(), DError> {
 pub fn generate_fn(f: &mut File, fun: &Func) -> Result<(), DError> {
     writeln!(f)?;
 
+    generate_docsummary(f, fun)?;
+    generate_doclink(f, fun)?;
+    generate_docsyntax(f, fun)?;
+    generate_docargs(f, &fun)?;
+    generate_docconstraints(f, &fun)?;
+    generate_docextra1(f, &fun)?;
+    generate_docsemantics(f, &fun)?;
+    generate_docnote(f, &fun)?;
+    generate_docseealso(f, &fun)?;
+
+    writeln!(f, "#[inline]")?;
+    writeln!(
+        f,
+        "pub fn {}{}({}) -> {} {{",
+        fun.name,
+        type_vars(fun)?,
+        args(fun)?,
+        returns(fun)?
+    )?;
+    writeln!(
+        f,
+        "    {}(\"{}\", {})",
+        ret_type(fun)?,
+        fun.fun,
+        ret_args(fun)?,
+    )?;
+    writeln!(f, "}}")?;
+
+    Ok(())
+}
+
+fn generate_docsummary(f: &mut File, fun: &Func) -> Result<(), DError> {
     if fun.summary.len() > 0 {
         for l in fun.summary.lines() {
             writeln!(f, "/// {}", l)?;
         }
     }
+    Ok(())
+}
 
+fn generate_docseealso(f: &mut File, fun: &Func) -> Result<(), DError> {
+    if !fun.see_also.fnname.is_empty() {
+        writeln!(f, "///")?;
+        write!(f, "/// __See also__: ")?;
+        for name in &fun.see_also.fnname {
+            let name = fn_name(name);
+            if fun.name != name {
+                write!(f, "[crate::of::{}()], ", name)?;
+            }
+        }
+        writeln!(f)?;
+    }
+    Ok(())
+}
+
+fn generate_docnote(f: &mut File, fun: &Func) -> Result<(), DError> {
+    if let Some(note) = &fun.note {
+        if note.len() > 0 {
+            writeln!(f, "///")?;
+            writeln!(f, "/// __Note__:")?;
+            for l in note.lines() {
+                writeln!(f, "/// {}", l)?;
+            }
+        }
+    }
+    Ok(())
+}
+
+fn generate_docsemantics(f: &mut File, fun: &Func) -> Result<(), DError> {
+    if let Some(semantics) = &fun.semantics {
+        if semantics.len() > 0 {
+            writeln!(f, "///")?;
+            writeln!(f, "/// __Semantics__:")?;
+            for l in semantics.lines() {
+                writeln!(f, "/// {}", l)?;
+            }
+        }
+    }
+    Ok(())
+}
+
+fn generate_docextra1(f: &mut File, fun: &Func) -> Result<(), DError> {
+    if let Some(extra1) = &fun.extra1 {
+        if extra1.len() > 0 {
+            writeln!(f, "///")?;
+            writeln!(f, "/// __Info2__:")?;
+            for l in extra1.lines() {
+                writeln!(f, "/// {}", l)?;
+            }
+        }
+    }
+    Ok(())
+}
+
+fn generate_docconstraints(f: &mut File, fun: &Func) -> Result<(), DError> {
+    if let Some(constraints) = &fun.constraints {
+        if constraints.len() > 0 {
+            writeln!(f, "///")?;
+            writeln!(f, "/// __Constraints__:")?;
+            for l in constraints.lines() {
+                writeln!(f, "/// {}", l)?;
+            }
+        }
+    }
+    Ok(())
+}
+
+fn generate_docargs(f: &mut File, fun: &Func) -> Result<(), DError> {
+    if let Some(extra0) = &fun.extra0 {
+        if extra0.len() > 0 {
+            writeln!(f, "///")?;
+            writeln!(f, "/// __Arguments__:")?;
+            for l in extra0.lines() {
+                writeln!(f, "/// {}", l)?;
+            }
+        }
+    }
+    Ok(())
+}
+
+fn generate_docsyntax(f: &mut File, fun: &Func) -> Result<(), DError> {
     writeln!(f, "///")?;
     writeln!(f, "/// __Syntax__: ")?;
     writeln!(f, "/// ```ods")?;
@@ -147,84 +307,16 @@ pub fn generate_fn(f: &mut File, fun: &Func) -> Result<(), DError> {
     }
     writeln!(f, " )")?;
     writeln!(f, "/// ```")?;
+    Ok(())
+}
 
-    if let Some(extra0) = &fun.extra0 {
-        if extra0.len() > 0 {
-            writeln!(f, "///")?;
-            writeln!(f, "/// __Arguments__:")?;
-            for l in extra0.lines() {
-                writeln!(f, "/// {}", l)?;
-            }
-        }
-    }
-
-    if let Some(constraints) = &fun.constraints {
-        if constraints.len() > 0 {
-            writeln!(f, "///")?;
-            writeln!(f, "/// __Constraints__:")?;
-            for l in constraints.lines() {
-                writeln!(f, "/// {}", l)?;
-            }
-        }
-    }
-
-    if let Some(extra1) = &fun.extra1 {
-        if extra1.len() > 0 {
-            writeln!(f, "///")?;
-            writeln!(f, "/// __Info2__:")?;
-            for l in extra1.lines() {
-                writeln!(f, "/// {}", l)?;
-            }
-        }
-    }
-
-    if let Some(semantics) = &fun.semantics {
-        if semantics.len() > 0 {
-            writeln!(f, "///")?;
-            writeln!(f, "/// __Semantics__:")?;
-            for l in semantics.lines() {
-                writeln!(f, "/// {}", l)?;
-            }
-        }
-    }
-
-    if let Some(note) = &fun.note {
-        if note.len() > 0 {
-            writeln!(f, "///")?;
-            writeln!(f, "/// __Note__:")?;
-            for l in note.lines() {
-                writeln!(f, "/// {}", l)?;
-            }
-        }
-    }
-
-    if !fun.see_also.fnname.is_empty() {
-        writeln!(f, "///")?;
-        write!(f, "/// __See also__: ")?;
-        for l in &fun.see_also.fnname {
-            write!(f, "{:?}, ", l)?;
-        }
-        writeln!(f)?;
-    }
-
-    writeln!(f, "#[inline]")?;
+fn generate_doclink(f: &mut File, fun: &Func) -> Result<(), DError> {
+    writeln!(f, "///")?;
     writeln!(
         f,
-        "pub fn {}{}({}) -> {} {{",
-        fun.name,
-        type_vars(fun)?,
-        args(fun)?,
-        returns(fun)?
+        "/// [documentfoundation->{}](https://wiki.documentfoundation.org/Documentation/Calc_Functions/{})",
+        fun.fun, fun.fun
     )?;
-    writeln!(
-        f,
-        "    {}(\"{}\", {})",
-        ret_type(fun)?,
-        fun.fun,
-        ret_args(fun)?,
-    )?;
-    writeln!(f, "}}")?;
-
     Ok(())
 }
 
@@ -351,34 +443,43 @@ mod mapp {
 
     pub fn manual_fn(fun: &Func) -> bool {
         match fun.name.as_str() {
-            "IF" => true,
             _ => false,
         }
     }
 
-    pub fn rectify_fn(fun: &mut Func) -> Result<(), DError> {
-        fun.name = fun.fun.to_lowercase().replace('.', "_");
-
-        // fn name
-        if fun.fun == "MATCH" {
-            fun.name = "match_".into();
-        } else if fun.fun == "MOD" {
-            fun.name = "mod_".into();
-        } else if fun.fun == "FALSE" {
-            fun.name = "false_".into();
-        } else if fun.fun == "TRUE" {
-            fun.name = "true_".into();
-        } else if fun.fun == "TYPE" {
-            fun.name = "type_".into();
-        } else if fun.fun == "YIELD" {
-            fun.name = "yield_".into();
+    pub fn fn_name(fun: &str) -> String {
+        if fun == "MATCH" {
+            "match_".into()
+        } else if fun == "MOD" {
+            "mod_".into()
+        } else if fun == "FALSE" {
+            "false_".into()
+        } else if fun == "TRUE" {
+            "true_".into()
+        } else if fun == "TYPE" {
+            "type_".into()
+        } else if fun == "YIELD" {
+            "yield_".into()
+        } else if fun == "IF" {
+            "if_".into()
+        } else {
+            fun.to_lowercase().replace('.', "_")
         }
+    }
+
+    pub fn rectify_fn(fun: &mut Func) -> Result<(), DError> {
+        fun.name = fn_name(&fun.fun);
 
         // set vol/opt
+        let mut see_also = fun.name.clone();
+        fun.see_also.fnname.push(see_also.clone());
         for arg in fun.args.iter_mut().rev() {
             if arg.opt {
                 arg.vol = true;
                 arg.opt = false;
+
+                see_also.push('_');
+                fun.see_also.fnname.push(see_also.clone());
             } else {
                 break;
             }
@@ -411,6 +512,8 @@ mod mapp {
             (_, "CONVERT", "Text", "From") => None,
             (_, "CONVERT", "Text", "Into") => None,
             (_, "DATEDIF", "Text", "Format") => None,
+            (_, "AGGREGATE", "Integer", "Function") => None,
+            (_, "AGGREGATE", "Integer", "Option") => None,
 
             ("fin", _, "Basis", "B") => None,
             ("fin", _, "Basis", "Basis") => None,
@@ -510,6 +613,8 @@ mod mapp {
             (_, "CONVERT", "Text", "From") => ("ConvertUnit", false),
             (_, "CONVERT", "Text", "Into") => ("ConvertUnit", false),
             (_, "DATEDIF", "Text", "Format") => ("DateDifMethod", false),
+            (_, "AGGREGATE", "Integer", "Function") => ("AggregateFunction", false),
+            (_, "AGGREGATE", "Integer", "Option") => ("AggregateOption", false),
 
             ("fin", _, "Basis", "B") => ("YearFracMethod", false),
             ("fin", _, "Basis", "Basis") => ("YearFracMethod", false),
@@ -833,7 +938,7 @@ mod parse {
                             lines.push(line);
                             line = String::new();
                         }
-                        line.push_str(*v.fragment());
+                        Self::push_word(&mut line, *v.fragment());
 
                         rest
                     }
@@ -884,6 +989,38 @@ mod parse {
             }
 
             Self { txt: lines }
+        }
+
+        fn push_word(line: &mut String, word: &str) {
+            if word.starts_with("http") {
+                line.push('<');
+                line.push_str(word);
+                line.push('>');
+            } else if word == "[ISO4217]" {
+                line.push_str("ISO4217");
+            } else if word == "[JISX0208]" {
+                line.push_str("JISX0208");
+            } else if word == "[JISX0208]." {
+                line.push_str("JISX0208.");
+            } else if word == "[JISX0201]" {
+                line.push_str("JISX0201");
+            } else if word == "[UNICODE]" {
+                line.push_str("UNICODE");
+            } else if word == "[UNICODE]." {
+                line.push_str("UNICODE.");
+            } else if word == "[ISO8601]" {
+                line.push_str("ISO8601");
+            } else if word == "[ISO8601]," {
+                line.push_str("ISO8601,");
+            } else if word == "[UAX11]" {
+                line.push_str("UAX11");
+            } else if word == "“0?[Xx]”" {
+                line.push_str("“0?\\[Xx\\]”");
+            } else if word == "Dates[1]" {
+                line.push_str("Dates\\[1\\]");
+            } else {
+                line.push_str(word);
+            }
         }
 
         pub fn len(&self) -> usize {

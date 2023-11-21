@@ -10,6 +10,8 @@ use crate::bit::*;
 
 /// Returns bitwise “and” of its parameters
 ///
+/// [documentfoundation->BITAND](https://wiki.documentfoundation.org/Documentation/Calc_Functions/BITAND)
+///
 /// __Syntax__: 
 /// ```ods
 ///     BITAND( X: Integer; Y: Integer )
@@ -23,13 +25,15 @@ use crate::bit::*;
 /// position is 1 if and only if all parameters' bits at that position are also 
 /// 1; else it is 0.
 ///
-/// __See also__: "BITOR", "BITXOR", "AND", 
+/// __See also__: [crate::of::bitor()], [crate::of::bitxor()], [crate::of::and()], 
 #[inline]
 pub fn bitand<A: Number, B: Number>(x: A, y: B) -> FnNumber2<A, B> {
     FnNumber2("BITAND", x, y)
 }
 
 /// Returns left shift of value X by N bits (“<<”)
+///
+/// [documentfoundation->BITLSHIFT](https://wiki.documentfoundation.org/Documentation/Calc_Functions/BITLSHIFT)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -48,13 +52,15 @@ pub fn bitand<A: Number, B: Number>(x: A, y: B) -> FnNumber2<A, B> {
 /// 
 /// •if N > 0, return X * 2^N
 ///
-/// __See also__: "BITAND", "BITXOR", "BITRSHIFT", 
+/// __See also__: [crate::of::bitand()], [crate::of::bitxor()], [crate::of::bitrshift()], 
 #[inline]
 pub fn bitlshift<A: Number, B: Number>(x: A, n: B) -> FnNumber2<A, B> {
     FnNumber2("BITLSHIFT", x, n)
 }
 
 /// Returns bitwise “or” of its parameters
+///
+/// [documentfoundation->BITOR](https://wiki.documentfoundation.org/Documentation/Calc_Functions/BITOR)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -69,13 +75,15 @@ pub fn bitlshift<A: Number, B: Number>(x: A, n: B) -> FnNumber2<A, B> {
 /// position is 1 if any of its parameters' bits at that position are also 1; 
 /// else it is 0.
 ///
-/// __See also__: "BITAND", "BITXOR", "AND", 
+/// __See also__: [crate::of::bitand()], [crate::of::bitxor()], [crate::of::and()], 
 #[inline]
 pub fn bitor<A: Number, B: Number>(x: A, y: B) -> FnNumber2<A, B> {
     FnNumber2("BITOR", x, y)
 }
 
 /// Returns right shift of value X by N bits (“>>”)
+///
+/// [documentfoundation->BITRSHIFT](https://wiki.documentfoundation.org/Documentation/Calc_Functions/BITRSHIFT)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -94,13 +102,15 @@ pub fn bitor<A: Number, B: Number>(x: A, y: B) -> FnNumber2<A, B> {
 /// 
 /// •if N > 0, return INT(X / 2^N)
 ///
-/// __See also__: "BITAND", "BITXOR", "BITLSHIFT", "INT", 
+/// __See also__: [crate::of::bitand()], [crate::of::bitxor()], [crate::of::bitlshift()], [crate::of::int()], 
 #[inline]
 pub fn bitrshift<A: Number, B: Number>(x: A, n: B) -> FnNumber2<A, B> {
     FnNumber2("BITRSHIFT", x, n)
 }
 
 /// Returns bitwise “exclusive or” of its parameters
+///
+/// [documentfoundation->BITXOR](https://wiki.documentfoundation.org/Documentation/Calc_Functions/BITXOR)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -115,7 +125,7 @@ pub fn bitrshift<A: Number, B: Number>(x: A, n: B) -> FnNumber2<A, B> {
 /// each bit position is 1 if one or the other parameters' bits at that 
 /// position are 1; else it is 0.
 ///
-/// __See also__: "BITAND", "BITOR", "OR", 
+/// __See also__: [crate::of::bitand()], [crate::of::bitor()], [crate::of::or()], 
 #[inline]
 pub fn bitxor<A: Number, B: Number>(x: A, y: B) -> FnNumber2<A, B> {
     FnNumber2("BITXOR", x, y)

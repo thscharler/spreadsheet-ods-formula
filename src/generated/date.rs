@@ -5,6 +5,8 @@ use crate::date::*;
 
 /// Constructs a date from year, month, and day of month.
 ///
+/// [documentfoundation->DATE](https://wiki.documentfoundation.org/Documentation/Calc_Functions/DATE)
+///
 /// __Syntax__: 
 /// ```ods
 ///     DATE( Year: Integer; Month: Integer; Day: Integer )
@@ -21,13 +23,15 @@ use crate::date::*;
 /// months and days as necessary. The value of the serial number depends on the 
 /// current epoch.
 ///
-/// __See also__: "TIME", "DATEVALUE", 
+/// __See also__: [crate::of::time()], [crate::of::datevalue()], 
 #[inline]
 pub fn date<A: Number, B: Number, C: Number>(year: A, month: B, day: C) -> FnNumber3<A, B, C> {
     FnNumber3("DATE", year, month, day)
 }
 
 /// Returns the difference in years, months, or days of two date numbers.
+///
+/// [documentfoundation->DATEDIF](https://wiki.documentfoundation.org/Documentation/Calc_Functions/DATEDIF)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -43,13 +47,15 @@ pub fn date<A: Number, B: Number, C: Number>(year: A, month: B, day: C) -> FnNum
 /// The Format is a code from the following table, entered as text, that 
 /// specifies the format you want the result of DATEDIF to have.
 ///
-/// __See also__: "DAYS360", "DAYS", "Infix Operator “-”", 
+/// __See also__: [crate::of::days360()], [crate::of::days()], [crate::of::infix operator “-”()], 
 #[inline]
 pub fn datedif<A: DateTime, B: DateTime>(start_date: A, end_date: B, format: DateDifMethod) -> FnNumber3<A, B, DateDifMethod> {
     FnNumber3("DATEDIF", start_date, end_date, format)
 }
 
 /// Returns the date serial number from given text.
+///
+/// [documentfoundation->DATEVALUE](https://wiki.documentfoundation.org/Documentation/Calc_Functions/DATEVALUE)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -71,13 +77,15 @@ pub fn datedif<A: DateTime, B: DateTime>(start_date: A, end_date: B, format: Dat
 /// information on date formats. The value of the serial number depends on the 
 /// current epoch.
 ///
-/// __See also__: "TIME", "DATE", "TIMEVALUE", "VALUE", 
+/// __See also__: [crate::of::time()], [crate::of::date()], [crate::of::timevalue()], [crate::of::value()], 
 #[inline]
 pub fn datevalue<A: Text>(d: A) -> FnNumber1<A> {
     FnNumber1("DATEVALUE", d)
 }
 
 /// Returns the day from a date.
+///
+/// [documentfoundation->DAY](https://wiki.documentfoundation.org/Documentation/Calc_Functions/DAY)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -90,13 +98,15 @@ pub fn datevalue<A: Text>(d: A) -> FnNumber1<A> {
 /// __Semantics__:
 /// Returns the day portion of D.
 ///
-/// __See also__: "MONTH", "YEAR", 
+/// __See also__: [crate::of::month()], [crate::of::year()], 
 #[inline]
 pub fn day<A: DateTime>(d: A) -> FnNumber1<A> {
     FnNumber1("DAY", d)
 }
 
 /// Returns the number of days between two dates
+///
+/// [documentfoundation->DAYS](https://wiki.documentfoundation.org/Documentation/Calc_Functions/DAYS)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -111,13 +121,15 @@ pub fn day<A: DateTime>(d: A) -> FnNumber1<A> {
 /// Numbers, this is EndDate – StartDate. If they are both Text, this is 
 /// DATEVALUE(StartDate) – DATEVALUE(EndDate).
 ///
-/// __See also__: "DATEDIF", "DATEVALUE", "DAYS360", "MONTH", "YEAR", "Infix Operator “-”", 
+/// __See also__: [crate::of::datedif()], [crate::of::datevalue()], [crate::of::days360()], [crate::of::month()], [crate::of::year()], [crate::of::infix operator “-”()], 
 #[inline]
 pub fn days<A: DateTime, B: DateTime>(end_date: A, start_date: B) -> FnNumber2<A, B> {
     FnNumber2("DAYS", end_date, start_date)
 }
 
 /// Returns the number of days between two dates using the 360-day year
+///
+/// [documentfoundation->DAYS360](https://wiki.documentfoundation.org/Documentation/Calc_Functions/DAYS360)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -166,13 +178,15 @@ pub fn days<A: DateTime, B: DateTime>(end_date: A, start_date: B) -> FnNumber2<A
 /// sign * ((EndDate.year * 360 + EndDate.month * 30 + EndDate.day) – 
 /// (StartDate.year * 360 + StartDate.month * 30 + StartDate.day))
 ///
-/// __See also__: "DAYS", "DATEDIF", 
+/// __See also__: [crate::of::days()], [crate::of::datedif()], [crate::of::days360_()], 
 #[inline]
 pub fn days360<A: DateTime, B: DateTime>(start_date: A, end_date: B) -> FnNumber2<A, B> {
     FnNumber2("DAYS360", start_date, end_date)
 }
 
 /// Returns the number of days between two dates using the 360-day year
+///
+/// [documentfoundation->DAYS360](https://wiki.documentfoundation.org/Documentation/Calc_Functions/DAYS360)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -221,13 +235,15 @@ pub fn days360<A: DateTime, B: DateTime>(start_date: A, end_date: B) -> FnNumber
 /// sign * ((EndDate.year * 360 + EndDate.month * 30 + EndDate.day) – 
 /// (StartDate.year * 360 + StartDate.month * 30 + StartDate.day))
 ///
-/// __See also__: "DAYS", "DATEDIF", 
+/// __See also__: [crate::of::days()], [crate::of::datedif()], [crate::of::days360()], 
 #[inline]
 pub fn days360_<A: DateTime, B: DateTime>(start_date: A, end_date: B, method: Days360Method) -> FnNumber3<A, B, Days360Method> {
     FnNumber3("DAYS360", start_date, end_date, method)
 }
 
 /// Returns the serial number of a given date when MonthAdd months is added
+///
+/// [documentfoundation->EDATE](https://wiki.documentfoundation.org/Documentation/Calc_Functions/EDATE)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -247,7 +263,7 @@ pub fn days360_<A: DateTime, B: DateTime>(start_date: A, end_date: B, method: Da
 /// month is adjusted to the last day of the new month. Then the serial number 
 /// of that date is returned.
 ///
-/// __See also__: "DAYS", "DATEDIF", "EOMONTH", 
+/// __See also__: [crate::of::days()], [crate::of::datedif()], [crate::of::eomonth()], 
 #[inline]
 pub fn edate<A: DateTime, B: Number>(start_date: A, month_add: B) -> FnNumber2<A, B> {
     FnNumber2("EDATE", start_date, month_add)
@@ -255,6 +271,8 @@ pub fn edate<A: DateTime, B: Number>(start_date: A, month_add: B) -> FnNumber2<A
 
 /// Returns the serial number of the end of a month, given date plus MonthAdd 
 /// months
+///
+/// [documentfoundation->EOMONTH](https://wiki.documentfoundation.org/Documentation/Calc_Functions/EOMONTH)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -270,13 +288,15 @@ pub fn edate<A: DateTime, B: Number>(start_date: A, month_add: B) -> FnNumber2<A
 /// representing the end of that month. Due to the semantics of this function, 
 /// the value of DAY(StartDate) is irrelevant.
 ///
-/// __See also__: "DAY", "EDATE", 
+/// __See also__: [crate::of::day()], [crate::of::edate()], 
 #[inline]
 pub fn eomonth<A: DateTime, B: Number>(start_date: A, month_add: B) -> FnNumber2<A, B> {
     FnNumber2("EOMONTH", start_date, month_add)
 }
 
 /// Extracts the hour (0 through 23) from a time.
+///
+/// [documentfoundation->HOUR](https://wiki.documentfoundation.org/Documentation/Calc_Functions/HOUR)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -294,13 +314,15 @@ pub fn eomonth<A: DateTime, B: Number>(start_date: A, month_add: B) -> FnNumber2
 /// 
 /// Hour = INT(DayFraction * 24)
 ///
-/// __See also__: "MONTH", "DAY", "MINUTE", "SECOND", "INT", 
+/// __See also__: [crate::of::month()], [crate::of::day()], [crate::of::minute()], [crate::of::second()], [crate::of::int()], 
 #[inline]
 pub fn hour<A: DateTime>(t: A) -> FnNumber1<A> {
     FnNumber1("HOUR", t)
 }
 
 /// Determines the ISO week number of the year for a given date.
+///
+/// [documentfoundation->ISOWEEKNUM](https://wiki.documentfoundation.org/Documentation/Calc_Functions/ISOWEEKNUM)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -311,18 +333,20 @@ pub fn hour<A: DateTime>(t: A) -> FnNumber1<A> {
 /// None
 ///
 /// __Semantics__:
-/// Returns the ordinal number of the [ISO8601] calendar week in the year for 
-/// the given date D. ISO 8601 defines the calendar week as a time interval of 
+/// Returns the ordinal number of the ISO8601 calendar week in the year for the 
+/// given date D. ISO 8601 defines the calendar week as a time interval of 
 /// seven calendar days starting with a Monday, and the first calendar week of 
 /// a year as the one that includes the first Thursday of that year.
 ///
-/// __See also__: "DAY", "MONTH", "YEAR", "WEEKDAY", "WEEKNUM", 
+/// __See also__: [crate::of::day()], [crate::of::month()], [crate::of::year()], [crate::of::weekday()], [crate::of::weeknum()], 
 #[inline]
 pub fn isoweeknum<A: DateTime>(d: A) -> FnNumber1<A> {
     FnNumber1("ISOWEEKNUM", d)
 }
 
 /// Extracts the minute (0 through 59) from a time.
+///
+/// [documentfoundation->MINUTE](https://wiki.documentfoundation.org/Documentation/Calc_Functions/MINUTE)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -342,13 +366,15 @@ pub fn isoweeknum<A: DateTime>(d: A) -> FnNumber1<A> {
 /// 
 /// Minute = INT(HourFraction * 60)
 ///
-/// __See also__: "MONTH", "DAY", "HOUR", "SECOND", "INT", 
+/// __See also__: [crate::of::month()], [crate::of::day()], [crate::of::hour()], [crate::of::second()], [crate::of::int()], 
 #[inline]
 pub fn minute<A: DateTime>(t: A) -> FnNumber1<A> {
     FnNumber1("MINUTE", t)
 }
 
 /// Extracts the month from a date.
+///
+/// [documentfoundation->MONTH](https://wiki.documentfoundation.org/Documentation/Calc_Functions/MONTH)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -361,13 +387,15 @@ pub fn minute<A: DateTime>(t: A) -> FnNumber1<A> {
 /// __Semantics__:
 /// Takes Date and returns the month portion.
 ///
-/// __See also__: "YEAR", "DAY", 
+/// __See also__: [crate::of::year()], [crate::of::day()], 
 #[inline]
 pub fn month<A: DateTime>(date: A) -> FnNumber1<A> {
     FnNumber1("MONTH", date)
 }
 
 /// Returns the whole number of work days between two dates.
+///
+/// [documentfoundation->NETWORKDAYS](https://wiki.documentfoundation.org/Documentation/Calc_Functions/NETWORKDAYS)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -395,12 +423,16 @@ pub fn month<A: DateTime>(date: A) -> FnNumber1<A> {
 /// default definition of the work week excludes Saturday and Sunday and is: 
 /// {1;0;0;0;0;0;1}. To define the work week as excluding Friday and Saturday, 
 /// the third parameter would be: {0;0;0;0;0;1;1}.
+///
+/// __See also__: [crate::of::networkdays_()], [crate::of::networkdays__()], 
 #[inline]
 pub fn networkdays<A: DateTime, B: DateTime>(date1: A, date2: B) -> FnNumber2<A, B> {
     FnNumber2("NETWORKDAYS", date1, date2)
 }
 
 /// Returns the whole number of work days between two dates.
+///
+/// [documentfoundation->NETWORKDAYS](https://wiki.documentfoundation.org/Documentation/Calc_Functions/NETWORKDAYS)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -428,12 +460,16 @@ pub fn networkdays<A: DateTime, B: DateTime>(date1: A, date2: B) -> FnNumber2<A,
 /// default definition of the work week excludes Saturday and Sunday and is: 
 /// {1;0;0;0;0;0;1}. To define the work week as excluding Friday and Saturday, 
 /// the third parameter would be: {0;0;0;0;0;1;1}.
+///
+/// __See also__: [crate::of::networkdays()], [crate::of::networkdays__()], 
 #[inline]
 pub fn networkdays_<A: DateTime, B: DateTime, C: Sequence>(date1: A, date2: B, holidays: C) -> FnNumber3<A, B, C> {
     FnNumber3("NETWORKDAYS", date1, date2, holidays)
 }
 
 /// Returns the whole number of work days between two dates.
+///
+/// [documentfoundation->NETWORKDAYS](https://wiki.documentfoundation.org/Documentation/Calc_Functions/NETWORKDAYS)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -461,12 +497,16 @@ pub fn networkdays_<A: DateTime, B: DateTime, C: Sequence>(date1: A, date2: B, h
 /// default definition of the work week excludes Saturday and Sunday and is: 
 /// {1;0;0;0;0;0;1}. To define the work week as excluding Friday and Saturday, 
 /// the third parameter would be: {0;0;0;0;0;1;1}.
+///
+/// __See also__: [crate::of::networkdays()], [crate::of::networkdays_()], 
 #[inline]
 pub fn networkdays__<A: DateTime, B: DateTime, C: Sequence, D: Sequence>(date1: A, date2: B, holidays: C, workdays: D) -> FnNumber4<A, B, C, D> {
     FnNumber4("NETWORKDAYS", date1, date2, holidays, workdays)
 }
 
 /// Returns the serial number of the current date and time.
+///
+/// [documentfoundation->NOW](https://wiki.documentfoundation.org/Documentation/Calc_Functions/NOW)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -481,7 +521,7 @@ pub fn networkdays__<A: DateTime, B: DateTime, C: Sequence, D: Sequence>(date1: 
 /// locale. If you want only the serial number of the current day, use TODAY 
 /// 6.10.19.
 ///
-/// __See also__: "DATE", "TIME", "TODAY", 
+/// __See also__: [crate::of::date()], [crate::of::time()], [crate::of::today()], 
 #[inline]
 pub fn now() -> FnNumber0 {
     FnNumber0("NOW", )
@@ -489,6 +529,8 @@ pub fn now() -> FnNumber0 {
 
 /// Extracts the second (the integer 0 through 59) from a time. This function 
 /// presumes that leap seconds never exist.
+///
+/// [documentfoundation->SECOND](https://wiki.documentfoundation.org/Documentation/Calc_Functions/SECOND)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -512,13 +554,15 @@ pub fn now() -> FnNumber0 {
 /// 
 /// Second = ROUND(MinuteFraction * 60)
 ///
-/// __See also__: "MONTH", "DAY", "HOUR", "MINUTE", "INT", 
+/// __See also__: [crate::of::month()], [crate::of::day()], [crate::of::hour()], [crate::of::minute()], [crate::of::int()], 
 #[inline]
 pub fn second<A: DateTime>(t: A) -> FnNumber1<A> {
     FnNumber1("SECOND", t)
 }
 
 /// Constructs a time value from hours, minutes, and seconds.
+///
+/// [documentfoundation->TIME](https://wiki.documentfoundation.org/Documentation/Calc_Functions/TIME)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -539,13 +583,15 @@ pub fn second<A: DateTime>(t: A) -> FnNumber1<A> {
 /// Hours, Minutes, and Seconds may be any number (they shall not be limited to 
 /// the ranges 0..24, 0..59, or 0..60 respectively).
 ///
-/// __See also__: "DATE", "INT", 
+/// __See also__: [crate::of::date()], [crate::of::int()], 
 #[inline]
 pub fn time<A: Number, B: Number, C: Number>(hours: A, minutes: B, seconds: C) -> FnNumber3<A, B, C> {
     FnNumber3("TIME", hours, minutes, seconds)
 }
 
 /// Returns a time serial number from given text.
+///
+/// [documentfoundation->TIMEVALUE](https://wiki.documentfoundation.org/Documentation/Calc_Functions/TIMEVALUE)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -564,13 +610,15 @@ pub fn time<A: Number, B: Number, C: Number>(hours: A, minutes: B, seconds: C) -
 /// format, an evaluator may attempt to convert the number another way (e.g., 
 /// using VALUE), or it may return an Error (this is implementation-dependent).
 ///
-/// __See also__: "TIME", "DATE", "DATEVALUE", "VALUE", 
+/// __See also__: [crate::of::time()], [crate::of::date()], [crate::of::datevalue()], [crate::of::value()], 
 #[inline]
 pub fn timevalue<A: Text>(t: A) -> FnNumber1<A> {
     FnNumber1("TIMEVALUE", t)
 }
 
 /// Returns the serial number of today.
+///
+/// [documentfoundation->TODAY](https://wiki.documentfoundation.org/Documentation/Calc_Functions/TODAY)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -585,7 +633,7 @@ pub fn timevalue<A: Text>(t: A) -> FnNumber1<A> {
 /// only returns the date, not the datetime value. For the specific time of day 
 /// as well, use NOW 6.10.15.
 ///
-/// __See also__: "TIME", "NOW", 
+/// __See also__: [crate::of::time()], [crate::of::now()], 
 #[inline]
 pub fn today() -> FnNumber0 {
     FnNumber0("TODAY", )
@@ -593,6 +641,8 @@ pub fn today() -> FnNumber0 {
 
 /// Extracts the day of the week from a date; if text, uses current locale to 
 /// convert to a date.
+///
+/// [documentfoundation->WEEKDAY](https://wiki.documentfoundation.org/Documentation/Calc_Functions/WEEKDAY)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -636,7 +686,7 @@ pub fn today() -> FnNumber0 {
 /// 10. When Type is 17, Sunday is the first day of the week, with value 1; 
 /// Saturday has value 7.
 ///
-/// __See also__: "DAY", "MONTH", "YEAR", 
+/// __See also__: [crate::of::day()], [crate::of::month()], [crate::of::year()], [crate::of::weekday_()], 
 #[inline]
 pub fn weekday<A: DateTime>(d: A) -> FnNumber1<A> {
     FnNumber1("WEEKDAY", d)
@@ -644,6 +694,8 @@ pub fn weekday<A: DateTime>(d: A) -> FnNumber1<A> {
 
 /// Extracts the day of the week from a date; if text, uses current locale to 
 /// convert to a date.
+///
+/// [documentfoundation->WEEKDAY](https://wiki.documentfoundation.org/Documentation/Calc_Functions/WEEKDAY)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -687,13 +739,15 @@ pub fn weekday<A: DateTime>(d: A) -> FnNumber1<A> {
 /// 10. When Type is 17, Sunday is the first day of the week, with value 1; 
 /// Saturday has value 7.
 ///
-/// __See also__: "DAY", "MONTH", "YEAR", 
+/// __See also__: [crate::of::day()], [crate::of::month()], [crate::of::year()], [crate::of::weekday()], 
 #[inline]
 pub fn weekday_<A: DateTime>(d: A, type_: WeekdayMethod) -> FnNumber2<A, WeekdayMethod> {
     FnNumber2("WEEKDAY", d, type_)
 }
 
 /// Determines the week number of the year for a given date.
+///
+/// [documentfoundation->WEEKNUM](https://wiki.documentfoundation.org/Documentation/Calc_Functions/WEEKNUM)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -710,17 +764,19 @@ pub fn weekday_<A: DateTime>(d: A, type_: WeekdayMethod) -> FnNumber2<A, Weekday
 /// first week of the year, and is numbered week 1. The week starts on {Sunday, 
 /// Monday, Monday, Tuesday, ..., Sunday}.
 /// 
-/// Mode 21 and Mode 150 are both [ISO8601], the week starts on Monday and the 
+/// Mode 21 and Mode 150 are both ISO8601, the week starts on Monday and the 
 /// week containing the first Thursday of the year is the first week of the 
 /// year, and is numbered week 1.
 ///
-/// __See also__: "DAY", "MONTH", "YEAR", "WEEKDAY", "ISOWEEKNUM", 
+/// __See also__: [crate::of::day()], [crate::of::month()], [crate::of::year()], [crate::of::weekday()], [crate::of::isoweeknum()], [crate::of::weeknum_()], 
 #[inline]
 pub fn weeknum<A: DateTime>(d: A) -> FnNumber1<A> {
     FnNumber1("WEEKNUM", d)
 }
 
 /// Determines the week number of the year for a given date.
+///
+/// [documentfoundation->WEEKNUM](https://wiki.documentfoundation.org/Documentation/Calc_Functions/WEEKNUM)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -737,11 +793,11 @@ pub fn weeknum<A: DateTime>(d: A) -> FnNumber1<A> {
 /// first week of the year, and is numbered week 1. The week starts on {Sunday, 
 /// Monday, Monday, Tuesday, ..., Sunday}.
 /// 
-/// Mode 21 and Mode 150 are both [ISO8601], the week starts on Monday and the 
+/// Mode 21 and Mode 150 are both ISO8601, the week starts on Monday and the 
 /// week containing the first Thursday of the year is the first week of the 
 /// year, and is numbered week 1.
 ///
-/// __See also__: "DAY", "MONTH", "YEAR", "WEEKDAY", "ISOWEEKNUM", 
+/// __See also__: [crate::of::day()], [crate::of::month()], [crate::of::year()], [crate::of::weekday()], [crate::of::isoweeknum()], [crate::of::weeknum()], 
 #[inline]
 pub fn weeknum_<A: DateTime>(d: A, mode: WeeknumMethod) -> FnNumber2<A, WeeknumMethod> {
     FnNumber2("WEEKNUM", d, mode)
@@ -749,6 +805,8 @@ pub fn weeknum_<A: DateTime>(d: A, mode: WeeknumMethod) -> FnNumber2<A, WeeknumM
 
 /// Returns the date serial number which is a specified number of work days 
 /// before or after an input date.
+///
+/// [documentfoundation->WORKDAY](https://wiki.documentfoundation.org/Documentation/Calc_Functions/WORKDAY)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -784,6 +842,8 @@ pub fn weeknum_<A: DateTime>(d: A, mode: WeeknumMethod) -> FnNumber2<A, WeeknumM
 /// The default definition of the work week that excludes Saturday and Sunday 
 /// and is: {1;0;0;0;0;0;1}. To define the workweek as excluding Friday and 
 /// Saturday, the third parameter would be: {0;0;0;0;0;1;1}.
+///
+/// __See also__: [crate::of::workday_()], [crate::of::workday__()], 
 #[inline]
 pub fn workday<A: DateTime, B: Number>(date: A, offset: B) -> FnNumber2<A, B> {
     FnNumber2("WORKDAY", date, offset)
@@ -791,6 +851,8 @@ pub fn workday<A: DateTime, B: Number>(date: A, offset: B) -> FnNumber2<A, B> {
 
 /// Returns the date serial number which is a specified number of work days 
 /// before or after an input date.
+///
+/// [documentfoundation->WORKDAY](https://wiki.documentfoundation.org/Documentation/Calc_Functions/WORKDAY)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -826,6 +888,8 @@ pub fn workday<A: DateTime, B: Number>(date: A, offset: B) -> FnNumber2<A, B> {
 /// The default definition of the work week that excludes Saturday and Sunday 
 /// and is: {1;0;0;0;0;0;1}. To define the workweek as excluding Friday and 
 /// Saturday, the third parameter would be: {0;0;0;0;0;1;1}.
+///
+/// __See also__: [crate::of::workday()], [crate::of::workday__()], 
 #[inline]
 pub fn workday_<A: DateTime, B: Number, C: Sequence>(date: A, offset: B, holidays: C) -> FnNumber3<A, B, C> {
     FnNumber3("WORKDAY", date, offset, holidays)
@@ -833,6 +897,8 @@ pub fn workday_<A: DateTime, B: Number, C: Sequence>(date: A, offset: B, holiday
 
 /// Returns the date serial number which is a specified number of work days 
 /// before or after an input date.
+///
+/// [documentfoundation->WORKDAY](https://wiki.documentfoundation.org/Documentation/Calc_Functions/WORKDAY)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -868,12 +934,16 @@ pub fn workday_<A: DateTime, B: Number, C: Sequence>(date: A, offset: B, holiday
 /// The default definition of the work week that excludes Saturday and Sunday 
 /// and is: {1;0;0;0;0;0;1}. To define the workweek as excluding Friday and 
 /// Saturday, the third parameter would be: {0;0;0;0;0;1;1}.
+///
+/// __See also__: [crate::of::workday()], [crate::of::workday_()], 
 #[inline]
 pub fn workday__<A: DateTime, B: Number, C: Sequence, D: Sequence>(date: A, offset: B, holidays: C, workdays: D) -> FnNumber4<A, B, C, D> {
     FnNumber4("WORKDAY", date, offset, holidays, workdays)
 }
 
 /// Extracts the year from a date given in the current locale of the evaluator.
+///
+/// [documentfoundation->YEAR](https://wiki.documentfoundation.org/Documentation/Calc_Functions/YEAR)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -899,13 +969,15 @@ pub fn workday__<A: DateTime, B: Number, C: Sequence, D: Sequence>(date: A, offs
 /// Error or the year number. Four-digit year numbers following 1582 should 
 /// return the year number.
 ///
-/// __See also__: "MONTH", "DAY", "VALUE", 
+/// __See also__: [crate::of::month()], [crate::of::day()], [crate::of::value()], 
 #[inline]
 pub fn year<A: DateTime>(d: A) -> FnNumber1<A> {
     FnNumber1("YEAR", d)
 }
 
 /// Extracts the number of years (including fractional part) between two dates
+///
+/// [documentfoundation->YEARFRAC](https://wiki.documentfoundation.org/Documentation/Calc_Functions/YEARFRAC)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -921,13 +993,15 @@ pub fn year<A: DateTime>(d: A) -> FnNumber1<A> {
 /// 
 /// B indicates the day-count convention to use in the calculation. 4.11.7
 ///
-/// __See also__: "DATEDIF", 
+/// __See also__: [crate::of::datedif()], [crate::of::yearfrac_()], 
 #[inline]
 pub fn yearfrac<A: DateTime, B: DateTime>(start_date: A, end_date: B) -> FnNumber2<A, B> {
     FnNumber2("YEARFRAC", start_date, end_date)
 }
 
 /// Extracts the number of years (including fractional part) between two dates
+///
+/// [documentfoundation->YEARFRAC](https://wiki.documentfoundation.org/Documentation/Calc_Functions/YEARFRAC)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -943,7 +1017,7 @@ pub fn yearfrac<A: DateTime, B: DateTime>(start_date: A, end_date: B) -> FnNumbe
 /// 
 /// B indicates the day-count convention to use in the calculation. 4.11.7
 ///
-/// __See also__: "DATEDIF", 
+/// __See also__: [crate::of::datedif()], [crate::of::yearfrac()], 
 #[inline]
 pub fn yearfrac_<A: DateTime, B: DateTime>(start_date: A, end_date: B, b: YearFracMethod) -> FnNumber3<A, B, YearFracMethod> {
     FnNumber3("YEARFRAC", start_date, end_date, b)

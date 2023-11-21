@@ -9,6 +9,8 @@ use crate::stat::*;
 
 /// Calculates the average of the absolute deviations of the values in list.
 ///
+/// [documentfoundation->AVEDEV](https://wiki.documentfoundation.org/Documentation/Calc_Functions/AVEDEV)
+///
 /// __Syntax__: 
 /// ```ods
 ///     AVEDEV({ N: NumberSequenceList}+ )
@@ -21,13 +23,15 @@ use crate::stat::*;
 /// For a list N containing n numbers x1 to xn, with average x, AVEDEV(N) is 
 /// equal to:
 ///
-/// __See also__: "SUM", "AVERAGE", 
+/// __See also__: [crate::of::sum()], [crate::of::average()], 
 #[inline]
 pub fn avedev<A: Sequence>(n: A) -> FnNumber1<A> {
     FnNumber1("AVEDEV", n)
 }
 
 /// Average the set of numbers
+///
+/// [documentfoundation->AVERAGE](https://wiki.documentfoundation.org/Documentation/Calc_Functions/AVERAGE)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -40,13 +44,15 @@ pub fn avedev<A: Sequence>(n: A) -> FnNumber1<A> {
 /// __Semantics__:
 /// Computes SUM(N) / COUNT(N).
 ///
-/// __See also__: "SUM", "COUNT", 
+/// __See also__: [crate::of::sum()], [crate::of::count()], 
 #[inline]
 pub fn average<A: Sequence>(n: A) -> FnNumber1<A> {
     FnNumber1("AVERAGE", n)
 }
 
 /// Average values, including values of type Text and Logical.
+///
+/// [documentfoundation->AVERAGEA](https://wiki.documentfoundation.org/Documentation/Calc_Functions/AVERAGEA)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -62,13 +68,15 @@ pub fn average<A: Sequence>(n: A) -> FnNumber1<A> {
 /// and FALSE is treated as 0. Empty cells are not included. Any N may be of 
 /// type ReferenceList.
 ///
-/// __See also__: "AVERAGE", 
+/// __See also__: [crate::of::average()], 
 #[inline]
 pub fn averagea<A: Sequence>(n: A) -> FnNumber1<A> {
     FnNumber1("AVERAGEA", n)
 }
 
 /// Average the values of cells in a range that meet a criteria.
+///
+/// [documentfoundation->AVERAGEIF](https://wiki.documentfoundation.org/Documentation/Calc_Functions/AVERAGEIF)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -91,13 +99,15 @@ pub fn averagea<A: Sequence>(n: A) -> FnNumber1<A> {
 /// HOST-USE-REGULAR-EXPRESSIONS or HOST-USE-WILDCARDS or 
 /// HOST-SEARCH-CRITERIA-MUST-APPLY-TO-WHOLE-CELL properties. 3.4
 ///
-/// __See also__: "AVERAGEIFS", "COUNTIF", "SUMIF", "Infix Operator \"=\"", "Infix Operator \"<>\"", "Infix Operator Ordered Comparison (\"<\", \"<=\", \">\", \">=\")", 
+/// __See also__: [crate::of::averageifs()], [crate::of::countif()], [crate::of::sumif()], [crate::of::infix operator "="()], [crate::of::infix operator "<>"()], [crate::of::infix operator ordered comparison ("<", "<=", ">", ">=")()], [crate::of::averageif_()], 
 #[inline]
 pub fn averageif<A: Reference, B: Criterion>(r: A, c: B) -> FnNumber2<A, B> {
     FnNumber2("AVERAGEIF", r, c)
 }
 
 /// Average the values of cells in a range that meet a criteria.
+///
+/// [documentfoundation->AVERAGEIF](https://wiki.documentfoundation.org/Documentation/Calc_Functions/AVERAGEIF)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -120,7 +130,7 @@ pub fn averageif<A: Reference, B: Criterion>(r: A, c: B) -> FnNumber2<A, B> {
 /// HOST-USE-REGULAR-EXPRESSIONS or HOST-USE-WILDCARDS or 
 /// HOST-SEARCH-CRITERIA-MUST-APPLY-TO-WHOLE-CELL properties. 3.4
 ///
-/// __See also__: "AVERAGEIFS", "COUNTIF", "SUMIF", "Infix Operator \"=\"", "Infix Operator \"<>\"", "Infix Operator Ordered Comparison (\"<\", \"<=\", \">\", \">=\")", 
+/// __See also__: [crate::of::averageifs()], [crate::of::countif()], [crate::of::sumif()], [crate::of::infix operator "="()], [crate::of::infix operator "<>"()], [crate::of::infix operator ordered comparison ("<", "<=", ">", ">=")()], [crate::of::averageif()], 
 #[inline]
 pub fn averageif_<A: Reference, B: Criterion, C: Reference>(r: A, c: B, a: C) -> FnNumber3<A, B, C> {
     FnNumber3("AVERAGEIF", r, c, a)
@@ -128,6 +138,8 @@ pub fn averageif_<A: Reference, B: Criterion, C: Reference>(r: A, c: B, a: C) ->
 
 /// returns the value of the probability density function or the cumulative 
 /// distribution function for the beta distribution.
+///
+/// [documentfoundation->BETADIST](https://wiki.documentfoundation.org/Documentation/Calc_Functions/BETADIST)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -157,7 +169,7 @@ pub fn averageif_<A: Reference, B: Criterion, C: Reference>(r: A, c: B, a: C) ->
 /// 
 /// the term can be written as
 ///
-/// __See also__: "BETAINV", 
+/// __See also__: [crate::of::betainv()], [crate::of::betadist_()], [crate::of::betadist__()], [crate::of::betadist___()], 
 #[inline]
 pub fn betadist<A: Number, B: Number, C: Number>(x: A, alpha: B, beta: C) -> FnNumber3<A, B, C> {
     FnNumber3("BETADIST", x, alpha, beta)
@@ -165,6 +177,8 @@ pub fn betadist<A: Number, B: Number, C: Number>(x: A, alpha: B, beta: C) -> FnN
 
 /// returns the value of the probability density function or the cumulative 
 /// distribution function for the beta distribution.
+///
+/// [documentfoundation->BETADIST](https://wiki.documentfoundation.org/Documentation/Calc_Functions/BETADIST)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -194,7 +208,7 @@ pub fn betadist<A: Number, B: Number, C: Number>(x: A, alpha: B, beta: C) -> FnN
 /// 
 /// the term can be written as
 ///
-/// __See also__: "BETAINV", 
+/// __See also__: [crate::of::betainv()], [crate::of::betadist()], [crate::of::betadist__()], [crate::of::betadist___()], 
 #[inline]
 pub fn betadist_<A: Number, B: Number, C: Number, D: Number>(x: A, alpha: B, beta: C, a: D) -> FnNumber4<A, B, C, D> {
     FnNumber4("BETADIST", x, alpha, beta, a)
@@ -202,6 +216,8 @@ pub fn betadist_<A: Number, B: Number, C: Number, D: Number>(x: A, alpha: B, bet
 
 /// returns the value of the probability density function or the cumulative 
 /// distribution function for the beta distribution.
+///
+/// [documentfoundation->BETADIST](https://wiki.documentfoundation.org/Documentation/Calc_Functions/BETADIST)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -231,7 +247,7 @@ pub fn betadist_<A: Number, B: Number, C: Number, D: Number>(x: A, alpha: B, bet
 /// 
 /// the term can be written as
 ///
-/// __See also__: "BETAINV", 
+/// __See also__: [crate::of::betainv()], [crate::of::betadist()], [crate::of::betadist_()], [crate::of::betadist___()], 
 #[inline]
 pub fn betadist__<A: Number, B: Number, C: Number, D: Number, E: Number>(x: A, alpha: B, beta: C, a: D, b: E) -> FnNumber5<A, B, C, D, E> {
     FnNumber5("BETADIST", x, alpha, beta, a, b)
@@ -239,6 +255,8 @@ pub fn betadist__<A: Number, B: Number, C: Number, D: Number, E: Number>(x: A, a
 
 /// returns the value of the probability density function or the cumulative 
 /// distribution function for the beta distribution.
+///
+/// [documentfoundation->BETADIST](https://wiki.documentfoundation.org/Documentation/Calc_Functions/BETADIST)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -268,13 +286,15 @@ pub fn betadist__<A: Number, B: Number, C: Number, D: Number, E: Number>(x: A, a
 /// 
 /// the term can be written as
 ///
-/// __See also__: "BETAINV", 
+/// __See also__: [crate::of::betainv()], [crate::of::betadist()], [crate::of::betadist_()], [crate::of::betadist__()], 
 #[inline]
 pub fn betadist___<A: Number, B: Number, C: Number, D: Number, E: Number, F: Logical>(x: A, alpha: B, beta: C, a: D, b: E, cumulative: F) -> FnNumber6<A, B, C, D, E, F> {
     FnNumber6("BETADIST", x, alpha, beta, a, b, cumulative)
 }
 
 /// returns the inverse of BETADIST(x;α;β;A;B;TRUE()).
+///
+/// [documentfoundation->BETAINV](https://wiki.documentfoundation.org/Documentation/Calc_Functions/BETAINV)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -288,13 +308,15 @@ pub fn betadist___<A: Number, B: Number, C: Number, D: Number, E: Number, F: Log
 /// BETAINV returns the unique number x in the closed interval from A to B such 
 /// that BETADIST(x;α;β;A;B) = P.
 ///
-/// __See also__: "BETADIST", 
+/// __See also__: [crate::of::betadist()], [crate::of::betainv_()], [crate::of::betainv__()], 
 #[inline]
 pub fn betainv<A: Number, B: Number, C: Number>(p: A, alpha: B, beta: C) -> FnNumber3<A, B, C> {
     FnNumber3("BETAINV", p, alpha, beta)
 }
 
 /// returns the inverse of BETADIST(x;α;β;A;B;TRUE()).
+///
+/// [documentfoundation->BETAINV](https://wiki.documentfoundation.org/Documentation/Calc_Functions/BETAINV)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -308,13 +330,15 @@ pub fn betainv<A: Number, B: Number, C: Number>(p: A, alpha: B, beta: C) -> FnNu
 /// BETAINV returns the unique number x in the closed interval from A to B such 
 /// that BETADIST(x;α;β;A;B) = P.
 ///
-/// __See also__: "BETADIST", 
+/// __See also__: [crate::of::betadist()], [crate::of::betainv()], [crate::of::betainv__()], 
 #[inline]
 pub fn betainv_<A: Number, B: Number, C: Number, D: Number>(p: A, alpha: B, beta: C, a: D) -> FnNumber4<A, B, C, D> {
     FnNumber4("BETAINV", p, alpha, beta, a)
 }
 
 /// returns the inverse of BETADIST(x;α;β;A;B;TRUE()).
+///
+/// [documentfoundation->BETAINV](https://wiki.documentfoundation.org/Documentation/Calc_Functions/BETAINV)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -328,13 +352,15 @@ pub fn betainv_<A: Number, B: Number, C: Number, D: Number>(p: A, alpha: B, beta
 /// BETAINV returns the unique number x in the closed interval from A to B such 
 /// that BETADIST(x;α;β;A;B) = P.
 ///
-/// __See also__: "BETADIST", 
+/// __See also__: [crate::of::betadist()], [crate::of::betainv()], [crate::of::betainv_()], 
 #[inline]
 pub fn betainv__<A: Number, B: Number, C: Number, D: Number, E: Number>(p: A, alpha: B, beta: C, a: D, b: E) -> FnNumber5<A, B, C, D, E> {
     FnNumber5("BETAINV", p, alpha, beta, a, b)
 }
 
 /// Returns the probability of a trial result using binomial distribution.
+///
+/// [documentfoundation->BINOM.DIST.RANGE](https://wiki.documentfoundation.org/Documentation/Calc_Functions/BINOM.DIST.RANGE)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -355,13 +381,15 @@ pub fn betainv__<A: Number, B: Number, C: Number, D: Number, E: Number>(p: A, al
 /// 
 /// If S2 is not given, let S2 = S. Then the function returns the value of
 ///
-/// __See also__: "BINOMDIST", 
+/// __See also__: [crate::of::binomdist()], [crate::of::binom_dist_range_()], 
 #[inline]
 pub fn binom_dist_range<A: Number, B: Number, C: Number>(n: A, p: B, s: C) -> FnNumber3<A, B, C> {
     FnNumber3("BINOM.DIST.RANGE", n, p, s)
 }
 
 /// Returns the probability of a trial result using binomial distribution.
+///
+/// [documentfoundation->BINOM.DIST.RANGE](https://wiki.documentfoundation.org/Documentation/Calc_Functions/BINOM.DIST.RANGE)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -382,13 +410,15 @@ pub fn binom_dist_range<A: Number, B: Number, C: Number>(n: A, p: B, s: C) -> Fn
 /// 
 /// If S2 is not given, let S2 = S. Then the function returns the value of
 ///
-/// __See also__: "BINOMDIST", 
+/// __See also__: [crate::of::binomdist()], [crate::of::binom_dist_range()], 
 #[inline]
 pub fn binom_dist_range_<A: Number, B: Number, C: Number, D: Number>(n: A, p: B, s: C, s2: D) -> FnNumber4<A, B, C, D> {
     FnNumber4("BINOM.DIST.RANGE", n, p, s, s2)
 }
 
 /// Returns the binomial distribution.
+///
+/// [documentfoundation->BINOMDIST](https://wiki.documentfoundation.org/Documentation/Calc_Functions/BINOMDIST)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -403,13 +433,15 @@ pub fn binom_dist_range_<A: Number, B: Number, C: Number, D: Number>(n: A, p: B,
 /// BINOM.DIST.RANGE(N;P;S). If Cumulative is TRUE, it is equivalent to calling 
 /// BINOM.DIST.RANGE(N;P;0;S).
 ///
-/// __See also__: "BINOM.DIST.RANGE", 
+/// __See also__: [crate::of::binom_dist_range()], 
 #[inline]
 pub fn binomdist<A: Number, B: Number, C: Number, D: Logical>(s: A, n: B, p: C, cumulative: D) -> FnNumber4<A, B, C, D> {
     FnNumber4("BINOMDIST", s, n, p, cumulative)
 }
 
 /// returns the right-tail probability for the χ2-distribution.
+///
+/// [documentfoundation->LEGACY.CHIDIST](https://wiki.documentfoundation.org/Documentation/Calc_Functions/LEGACY.CHIDIST)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -425,7 +457,7 @@ pub fn binomdist<A: Number, B: Number, C: Number, D: Logical>(s: A, n: B, p: C, 
 /// 
 /// for X > 0.
 ///
-/// __See also__: "CHISQDIST", "LEGACY.CHITEST", 
+/// __See also__: [crate::of::chisqdist()], [crate::of::legacy_chitest()], 
 #[inline]
 pub fn legacy_chidist<A: Number, B: Number>(x: A, degrees_of_freedom: B) -> FnNumber2<A, B> {
     FnNumber2("LEGACY.CHIDIST", x, degrees_of_freedom)
@@ -433,6 +465,8 @@ pub fn legacy_chidist<A: Number, B: Number>(x: A, degrees_of_freedom: B) -> FnNu
 
 /// returns the value of the probability density function or the cumulative 
 /// distribution function for the χ2-distribution.
+///
+/// [documentfoundation->CHISQDIST](https://wiki.documentfoundation.org/Documentation/Calc_Functions/CHISQDIST)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -453,7 +487,7 @@ pub fn legacy_chidist<A: Number, B: Number>(x: A, degrees_of_freedom: B) -> FnNu
 /// 
 /// for X > 0.
 ///
-/// __See also__: "LEGACY.CHIDIST", 
+/// __See also__: [crate::of::legacy_chidist()], [crate::of::chisqdist_()], 
 #[inline]
 pub fn chisqdist<A: Number, B: Number>(x: A, degrees_of_freedom: B) -> FnNumber2<A, B> {
     FnNumber2("CHISQDIST", x, degrees_of_freedom)
@@ -461,6 +495,8 @@ pub fn chisqdist<A: Number, B: Number>(x: A, degrees_of_freedom: B) -> FnNumber2
 
 /// returns the value of the probability density function or the cumulative 
 /// distribution function for the χ2-distribution.
+///
+/// [documentfoundation->CHISQDIST](https://wiki.documentfoundation.org/Documentation/Calc_Functions/CHISQDIST)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -481,13 +517,15 @@ pub fn chisqdist<A: Number, B: Number>(x: A, degrees_of_freedom: B) -> FnNumber2
 /// 
 /// for X > 0.
 ///
-/// __See also__: "LEGACY.CHIDIST", 
+/// __See also__: [crate::of::legacy_chidist()], [crate::of::chisqdist()], 
 #[inline]
 pub fn chisqdist_<A: Number, B: Number, C: Logical>(x: A, degrees_of_freedom: B, cumulative: C) -> FnNumber3<A, B, C> {
     FnNumber3("CHISQDIST", x, degrees_of_freedom, cumulative)
 }
 
 /// returns the inverse of LEGACY.CHIDIST(x; DegreesOfFreedom).
+///
+/// [documentfoundation->LEGACY.CHIINV](https://wiki.documentfoundation.org/Documentation/Calc_Functions/LEGACY.CHIINV)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -501,13 +539,15 @@ pub fn chisqdist_<A: Number, B: Number, C: Logical>(x: A, degrees_of_freedom: B,
 /// LEGACY.CHIINV returns the unique number x such that LEGACY.CHIDIST(x; 
 /// DegreesOfFreedom) = P.
 ///
-/// __See also__: "LEGACY.CHIDIST", 
+/// __See also__: [crate::of::legacy_chidist()], 
 #[inline]
 pub fn legacy_chiinv<A: Number, B: Number>(p: A, degrees_of_freedom: B) -> FnNumber2<A, B> {
     FnNumber2("LEGACY.CHIINV", p, degrees_of_freedom)
 }
 
 /// returns the inverse of CHISQDIST(x; DegreesOfFreedom; TRUE()).
+///
+/// [documentfoundation->CHISQINV](https://wiki.documentfoundation.org/Documentation/Calc_Functions/CHISQINV)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -521,13 +561,15 @@ pub fn legacy_chiinv<A: Number, B: Number>(p: A, degrees_of_freedom: B) -> FnNum
 /// CHISQINV returns the unique number x ≥ 0 such that CHISQDIST(x; 
 /// DegreesOfFreedom;TRUE()) = P.
 ///
-/// __See also__: "CHISQDIST", 
+/// __See also__: [crate::of::chisqdist()], 
 #[inline]
 pub fn chisqinv<A: Number, B: Number>(p: A, degrees_of_freedom: B) -> FnNumber2<A, B> {
     FnNumber2("CHISQINV", p, degrees_of_freedom)
 }
 
 /// Returns some Chi square goodness-for-fit test.
+///
+/// [documentfoundation->LEGACY.CHITEST](https://wiki.documentfoundation.org/Documentation/Calc_Functions/LEGACY.CHITEST)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -554,13 +596,15 @@ pub fn chisqinv<A: Number, B: Number>(p: A, degrees_of_freedom: B) -> FnNumber2<
 /// Then LEGACY.CHIDIST is called with the Chi-square value and a degree of 
 /// freedom (df):
 ///
-/// __See also__: "COLUMNS", "ROWS", "LEGACY.CHIDIST", 
+/// __See also__: [crate::of::columns()], [crate::of::rows()], [crate::of::legacy_chidist()], 
 #[inline]
 pub fn legacy_chitest<A: Array, B: Array>(a: A, e: B) -> FnNumber2<A, B> {
     FnNumber2("LEGACY.CHITEST", a, e)
 }
 
 /// Returns the confidence interval for a population mean.
+///
+/// [documentfoundation->CONFIDENCE](https://wiki.documentfoundation.org/Documentation/Calc_Functions/CONFIDENCE)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -574,13 +618,15 @@ pub fn legacy_chitest<A: Array, B: Array>(a: A, e: B) -> FnNumber2<A, B> {
 /// Calling this function is equivalent to calling
 /// NORMINV(1 - Alpha / 2; 0; 1) * Stddev / SQRT (Size)
 ///
-/// __See also__: "NORMINV", "SQRT", 
+/// __See also__: [crate::of::norminv()], [crate::of::sqrt()], 
 #[inline]
 pub fn confidence<A: Number, B: Number, C: Number>(alpha: A, stddev: B, size: C) -> FnNumber3<A, B, C> {
     FnNumber3("CONFIDENCE", alpha, stddev, size)
 }
 
 /// Calculates the correlation coefficient of values in N1 and N2.
+///
+/// [documentfoundation->CORREL](https://wiki.documentfoundation.org/Documentation/Calc_Functions/CORREL)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -598,13 +644,15 @@ pub fn confidence<A: Number, B: Number, C: Number>(alpha: A, stddev: B, size: C)
 /// For an empty element or an element of type Text or Boolean in N1 the 
 /// element at the corresponding position of N2 is ignored, and vice versa.
 ///
-/// __See also__: "COLUMNS", "ROWS", "COVAR", "STDEVP", "PEARSON", 
+/// __See also__: [crate::of::columns()], [crate::of::rows()], [crate::of::covar()], [crate::of::stdevp()], [crate::of::pearson()], 
 #[inline]
 pub fn correl<A: Array, B: Array>(n1: A, n2: B) -> FnNumber2<A, B> {
     FnNumber2("CORREL", n1, n2)
 }
 
 /// Calculates covariance of two cell ranges.
+///
+/// [documentfoundation->COVAR](https://wiki.documentfoundation.org/Documentation/Calc_Functions/COVAR)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -626,7 +674,7 @@ pub fn correl<A: Array, B: Array>(n1: A, n2: B) -> FnNumber2<A, B> {
 /// For an empty element or an element of type Text or Boolean in N1 the 
 /// element at the corresponding position of N2 is ignored, and vice versa.
 ///
-/// __See also__: "COLUMNS", "ROWS", "AVERAGE", 
+/// __See also__: [crate::of::columns()], [crate::of::rows()], [crate::of::average()], 
 #[inline]
 pub fn covar<A: Array, B: Array>(n1: A, n2: B) -> FnNumber2<A, B> {
     FnNumber2("COVAR", n1, n2)
@@ -634,6 +682,8 @@ pub fn covar<A: Array, B: Array>(n1: A, n2: B) -> FnNumber2<A, B> {
 
 /// Returns the smallest value for which the cumulative binomial distribution 
 /// is greater than or equal to a criterion value.
+///
+/// [documentfoundation->CRITBINOM](https://wiki.documentfoundation.org/Documentation/Calc_Functions/CRITBINOM)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -650,12 +700,16 @@ pub fn covar<A: Array, B: Array>(n1: A, n2: B) -> FnNumber2<A, B> {
 /// •SP: the probability of success for one trial.
 /// 
 /// •Alpha: the threshold probability to be reached or exceeded.
+///
+/// __See also__: 
 #[inline]
 pub fn critbinom<A: Number, B: Number, C: Number>(trials: A, s_p: B, alpha: C) -> FnNumber3<A, B, C> {
     FnNumber3("CRITBINOM", trials, s_p, alpha)
 }
 
 /// Calculates sum of squares of deviations.
+///
+/// [documentfoundation->DEVSQ](https://wiki.documentfoundation.org/Documentation/Calc_Functions/DEVSQ)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -666,6 +720,8 @@ pub fn critbinom<A: Number, B: Number, C: Number>(trials: A, s_p: B, alpha: C) -
 /// returns
 /// 
 /// where a is the result of calling AVERAGE(N).
+///
+/// __See also__: 
 #[inline]
 pub fn devsq<A: Sequence>(n: A) -> FnNumber1<A> {
     FnNumber1("DEVSQ", n)
@@ -673,6 +729,8 @@ pub fn devsq<A: Sequence>(n: A) -> FnNumber1<A> {
 
 /// returns the value of the probability density function or the cumulative 
 /// distribution function for the exponential distribution.
+///
+/// [documentfoundation->EXPONDIST](https://wiki.documentfoundation.org/Documentation/Calc_Functions/EXPONDIST)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -690,6 +748,8 @@ pub fn devsq<A: Sequence>(n: A) -> FnNumber1<A> {
 /// If Cumulative is TRUE, EXPONDIST returns 0 if X < 0 and the value
 /// 
 /// otherwise.
+///
+/// __See also__: [crate::of::expondist_()], 
 #[inline]
 pub fn expondist<A: Number, B: Number>(x: A, λ: B) -> FnNumber2<A, B> {
     FnNumber2("EXPONDIST", x, λ)
@@ -697,6 +757,8 @@ pub fn expondist<A: Number, B: Number>(x: A, λ: B) -> FnNumber2<A, B> {
 
 /// returns the value of the probability density function or the cumulative 
 /// distribution function for the exponential distribution.
+///
+/// [documentfoundation->EXPONDIST](https://wiki.documentfoundation.org/Documentation/Calc_Functions/EXPONDIST)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -714,6 +776,8 @@ pub fn expondist<A: Number, B: Number>(x: A, λ: B) -> FnNumber2<A, B> {
 /// If Cumulative is TRUE, EXPONDIST returns 0 if X < 0 and the value
 /// 
 /// otherwise.
+///
+/// __See also__: [crate::of::expondist()], 
 #[inline]
 pub fn expondist_<A: Number, B: Number, C: Logical>(x: A, λ: B, cumulative: C) -> FnNumber3<A, B, C> {
     FnNumber3("EXPONDIST", x, λ, cumulative)
@@ -721,6 +785,8 @@ pub fn expondist_<A: Number, B: Number, C: Logical>(x: A, λ: B, cumulative: C) 
 
 /// returns the value of the probability density function or the cumulative 
 /// distribution function for the F-distribution.
+///
+/// [documentfoundation->FDIST](https://wiki.documentfoundation.org/Documentation/Calc_Functions/FDIST)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -748,7 +814,7 @@ pub fn expondist_<A: Number, B: Number, C: Logical>(x: A, λ: B, cumulative: C) 
 /// 
 /// otherwise.
 ///
-/// __See also__: "LEGACY.FDIST", 
+/// __See also__: [crate::of::legacy_fdist()], [crate::of::fdist_()], 
 #[inline]
 pub fn fdist<A: Number, B: Number, C: Number>(x: A, r1: B, r2: C) -> FnNumber3<A, B, C> {
     FnNumber3("FDIST", x, r1, r2)
@@ -756,6 +822,8 @@ pub fn fdist<A: Number, B: Number, C: Number>(x: A, r1: B, r2: C) -> FnNumber3<A
 
 /// returns the value of the probability density function or the cumulative 
 /// distribution function for the F-distribution.
+///
+/// [documentfoundation->FDIST](https://wiki.documentfoundation.org/Documentation/Calc_Functions/FDIST)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -783,7 +851,7 @@ pub fn fdist<A: Number, B: Number, C: Number>(x: A, r1: B, r2: C) -> FnNumber3<A
 /// 
 /// otherwise.
 ///
-/// __See also__: "LEGACY.FDIST", 
+/// __See also__: [crate::of::legacy_fdist()], [crate::of::fdist()], 
 #[inline]
 pub fn fdist_<A: Number, B: Number, C: Number, D: Logical>(x: A, r1: B, r2: C, cumulative: D) -> FnNumber4<A, B, C, D> {
     FnNumber4("FDIST", x, r1, r2, cumulative)
@@ -791,6 +859,8 @@ pub fn fdist_<A: Number, B: Number, C: Number, D: Logical>(x: A, r1: B, r2: C, c
 
 /// returns the area of the right tail of the probability density function for 
 /// the F-distribution.
+///
+/// [documentfoundation->LEGACY.FDIST](https://wiki.documentfoundation.org/Documentation/Calc_Functions/LEGACY.FDIST)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -808,13 +878,15 @@ pub fn fdist_<A: Number, B: Number, C: Number, D: Logical>(x: A, r1: B, r2: C, c
 /// 
 /// Note that the latter is (1-FDIST(x; r1; r2;TRUE())).
 ///
-/// __See also__: "FDIST", 
+/// __See also__: [crate::of::fdist()], 
 #[inline]
 pub fn legacy_fdist<A: Number, B: Number, C: Number>(x: A, r1: B, r2: C) -> FnNumber3<A, B, C> {
     FnNumber3("LEGACY.FDIST", x, r1, r2)
 }
 
 /// returns the inverse of FDIST(x;R1;R2;TRUE()).
+///
+/// [documentfoundation->FINV](https://wiki.documentfoundation.org/Documentation/Calc_Functions/FINV)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -827,13 +899,15 @@ pub fn legacy_fdist<A: Number, B: Number, C: Number>(x: A, r1: B, r2: C) -> FnNu
 /// __Semantics__:
 /// FINV returns the unique non-negative number x such that FDIST(x;R1;R2) = P.
 ///
-/// __See also__: "FDIST", "LEGACY.FDIST", "LEGACY.FINV", 
+/// __See also__: [crate::of::fdist()], [crate::of::legacy_fdist()], [crate::of::legacy_finv()], 
 #[inline]
 pub fn finv<A: Number, B: Number, C: Number>(p: A, r1: B, r2: C) -> FnNumber3<A, B, C> {
     FnNumber3("FINV", p, r1, r2)
 }
 
 /// returns the inverse of LEGACY.FDIST(x;R1;R2).
+///
+/// [documentfoundation->LEGACY.FINV](https://wiki.documentfoundation.org/Documentation/Calc_Functions/LEGACY.FINV)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -847,13 +921,15 @@ pub fn finv<A: Number, B: Number, C: Number>(p: A, r1: B, r2: C) -> FnNumber3<A,
 /// LEGACY.FINV returns the unique non-negative number x such that 
 /// LEGACY.FDIST(x;R1;R2) = P.
 ///
-/// __See also__: "FDIST", "LEGACY.FDIST", "FINV", 
+/// __See also__: [crate::of::fdist()], [crate::of::legacy_fdist()], [crate::of::finv()], 
 #[inline]
 pub fn legacy_finv<A: Number, B: Number, C: Number>(p: A, r1: B, r2: C) -> FnNumber3<A, B, C> {
     FnNumber3("LEGACY.FINV", p, r1, r2)
 }
 
 /// returns the Fisher transformation.
+///
+/// [documentfoundation->FISHER](https://wiki.documentfoundation.org/Documentation/Calc_Functions/FISHER)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -871,13 +947,15 @@ pub fn legacy_finv<A: Number, B: Number, C: Number>(p: A, r1: B, r2: C) -> FnNum
 /// 
 /// FISHER is a synonym for ATANH.
 ///
-/// __See also__: "ATANH", 
+/// __See also__: [crate::of::atanh()], 
 #[inline]
 pub fn fisher<A: Number>(r: A) -> FnNumber1<A> {
     FnNumber1("FISHER", r)
 }
 
 /// returns the inverse Fisher transformation.
+///
+/// [documentfoundation->FISHERINV](https://wiki.documentfoundation.org/Documentation/Calc_Functions/FISHERINV)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -892,13 +970,15 @@ pub fn fisher<A: Number>(r: A) -> FnNumber1<A> {
 /// 
 /// FISHERINV is a synonym for TANH.
 ///
-/// __See also__: "TANH", 
+/// __See also__: [crate::of::tanh()], 
 #[inline]
 pub fn fisherinv<A: Number>(r: A) -> FnNumber1<A> {
     FnNumber1("FISHERINV", r)
 }
 
 /// Extrapolates future values based on existing x and y values.
+///
+/// [documentfoundation->FORECAST](https://wiki.documentfoundation.org/Documentation/Calc_Functions/FORECAST)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -920,7 +1000,7 @@ pub fn fisherinv<A: Number>(r: A) -> FnNumber1<A> {
 /// For an empty element or an element of type Text or Boolean in Data_Y the 
 /// element at the corresponding position of Data_X is ignored, and vice versa.
 ///
-/// __See also__: "COLUMNS", "ROWS", 
+/// __See also__: [crate::of::columns()], [crate::of::rows()], 
 #[inline]
 pub fn forecast<A: Number, B: Array, C: Array>(value: A, data_y: B, data_x: C) -> FnNumber3<A, B, C> {
     FnNumber3("FORECAST", value, data_y, data_x)
@@ -928,6 +1008,8 @@ pub fn forecast<A: Number, B: Array, C: Array>(value: A, data_y: B, data_x: C) -
 
 /// Categorizes values into intervals and counts the number of values in each 
 /// interval.
+///
+/// [documentfoundation->FREQUENCY](https://wiki.documentfoundation.org/Documentation/Calc_Functions/FREQUENCY)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -956,12 +1038,16 @@ pub fn forecast<A: Number, B: Array, C: Array>(value: A, data_y: B, data_x: C) -
 /// given intervals.
 /// Bins: The upper boundaries determining the intervals the values in data 
 /// should be grouped by.
+///
+/// __See also__: 
 #[inline]
 pub fn frequency<A: Sequence, B: Sequence>(data: A, bins: B) -> FnArray2<A, B> {
     FnArray2("FREQUENCY", data, bins)
 }
 
 /// Calculates the probability of an F-test.
+///
+/// [documentfoundation->FTEST](https://wiki.documentfoundation.org/Documentation/Calc_Functions/FTEST)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -993,6 +1079,8 @@ pub fn frequency<A: Sequence, B: Sequence>(data: A, bins: B) -> FnArray2<A, B> {
 /// FTEST returns twice the minimum of the values
 /// and
 /// .See also TTEST 6.18.81
+///
+/// __See also__: 
 #[inline]
 pub fn ftest<A: Sequence, B: Sequence>(data_1: A, data_2: B) -> FnNumber2<A, B> {
     FnNumber2("FTEST", data_1, data_2)
@@ -1000,6 +1088,8 @@ pub fn ftest<A: Sequence, B: Sequence>(data_1: A, data_2: B) -> FnNumber2<A, B> 
 
 /// returns the value of the probability density function or the cumulative 
 /// distribution function for the Gamma distribution.
+///
+/// [documentfoundation->GAMMADIST](https://wiki.documentfoundation.org/Documentation/Calc_Functions/GAMMADIST)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -1018,7 +1108,7 @@ pub fn ftest<A: Sequence, B: Sequence>(data_1: A, data_2: B) -> FnNumber2<A, B> 
 /// 
 /// otherwise.
 ///
-/// __See also__: "GAMMA", "GAMMAINV", 
+/// __See also__: [crate::of::gamma()], [crate::of::gammainv()], [crate::of::gammadist_()], 
 #[inline]
 pub fn gammadist<A: Number, B: Number, C: Number>(x: A, alpha: B, beta: C) -> FnNumber3<A, B, C> {
     FnNumber3("GAMMADIST", x, alpha, beta)
@@ -1026,6 +1116,8 @@ pub fn gammadist<A: Number, B: Number, C: Number>(x: A, alpha: B, beta: C) -> Fn
 
 /// returns the value of the probability density function or the cumulative 
 /// distribution function for the Gamma distribution.
+///
+/// [documentfoundation->GAMMADIST](https://wiki.documentfoundation.org/Documentation/Calc_Functions/GAMMADIST)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -1044,13 +1136,15 @@ pub fn gammadist<A: Number, B: Number, C: Number>(x: A, alpha: B, beta: C) -> Fn
 /// 
 /// otherwise.
 ///
-/// __See also__: "GAMMA", "GAMMAINV", 
+/// __See also__: [crate::of::gamma()], [crate::of::gammainv()], [crate::of::gammadist()], 
 #[inline]
 pub fn gammadist_<A: Number, B: Number, C: Number, D: Logical>(x: A, alpha: B, beta: C, cumulative: D) -> FnNumber4<A, B, C, D> {
     FnNumber4("GAMMADIST", x, alpha, beta, cumulative)
 }
 
 /// returns the inverse of GAMMADIST(X;α;β;TRUE).
+///
+/// [documentfoundation->GAMMAINV](https://wiki.documentfoundation.org/Documentation/Calc_Functions/GAMMAINV)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -1063,13 +1157,15 @@ pub fn gammadist_<A: Number, B: Number, C: Number, D: Logical>(x: A, alpha: B, b
 /// __Semantics__:
 /// GAMMAINV returns the unique number X ≥ 0 such that GAMMAINV(X;α;β) = P.
 ///
-/// __See also__: "GAMMADIST", 
+/// __See also__: [crate::of::gammadist()], 
 #[inline]
 pub fn gammainv<A: Number, B: Number, C: Number>(p: A, alpha: B, beta: C) -> FnNumber3<A, B, C> {
     FnNumber3("GAMMAINV", p, alpha, beta)
 }
 
 /// Returns 0.5 less than the standard normal cumulative distribution
+///
+/// [documentfoundation->GAUSS](https://wiki.documentfoundation.org/Documentation/Calc_Functions/GAUSS)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -1079,13 +1175,15 @@ pub fn gammainv<A: Number, B: Number, C: Number>(p: A, alpha: B, beta: C) -> FnN
 /// __Semantics__:
 /// Returns NORMDIST(X;0;1;TRUE())-0.5
 ///
-/// __See also__: "NORMDIST", 
+/// __See also__: [crate::of::normdist()], 
 #[inline]
 pub fn gauss<A: Number>(x: A) -> FnNumber1<A> {
     FnNumber1("GAUSS", x)
 }
 
 /// returns the geometric mean of a sequence
+///
+/// [documentfoundation->GEOMEAN](https://wiki.documentfoundation.org/Documentation/Calc_Functions/GEOMEAN)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -1097,13 +1195,15 @@ pub fn gauss<A: Number>(x: A) -> FnNumber1<A> {
 /// 
 /// where n is a result of calling COUNT(N).
 ///
-/// __See also__: "COUNT", 
+/// __See also__: [crate::of::count()], 
 #[inline]
 pub fn geomean<A: Sequence>(n: A) -> FnNumber1<A> {
     FnNumber1("GEOMEAN", n)
 }
 
 /// Returns predicted values based on an exponential regression.
+///
+/// [documentfoundation->GROWTH](https://wiki.documentfoundation.org/Documentation/Calc_Functions/GROWTH)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -1150,13 +1250,15 @@ pub fn geomean<A: Sequence>(n: A) -> FnNumber1<A> {
 /// COLUMNS(NewX) columns, such that the entry in the jth column is
 /// .
 ///
-/// __See also__: "COLUMNS", "ROWS", "LOGEST", "TREND", 
+/// __See also__: [crate::of::columns()], [crate::of::rows()], [crate::of::logest()], [crate::of::trend()], [crate::of::growth_()], [crate::of::growth__()], [crate::of::growth___()], 
 #[inline]
 pub fn growth<A: Array>(known_y: A) -> FnArray1<A> {
     FnArray1("GROWTH", known_y)
 }
 
 /// Returns predicted values based on an exponential regression.
+///
+/// [documentfoundation->GROWTH](https://wiki.documentfoundation.org/Documentation/Calc_Functions/GROWTH)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -1203,13 +1305,15 @@ pub fn growth<A: Array>(known_y: A) -> FnArray1<A> {
 /// COLUMNS(NewX) columns, such that the entry in the jth column is
 /// .
 ///
-/// __See also__: "COLUMNS", "ROWS", "LOGEST", "TREND", 
+/// __See also__: [crate::of::columns()], [crate::of::rows()], [crate::of::logest()], [crate::of::trend()], [crate::of::growth()], [crate::of::growth__()], [crate::of::growth___()], 
 #[inline]
 pub fn growth_<A: Array, B: Array>(known_y: A, known_x: B) -> FnArray2<A, B> {
     FnArray2("GROWTH", known_y, known_x)
 }
 
 /// Returns predicted values based on an exponential regression.
+///
+/// [documentfoundation->GROWTH](https://wiki.documentfoundation.org/Documentation/Calc_Functions/GROWTH)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -1256,13 +1360,15 @@ pub fn growth_<A: Array, B: Array>(known_y: A, known_x: B) -> FnArray2<A, B> {
 /// COLUMNS(NewX) columns, such that the entry in the jth column is
 /// .
 ///
-/// __See also__: "COLUMNS", "ROWS", "LOGEST", "TREND", 
+/// __See also__: [crate::of::columns()], [crate::of::rows()], [crate::of::logest()], [crate::of::trend()], [crate::of::growth()], [crate::of::growth_()], [crate::of::growth___()], 
 #[inline]
 pub fn growth__<A: Array, B: Array, C: Array>(known_y: A, known_x: B, new_x: C) -> FnArray3<A, B, C> {
     FnArray3("GROWTH", known_y, known_x, new_x)
 }
 
 /// Returns predicted values based on an exponential regression.
+///
+/// [documentfoundation->GROWTH](https://wiki.documentfoundation.org/Documentation/Calc_Functions/GROWTH)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -1309,13 +1415,15 @@ pub fn growth__<A: Array, B: Array, C: Array>(known_y: A, known_x: B, new_x: C) 
 /// COLUMNS(NewX) columns, such that the entry in the jth column is
 /// .
 ///
-/// __See also__: "COLUMNS", "ROWS", "LOGEST", "TREND", 
+/// __See also__: [crate::of::columns()], [crate::of::rows()], [crate::of::logest()], [crate::of::trend()], [crate::of::growth()], [crate::of::growth_()], [crate::of::growth__()], 
 #[inline]
 pub fn growth___<A: Array, B: Array, C: Array, D: Logical>(known_y: A, known_x: B, new_x: C, const_: D) -> FnArray4<A, B, C, D> {
     FnArray4("GROWTH", known_y, known_x, new_x, const_)
 }
 
 /// returns the harmonic mean of a sequence
+///
+/// [documentfoundation->HARMEAN](https://wiki.documentfoundation.org/Documentation/Calc_Functions/HARMEAN)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -1328,7 +1436,7 @@ pub fn growth___<A: Array, B: Array, C: Array, D: Logical>(known_y: A, known_x: 
 /// where a1,a2,...,an are the numbers of the sequence N and n is a result of 
 /// calling COUNT(N).
 ///
-/// __See also__: "COUNT", 
+/// __See also__: [crate::of::count()], 
 #[inline]
 pub fn harmean<A: Sequence>(n: A) -> FnNumber1<A> {
     FnNumber1("HARMEAN", n)
@@ -1336,6 +1444,8 @@ pub fn harmean<A: Sequence>(n: A) -> FnNumber1<A> {
 
 /// The hypergeometric distribution returns the number of successes in a 
 /// sequence of n draws from a finite population without replacement.
+///
+/// [documentfoundation->HYPGEOMDIST](https://wiki.documentfoundation.org/Documentation/Calc_Functions/HYPGEOMDIST)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -1364,6 +1474,8 @@ pub fn harmean<A: Sequence>(n: A) -> FnNumber1<A> {
 /// If Cumulative is FALSE, HYPGEOMDIST returns
 /// 
 /// If Cumulative is TRUE, HYPGEOMDIST returns
+///
+/// __See also__: [crate::of::hypgeomdist_()], 
 #[inline]
 pub fn hypgeomdist<A: Number, B: Number, C: Number, D: Number>(x: A, t: B, m: C, n: D) -> FnNumber4<A, B, C, D> {
     FnNumber4("HYPGEOMDIST", x, t, m, n)
@@ -1371,6 +1483,8 @@ pub fn hypgeomdist<A: Number, B: Number, C: Number, D: Number>(x: A, t: B, m: C,
 
 /// The hypergeometric distribution returns the number of successes in a 
 /// sequence of n draws from a finite population without replacement.
+///
+/// [documentfoundation->HYPGEOMDIST](https://wiki.documentfoundation.org/Documentation/Calc_Functions/HYPGEOMDIST)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -1399,12 +1513,16 @@ pub fn hypgeomdist<A: Number, B: Number, C: Number, D: Number>(x: A, t: B, m: C,
 /// If Cumulative is FALSE, HYPGEOMDIST returns
 /// 
 /// If Cumulative is TRUE, HYPGEOMDIST returns
+///
+/// __See also__: [crate::of::hypgeomdist()], 
 #[inline]
 pub fn hypgeomdist_<A: Number, B: Number, C: Number, D: Number, E: Logical>(x: A, t: B, m: C, n: D, cumulative: E) -> FnNumber5<A, B, C, D, E> {
     FnNumber5("HYPGEOMDIST", x, t, m, n, cumulative)
 }
 
 /// Returns the y-intercept of the linear regression line for the given data.
+///
+/// [documentfoundation->INTERCEPT](https://wiki.documentfoundation.org/Documentation/Calc_Functions/INTERCEPT)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -1422,13 +1540,15 @@ pub fn hypgeomdist_<A: Number, B: Number, C: Number, D: Number, E: Logical>(x: A
 /// For an empty element or an element of type Text or Boolean in Data_Y the 
 /// element at the corresponding position of Data_X is ignored, and vice versa.
 ///
-/// __See also__: "COLUMNS", "ROWS", 
+/// __See also__: [crate::of::columns()], [crate::of::rows()], 
 #[inline]
 pub fn intercept<A: Array, B: Array>(data_y: A, data_x: B) -> FnNumber2<A, B> {
     FnNumber2("INTERCEPT", data_y, data_x)
 }
 
 /// Return the kurtosis (“peakedness”) of a data set.
+///
+/// [documentfoundation->KURT](https://wiki.documentfoundation.org/Documentation/Calc_Functions/KURT)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -1448,13 +1568,15 @@ pub fn intercept<A: Array, B: Array>(data_y: A, data_x: B) -> FnNumber2<A, B> {
 /// 
 /// where s is the sample standard deviation, and n is the number of numbers.
 ///
-/// __See also__: "STDEV", 
+/// __See also__: [crate::of::stdev()], 
 #[inline]
 pub fn kurt<A: Sequence>(x: A) -> FnNumber1<A> {
     FnNumber1("KURT", x)
 }
 
 /// Finds the nth largest value in a list.
+///
+/// [documentfoundation->LARGE](https://wiki.documentfoundation.org/Documentation/Calc_Functions/LARGE)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -1468,7 +1590,7 @@ pub fn kurt<A: Sequence>(x: A) -> FnNumber1<A> {
 /// __Semantics__:
 /// If N is an array of numbers, an array of largest values is returned.
 ///
-/// __See also__: "SMALL", "ROUNDUP", 
+/// __See also__: [crate::of::small()], [crate::of::roundup()], 
 #[inline]
 pub fn large<A: Sequence, B: NumberOrArray>(list: A, n: B) -> FnArray2<A, B> {
     FnArray2("LARGE", list, n)
@@ -1476,6 +1598,8 @@ pub fn large<A: Sequence, B: NumberOrArray>(list: A, n: B) -> FnArray2<A, B> {
 
 /// Returns the parameters of the (simple or multiple) linear regression 
 /// equation for the given data and, optionally, statistics on this regression.
+///
+/// [documentfoundation->LINEST](https://wiki.documentfoundation.org/Documentation/Calc_Functions/LINEST)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -1505,7 +1629,7 @@ pub fn large<A: Sequence, B: NumberOrArray>(list: A, n: B) -> FnArray2<A, B> {
 /// 
 /// ** Some formulas **
 ///
-/// __See also__: "COLUMNS", "ROWS", 
+/// __See also__: [crate::of::columns()], [crate::of::rows()], [crate::of::linest_()], [crate::of::linest__()], [crate::of::linest___()], 
 #[inline]
 pub fn linest<A: Array>(known_y: A) -> FnArray1<A> {
     FnArray1("LINEST", known_y)
@@ -1513,6 +1637,8 @@ pub fn linest<A: Array>(known_y: A) -> FnArray1<A> {
 
 /// Returns the parameters of the (simple or multiple) linear regression 
 /// equation for the given data and, optionally, statistics on this regression.
+///
+/// [documentfoundation->LINEST](https://wiki.documentfoundation.org/Documentation/Calc_Functions/LINEST)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -1542,7 +1668,7 @@ pub fn linest<A: Array>(known_y: A) -> FnArray1<A> {
 /// 
 /// ** Some formulas **
 ///
-/// __See also__: "COLUMNS", "ROWS", 
+/// __See also__: [crate::of::columns()], [crate::of::rows()], [crate::of::linest()], [crate::of::linest__()], [crate::of::linest___()], 
 #[inline]
 pub fn linest_<A: Array, B: Array>(known_y: A, known_x: B) -> FnArray2<A, B> {
     FnArray2("LINEST", known_y, known_x)
@@ -1550,6 +1676,8 @@ pub fn linest_<A: Array, B: Array>(known_y: A, known_x: B) -> FnArray2<A, B> {
 
 /// Returns the parameters of the (simple or multiple) linear regression 
 /// equation for the given data and, optionally, statistics on this regression.
+///
+/// [documentfoundation->LINEST](https://wiki.documentfoundation.org/Documentation/Calc_Functions/LINEST)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -1579,7 +1707,7 @@ pub fn linest_<A: Array, B: Array>(known_y: A, known_x: B) -> FnArray2<A, B> {
 /// 
 /// ** Some formulas **
 ///
-/// __See also__: "COLUMNS", "ROWS", 
+/// __See also__: [crate::of::columns()], [crate::of::rows()], [crate::of::linest()], [crate::of::linest_()], [crate::of::linest___()], 
 #[inline]
 pub fn linest__<A: Array, B: Array, C: Logical>(known_y: A, known_x: B, const_: C) -> FnArray3<A, B, C> {
     FnArray3("LINEST", known_y, known_x, const_)
@@ -1587,6 +1715,8 @@ pub fn linest__<A: Array, B: Array, C: Logical>(known_y: A, known_x: B, const_: 
 
 /// Returns the parameters of the (simple or multiple) linear regression 
 /// equation for the given data and, optionally, statistics on this regression.
+///
+/// [documentfoundation->LINEST](https://wiki.documentfoundation.org/Documentation/Calc_Functions/LINEST)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -1616,7 +1746,7 @@ pub fn linest__<A: Array, B: Array, C: Logical>(known_y: A, known_x: B, const_: 
 /// 
 /// ** Some formulas **
 ///
-/// __See also__: "COLUMNS", "ROWS", 
+/// __See also__: [crate::of::columns()], [crate::of::rows()], [crate::of::linest()], [crate::of::linest_()], [crate::of::linest__()], 
 #[inline]
 pub fn linest___<A: Array, B: Array, C: Logical, D: Logical>(known_y: A, known_x: B, const_: C, stats: D) -> FnArray4<A, B, C, D> {
     FnArray4("LINEST", known_y, known_x, const_, stats)
@@ -1625,6 +1755,8 @@ pub fn linest___<A: Array, B: Array, C: Logical, D: Logical>(known_y: A, known_x
 /// Returns the parameters of an exponential regression equation for the given 
 /// data obtained by linearizing this intrinsically linear response function 
 /// and returns, optionally, statistics on this regression.
+///
+/// [documentfoundation->LOGEST](https://wiki.documentfoundation.org/Documentation/Calc_Functions/LOGEST)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -1654,7 +1786,7 @@ pub fn linest___<A: Array, B: Array, C: Logical, D: Logical>(known_y: A, known_x
 /// 
 /// ** Some formulas **
 ///
-/// __See also__: "COLUMNS", "ROWS", 
+/// __See also__: [crate::of::columns()], [crate::of::rows()], [crate::of::logest_()], [crate::of::logest__()], [crate::of::logest___()], 
 #[inline]
 pub fn logest<A: Array>(known_y: A) -> FnArray1<A> {
     FnArray1("LOGEST", known_y)
@@ -1663,6 +1795,8 @@ pub fn logest<A: Array>(known_y: A) -> FnArray1<A> {
 /// Returns the parameters of an exponential regression equation for the given 
 /// data obtained by linearizing this intrinsically linear response function 
 /// and returns, optionally, statistics on this regression.
+///
+/// [documentfoundation->LOGEST](https://wiki.documentfoundation.org/Documentation/Calc_Functions/LOGEST)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -1692,7 +1826,7 @@ pub fn logest<A: Array>(known_y: A) -> FnArray1<A> {
 /// 
 /// ** Some formulas **
 ///
-/// __See also__: "COLUMNS", "ROWS", 
+/// __See also__: [crate::of::columns()], [crate::of::rows()], [crate::of::logest()], [crate::of::logest__()], [crate::of::logest___()], 
 #[inline]
 pub fn logest_<A: Array, B: Array>(known_y: A, known_x: B) -> FnArray2<A, B> {
     FnArray2("LOGEST", known_y, known_x)
@@ -1701,6 +1835,8 @@ pub fn logest_<A: Array, B: Array>(known_y: A, known_x: B) -> FnArray2<A, B> {
 /// Returns the parameters of an exponential regression equation for the given 
 /// data obtained by linearizing this intrinsically linear response function 
 /// and returns, optionally, statistics on this regression.
+///
+/// [documentfoundation->LOGEST](https://wiki.documentfoundation.org/Documentation/Calc_Functions/LOGEST)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -1730,7 +1866,7 @@ pub fn logest_<A: Array, B: Array>(known_y: A, known_x: B) -> FnArray2<A, B> {
 /// 
 /// ** Some formulas **
 ///
-/// __See also__: "COLUMNS", "ROWS", 
+/// __See also__: [crate::of::columns()], [crate::of::rows()], [crate::of::logest()], [crate::of::logest_()], [crate::of::logest___()], 
 #[inline]
 pub fn logest__<A: Array, B: Array, C: Logical>(known_y: A, known_x: B, const_: C) -> FnArray3<A, B, C> {
     FnArray3("LOGEST", known_y, known_x, const_)
@@ -1739,6 +1875,8 @@ pub fn logest__<A: Array, B: Array, C: Logical>(known_y: A, known_x: B, const_: 
 /// Returns the parameters of an exponential regression equation for the given 
 /// data obtained by linearizing this intrinsically linear response function 
 /// and returns, optionally, statistics on this regression.
+///
+/// [documentfoundation->LOGEST](https://wiki.documentfoundation.org/Documentation/Calc_Functions/LOGEST)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -1768,13 +1906,15 @@ pub fn logest__<A: Array, B: Array, C: Logical>(known_y: A, known_x: B, const_: 
 /// 
 /// ** Some formulas **
 ///
-/// __See also__: "COLUMNS", "ROWS", 
+/// __See also__: [crate::of::columns()], [crate::of::rows()], [crate::of::logest()], [crate::of::logest_()], [crate::of::logest__()], 
 #[inline]
 pub fn logest___<A: Array, B: Array, C: Logical, D: Logical>(known_y: A, known_x: B, const_: C, stats: D) -> FnArray4<A, B, C, D> {
     FnArray4("LOGEST", known_y, known_x, const_, stats)
 }
 
 /// returns the inverse of LOGNORMDIST(x;Mean;StandardDeviation,TRUE()).
+///
+/// [documentfoundation->LOGINV](https://wiki.documentfoundation.org/Documentation/Calc_Functions/LOGINV)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -1788,13 +1928,15 @@ pub fn logest___<A: Array, B: Array, C: Logical, D: Logical>(known_y: A, known_x
 /// LOGINV returns the unique number x such that 
 /// LOGNORMDIST(x;Mean;StandardDeviation;TRUE()) = P.
 ///
-/// __See also__: "LOGNORMDIST", 
+/// __See also__: [crate::of::lognormdist()], [crate::of::loginv_()], [crate::of::loginv__()], 
 #[inline]
 pub fn loginv<A: Number>(p: A) -> FnNumber1<A> {
     FnNumber1("LOGINV", p)
 }
 
 /// returns the inverse of LOGNORMDIST(x;Mean;StandardDeviation,TRUE()).
+///
+/// [documentfoundation->LOGINV](https://wiki.documentfoundation.org/Documentation/Calc_Functions/LOGINV)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -1808,13 +1950,15 @@ pub fn loginv<A: Number>(p: A) -> FnNumber1<A> {
 /// LOGINV returns the unique number x such that 
 /// LOGNORMDIST(x;Mean;StandardDeviation;TRUE()) = P.
 ///
-/// __See also__: "LOGNORMDIST", 
+/// __See also__: [crate::of::lognormdist()], [crate::of::loginv()], [crate::of::loginv__()], 
 #[inline]
 pub fn loginv_<A: Number, B: Number>(p: A, mean: B) -> FnNumber2<A, B> {
     FnNumber2("LOGINV", p, mean)
 }
 
 /// returns the inverse of LOGNORMDIST(x;Mean;StandardDeviation,TRUE()).
+///
+/// [documentfoundation->LOGINV](https://wiki.documentfoundation.org/Documentation/Calc_Functions/LOGINV)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -1828,7 +1972,7 @@ pub fn loginv_<A: Number, B: Number>(p: A, mean: B) -> FnNumber2<A, B> {
 /// LOGINV returns the unique number x such that 
 /// LOGNORMDIST(x;Mean;StandardDeviation;TRUE()) = P.
 ///
-/// __See also__: "LOGNORMDIST", 
+/// __See also__: [crate::of::lognormdist()], [crate::of::loginv()], [crate::of::loginv_()], 
 #[inline]
 pub fn loginv__<A: Number, B: Number, C: Number>(p: A, mean: B, standard_deviation: C) -> FnNumber3<A, B, C> {
     FnNumber3("LOGINV", p, mean, standard_deviation)
@@ -1837,6 +1981,8 @@ pub fn loginv__<A: Number, B: Number, C: Number>(p: A, mean: B, standard_deviati
 /// returns the value of the probability density function or the cumulative 
 /// distribution function for the lognormal distribution with the mean and 
 /// standard deviation given.
+///
+/// [documentfoundation->LOGNORMDIST](https://wiki.documentfoundation.org/Documentation/Calc_Functions/LOGNORMDIST)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -1852,6 +1998,8 @@ pub fn loginv__<A: Number, B: Number, C: Number>(p: A, mean: B, standard_deviati
 /// If Cumulative is TRUE, LOGNORMDIST returns the value
 /// 
 /// if X > 0 and 0 otherwise.
+///
+/// __See also__: [crate::of::lognormdist_()], [crate::of::lognormdist__()], [crate::of::lognormdist___()], 
 #[inline]
 pub fn lognormdist<A: Number>(x: A) -> FnNumber1<A> {
     FnNumber1("LOGNORMDIST", x)
@@ -1860,6 +2008,8 @@ pub fn lognormdist<A: Number>(x: A) -> FnNumber1<A> {
 /// returns the value of the probability density function or the cumulative 
 /// distribution function for the lognormal distribution with the mean and 
 /// standard deviation given.
+///
+/// [documentfoundation->LOGNORMDIST](https://wiki.documentfoundation.org/Documentation/Calc_Functions/LOGNORMDIST)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -1875,6 +2025,8 @@ pub fn lognormdist<A: Number>(x: A) -> FnNumber1<A> {
 /// If Cumulative is TRUE, LOGNORMDIST returns the value
 /// 
 /// if X > 0 and 0 otherwise.
+///
+/// __See also__: [crate::of::lognormdist()], [crate::of::lognormdist__()], [crate::of::lognormdist___()], 
 #[inline]
 pub fn lognormdist_<A: Number, B: Number>(x: A, μ: B) -> FnNumber2<A, B> {
     FnNumber2("LOGNORMDIST", x, μ)
@@ -1883,6 +2035,8 @@ pub fn lognormdist_<A: Number, B: Number>(x: A, μ: B) -> FnNumber2<A, B> {
 /// returns the value of the probability density function or the cumulative 
 /// distribution function for the lognormal distribution with the mean and 
 /// standard deviation given.
+///
+/// [documentfoundation->LOGNORMDIST](https://wiki.documentfoundation.org/Documentation/Calc_Functions/LOGNORMDIST)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -1898,6 +2052,8 @@ pub fn lognormdist_<A: Number, B: Number>(x: A, μ: B) -> FnNumber2<A, B> {
 /// If Cumulative is TRUE, LOGNORMDIST returns the value
 /// 
 /// if X > 0 and 0 otherwise.
+///
+/// __See also__: [crate::of::lognormdist()], [crate::of::lognormdist_()], [crate::of::lognormdist___()], 
 #[inline]
 pub fn lognormdist__<A: Number, B: Number, C: Number>(x: A, μ: B, σ: C) -> FnNumber3<A, B, C> {
     FnNumber3("LOGNORMDIST", x, μ, σ)
@@ -1906,6 +2062,8 @@ pub fn lognormdist__<A: Number, B: Number, C: Number>(x: A, μ: B, σ: C) -> FnN
 /// returns the value of the probability density function or the cumulative 
 /// distribution function for the lognormal distribution with the mean and 
 /// standard deviation given.
+///
+/// [documentfoundation->LOGNORMDIST](https://wiki.documentfoundation.org/Documentation/Calc_Functions/LOGNORMDIST)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -1921,12 +2079,16 @@ pub fn lognormdist__<A: Number, B: Number, C: Number>(x: A, μ: B, σ: C) -> FnN
 /// If Cumulative is TRUE, LOGNORMDIST returns the value
 /// 
 /// if X > 0 and 0 otherwise.
+///
+/// __See also__: [crate::of::lognormdist()], [crate::of::lognormdist_()], [crate::of::lognormdist__()], 
 #[inline]
 pub fn lognormdist___<A: Number, B: Number, C: Number, D: Logical>(x: A, μ: B, σ: C, cumulative: D) -> FnNumber4<A, B, C, D> {
     FnNumber4("LOGNORMDIST", x, μ, σ, cumulative)
 }
 
 /// Return the maximum from a set of numbers.
+///
+/// [documentfoundation->MAX](https://wiki.documentfoundation.org/Documentation/Calc_Functions/MAX)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -1941,7 +2103,7 @@ pub fn lognormdist___<A: Number, B: Number, C: Number, D: Logical>(x: A, μ: B, 
 /// are ignored. Note that if Logical types are a distinct type, they are not 
 /// included.
 ///
-/// __See also__: "MAXA", "MIN", 
+/// __See also__: [crate::of::maxa()], [crate::of::min()], 
 #[inline]
 pub fn max<A: Sequence>(n: A) -> FnNumber1<A> {
     FnNumber1("MAX", n)
@@ -1949,6 +2111,8 @@ pub fn max<A: Sequence>(n: A) -> FnNumber1<A> {
 
 /// Return the maximum from a set of values, including values of type Text and 
 /// Logical.
+///
+/// [documentfoundation->MAXA](https://wiki.documentfoundation.org/Documentation/Calc_Functions/MAXA)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -1964,13 +2128,15 @@ pub fn max<A: Sequence>(n: A) -> FnNumber1<A> {
 /// and FALSE is treated as 0. Empty cells are not included. Any N may be of 
 /// type ReferenceList.
 ///
-/// __See also__: "MAX", "MIN", "MINA", 
+/// __See also__: [crate::of::max()], [crate::of::min()], [crate::of::mina()], 
 #[inline]
 pub fn maxa<A: Sequence>(n: A) -> FnNumber1<A> {
     FnNumber1("MAXA", n)
 }
 
 /// Returns the median (middle) value in the list.
+///
+/// [documentfoundation->MEDIAN](https://wiki.documentfoundation.org/Documentation/Calc_Functions/MEDIAN)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -1982,12 +2148,16 @@ pub fn maxa<A: Sequence>(n: A) -> FnNumber1<A> {
 /// MEDIAN logically ranks the numbers (lowest to highest). If given an odd 
 /// number of values, MEDIAN returns the middle value. If given an even number 
 /// of values, MEDIAN returns the arithmetic average of the two middle values.
+///
+/// __See also__: 
 #[inline]
 pub fn median<A: Sequence>(x: A) -> FnNumber1<A> {
     FnNumber1("MEDIAN", x)
 }
 
 /// Return the minimum from a set of numbers.
+///
+/// [documentfoundation->MIN](https://wiki.documentfoundation.org/Documentation/Calc_Functions/MIN)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -2003,7 +2173,7 @@ pub fn median<A: Sequence>(x: A) -> FnNumber1<A> {
 /// parameters is implementation-defined, but MIN() with no parameters should 
 /// return 0.
 ///
-/// __See also__: "MAX", "MINA", 
+/// __See also__: [crate::of::max()], [crate::of::mina()], 
 #[inline]
 pub fn min<A: Sequence>(n: A) -> FnNumber1<A> {
     FnNumber1("MIN", n)
@@ -2011,6 +2181,8 @@ pub fn min<A: Sequence>(n: A) -> FnNumber1<A> {
 
 /// Return the minimum from a set of values, including values of type Text and 
 /// Logical.
+///
+/// [documentfoundation->MINA](https://wiki.documentfoundation.org/Documentation/Calc_Functions/MINA)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -2027,13 +2199,15 @@ pub fn min<A: Sequence>(n: A) -> FnNumber1<A> {
 /// MINA is provided 0 parameters is implementation-defined. Any N may be of 
 /// type ReferenceList.
 ///
-/// __See also__: "MIN", "MAXA", 
+/// __See also__: [crate::of::min()], [crate::of::maxa()], 
 #[inline]
 pub fn mina<A: Sequence>(n: A) -> FnNumber1<A> {
     FnNumber1("MINA", n)
 }
 
 /// Returns the most common value in a data set.
+///
+/// [documentfoundation->MODE](https://wiki.documentfoundation.org/Documentation/Calc_Functions/MODE)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -2045,12 +2219,16 @@ pub fn mina<A: Sequence>(n: A) -> FnNumber1<A> {
 /// values with the same largest frequency, returns the smallest value. If the 
 /// number sequence does no contain at least two equal values, the MODE is not 
 /// defined, as no most common value can be found, and an Error is returned.
+///
+/// __See also__: 
 #[inline]
 pub fn mode<A: Sequence>(n: A) -> FnNumber1<A> {
     FnNumber1("MODE", n)
 }
 
 /// Returns the negative binomial distribution.
+///
+/// [documentfoundation->NEGBINOMDIST](https://wiki.documentfoundation.org/Documentation/Calc_Functions/NEGBINOMDIST)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -2080,6 +2258,8 @@ pub fn mode<A: Sequence>(n: A) -> FnNumber1<A> {
 /// This function is similar to the binomial distribution, except that the 
 /// number of successes is fixed, and the number of trials is variable. Like 
 /// the binomial, trials are assumed to be independent.
+///
+/// __See also__: 
 #[inline]
 pub fn negbinomdist<A: Number, B: Number, C: Number>(x: A, r: B, prob: C) -> FnNumber3<A, B, C> {
     FnNumber3("NEGBINOMDIST", x, r, prob)
@@ -2088,6 +2268,8 @@ pub fn negbinomdist<A: Number, B: Number, C: Number>(x: A, r: B, prob: C) -> FnN
 /// returns the value of the probability density function or the cumulative 
 /// distribution function for the normal distribution with the mean and 
 /// standard deviation given.
+///
+/// [documentfoundation->NORMDIST](https://wiki.documentfoundation.org/Documentation/Calc_Functions/NORMDIST)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -2104,7 +2286,7 @@ pub fn negbinomdist<A: Number, B: Number, C: Number>(x: A, r: B, prob: C) -> FnN
 /// 
 /// If Cumulative is TRUE, NORMDIST returns the value
 ///
-/// __See also__: "LEGACY.NORMSDIST", 
+/// __See also__: [crate::of::legacy_normsdist()], [crate::of::normdist_()], 
 #[inline]
 pub fn normdist<A: Number, B: Number, C: Number>(x: A, mean: B, standard_deviation: C) -> FnNumber3<A, B, C> {
     FnNumber3("NORMDIST", x, mean, standard_deviation)
@@ -2113,6 +2295,8 @@ pub fn normdist<A: Number, B: Number, C: Number>(x: A, mean: B, standard_deviati
 /// returns the value of the probability density function or the cumulative 
 /// distribution function for the normal distribution with the mean and 
 /// standard deviation given.
+///
+/// [documentfoundation->NORMDIST](https://wiki.documentfoundation.org/Documentation/Calc_Functions/NORMDIST)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -2129,13 +2313,15 @@ pub fn normdist<A: Number, B: Number, C: Number>(x: A, mean: B, standard_deviati
 /// 
 /// If Cumulative is TRUE, NORMDIST returns the value
 ///
-/// __See also__: "LEGACY.NORMSDIST", 
+/// __See also__: [crate::of::legacy_normsdist()], [crate::of::normdist()], 
 #[inline]
 pub fn normdist_<A: Number, B: Number, C: Number, D: Logical>(x: A, mean: B, standard_deviation: C, cumulative: D) -> FnNumber4<A, B, C, D> {
     FnNumber4("NORMDIST", x, mean, standard_deviation, cumulative)
 }
 
 /// returns the inverse of NORMDIST(x;Mean;StandardDeviation,TRUE()).
+///
+/// [documentfoundation->NORMINV](https://wiki.documentfoundation.org/Documentation/Calc_Functions/NORMINV)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -2149,7 +2335,7 @@ pub fn normdist_<A: Number, B: Number, C: Number, D: Logical>(x: A, mean: B, sta
 /// NORMINV returns the unique number x such that 
 /// NORMDIST(x;Mean;StandardDeviation;TRUE()) = P.
 ///
-/// __See also__: "NORMDIST", 
+/// __See also__: [crate::of::normdist()], 
 #[inline]
 pub fn norminv<A: Number, B: Number, C: Number>(p: A, mean: B, standard_deviation: C) -> FnNumber3<A, B, C> {
     FnNumber3("NORMINV", p, mean, standard_deviation)
@@ -2157,6 +2343,8 @@ pub fn norminv<A: Number, B: Number, C: Number>(p: A, mean: B, standard_deviatio
 
 /// returns the value of the cumulative distribution function for the standard 
 /// normal distribution.
+///
+/// [documentfoundation->LEGACY.NORMSDIST](https://wiki.documentfoundation.org/Documentation/Calc_Functions/LEGACY.NORMSDIST)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -2171,13 +2359,15 @@ pub fn norminv<A: Number, B: Number, C: Number>(p: A, mean: B, standard_deviatio
 /// 
 /// This is exactly NORMDIST(X;0;1;TRUE()).
 ///
-/// __See also__: "NORMDIST", "LEGACY.NORMSINV", 
+/// __See also__: [crate::of::normdist()], [crate::of::legacy_normsinv()], 
 #[inline]
 pub fn legacy_normsdist<A: Number>(x: A) -> FnNumber1<A> {
     FnNumber1("LEGACY.NORMSDIST", x)
 }
 
 /// returns the inverse of LEGACY.NORMSDIST(X).
+///
+/// [documentfoundation->LEGACY.NORMSINV](https://wiki.documentfoundation.org/Documentation/Calc_Functions/LEGACY.NORMSINV)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -2190,13 +2380,15 @@ pub fn legacy_normsdist<A: Number>(x: A) -> FnNumber1<A> {
 /// __Semantics__:
 /// LEGACY.NORMSINV returns NORMINV (P).
 ///
-/// __See also__: "NORMINV", "LEGACY.NORMSDIST", 
+/// __See also__: [crate::of::norminv()], [crate::of::legacy_normsdist()], 
 #[inline]
 pub fn legacy_normsinv<A: Number>(p: A) -> FnNumber1<A> {
     FnNumber1("LEGACY.NORMSINV", p)
 }
 
 /// PEARSON returns the Pearson correlation coefficient of two data sets
+///
+/// [documentfoundation->PEARSON](https://wiki.documentfoundation.org/Documentation/Calc_Functions/PEARSON)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -2219,13 +2411,15 @@ pub fn legacy_normsinv<A: Number>(p: A) -> FnNumber1<A> {
 /// IndependentValues the element at the corresponding position of 
 /// DependentValues is ignored, and vice versa.
 ///
-/// __See also__: "COLUMNS", "ROWS", 
+/// __See also__: [crate::of::columns()], [crate::of::rows()], 
 #[inline]
 pub fn pearson<A: Array, B: Array>(independent_values: A, dependent_values: B) -> FnNumber2<A, B> {
     FnNumber2("PEARSON", independent_values, dependent_values)
 }
 
 /// Calculates the x-th sample percentile among the values in range.
+///
+/// [documentfoundation->PERCENTILE](https://wiki.documentfoundation.org/Documentation/Calc_Functions/PERCENTILE)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -2252,13 +2446,15 @@ pub fn pearson<A: Array, B: Array>(independent_values: A, dependent_values: B) -
 /// (Alpha = 0) to the largest value (Alpha = 1) of a data series. For Alpha = 
 /// 25%, the percentile means the first quartile; Alpha = 50% is the MEDIAN.
 ///
-/// __See also__: "COUNT", "MAX", "MAX", "MEDIAN", "MIN", "PERCENTRANK", "QUARTILE", "RANK", 
+/// __See also__: [crate::of::count()], [crate::of::max()], [crate::of::max()], [crate::of::median()], [crate::of::min()], [crate::of::percentrank()], [crate::of::quartile()], [crate::of::rank()], 
 #[inline]
 pub fn percentile<A: Sequence, B: Number>(data: A, x: B) -> FnNumber2<A, B> {
     FnNumber2("PERCENTILE", data, x)
 }
 
 /// Returns the percentage rank of a value in a sample.
+///
+/// [documentfoundation->PERCENTRANK](https://wiki.documentfoundation.org/Documentation/Calc_Functions/PERCENTRANK)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -2298,13 +2494,15 @@ pub fn percentile<A: Sequence, B: Number>(data: A, x: B) -> FnNumber2<A, B> {
 /// In the special case where COUNT(Data) = 1, the only valid value for X is 
 /// the single value in Data, in which case PERCENTRANK returns 1.
 ///
-/// __See also__: "COUNT", "INT", "MAX", "MIN", "PERCENTILE", "RANK", 
+/// __See also__: [crate::of::count()], [crate::of::int()], [crate::of::max()], [crate::of::min()], [crate::of::percentile()], [crate::of::rank()], [crate::of::percentrank_()], 
 #[inline]
 pub fn percentrank<A: Sequence, B: Number>(data: A, x: B) -> FnNumber2<A, B> {
     FnNumber2("PERCENTRANK", data, x)
 }
 
 /// Returns the percentage rank of a value in a sample.
+///
+/// [documentfoundation->PERCENTRANK](https://wiki.documentfoundation.org/Documentation/Calc_Functions/PERCENTRANK)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -2344,13 +2542,15 @@ pub fn percentrank<A: Sequence, B: Number>(data: A, x: B) -> FnNumber2<A, B> {
 /// In the special case where COUNT(Data) = 1, the only valid value for X is 
 /// the single value in Data, in which case PERCENTRANK returns 1.
 ///
-/// __See also__: "COUNT", "INT", "MAX", "MIN", "PERCENTILE", "RANK", 
+/// __See also__: [crate::of::count()], [crate::of::int()], [crate::of::max()], [crate::of::min()], [crate::of::percentile()], [crate::of::rank()], [crate::of::percentrank()], 
 #[inline]
 pub fn percentrank_<A: Sequence, B: Number, C: Number>(data: A, x: B, significance: C) -> FnNumber3<A, B, C> {
     FnNumber3("PERCENTRANK", data, x, significance)
 }
 
 /// returns the number of permutations of k objects taken from n objects.
+///
+/// [documentfoundation->PERMUT](https://wiki.documentfoundation.org/Documentation/Calc_Functions/PERMUT)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -2362,6 +2562,8 @@ pub fn percentrank_<A: Sequence, B: Number, C: Number>(data: A, x: B, significan
 ///
 /// __Semantics__:
 /// PERMUT returns
+///
+/// __See also__: 
 #[inline]
 pub fn permut<A: Number, B: Number>(n: A, k: B) -> FnNumber2<A, B> {
     FnNumber2("PERMUT", n, k)
@@ -2369,6 +2571,8 @@ pub fn permut<A: Number, B: Number>(n: A, k: B) -> FnNumber2<A, B> {
 
 /// Returns the number of permutations for a given number of objects 
 /// (repetition allowed).
+///
+/// [documentfoundation->PERMUTATIONA](https://wiki.documentfoundation.org/Documentation/Calc_Functions/PERMUTATIONA)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -2382,6 +2586,8 @@ pub fn permut<A: Number, B: Number>(n: A, k: B) -> FnNumber2<A, B> {
 /// Given Total number of objects, return the number of permutations containing 
 /// Chosen number of objects, with repetition permitted. The result is 1 if 
 /// Total = 0 and Chosen = 0, otherwise the result is
+///
+/// __See also__: 
 #[inline]
 pub fn permutationa<A: Number, B: Number>(total: A, chosen: B) -> FnNumber2<A, B> {
     FnNumber2("PERMUTATIONA", total, chosen)
@@ -2389,6 +2595,8 @@ pub fn permutationa<A: Number, B: Number>(total: A, chosen: B) -> FnNumber2<A, B
 
 /// Returns the values of the density function for a standard normal 
 /// distribution.
+///
+/// [documentfoundation->PHI](https://wiki.documentfoundation.org/Documentation/Calc_Functions/PHI)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -2398,7 +2606,7 @@ pub fn permutationa<A: Number, B: Number>(total: A, chosen: B) -> FnNumber2<A, B
 /// __Semantics__:
 /// PHI(N) is a synonym for NORMDIST(N,0,1,FALSE()).
 ///
-/// __See also__: "NORMDIST", 
+/// __See also__: [crate::of::normdist()], 
 #[inline]
 pub fn phi<A: Number>(n: A) -> FnNumber1<A> {
     FnNumber1("PHI", n)
@@ -2406,6 +2614,8 @@ pub fn phi<A: Number>(n: A) -> FnNumber1<A> {
 
 /// returns the probability or the cumulative distribution function for the 
 /// Poisson distribution
+///
+/// [documentfoundation->POISSON](https://wiki.documentfoundation.org/Documentation/Calc_Functions/POISSON)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -2419,6 +2629,8 @@ pub fn phi<A: Number>(n: A) -> FnNumber1<A> {
 /// If Cumulative is FALSE, POISSON returns the value
 /// 
 /// If Cumulative is TRUE, POISSON returns the value
+///
+/// __See also__: [crate::of::poisson_()], 
 #[inline]
 pub fn poisson<A: Number, B: Number>(x: A, λ: B) -> FnNumber2<A, B> {
     FnNumber2("POISSON", x, λ)
@@ -2426,6 +2638,8 @@ pub fn poisson<A: Number, B: Number>(x: A, λ: B) -> FnNumber2<A, B> {
 
 /// returns the probability or the cumulative distribution function for the 
 /// Poisson distribution
+///
+/// [documentfoundation->POISSON](https://wiki.documentfoundation.org/Documentation/Calc_Functions/POISSON)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -2439,6 +2653,8 @@ pub fn poisson<A: Number, B: Number>(x: A, λ: B) -> FnNumber2<A, B> {
 /// If Cumulative is FALSE, POISSON returns the value
 /// 
 /// If Cumulative is TRUE, POISSON returns the value
+///
+/// __See also__: [crate::of::poisson()], 
 #[inline]
 pub fn poisson_<A: Number, B: Number, C: Logical>(x: A, λ: B, cumulative: C) -> FnNumber3<A, B, C> {
     FnNumber3("POISSON", x, λ, cumulative)
@@ -2446,6 +2662,8 @@ pub fn poisson_<A: Number, B: Number, C: Logical>(x: A, λ: B, cumulative: C) ->
 
 /// Returns the probability that a discrete random variable lies between two 
 /// limits.
+///
+/// [documentfoundation->PROB](https://wiki.documentfoundation.org/Documentation/Calc_Functions/PROB)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -2492,7 +2710,7 @@ pub fn poisson_<A: Number, B: Number, C: Logical>(x: A, λ: B, cumulative: C) ->
 /// then PROB returns 0 since in this case
 /// for all i.
 ///
-/// __See also__: "COUNT", 
+/// __See also__: [crate::of::count()], [crate::of::prob_()], 
 #[inline]
 pub fn prob<A: Array, B: Array, C: Number>(data: A, probability: B, start: C) -> FnNumber3<A, B, C> {
     FnNumber3("PROB", data, probability, start)
@@ -2500,6 +2718,8 @@ pub fn prob<A: Array, B: Array, C: Number>(data: A, probability: B, start: C) ->
 
 /// Returns the probability that a discrete random variable lies between two 
 /// limits.
+///
+/// [documentfoundation->PROB](https://wiki.documentfoundation.org/Documentation/Calc_Functions/PROB)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -2546,13 +2766,15 @@ pub fn prob<A: Array, B: Array, C: Number>(data: A, probability: B, start: C) ->
 /// then PROB returns 0 since in this case
 /// for all i.
 ///
-/// __See also__: "COUNT", 
+/// __See also__: [crate::of::count()], [crate::of::prob()], 
 #[inline]
 pub fn prob_<A: Array, B: Array, C: Number, D: Number>(data: A, probability: B, start: C, end: D) -> FnNumber4<A, B, C, D> {
     FnNumber4("PROB", data, probability, start, end)
 }
 
 /// Returns a quartile of a set of data points.
+///
+/// [documentfoundation->QUARTILE](https://wiki.documentfoundation.org/Documentation/Calc_Functions/QUARTILE)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -2589,13 +2811,15 @@ pub fn prob_<A: Array, B: Array, C: Number, D: Number>(data: A, probability: B, 
 /// Quart divided by 4. An algorithm to calculate the percentile for a set of 
 /// data points is given in the definition of PERCENTILE.
 ///
-/// __See also__: "COUNT", "MAX", "MEDIAN", "MIN", "PERCENTILE", "PERCENTRANK", "RANK", 
+/// __See also__: [crate::of::count()], [crate::of::max()], [crate::of::median()], [crate::of::min()], [crate::of::percentile()], [crate::of::percentrank()], [crate::of::rank()], 
 #[inline]
 pub fn quartile<A: Sequence, B: Number>(data: A, quart: B) -> FnNumber2<A, B> {
     FnNumber2("QUARTILE", data, quart)
 }
 
 /// Returns the rank of a number in a list of numbers.
+///
+/// [documentfoundation->RANK](https://wiki.documentfoundation.org/Documentation/Calc_Functions/RANK)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -2619,12 +2843,16 @@ pub fn quartile<A: Sequence, B: Number>(data: A, quart: B) -> FnNumber2<A, B> {
 /// If a number in Data occurs more than once it is given the same rank, but 
 /// increments the rank for subsequent different numbers. If Value does not 
 /// exist in Data an Error is returned.
+///
+/// __See also__: [crate::of::rank_()], 
 #[inline]
 pub fn rank<A: Number, B: Sequence>(value: A, data: B) -> FnNumber2<A, B> {
     FnNumber2("RANK", value, data)
 }
 
 /// Returns the rank of a number in a list of numbers.
+///
+/// [documentfoundation->RANK](https://wiki.documentfoundation.org/Documentation/Calc_Functions/RANK)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -2648,12 +2876,16 @@ pub fn rank<A: Number, B: Sequence>(value: A, data: B) -> FnNumber2<A, B> {
 /// If a number in Data occurs more than once it is given the same rank, but 
 /// increments the rank for subsequent different numbers. If Value does not 
 /// exist in Data an Error is returned.
+///
+/// __See also__: [crate::of::rank()], 
 #[inline]
 pub fn rank_<A: Number, B: Sequence, C: Number>(value: A, data: B, order: C) -> FnNumber3<A, B, C> {
     FnNumber3("RANK", value, data, order)
 }
 
 /// Returns the square of the Pearson product moment correlation coefficient.
+///
+/// [documentfoundation->RSQ](https://wiki.documentfoundation.org/Documentation/Calc_Functions/RSQ)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -2681,13 +2913,15 @@ pub fn rank_<A: Number, B: Sequence, C: Number>(value: A, data: B, order: C) -> 
 /// For an empty element or an element of type Text or Boolean in ArrayY the 
 /// element at the corresponding position of ArrayX is ignored, and vice versa.
 ///
-/// __See also__: "COLUMNS", "ROWS", "PEARSON", 
+/// __See also__: [crate::of::columns()], [crate::of::rows()], [crate::of::pearson()], 
 #[inline]
 pub fn rsq<A: Array, B: Array>(array_y: A, array_x: B) -> FnNumber2<A, B> {
     FnNumber2("RSQ", array_y, array_x)
 }
 
 /// Estimates the skewness of a distribution using a sample set of numbers.
+///
+/// [documentfoundation->SKEW](https://wiki.documentfoundation.org/Documentation/Calc_Functions/SKEW)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -2703,7 +2937,7 @@ pub fn rsq<A: Array, B: Array>(array_y: A, array_x: B) -> FnNumber2<A, B> {
 /// and the standard deviation estimate
 /// , the skewness becomes
 ///
-/// __See also__: "SKEWP", 
+/// __See also__: [crate::of::skewp()], 
 #[inline]
 pub fn skew<A: Sequence>(sample: A) -> FnNumber1<A> {
     FnNumber1("SKEW", sample)
@@ -2711,6 +2945,8 @@ pub fn skew<A: Sequence>(sample: A) -> FnNumber1<A> {
 
 /// Calculates the skewness of a distribution using the population of a random 
 /// variable.
+///
+/// [documentfoundation->SKEWP](https://wiki.documentfoundation.org/Documentation/Calc_Functions/SKEWP)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -2726,13 +2962,15 @@ pub fn skew<A: Sequence>(sample: A) -> FnNumber1<A> {
 /// Given the expectation value
 /// and the standard deviation σ,the skewness becomes
 ///
-/// __See also__: "SKEW", 
+/// __See also__: [crate::of::skew()], 
 #[inline]
 pub fn skewp<A: Sequence>(population: A) -> FnNumber1<A> {
     FnNumber1("SKEWP", population)
 }
 
 /// Calculates the slope of the linear regression line.
+///
+/// [documentfoundation->SLOPE](https://wiki.documentfoundation.org/Documentation/Calc_Functions/SLOPE)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -2749,13 +2987,15 @@ pub fn skewp<A: Sequence>(population: A) -> FnNumber1<A> {
 /// For an empty element or an element of type Text or Boolean in Y the element 
 /// at the corresponding position of X is ignored, and vice versa.
 ///
-/// __See also__: "COLUMNS", "ROWS", "INTERCEPT", "STEYX", 
+/// __See also__: [crate::of::columns()], [crate::of::rows()], [crate::of::intercept()], [crate::of::steyx()], 
 #[inline]
 pub fn slope<A: Array, B: Array>(y: A, x: B) -> FnNumber2<A, B> {
     FnNumber2("SLOPE", y, x)
 }
 
 /// Finds the nth smallest value in a list.
+///
+/// [documentfoundation->SMALL](https://wiki.documentfoundation.org/Documentation/Calc_Functions/SMALL)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -2769,13 +3009,15 @@ pub fn slope<A: Array, B: Array>(y: A, x: B) -> FnNumber2<A, B> {
 /// __Semantics__:
 /// If N is an array of numbers, an array of smallest values is returned.
 ///
-/// __See also__: "INT", "LARGE", "ROUNDDOWN", 
+/// __See also__: [crate::of::int()], [crate::of::large()], [crate::of::rounddown()], 
 #[inline]
 pub fn small<A: Sequence, B: NumberOrArray>(list: A, n: B) -> FnArray2<A, B> {
     FnArray2("SMALL", list, n)
 }
 
 /// Calculates a normalized value of a random variable.
+///
+/// [documentfoundation->STANDARDIZE](https://wiki.documentfoundation.org/Documentation/Calc_Functions/STANDARDIZE)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -2788,13 +3030,15 @@ pub fn small<A: Sequence, B: NumberOrArray>(list: A, n: B) -> FnArray2<A, B> {
 /// __Semantics__:
 /// Calculates a normalized value of a random variable.
 ///
-/// __See also__: "GAUSS", 
+/// __See also__: [crate::of::gauss()], 
 #[inline]
 pub fn standardize<A: Number, B: Number, C: Number>(value: A, mean: B, sigma: C) -> FnNumber3<A, B, C> {
     FnNumber3("STANDARDIZE", value, mean, sigma)
 }
 
 /// Compute the sample standard deviation of a set of numbers.
+///
+/// [documentfoundation->STDEV](https://wiki.documentfoundation.org/Documentation/Calc_Functions/STDEV)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -2811,7 +3055,7 @@ pub fn standardize<A: Number, B: Number, C: Number>(value: A, mean: B, sigma: C)
 /// Note that s is not the same as the standard deviation of the set, σ, which 
 /// uses n rather than n − 1.
 ///
-/// __See also__: "STDEVP", "AVERAGE", 
+/// __See also__: [crate::of::stdevp()], [crate::of::average()], 
 #[inline]
 pub fn stdev<A: Sequence>(n: A) -> FnNumber1<A> {
     FnNumber1("STDEV", n)
@@ -2819,6 +3063,8 @@ pub fn stdev<A: Sequence>(n: A) -> FnNumber1<A> {
 
 /// Calculate the standard deviation using a sample set of values, including 
 /// values of type Text and Logical.
+///
+/// [documentfoundation->STDEVA](https://wiki.documentfoundation.org/Documentation/Calc_Functions/STDEVA)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -2842,7 +3088,7 @@ pub fn stdev<A: Sequence>(n: A) -> FnNumber1<A> {
 /// 
 /// STDEVA returns
 ///
-/// __See also__: "COUNTA", "STDEV", 
+/// __See also__: [crate::of::counta()], [crate::of::stdev()], 
 #[inline]
 pub fn stdeva<A: Sequence>(sample: A) -> FnNumber1<A> {
     FnNumber1("STDEVA", sample)
@@ -2850,6 +3096,8 @@ pub fn stdeva<A: Sequence>(sample: A) -> FnNumber1<A> {
 
 /// Calculates the standard deviation using the population of a random 
 /// variable, including values of type Text and Logical.
+///
+/// [documentfoundation->STDEVP](https://wiki.documentfoundation.org/Documentation/Calc_Functions/STDEVP)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -2865,7 +3113,7 @@ pub fn stdeva<A: Sequence>(sample: A) -> FnNumber1<A> {
 /// Note that σ is not the same as the sample standard deviation, s, which 
 /// uses n − 1 rather than n.
 ///
-/// __See also__: "COUNT", "STDEV", "AVERAGE", 
+/// __See also__: [crate::of::count()], [crate::of::stdev()], [crate::of::average()], 
 #[inline]
 pub fn stdevp<A: Sequence>(n: A) -> FnNumber1<A> {
     FnNumber1("STDEVP", n)
@@ -2873,6 +3121,8 @@ pub fn stdevp<A: Sequence>(n: A) -> FnNumber1<A> {
 
 /// Calculates the standard deviation using the population of a random 
 /// variable, including values of type Text and Logical.
+///
+/// [documentfoundation->STDEVPA](https://wiki.documentfoundation.org/Documentation/Calc_Functions/STDEVPA)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -2899,7 +3149,7 @@ pub fn stdevp<A: Sequence>(n: A) -> FnNumber1<A> {
 /// otherwise, they are treated as zero, or string constants are always treated 
 /// as zero.
 ///
-/// __See also__: "COUNTA", "STDEVP", 
+/// __See also__: [crate::of::counta()], [crate::of::stdevp()], 
 #[inline]
 pub fn stdevpa<A: Sequence>(sample: A) -> FnNumber1<A> {
     FnNumber1("STDEVPA", sample)
@@ -2907,6 +3157,8 @@ pub fn stdevpa<A: Sequence>(sample: A) -> FnNumber1<A> {
 
 /// Calculates the standard error of the predicted y value for each x in the 
 /// regression.
+///
+/// [documentfoundation->STEYX](https://wiki.documentfoundation.org/Documentation/Calc_Functions/STEYX)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -2924,7 +3176,7 @@ pub fn stdevpa<A: Sequence>(sample: A) -> FnNumber1<A> {
 /// For an empty element or an element of type Text or Boolean in MeasuredY the 
 /// element at the corresponding position of X is ignored, and vice versa.
 ///
-/// __See also__: "COLUMNS", "ROWS", "INTERCEPT", "SLOPE", 
+/// __See also__: [crate::of::columns()], [crate::of::rows()], [crate::of::intercept()], [crate::of::slope()], 
 #[inline]
 pub fn steyx<A: Array, B: Array>(measured_y: A, x: B) -> FnNumber2<A, B> {
     FnNumber2("STEYX", measured_y, x)
@@ -2932,6 +3184,8 @@ pub fn steyx<A: Array, B: Array>(measured_y: A, x: B) -> FnNumber2<A, B> {
 
 /// Returns the area to the tail or tails of the probability density function 
 /// of the t-distribution.
+///
+/// [documentfoundation->LEGACY.TDIST](https://wiki.documentfoundation.org/Documentation/Calc_Functions/LEGACY.TDIST)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -2949,13 +3203,15 @@ pub fn steyx<A: Array, B: Array>(measured_y: A, x: B) -> FnNumber2<A, B> {
 /// Note that Df denotes the degrees of freedom of the t-distribution and Γ is 
 /// the Gamma function.
 ///
-/// __See also__: "GAMMA", "BETADIST", "BINOMDIST", "CHISQDIST", "EXPONDIST", "FDIST", "GAMMADIST", "GAUSS", "HYPGEOMDIST", "LOGNORMDIST", "NEGBINOMDIST", "NORMDIST", "POISSON", "WEIBULL", 
+/// __See also__: [crate::of::gamma()], [crate::of::betadist()], [crate::of::binomdist()], [crate::of::chisqdist()], [crate::of::expondist()], [crate::of::fdist()], [crate::of::gammadist()], [crate::of::gauss()], [crate::of::hypgeomdist()], [crate::of::lognormdist()], [crate::of::negbinomdist()], [crate::of::normdist()], [crate::of::poisson()], [crate::of::weibull()], 
 #[inline]
 pub fn legacy_tdist<A: Number, B: Number, C: Number>(x: A, df: B, tails: C) -> FnNumber3<A, B, C> {
     FnNumber3("LEGACY.TDIST", x, df, tails)
 }
 
 /// Calculates the inverse of the two-tailed t-distribution.
+///
+/// [documentfoundation->TINV](https://wiki.documentfoundation.org/Documentation/Calc_Functions/TINV)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -2968,13 +3224,15 @@ pub fn legacy_tdist<A: Number, B: Number, C: Number>(x: A, df: B, tails: C) -> F
 /// __Semantics__:
 /// Calculates the inverse of the two-tailed t-distribution.
 ///
-/// __See also__: "LEGACY.TDIST", 
+/// __See also__: [crate::of::legacy_tdist()], 
 #[inline]
 pub fn tinv<A: Number, B: Number>(probability: A, degree_of_freedom: B) -> FnNumber2<A, B> {
     FnNumber2("TINV", probability, degree_of_freedom)
 }
 
 /// Returns predicted values based on a simple or multiple linear regression.
+///
+/// [documentfoundation->TREND](https://wiki.documentfoundation.org/Documentation/Calc_Functions/TREND)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -3019,13 +3277,15 @@ pub fn tinv<A: Number, B: Number>(probability: A, degree_of_freedom: B) -> FnNum
 /// COLUMNS(NewX) columns, such that the entry in the jth column is
 /// .
 ///
-/// __See also__: "COLUMNS", "ROWS", "INTERCEPT", "LINEST", "SLOPE", "STEYX", 
+/// __See also__: [crate::of::columns()], [crate::of::rows()], [crate::of::intercept()], [crate::of::linest()], [crate::of::slope()], [crate::of::steyx()], [crate::of::trend_()], [crate::of::trend__()], [crate::of::trend___()], 
 #[inline]
 pub fn trend<A: Array>(known_y: A) -> FnArray1<A> {
     FnArray1("TREND", known_y)
 }
 
 /// Returns predicted values based on a simple or multiple linear regression.
+///
+/// [documentfoundation->TREND](https://wiki.documentfoundation.org/Documentation/Calc_Functions/TREND)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -3070,13 +3330,15 @@ pub fn trend<A: Array>(known_y: A) -> FnArray1<A> {
 /// COLUMNS(NewX) columns, such that the entry in the jth column is
 /// .
 ///
-/// __See also__: "COLUMNS", "ROWS", "INTERCEPT", "LINEST", "SLOPE", "STEYX", 
+/// __See also__: [crate::of::columns()], [crate::of::rows()], [crate::of::intercept()], [crate::of::linest()], [crate::of::slope()], [crate::of::steyx()], [crate::of::trend()], [crate::of::trend__()], [crate::of::trend___()], 
 #[inline]
 pub fn trend_<A: Array, B: Array>(known_y: A, known_x: B) -> FnArray2<A, B> {
     FnArray2("TREND", known_y, known_x)
 }
 
 /// Returns predicted values based on a simple or multiple linear regression.
+///
+/// [documentfoundation->TREND](https://wiki.documentfoundation.org/Documentation/Calc_Functions/TREND)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -3121,13 +3383,15 @@ pub fn trend_<A: Array, B: Array>(known_y: A, known_x: B) -> FnArray2<A, B> {
 /// COLUMNS(NewX) columns, such that the entry in the jth column is
 /// .
 ///
-/// __See also__: "COLUMNS", "ROWS", "INTERCEPT", "LINEST", "SLOPE", "STEYX", 
+/// __See also__: [crate::of::columns()], [crate::of::rows()], [crate::of::intercept()], [crate::of::linest()], [crate::of::slope()], [crate::of::steyx()], [crate::of::trend()], [crate::of::trend_()], [crate::of::trend___()], 
 #[inline]
 pub fn trend__<A: Array, B: Array, C: Array>(known_y: A, known_x: B, new_x: C) -> FnArray3<A, B, C> {
     FnArray3("TREND", known_y, known_x, new_x)
 }
 
 /// Returns predicted values based on a simple or multiple linear regression.
+///
+/// [documentfoundation->TREND](https://wiki.documentfoundation.org/Documentation/Calc_Functions/TREND)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -3172,7 +3436,7 @@ pub fn trend__<A: Array, B: Array, C: Array>(known_y: A, known_x: B, new_x: C) -
 /// COLUMNS(NewX) columns, such that the entry in the jth column is
 /// .
 ///
-/// __See also__: "COLUMNS", "ROWS", "INTERCEPT", "LINEST", "SLOPE", "STEYX", 
+/// __See also__: [crate::of::columns()], [crate::of::rows()], [crate::of::intercept()], [crate::of::linest()], [crate::of::slope()], [crate::of::steyx()], [crate::of::trend()], [crate::of::trend_()], [crate::of::trend__()], 
 #[inline]
 pub fn trend___<A: Array, B: Array, C: Array, D: Logical>(known_y: A, known_x: B, new_x: C, const_: D) -> FnArray4<A, B, C, D> {
     FnArray4("TREND", known_y, known_x, new_x, const_)
@@ -3180,6 +3444,8 @@ pub fn trend___<A: Array, B: Array, C: Array, D: Logical>(known_y: A, known_x: B
 
 /// Returns the mean of a data set, ignoring a proportion of high and low 
 /// values.
+///
+/// [documentfoundation->TRIMMEAN](https://wiki.documentfoundation.org/Documentation/Calc_Functions/TRIMMEAN)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -3199,13 +3465,15 @@ pub fn trend___<A: Array, B: Array, C: Array, D: Logical>(known_y: A, known_x: B
 /// 
 /// Then TRIMMEAN returns the value
 ///
-/// __See also__: "AVERAGE", "GEOMEAN", "HARMEAN", 
+/// __See also__: [crate::of::average()], [crate::of::geomean()], [crate::of::harmean()], 
 #[inline]
 pub fn trimmean<A: Sequence, B: Number>(data_set: A, cut_off_fraction: B) -> FnNumber2<A, B> {
     FnNumber2("TRIMMEAN", data_set, cut_off_fraction)
 }
 
 /// Calculates the p-value of a 2-sample t-test.
+///
+/// [documentfoundation->TTEST](https://wiki.documentfoundation.org/Documentation/Calc_Functions/TTEST)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -3260,13 +3528,15 @@ pub fn trimmean<A: Sequence, B: Number>(data_set: A, cut_off_fraction: B) -> FnN
 /// For an empty element or an element of type Text or Boolean in X the element 
 /// at the corresponding position of Y is ignored, and vice versa.
 ///
-/// __See also__: "COLUMNS", "COUNT", "ROWS", "FTEST", "LEGACY.TDIST", "ZTEST", 
+/// __See also__: [crate::of::columns()], [crate::of::count()], [crate::of::rows()], [crate::of::ftest()], [crate::of::legacy_tdist()], [crate::of::ztest()], 
 #[inline]
 pub fn ttest<A: Array, B: Array, C: Number, D: Number>(x: A, y: B, tails: C, type_: D) -> FnNumber4<A, B, C, D> {
     FnNumber4("TTEST", x, y, tails, type_)
 }
 
 /// Compute the sample variance of a set of numbers.
+///
+/// [documentfoundation->VAR](https://wiki.documentfoundation.org/Documentation/Calc_Functions/VAR)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -3283,7 +3553,7 @@ pub fn ttest<A: Array, B: Array, C: Number, D: Number>(x: A, y: B, tails: C, typ
 /// Note that s2 is not the same as the variance of the set, σ2, which uses n 
 /// rather than n − 1.
 ///
-/// __See also__: "VARP", "STDEV", "AVERAGE", 
+/// __See also__: [crate::of::varp()], [crate::of::stdev()], [crate::of::average()], 
 #[inline]
 pub fn var<A: Sequence>(n: A) -> FnNumber1<A> {
     FnNumber1("VAR", n)
@@ -3291,6 +3561,8 @@ pub fn var<A: Sequence>(n: A) -> FnNumber1<A> {
 
 /// Estimates the variance using a sample set of values, including values of 
 /// type Text and Logical.
+///
+/// [documentfoundation->VARA](https://wiki.documentfoundation.org/Documentation/Calc_Functions/VARA)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -3317,13 +3589,15 @@ pub fn var<A: Sequence>(n: A) -> FnNumber1<A> {
 /// otherwise, they are treated as zero, or string constants are always treated 
 /// as zero.
 ///
-/// __See also__: "VAR", 
+/// __See also__: [crate::of::var()], 
 #[inline]
 pub fn vara<A: Sequence>(sample: A) -> FnNumber1<A> {
     FnNumber1("VARA", sample)
 }
 
 /// Compute the variance of the set for a set of numbers.
+///
+/// [documentfoundation->VARP](https://wiki.documentfoundation.org/Documentation/Calc_Functions/VARP)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -3341,7 +3615,7 @@ pub fn vara<A: Sequence>(sample: A) -> FnNumber1<A> {
 /// 
 /// If only one number is provided, returns 0.
 ///
-/// __See also__: "COUNT", "VAR", "STDEVP", "AVERAGE", 
+/// __See also__: [crate::of::count()], [crate::of::var()], [crate::of::stdevp()], [crate::of::average()], 
 #[inline]
 pub fn varp<A: Sequence>(n: A) -> FnNumber1<A> {
     FnNumber1("VARP", n)
@@ -3349,6 +3623,8 @@ pub fn varp<A: Sequence>(n: A) -> FnNumber1<A> {
 
 /// Calculates the variance using the population of the distribution, including 
 /// values of type Text and Logical.
+///
+/// [documentfoundation->VARPA](https://wiki.documentfoundation.org/Documentation/Calc_Functions/VARPA)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -3375,13 +3651,15 @@ pub fn varp<A: Sequence>(n: A) -> FnNumber1<A> {
 /// otherwise, they are treated as zero, or string constants are always treated 
 /// as zero.
 ///
-/// __See also__: "COUNTA", "VARP", 
+/// __See also__: [crate::of::counta()], [crate::of::varp()], 
 #[inline]
 pub fn varpa<A: Sequence>(sample: A) -> FnNumber1<A> {
     FnNumber1("VARPA", sample)
 }
 
 /// Calculates the Weibull distribution.
+///
+/// [documentfoundation->WEIBULL](https://wiki.documentfoundation.org/Documentation/Calc_Functions/WEIBULL)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -3398,7 +3676,7 @@ pub fn varpa<A: Sequence>(sample: A) -> FnNumber1<A> {
 /// 
 /// If Cumulative is TRUE, the cumulative distribution function is calculated:
 ///
-/// __See also__: "BETADIST", "BINOMDIST", "CHISQDIST", "EXPONDIST", "FDIST", "GAMMADIST", "GAUSS", "HYPGEOMDIST", "LOGNORMDIST", "NEGBINOMDIST", "NORMDIST", "POISSON", "LEGACY.TDIST", 
+/// __See also__: [crate::of::betadist()], [crate::of::binomdist()], [crate::of::chisqdist()], [crate::of::expondist()], [crate::of::fdist()], [crate::of::gammadist()], [crate::of::gauss()], [crate::of::hypgeomdist()], [crate::of::lognormdist()], [crate::of::negbinomdist()], [crate::of::normdist()], [crate::of::poisson()], [crate::of::legacy_tdist()], 
 #[inline]
 pub fn weibull<A: Number, B: Number, C: Number, D: Logical>(value: A, shape: B, scale: C, cumulative: D) -> FnNumber4<A, B, C, D> {
     FnNumber4("WEIBULL", value, shape, scale, cumulative)
@@ -3407,6 +3685,8 @@ pub fn weibull<A: Number, B: Number, C: Number, D: Logical>(value: A, shape: B, 
 /// Calculates the probability of observing a sample mean as large or larger 
 /// than the mean of the given sample for samples drawn from a normal 
 /// distribution.
+///
+/// [documentfoundation->ZTEST](https://wiki.documentfoundation.org/Documentation/Calc_Functions/ZTEST)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -3420,12 +3700,9 @@ pub fn weibull<A: Number, B: Number, C: Number, D: Logical>(value: A, shape: B, 
 /// Calculates the probability of observing a sample mean as large or larger 
 /// than the mean of the given Sample for samples drawn from a normal 
 /// distribution with the given mean Mean and the given standard deviation 
-/// Sigma. If Sigma is omitted, it is estimated from Sample, using STDEV. With 
-/// Sample being the mean of Sample and
-/// 
-/// ZTEST returns
+/// Sigma. If Sigma is omitted, it is estimated from Sample, using STDEV.
 ///
-/// __See also__: "FTEST", "TTEST", 
+/// __See also__: [crate::of::ftest()], [crate::of::ttest()], [crate::of::ztest_()], 
 #[inline]
 pub fn ztest<A: Sequence, B: Number>(sample: A, mean: B) -> FnNumber2<A, B> {
     FnNumber2("ZTEST", sample, mean)
@@ -3434,6 +3711,8 @@ pub fn ztest<A: Sequence, B: Number>(sample: A, mean: B) -> FnNumber2<A, B> {
 /// Calculates the probability of observing a sample mean as large or larger 
 /// than the mean of the given sample for samples drawn from a normal 
 /// distribution.
+///
+/// [documentfoundation->ZTEST](https://wiki.documentfoundation.org/Documentation/Calc_Functions/ZTEST)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -3447,13 +3726,324 @@ pub fn ztest<A: Sequence, B: Number>(sample: A, mean: B) -> FnNumber2<A, B> {
 /// Calculates the probability of observing a sample mean as large or larger 
 /// than the mean of the given Sample for samples drawn from a normal 
 /// distribution with the given mean Mean and the given standard deviation 
-/// Sigma. If Sigma is omitted, it is estimated from Sample, using STDEV. With 
-/// Sample being the mean of Sample and
-/// 
-/// ZTEST returns
+/// Sigma. If Sigma is omitted, it is estimated from Sample, using STDEV.
 ///
-/// __See also__: "FTEST", "TTEST", 
+/// __See also__: [crate::of::ftest()], [crate::of::ttest()], [crate::of::ztest()], 
 #[inline]
 pub fn ztest_<A: Sequence, B: Number, C: Number>(sample: A, mean: B, sigma: C) -> FnNumber3<A, B, C> {
     FnNumber3("ZTEST", sample, mean, sigma)
+}
+
+/// Uses the probability mass function of the binomial distribution to 
+/// calculate the probability of a specific number of successful trial 
+/// outcomes, or a range of successful trial outcomes. The binomial 
+/// distribution is a discrete probability distribution that is used to analyze 
+/// data in many domains.
+///
+/// [documentfoundation->B](https://wiki.documentfoundation.org/Documentation/Calc_Functions/B)
+///
+/// __Syntax__: 
+/// ```ods
+///     B( Trials: Integer; SP: Number; T_1: Integer )
+/// ```
+///
+/// __Info2__:
+/// Returns a real number in the range [0, 1], which is the probability for the 
+/// given arguments.
+///
+/// __Semantics__:
+/// 
+/// Trials is a non-negative integer, or a reference to a cell containing that 
+/// integer, that is the total number of independent trials.
+/// 
+/// SP is a real number (expressed as a percentage, such as 2.5%, or a decimal 
+/// fraction, such as 0.025), or a reference to a cell containing that number, 
+/// that is the probability of a successful outcome on each trial. As a 
+/// probability, SP lies in the range [0, 1] (or equivalently 0% ≤ SP ≤ 
+/// 100%).
+/// 
+/// T 1 is a non-negative integer, or a reference to a cell containing that 
+/// integer, that specifies the lower limit for the number of successful 
+/// trials.
+/// 
+/// T 2 is a non-negative integer, or a reference to a cell containing that 
+/// integer, that specifies the upper limit for the number of successful 
+/// trials. If T 2 is omitted, the function calculates the probability that the 
+/// number of successful trials shall be exactly T 1. If T 2 is provided, the 
+/// function calculates the probability that the number of successful trials 
+/// shall lie between T 1 and T 2 inclusive.
+/// 
+/// If any of Trials, SP, T 1, and T 2 is non-numeric, then B reports a #VALUE! 
+/// error.
+/// If any of Trials, T 1, and T 2 is a non-integer value, then B truncates it 
+/// to an integer value.
+/// If SP is less than 0.0 or greater than 1.0, then B reports an invalid 
+/// argument error (Err:502).
+/// For the case when T 2 is omitted, B checks (after any truncation) that 
+/// Trials ≥ 0, T 1 ≥ 0, and Trials ≥ T 1. If any of these checks fail, 
+/// then B reports an invalid argument error (Err:502).
+/// For the case when T 2 is provided, B checks (after any truncation) that T 1 
+/// ≥ 0, T 2 ≥ T 1, and Trials ≥ T 2. If any of these checks fail, then B 
+/// reports an invalid argument error (Err:502).
+/// 
+/// Info:
+/// 
+/// The formula for B is:
+/// 
+/// <math xmlns="http://www.w3.org/1998/Math/MathML">
+/// <mstyle displaystyle="true" scriptlevel="0">
+/// <mrow>
+/// <mtext>B</mtext>
+/// <mo stretchy="false">(</mo>
+/// <mi>n</mi>
+/// <mo>;</mo>
+/// <mstyle scriptlevel="0">
+/// <mspace width="mediummathspace"></mspace>
+/// </mstyle>
+/// <mi>p</mi>
+/// <mo>;</mo>
+/// <mstyle scriptlevel="0">
+/// <mspace width="mediummathspace"></mspace>
+/// </mstyle>
+/// <mi>k</mi>
+/// <mn>1</mn>
+/// <mo>;</mo>
+/// <mstyle scriptlevel="0">
+/// <mspace width="mediummathspace"></mspace>
+/// </mstyle>
+/// <mi>k</mi>
+/// <mn>2</mn>
+/// <mo stretchy="false">)</mo>
+/// <mtext>&#xA0;</mtext>
+/// <mo>=</mo>
+/// <mtext>&#xA0;</mtext>
+/// <munderover>
+/// <mo data-mjx-texclass="OP">&#x2211;</mo>
+/// <mrow>
+/// <mi>i</mi>
+/// <mo>=</mo>
+/// <mi>k</mi>
+/// <mn>1</mn>
+/// </mrow>
+/// <mrow>
+/// <mi>k</mi>
+/// <mn>2</mn>
+/// </mrow>
+/// </munderover>
+/// <mfrac>
+/// <mrow>
+/// <mi>n</mi>
+/// <mo>!</mo>
+/// </mrow>
+/// <mrow>
+/// <mi>i</mi>
+/// <mo>!</mo>
+/// <mo stretchy="false">(</mo>
+/// <mi>n</mi>
+/// <mo>&#x2212;</mo>
+/// <mi>i</mi>
+/// <mo stretchy="false">)</mo>
+/// <mo>!</mo>
+/// </mrow>
+/// </mfrac>
+/// <mstyle scriptlevel="0">
+/// <mspace width="mediummathspace"></mspace>
+/// </mstyle>
+/// <mo>&#xD7;</mo>
+/// <mstyle scriptlevel="0">
+/// <mspace width="mediummathspace"></mspace>
+/// </mstyle>
+/// <msup>
+/// <mi>p</mi>
+/// <mrow>
+/// <mi>i</mi>
+/// </mrow>
+/// </msup>
+/// <mstyle scriptlevel="0">
+/// <mspace width="mediummathspace"></mspace>
+/// </mstyle>
+/// <mo>&#xD7;</mo>
+/// <mstyle scriptlevel="0">
+/// <mspace width="mediummathspace"></mspace>
+/// </mstyle>
+/// <mo stretchy="false">(</mo>
+/// <mn>1</mn>
+/// <mo>&#x2212;</mo>
+/// <mi>p</mi>
+/// <msup>
+/// <mo stretchy="false">)</mo>
+/// <mrow>
+/// <mi>n</mi>
+/// <mo>&#x2212;</mo>
+/// <mi>i</mi>
+/// </mrow>
+/// </msup>
+/// </mrow>
+/// </mstyle>
+/// </math>
+/// 
+/// If the final argument (T 2) is omitted, then set k2 to the value of k1 in 
+/// this equation, effectively removing the summation operation.
+///
+/// __See also__: [crate::of::b_()], 
+#[inline]
+pub fn b<A: Number, B: Number, C: Number>(trials: A, s_p: B, t_1: C) -> FnNumber3<A, B, C> {
+    FnNumber3("B", trials, s_p, t_1)
+}
+
+/// Uses the probability mass function of the binomial distribution to 
+/// calculate the probability of a specific number of successful trial 
+/// outcomes, or a range of successful trial outcomes. The binomial 
+/// distribution is a discrete probability distribution that is used to analyze 
+/// data in many domains.
+///
+/// [documentfoundation->B](https://wiki.documentfoundation.org/Documentation/Calc_Functions/B)
+///
+/// __Syntax__: 
+/// ```ods
+///     B( Trials: Integer; SP: Number; T_1: Integer; T_2: Integer )
+/// ```
+///
+/// __Info2__:
+/// Returns a real number in the range [0, 1], which is the probability for the 
+/// given arguments.
+///
+/// __Semantics__:
+/// 
+/// Trials is a non-negative integer, or a reference to a cell containing that 
+/// integer, that is the total number of independent trials.
+/// 
+/// SP is a real number (expressed as a percentage, such as 2.5%, or a decimal 
+/// fraction, such as 0.025), or a reference to a cell containing that number, 
+/// that is the probability of a successful outcome on each trial. As a 
+/// probability, SP lies in the range [0, 1] (or equivalently 0% ≤ SP ≤ 
+/// 100%).
+/// 
+/// T 1 is a non-negative integer, or a reference to a cell containing that 
+/// integer, that specifies the lower limit for the number of successful 
+/// trials.
+/// 
+/// T 2 is a non-negative integer, or a reference to a cell containing that 
+/// integer, that specifies the upper limit for the number of successful 
+/// trials. If T 2 is omitted, the function calculates the probability that the 
+/// number of successful trials shall be exactly T 1. If T 2 is provided, the 
+/// function calculates the probability that the number of successful trials 
+/// shall lie between T 1 and T 2 inclusive.
+/// 
+/// If any of Trials, SP, T 1, and T 2 is non-numeric, then B reports a #VALUE! 
+/// error.
+/// If any of Trials, T 1, and T 2 is a non-integer value, then B truncates it 
+/// to an integer value.
+/// If SP is less than 0.0 or greater than 1.0, then B reports an invalid 
+/// argument error (Err:502).
+/// For the case when T 2 is omitted, B checks (after any truncation) that 
+/// Trials ≥ 0, T 1 ≥ 0, and Trials ≥ T 1. If any of these checks fail, 
+/// then B reports an invalid argument error (Err:502).
+/// For the case when T 2 is provided, B checks (after any truncation) that T 1 
+/// ≥ 0, T 2 ≥ T 1, and Trials ≥ T 2. If any of these checks fail, then B 
+/// reports an invalid argument error (Err:502).
+/// 
+/// Info:
+/// 
+/// The formula for B is:
+/// 
+/// <math xmlns="http://www.w3.org/1998/Math/MathML">
+/// <mstyle displaystyle="true" scriptlevel="0">
+/// <mrow>
+/// <mtext>B</mtext>
+/// <mo stretchy="false">(</mo>
+/// <mi>n</mi>
+/// <mo>;</mo>
+/// <mstyle scriptlevel="0">
+/// <mspace width="mediummathspace"></mspace>
+/// </mstyle>
+/// <mi>p</mi>
+/// <mo>;</mo>
+/// <mstyle scriptlevel="0">
+/// <mspace width="mediummathspace"></mspace>
+/// </mstyle>
+/// <mi>k</mi>
+/// <mn>1</mn>
+/// <mo>;</mo>
+/// <mstyle scriptlevel="0">
+/// <mspace width="mediummathspace"></mspace>
+/// </mstyle>
+/// <mi>k</mi>
+/// <mn>2</mn>
+/// <mo stretchy="false">)</mo>
+/// <mtext>&#xA0;</mtext>
+/// <mo>=</mo>
+/// <mtext>&#xA0;</mtext>
+/// <munderover>
+/// <mo data-mjx-texclass="OP">&#x2211;</mo>
+/// <mrow>
+/// <mi>i</mi>
+/// <mo>=</mo>
+/// <mi>k</mi>
+/// <mn>1</mn>
+/// </mrow>
+/// <mrow>
+/// <mi>k</mi>
+/// <mn>2</mn>
+/// </mrow>
+/// </munderover>
+/// <mfrac>
+/// <mrow>
+/// <mi>n</mi>
+/// <mo>!</mo>
+/// </mrow>
+/// <mrow>
+/// <mi>i</mi>
+/// <mo>!</mo>
+/// <mo stretchy="false">(</mo>
+/// <mi>n</mi>
+/// <mo>&#x2212;</mo>
+/// <mi>i</mi>
+/// <mo stretchy="false">)</mo>
+/// <mo>!</mo>
+/// </mrow>
+/// </mfrac>
+/// <mstyle scriptlevel="0">
+/// <mspace width="mediummathspace"></mspace>
+/// </mstyle>
+/// <mo>&#xD7;</mo>
+/// <mstyle scriptlevel="0">
+/// <mspace width="mediummathspace"></mspace>
+/// </mstyle>
+/// <msup>
+/// <mi>p</mi>
+/// <mrow>
+/// <mi>i</mi>
+/// </mrow>
+/// </msup>
+/// <mstyle scriptlevel="0">
+/// <mspace width="mediummathspace"></mspace>
+/// </mstyle>
+/// <mo>&#xD7;</mo>
+/// <mstyle scriptlevel="0">
+/// <mspace width="mediummathspace"></mspace>
+/// </mstyle>
+/// <mo stretchy="false">(</mo>
+/// <mn>1</mn>
+/// <mo>&#x2212;</mo>
+/// <mi>p</mi>
+/// <msup>
+/// <mo stretchy="false">)</mo>
+/// <mrow>
+/// <mi>n</mi>
+/// <mo>&#x2212;</mo>
+/// <mi>i</mi>
+/// </mrow>
+/// </msup>
+/// </mrow>
+/// </mstyle>
+/// </math>
+/// 
+/// If the final argument (T 2) is omitted, then set k2 to the value of k1 in 
+/// this equation, effectively removing the summation operation.
+///
+/// __See also__: [crate::of::b()], 
+#[inline]
+pub fn b_<A: Number, B: Number, C: Number, D: Number>(trials: A, s_p: B, t_1: C, t_2: D) -> FnNumber4<A, B, C, D> {
+    FnNumber4("B", trials, s_p, t_1, t_2)
 }

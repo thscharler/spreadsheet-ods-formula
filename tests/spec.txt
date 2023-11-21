@@ -1366,7 +1366,7 @@ See also COUPDAYBS 6.12.5 , COUPDAYSNC 6.12.7 , COUPNCD 6.12.7 , COUPNUM 6.12.9 
 
 Summary: Calculates the number of days between a settlement date and the next coupon date.
 
-Syntax: COUPDAYNC( DateParam Settlement ; DateParam Maturity ; Integer Frequency [ ; Basis B = 0 ] )
+Syntax: COUPDAYSNC( DateParam Settlement ; DateParam Maturity ; Integer Frequency [ ; Basis B = 0 ] )
 
 Returns: Number
 
@@ -2571,6 +2571,28 @@ Semantics: The parameters are:
     •B: indicates the day-count convention to use in the calculation. 4.11.7
 
 See also PRICE 6.12.38, YIELD 6.12.53, YIELDDISC 6.12.54
+
+6.12.56 AMORDEGRC
+
+Summary: Calculates the depreciation (or amortization) of an asset during a specific period using a degressive depreciation model.
+
+This method depreciates at a higher rate at the beginning and the rate decreases over the useful life of the asset. If the asset is acquired part-way through an accounting period, then depreciation for that period is calculated on a pro rata basis. AMORDEGRC is intended for users of the French accounting system.
+
+Syntax: AMORDEGRC(Number Cost; Date Date_Purchased; Date First_Period; Number Salvage; Integer Period; Number Rate[; Basis B])
+
+Returns: Number
+
+Returns a non-negative real number that is the depreciation of the asset during the specified period, expressed in the same currency units as the asset's cost and salvage values.
+
+Semantics:
+Cost is a positive real number, or a reference to a cell containing that number, which is the cost or value of the asset before depreciation.
+Date Purchased is a date, or a reference to a cell containing that date, which is the start date of the depreciation. For a tangible asset, this is usually the date of acquisition.
+First Period is a date, or a reference to a cell containing that date, which is the end date of the first accounting period during which depreciation is calculated.
+Salvage is a positive real number, or a reference to a cell containing that number, which is the residual value of the asset at the end of its depreciated life. Salvage must be in the same currency units as Cost.
+Period is a non-negative integer, or a reference to a cell containing that integer, which specifies the accounting period for which the depreciation value is returned. The value 0 indicates the period that ends on the date given by First Period. Subsequent accounting periods are numbered 1, 2, 3, and so on.
+Rate is a positive real number (expressed as a percentage, such as 2.5%, or a decimal fraction, such as 0.025), or a reference to a cell containing that number, which is the annual rate at which the value of the asset is depreciated.
+Basis is an integer in the range 0 to 4, or a reference to a cell containing that integer, which indicates how the year is to be calculated.
+
 6.13 Information Functions
 6.13.1 General
 
@@ -4478,6 +4500,27 @@ Semantics: Computes the hyperbolic tangent of a hyperbolic angle. The hyperbolic
 
 
 See also ATANH 6.16.11, SINH 6.16.56, COSH 6.16.20, FISHERINV 6.18.27
+
+6.16.71 AGGREGATE
+
+Summary: AGGREGATE is a powerful but complex function that calculates a single number by applying a selected aggregate function to a specified set of data. Nineteen different aggregate functions are available.
+
+Unlike many other functions that perform similar calculations, AGGREGATE provides options to omit certain unwanted data types from its processing. Options are available to ignore errors, hidden rows, and nested SUBTOTAL and other AGGREGATE function results.
+
+Syntax: AGGREGATE(Integer Function; Integer Option; NumberSequence Args; [Integer k])
+
+Returns: Number
+
+Semantics: Function is an integer value in the range [1, 19], or a reference to a cell containing that number, which specifies the aggregate function to be used.
+Option is an integer value in the range [0, 7], or a reference to a cell containing that number, which specifies the ignore option to be used.
+k is required when Function is in the range [14, 19] and specifies the second argument required by the standalone aggregation function. These are as follows:
+    LARGE requires a RankC argument (positive integer).
+    SMALL requires a RankC argument (positive integer).
+    PERCENTILE.INC requires an Alpha argument (real number in the range [0, 1]).
+    PERCENTILE.EXC requires an Alpha argument (real number in the range (0, 1)).
+    QUARTILE.INC requires a Type argument (integer in the range [0, 4]).
+    QUARTILE.EXC requires a Type argument (integer in the range [1, 3]).
+
 6.17 Rounding Functions
 6.17.1 CEILING
 
@@ -6205,13 +6248,44 @@ Returns: Number
 
 Constraints: The sequence Sample shall contain at least two numbers.
 
-Semantics: Calculates the probability of observing a sample mean as large or larger than the mean of the given Sample for samples drawn from a normal distribution with the given mean Mean and the given standard deviation Sigma. If Sigma is omitted, it is estimated from Sample, using STDEV. With Sample being the mean of Sample and
-
-
-ZTEST returns
-
+Semantics: Calculates the probability of observing a sample mean as large or larger than the mean of the given Sample for samples drawn from a normal distribution with the given mean Mean and the given standard deviation Sigma. If Sigma is omitted, it is estimated from Sample, using STDEV.
 
 See also FTEST 6.18.30, TTEST 6.18.81
+
+6.18.88 B
+
+Summary: Uses the probability mass function of the binomial distribution to calculate the probability of a specific number of successful trial outcomes, or a range of successful trial outcomes. The binomial distribution is a discrete probability distribution that is used to analyze data in many domains.
+
+Syntax: B(Integer Trials; Number SP; Integer T_1 [; Integer T_2])
+
+Returns: Number
+
+Returns a real number in the range [0, 1], which is the probability for the given arguments.
+
+Semantics:
+
+Trials is a non-negative integer, or a reference to a cell containing that integer, that is the total number of independent trials.
+
+SP is a real number (expressed as a percentage, such as 2.5%, or a decimal fraction, such as 0.025), or a reference to a cell containing that number, that is the probability of a successful outcome on each trial. As a probability, SP lies in the range [0, 1] (or equivalently 0% ≤ SP ≤ 100%).
+
+T 1 is a non-negative integer, or a reference to a cell containing that integer, that specifies the lower limit for the number of successful trials.
+
+T 2 is a non-negative integer, or a reference to a cell containing that integer, that specifies the upper limit for the number of successful trials. If T 2 is omitted, the function calculates the probability that the number of successful trials shall be exactly T 1. If T 2 is provided, the function calculates the probability that the number of successful trials shall lie between T 1 and T 2 inclusive.
+
+    If any of Trials, SP, T 1, and T 2 is non-numeric, then B reports a #VALUE! error.
+    If any of Trials, T 1, and T 2 is a non-integer value, then B truncates it to an integer value.
+    If SP is less than 0.0 or greater than 1.0, then B reports an invalid argument error (Err:502).
+    For the case when T 2 is omitted, B checks (after any truncation) that Trials ≥ 0, T 1 ≥ 0, and Trials ≥ T 1. If any of these checks fail, then B reports an invalid argument error (Err:502).
+    For the case when T 2 is provided, B checks (after any truncation) that T 1 ≥ 0, T 2 ≥ T 1, and Trials ≥ T 2. If any of these checks fail, then B reports an invalid argument error (Err:502).
+
+Info:
+
+The formula for B is:
+
+<math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle displaystyle="true" scriptlevel="0"><mrow><mtext>B</mtext><mo stretchy="false">(</mo><mi>n</mi><mo>;</mo><mstyle scriptlevel="0"><mspace width="mediummathspace"></mspace></mstyle><mi>p</mi><mo>;</mo><mstyle scriptlevel="0"><mspace width="mediummathspace"></mspace></mstyle><mi>k</mi><mn>1</mn><mo>;</mo><mstyle scriptlevel="0"><mspace width="mediummathspace"></mspace></mstyle><mi>k</mi><mn>2</mn><mo stretchy="false">)</mo><mtext>&#xA0;</mtext><mo>=</mo><mtext>&#xA0;</mtext><munderover><mo data-mjx-texclass="OP">&#x2211;</mo><mrow><mi>i</mi><mo>=</mo><mi>k</mi><mn>1</mn></mrow><mrow><mi>k</mi><mn>2</mn></mrow></munderover><mfrac><mrow><mi>n</mi><mo>!</mo></mrow><mrow><mi>i</mi><mo>!</mo><mo stretchy="false">(</mo><mi>n</mi><mo>&#x2212;</mo><mi>i</mi><mo stretchy="false">)</mo><mo>!</mo></mrow></mfrac><mstyle scriptlevel="0"><mspace width="mediummathspace"></mspace></mstyle><mo>&#xD7;</mo><mstyle scriptlevel="0"><mspace width="mediummathspace"></mspace></mstyle><msup><mi>p</mi><mrow><mi>i</mi></mrow></msup><mstyle scriptlevel="0"><mspace width="mediummathspace"></mspace></mstyle><mo>&#xD7;</mo><mstyle scriptlevel="0"><mspace width="mediummathspace"></mspace></mstyle><mo stretchy="false">(</mo><mn>1</mn><mo>&#x2212;</mo><mi>p</mi><msup><mo stretchy="false">)</mo><mrow><mi>n</mi><mo>&#x2212;</mo><mi>i</mi></mrow></msup></mrow></mstyle></math>
+
+If the final argument (T 2) is omitted, then set k2 to the value of k1 in this equation, effectively removing the summation operation.
+
 6.19 Number Representation Conversion Functions
 6.19.1 General
 

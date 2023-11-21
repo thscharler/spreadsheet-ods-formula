@@ -20,6 +20,8 @@ use crate::fin::*;
 /// Calculates the accrued interest for securities with periodic interest 
 /// payments.
 ///
+/// [documentfoundation->ACCRINT](https://wiki.documentfoundation.org/Documentation/Calc_Functions/ACCRINT)
+///
 /// __Syntax__: 
 /// ```ods
 ///     ACCRINT( Issue: DateParam; First: DateParam; Settlement: DateParam; Coupon: Number; Par: Number; Frequency: Integer )
@@ -59,7 +61,7 @@ use crate::fin::*;
 /// •CalcMethod: A logical value that specifies how to treat the case where 
 /// Settlement > First.
 ///
-/// __See also__: "ACCRINTM", "YEARFRAC", 
+/// __See also__: [crate::of::accrintm()], [crate::of::yearfrac()], [crate::of::accrint_()], [crate::of::accrint__()], 
 #[inline]
 pub fn accrint<A: DateTime, B: DateTime, C: DateTime, D: Number, E: Number>(issue: A, first: B, settlement: C, coupon: D, par: E, frequency: Frequency) -> FnNumber6<A, B, C, D, E, Frequency> {
     FnNumber6("ACCRINT", issue, first, settlement, coupon, par, frequency)
@@ -67,6 +69,8 @@ pub fn accrint<A: DateTime, B: DateTime, C: DateTime, D: Number, E: Number>(issu
 
 /// Calculates the accrued interest for securities with periodic interest 
 /// payments.
+///
+/// [documentfoundation->ACCRINT](https://wiki.documentfoundation.org/Documentation/Calc_Functions/ACCRINT)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -107,7 +111,7 @@ pub fn accrint<A: DateTime, B: DateTime, C: DateTime, D: Number, E: Number>(issu
 /// •CalcMethod: A logical value that specifies how to treat the case where 
 /// Settlement > First.
 ///
-/// __See also__: "ACCRINTM", "YEARFRAC", 
+/// __See also__: [crate::of::accrintm()], [crate::of::yearfrac()], [crate::of::accrint()], [crate::of::accrint__()], 
 #[inline]
 pub fn accrint_<A: DateTime, B: DateTime, C: DateTime, D: Number, E: Number>(issue: A, first: B, settlement: C, coupon: D, par: E, frequency: Frequency, b: YearFracMethod) -> FnNumber7<A, B, C, D, E, Frequency, YearFracMethod> {
     FnNumber7("ACCRINT", issue, first, settlement, coupon, par, frequency, b)
@@ -115,6 +119,8 @@ pub fn accrint_<A: DateTime, B: DateTime, C: DateTime, D: Number, E: Number>(iss
 
 /// Calculates the accrued interest for securities with periodic interest 
 /// payments.
+///
+/// [documentfoundation->ACCRINT](https://wiki.documentfoundation.org/Documentation/Calc_Functions/ACCRINT)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -155,13 +161,15 @@ pub fn accrint_<A: DateTime, B: DateTime, C: DateTime, D: Number, E: Number>(iss
 /// •CalcMethod: A logical value that specifies how to treat the case where 
 /// Settlement > First.
 ///
-/// __See also__: "ACCRINTM", "YEARFRAC", 
+/// __See also__: [crate::of::accrintm()], [crate::of::yearfrac()], [crate::of::accrint()], [crate::of::accrint_()], 
 #[inline]
 pub fn accrint__<A: DateTime, B: DateTime, C: DateTime, D: Number, E: Number, F: Logical>(issue: A, first: B, settlement: C, coupon: D, par: E, frequency: Frequency, b: YearFracMethod, calc_method: F) -> FnNumber8<A, B, C, D, E, Frequency, YearFracMethod, F> {
     FnNumber8("ACCRINT", issue, first, settlement, coupon, par, frequency, b, calc_method)
 }
 
 /// Calculates the accrued interest for securities that pay at maturity.
+///
+/// [documentfoundation->ACCRINTM](https://wiki.documentfoundation.org/Documentation/Calc_Functions/ACCRINTM)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -185,13 +193,15 @@ pub fn accrint__<A: DateTime, B: DateTime, C: DateTime, D: Number, E: Number, F:
 /// 
 /// •B: Indicates the day-count convention to use in the calculation. 4.11.7
 ///
-/// __See also__: "ACCRINT", 
+/// __See also__: [crate::of::accrint()], [crate::of::accrintm_()], 
 #[inline]
 pub fn accrintm<A: DateTime, B: DateTime, C: Number, D: Number>(issue: A, settlement: B, coupon: C, par: D) -> FnNumber4<A, B, C, D> {
     FnNumber4("ACCRINTM", issue, settlement, coupon, par)
 }
 
 /// Calculates the accrued interest for securities that pay at maturity.
+///
+/// [documentfoundation->ACCRINTM](https://wiki.documentfoundation.org/Documentation/Calc_Functions/ACCRINTM)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -215,7 +225,7 @@ pub fn accrintm<A: DateTime, B: DateTime, C: Number, D: Number>(issue: A, settle
 /// 
 /// •B: Indicates the day-count convention to use in the calculation. 4.11.7
 ///
-/// __See also__: "ACCRINT", 
+/// __See also__: [crate::of::accrint()], [crate::of::accrintm()], 
 #[inline]
 pub fn accrintm_<A: DateTime, B: DateTime, C: Number, D: Number>(issue: A, settlement: B, coupon: C, par: D, b: YearFracMethod) -> FnNumber5<A, B, C, D, YearFracMethod> {
     FnNumber5("ACCRINTM", issue, settlement, coupon, par, b)
@@ -223,6 +233,8 @@ pub fn accrintm_<A: DateTime, B: DateTime, C: Number, D: Number>(issue: A, settl
 
 /// Calculates the amortization value for the French accounting system using 
 /// linear depreciation (l'amortissement linéaire comptable) .
+///
+/// [documentfoundation->AMORLINC](https://wiki.documentfoundation.org/Documentation/Calc_Functions/AMORLINC)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -267,7 +279,7 @@ pub fn accrintm_<A: DateTime, B: DateTime, C: Number, D: Number>(issue: A, settl
 /// The behavior of this function is implementation-defined in cases where 
 /// PurchaseDate = FirstPeriodEndDate.
 ///
-/// __See also__: "DB", "DDB", "YEARFRAC", 
+/// __See also__: [crate::of::db()], [crate::of::ddb()], [crate::of::yearfrac()], [crate::of::amorlinc_()], 
 #[inline]
 pub fn amorlinc<A: Number, B: DateTime, C: DateTime, D: Number, E: Number, F: Number>(cost: A, purchase_date: B, first_period_end_date: C, salvage: D, period: E, rate: F) -> FnNumber6<A, B, C, D, E, F> {
     FnNumber6("AMORLINC", cost, purchase_date, first_period_end_date, salvage, period, rate)
@@ -275,6 +287,8 @@ pub fn amorlinc<A: Number, B: DateTime, C: DateTime, D: Number, E: Number, F: Nu
 
 /// Calculates the amortization value for the French accounting system using 
 /// linear depreciation (l'amortissement linéaire comptable) .
+///
+/// [documentfoundation->AMORLINC](https://wiki.documentfoundation.org/Documentation/Calc_Functions/AMORLINC)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -319,7 +333,7 @@ pub fn amorlinc<A: Number, B: DateTime, C: DateTime, D: Number, E: Number, F: Nu
 /// The behavior of this function is implementation-defined in cases where 
 /// PurchaseDate = FirstPeriodEndDate.
 ///
-/// __See also__: "DB", "DDB", "YEARFRAC", 
+/// __See also__: [crate::of::db()], [crate::of::ddb()], [crate::of::yearfrac()], [crate::of::amorlinc()], 
 #[inline]
 pub fn amorlinc_<A: Number, B: DateTime, C: DateTime, D: Number, E: Number, F: Number>(cost: A, purchase_date: B, first_period_end_date: C, salvage: D, period: E, rate: F, b: YearFracMethod) -> FnNumber7<A, B, C, D, E, F, YearFracMethod> {
     FnNumber7("AMORLINC", cost, purchase_date, first_period_end_date, salvage, period, rate, b)
@@ -327,6 +341,8 @@ pub fn amorlinc_<A: Number, B: DateTime, C: DateTime, D: Number, E: Number, F: N
 
 /// Calculates the number of days between the beginning of the coupon period 
 /// that contains the settlement date and the settlement date.
+///
+/// [documentfoundation->COUPDAYBS](https://wiki.documentfoundation.org/Documentation/Calc_Functions/COUPDAYBS)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -350,7 +366,7 @@ pub fn amorlinc_<A: Number, B: DateTime, C: DateTime, D: Number, E: Number, F: N
 /// 
 /// •B: Indicates the day-count convention to use in the calculation. 4.11.7
 ///
-/// __See also__: "COUPDAYS", "COUPDAYSNC", "COUPNCD", "COUPNUM", "COUPPCD", 
+/// __See also__: [crate::of::coupdays()], [crate::of::coupdaysnc()], [crate::of::coupncd()], [crate::of::coupnum()], [crate::of::couppcd()], [crate::of::coupdaybs_()], 
 #[inline]
 pub fn coupdaybs<A: DateTime, B: DateTime>(settlement: A, maturity: B, frequency: Frequency) -> FnNumber3<A, B, Frequency> {
     FnNumber3("COUPDAYBS", settlement, maturity, frequency)
@@ -358,6 +374,8 @@ pub fn coupdaybs<A: DateTime, B: DateTime>(settlement: A, maturity: B, frequency
 
 /// Calculates the number of days between the beginning of the coupon period 
 /// that contains the settlement date and the settlement date.
+///
+/// [documentfoundation->COUPDAYBS](https://wiki.documentfoundation.org/Documentation/Calc_Functions/COUPDAYBS)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -381,7 +399,7 @@ pub fn coupdaybs<A: DateTime, B: DateTime>(settlement: A, maturity: B, frequency
 /// 
 /// •B: Indicates the day-count convention to use in the calculation. 4.11.7
 ///
-/// __See also__: "COUPDAYS", "COUPDAYSNC", "COUPNCD", "COUPNUM", "COUPPCD", 
+/// __See also__: [crate::of::coupdays()], [crate::of::coupdaysnc()], [crate::of::coupncd()], [crate::of::coupnum()], [crate::of::couppcd()], [crate::of::coupdaybs()], 
 #[inline]
 pub fn coupdaybs_<A: DateTime, B: DateTime>(settlement: A, maturity: B, frequency: Frequency, b: YearFracMethod) -> FnNumber4<A, B, Frequency, YearFracMethod> {
     FnNumber4("COUPDAYBS", settlement, maturity, frequency, b)
@@ -389,6 +407,8 @@ pub fn coupdaybs_<A: DateTime, B: DateTime>(settlement: A, maturity: B, frequenc
 
 /// Calculates the number of days in a coupon period that contains the 
 /// settlement date.
+///
+/// [documentfoundation->COUPDAYS](https://wiki.documentfoundation.org/Documentation/Calc_Functions/COUPDAYS)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -412,7 +432,7 @@ pub fn coupdaybs_<A: DateTime, B: DateTime>(settlement: A, maturity: B, frequenc
 /// 
 /// •B: Indicates the day-count convention to use in the calculation. 4.11.7
 ///
-/// __See also__: "COUPDAYBS", "COUPDAYSNC", "COUPNCD", "COUPNUM", "COUPPCD", 
+/// __See also__: [crate::of::coupdaybs()], [crate::of::coupdaysnc()], [crate::of::coupncd()], [crate::of::coupnum()], [crate::of::couppcd()], [crate::of::coupdays_()], 
 #[inline]
 pub fn coupdays<A: DateTime, B: DateTime>(settlement: A, maturity: B, frequency: Frequency) -> FnNumber3<A, B, Frequency> {
     FnNumber3("COUPDAYS", settlement, maturity, frequency)
@@ -420,6 +440,8 @@ pub fn coupdays<A: DateTime, B: DateTime>(settlement: A, maturity: B, frequency:
 
 /// Calculates the number of days in a coupon period that contains the 
 /// settlement date.
+///
+/// [documentfoundation->COUPDAYS](https://wiki.documentfoundation.org/Documentation/Calc_Functions/COUPDAYS)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -443,7 +465,7 @@ pub fn coupdays<A: DateTime, B: DateTime>(settlement: A, maturity: B, frequency:
 /// 
 /// •B: Indicates the day-count convention to use in the calculation. 4.11.7
 ///
-/// __See also__: "COUPDAYBS", "COUPDAYSNC", "COUPNCD", "COUPNUM", "COUPPCD", 
+/// __See also__: [crate::of::coupdaybs()], [crate::of::coupdaysnc()], [crate::of::coupncd()], [crate::of::coupnum()], [crate::of::couppcd()], [crate::of::coupdays()], 
 #[inline]
 pub fn coupdays_<A: DateTime, B: DateTime>(settlement: A, maturity: B, frequency: Frequency, b: YearFracMethod) -> FnNumber4<A, B, Frequency, YearFracMethod> {
     FnNumber4("COUPDAYS", settlement, maturity, frequency, b)
@@ -452,9 +474,11 @@ pub fn coupdays_<A: DateTime, B: DateTime>(settlement: A, maturity: B, frequency
 /// Calculates the number of days between a settlement date and the next coupon 
 /// date.
 ///
+/// [documentfoundation->COUPDAYSNC](https://wiki.documentfoundation.org/Documentation/Calc_Functions/COUPDAYSNC)
+///
 /// __Syntax__: 
 /// ```ods
-///     COUPDAYNC( Settlement: DateParam; Maturity: DateParam; Frequency: Integer )
+///     COUPDAYSNC( Settlement: DateParam; Maturity: DateParam; Frequency: Integer )
 /// ```
 ///
 /// __Constraints__:
@@ -474,18 +498,20 @@ pub fn coupdays_<A: DateTime, B: DateTime>(settlement: A, maturity: B, frequency
 /// 
 /// •B: Indicates the day-count convention to use in the calculation. 4.11.7
 ///
-/// __See also__: "COUPDAYBS", "COUPDAYS", "COUPNCD", "COUPNUM", "COUPPCD", 
+/// __See also__: [crate::of::coupdaybs()], [crate::of::coupdays()], [crate::of::coupncd()], [crate::of::coupnum()], [crate::of::couppcd()], [crate::of::coupdaysnc_()], 
 #[inline]
-pub fn coupdaync<A: DateTime, B: DateTime>(settlement: A, maturity: B, frequency: Frequency) -> FnNumber3<A, B, Frequency> {
-    FnNumber3("COUPDAYNC", settlement, maturity, frequency)
+pub fn coupdaysnc<A: DateTime, B: DateTime>(settlement: A, maturity: B, frequency: Frequency) -> FnNumber3<A, B, Frequency> {
+    FnNumber3("COUPDAYSNC", settlement, maturity, frequency)
 }
 
 /// Calculates the number of days between a settlement date and the next coupon 
 /// date.
 ///
+/// [documentfoundation->COUPDAYSNC](https://wiki.documentfoundation.org/Documentation/Calc_Functions/COUPDAYSNC)
+///
 /// __Syntax__: 
 /// ```ods
-///     COUPDAYNC( Settlement: DateParam; Maturity: DateParam; Frequency: Integer; B: Basis )
+///     COUPDAYSNC( Settlement: DateParam; Maturity: DateParam; Frequency: Integer; B: Basis )
 /// ```
 ///
 /// __Constraints__:
@@ -505,13 +531,15 @@ pub fn coupdaync<A: DateTime, B: DateTime>(settlement: A, maturity: B, frequency
 /// 
 /// •B: Indicates the day-count convention to use in the calculation. 4.11.7
 ///
-/// __See also__: "COUPDAYBS", "COUPDAYS", "COUPNCD", "COUPNUM", "COUPPCD", 
+/// __See also__: [crate::of::coupdaybs()], [crate::of::coupdays()], [crate::of::coupncd()], [crate::of::coupnum()], [crate::of::couppcd()], [crate::of::coupdaysnc()], 
 #[inline]
-pub fn coupdaync_<A: DateTime, B: DateTime>(settlement: A, maturity: B, frequency: Frequency, b: YearFracMethod) -> FnNumber4<A, B, Frequency, YearFracMethod> {
-    FnNumber4("COUPDAYNC", settlement, maturity, frequency, b)
+pub fn coupdaysnc_<A: DateTime, B: DateTime>(settlement: A, maturity: B, frequency: Frequency, b: YearFracMethod) -> FnNumber4<A, B, Frequency, YearFracMethod> {
+    FnNumber4("COUPDAYSNC", settlement, maturity, frequency, b)
 }
 
 /// Calculates the next coupon date following a settlement.
+///
+/// [documentfoundation->COUPNCD](https://wiki.documentfoundation.org/Documentation/Calc_Functions/COUPNCD)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -531,13 +559,15 @@ pub fn coupdaync_<A: DateTime, B: DateTime>(settlement: A, maturity: B, frequenc
 /// 
 /// B indicates the day-count convention to use in the calculation. 4.11.7
 ///
-/// __See also__: "COUPDAYSNC", 
+/// __See also__: [crate::of::coupdaysnc()], [crate::of::coupncd_()], 
 #[inline]
 pub fn coupncd<A: DateTime, B: DateTime>(settlement: A, maturity: B, frequency: Frequency) -> FnNumber3<A, B, Frequency> {
     FnNumber3("COUPNCD", settlement, maturity, frequency)
 }
 
 /// Calculates the next coupon date following a settlement.
+///
+/// [documentfoundation->COUPNCD](https://wiki.documentfoundation.org/Documentation/Calc_Functions/COUPNCD)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -557,7 +587,7 @@ pub fn coupncd<A: DateTime, B: DateTime>(settlement: A, maturity: B, frequency: 
 /// 
 /// B indicates the day-count convention to use in the calculation. 4.11.7
 ///
-/// __See also__: "COUPDAYSNC", 
+/// __See also__: [crate::of::coupdaysnc()], [crate::of::coupncd()], 
 #[inline]
 pub fn coupncd_<A: DateTime, B: DateTime>(settlement: A, maturity: B, frequency: Frequency, b: YearFracMethod) -> FnNumber4<A, B, Frequency, YearFracMethod> {
     FnNumber4("COUPNCD", settlement, maturity, frequency, b)
@@ -565,6 +595,8 @@ pub fn coupncd_<A: DateTime, B: DateTime>(settlement: A, maturity: B, frequency:
 
 /// Calculates the number of outstanding coupons between settlement and 
 /// maturity dates.
+///
+/// [documentfoundation->COUPNUM](https://wiki.documentfoundation.org/Documentation/Calc_Functions/COUPNUM)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -582,7 +614,7 @@ pub fn coupncd_<A: DateTime, B: DateTime>(settlement: A, maturity: B, frequency:
 /// 
 /// B indicates the day-count convention to use in the calculation. 4.11.7
 ///
-/// __See also__: "COUPDAYBS", "COUPDAYS", "COUPDAYSNC", "COUPNCD", "COUPPCD", 
+/// __See also__: [crate::of::coupdaybs()], [crate::of::coupdays()], [crate::of::coupdaysnc()], [crate::of::coupncd()], [crate::of::couppcd()], [crate::of::coupnum_()], 
 #[inline]
 pub fn coupnum<A: DateTime, B: DateTime>(settlement: A, maturity: B, frequency: Frequency) -> FnNumber3<A, B, Frequency> {
     FnNumber3("COUPNUM", settlement, maturity, frequency)
@@ -590,6 +622,8 @@ pub fn coupnum<A: DateTime, B: DateTime>(settlement: A, maturity: B, frequency: 
 
 /// Calculates the number of outstanding coupons between settlement and 
 /// maturity dates.
+///
+/// [documentfoundation->COUPNUM](https://wiki.documentfoundation.org/Documentation/Calc_Functions/COUPNUM)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -607,13 +641,15 @@ pub fn coupnum<A: DateTime, B: DateTime>(settlement: A, maturity: B, frequency: 
 /// 
 /// B indicates the day-count convention to use in the calculation. 4.11.7
 ///
-/// __See also__: "COUPDAYBS", "COUPDAYS", "COUPDAYSNC", "COUPNCD", "COUPPCD", 
+/// __See also__: [crate::of::coupdaybs()], [crate::of::coupdays()], [crate::of::coupdaysnc()], [crate::of::coupncd()], [crate::of::couppcd()], [crate::of::coupnum()], 
 #[inline]
 pub fn coupnum_<A: DateTime, B: DateTime>(settlement: A, maturity: B, frequency: Frequency, b: YearFracMethod) -> FnNumber4<A, B, Frequency, YearFracMethod> {
     FnNumber4("COUPNUM", settlement, maturity, frequency, b)
 }
 
 /// Calculates the next coupon date prior a settlement.
+///
+/// [documentfoundation->COUPPCD](https://wiki.documentfoundation.org/Documentation/Calc_Functions/COUPPCD)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -633,13 +669,15 @@ pub fn coupnum_<A: DateTime, B: DateTime>(settlement: A, maturity: B, frequency:
 /// 
 /// B indicates the day-count convention to use in the calculation. 4.11.7
 ///
-/// __See also__: "COUPDAYBS", "COUPDAYS", "COUPDAYSNC", "COUPNCD", "COUPNUM", 
+/// __See also__: [crate::of::coupdaybs()], [crate::of::coupdays()], [crate::of::coupdaysnc()], [crate::of::coupncd()], [crate::of::coupnum()], [crate::of::couppcd_()], 
 #[inline]
 pub fn couppcd<A: DateTime, B: DateTime>(settlement: A, maturity: B, frequency: Frequency) -> FnNumber3<A, B, Frequency> {
     FnNumber3("COUPPCD", settlement, maturity, frequency)
 }
 
 /// Calculates the next coupon date prior a settlement.
+///
+/// [documentfoundation->COUPPCD](https://wiki.documentfoundation.org/Documentation/Calc_Functions/COUPPCD)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -659,13 +697,15 @@ pub fn couppcd<A: DateTime, B: DateTime>(settlement: A, maturity: B, frequency: 
 /// 
 /// B indicates the day-count convention to use in the calculation. 4.11.7
 ///
-/// __See also__: "COUPDAYBS", "COUPDAYS", "COUPDAYSNC", "COUPNCD", "COUPNUM", 
+/// __See also__: [crate::of::coupdaybs()], [crate::of::coupdays()], [crate::of::coupdaysnc()], [crate::of::coupncd()], [crate::of::coupnum()], [crate::of::couppcd()], 
 #[inline]
 pub fn couppcd_<A: DateTime, B: DateTime>(settlement: A, maturity: B, frequency: Frequency, b: YearFracMethod) -> FnNumber4<A, B, Frequency, YearFracMethod> {
     FnNumber4("COUPPCD", settlement, maturity, frequency, b)
 }
 
 /// Calculates a cumulative interest payment.
+///
+/// [documentfoundation->CUMIPMT](https://wiki.documentfoundation.org/Documentation/Calc_Functions/CUMIPMT)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -694,13 +734,15 @@ pub fn couppcd_<A: DateTime, B: DateTime>(settlement: A, maturity: B, frequency:
 /// 
 /// •Type: The maturity date, the beginning or the end of a period.
 ///
-/// __See also__: "IPMT", "CUMPRINC", 
+/// __See also__: [crate::of::ipmt()], [crate::of::cumprinc()], 
 #[inline]
 pub fn cumipmt<A: Number, B: Number, C: Number, D: Number, E: Number>(rate: A, periods: B, value: C, start: D, end: E, type_: MaturityDate) -> FnNumber6<A, B, C, D, E, MaturityDate> {
     FnNumber6("CUMIPMT", rate, periods, value, start, end, type_)
 }
 
 /// Calculates a cumulative principal payment.
+///
+/// [documentfoundation->CUMPRINC](https://wiki.documentfoundation.org/Documentation/Calc_Functions/CUMPRINC)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -725,13 +767,15 @@ pub fn cumipmt<A: Number, B: Number, C: Number, D: Number, E: Number>(rate: A, p
 /// 
 /// •Type: The maturity date, the beginning or the end of a period.
 ///
-/// __See also__: "PPMT", "CUMIPMT", 
+/// __See also__: [crate::of::ppmt()], [crate::of::cumipmt()], 
 #[inline]
 pub fn cumprinc<A: Number, B: Number, C: Number, D: Number, E: Number>(rate: A, periods: B, value: C, start: D, end: E, type_: MaturityDate) -> FnNumber6<A, B, C, D, E, MaturityDate> {
     FnNumber6("CUMPRINC", rate, periods, value, start, end, type_)
 }
 
 /// Compute the depreciation allowance of an asset.
+///
+/// [documentfoundation->DB](https://wiki.documentfoundation.org/Documentation/Calc_Functions/DB)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -780,13 +824,15 @@ pub fn cumprinc<A: Number, B: Number, C: Number, D: Number, E: Number>(rate: A, 
 /// For all periods, where Period > LifeTime + 1 – INT(Month / 12), the 
 /// depreciation allowance is zero.
 ///
-/// __See also__: "DDB", "SLN", "INT", 
+/// __See also__: [crate::of::ddb()], [crate::of::sln()], [crate::of::int()], [crate::of::db_()], 
 #[inline]
 pub fn db<A: Number, B: Number, C: Number, D: Number>(cost: A, salvage: B, life_time: C, period: D) -> FnNumber4<A, B, C, D> {
     FnNumber4("DB", cost, salvage, life_time, period)
 }
 
 /// Compute the depreciation allowance of an asset.
+///
+/// [documentfoundation->DB](https://wiki.documentfoundation.org/Documentation/Calc_Functions/DB)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -835,13 +881,15 @@ pub fn db<A: Number, B: Number, C: Number, D: Number>(cost: A, salvage: B, life_
 /// For all periods, where Period > LifeTime + 1 – INT(Month / 12), the 
 /// depreciation allowance is zero.
 ///
-/// __See also__: "DDB", "SLN", "INT", 
+/// __See also__: [crate::of::ddb()], [crate::of::sln()], [crate::of::int()], [crate::of::db()], 
 #[inline]
 pub fn db_<A: Number, B: Number, C: Number, D: Number, E: Number>(cost: A, salvage: B, life_time: C, period: D, month: E) -> FnNumber5<A, B, C, D, E> {
     FnNumber5("DB", cost, salvage, life_time, period, month)
 }
 
 /// Compute the amount of depreciation at a given period of time.
+///
+/// [documentfoundation->DDB](https://wiki.documentfoundation.org/Documentation/Calc_Functions/DDB)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -888,13 +936,15 @@ pub fn db_<A: Number, B: Number, C: Number, D: Number, E: Number>(cost: A, salva
 /// VDB( Cost ; Salvage ; LifeTime ; Period - 1 ; Period ; DeclinationFactor ; 
 /// TRUE )
 ///
-/// __See also__: "SLN", "VDB", "MIN", 
+/// __See also__: [crate::of::sln()], [crate::of::vdb()], [crate::of::min()], [crate::of::ddb_()], 
 #[inline]
 pub fn ddb<A: Number, B: Number, C: Number, D: Number>(cost: A, salvage: B, life_time: C, period: D) -> FnNumber4<A, B, C, D> {
     FnNumber4("DDB", cost, salvage, life_time, period)
 }
 
 /// Compute the amount of depreciation at a given period of time.
+///
+/// [documentfoundation->DDB](https://wiki.documentfoundation.org/Documentation/Calc_Functions/DDB)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -941,13 +991,15 @@ pub fn ddb<A: Number, B: Number, C: Number, D: Number>(cost: A, salvage: B, life
 /// VDB( Cost ; Salvage ; LifeTime ; Period - 1 ; Period ; DeclinationFactor ; 
 /// TRUE )
 ///
-/// __See also__: "SLN", "VDB", "MIN", 
+/// __See also__: [crate::of::sln()], [crate::of::vdb()], [crate::of::min()], [crate::of::ddb()], 
 #[inline]
 pub fn ddb_<A: Number, B: Number, C: Number, D: Number, E: Number>(cost: A, salvage: B, life_time: C, period: D, declination_factor: E) -> FnNumber5<A, B, C, D, E> {
     FnNumber5("DDB", cost, salvage, life_time, period, declination_factor)
 }
 
 /// Returns the discount rate of a security.
+///
+/// [documentfoundation->DISC](https://wiki.documentfoundation.org/Documentation/Calc_Functions/DISC)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -970,13 +1022,15 @@ pub fn ddb_<A: Number, B: Number, C: Number, D: Number, E: Number>(cost: A, salv
 /// 
 /// •B: Indicates the day-count convention to use in the calculation. 4.11.7
 ///
-/// __See also__: "YEARFRAC", 
+/// __See also__: [crate::of::yearfrac()], [crate::of::disc_()], 
 #[inline]
 pub fn disc<A: DateTime, B: DateTime, C: Number, D: Number>(settlement: A, maturity: B, price: C, redemption: D) -> FnNumber4<A, B, C, D> {
     FnNumber4("DISC", settlement, maturity, price, redemption)
 }
 
 /// Returns the discount rate of a security.
+///
+/// [documentfoundation->DISC](https://wiki.documentfoundation.org/Documentation/Calc_Functions/DISC)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -999,13 +1053,15 @@ pub fn disc<A: DateTime, B: DateTime, C: Number, D: Number>(settlement: A, matur
 /// 
 /// •B: Indicates the day-count convention to use in the calculation. 4.11.7
 ///
-/// __See also__: "YEARFRAC", 
+/// __See also__: [crate::of::yearfrac()], [crate::of::disc()], 
 #[inline]
 pub fn disc_<A: DateTime, B: DateTime, C: Number, D: Number>(settlement: A, maturity: B, price: C, redemption: D, b: YearFracMethod) -> FnNumber5<A, B, C, D, YearFracMethod> {
     FnNumber5("DISC", settlement, maturity, price, redemption, b)
 }
 
 /// Converts a fractional dollar representation into a decimal representation.
+///
+/// [documentfoundation->DOLLARDE](https://wiki.documentfoundation.org/Documentation/Calc_Functions/DOLLARDE)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -1022,13 +1078,15 @@ pub fn disc_<A: DateTime, B: DateTime, C: Number, D: Number>(settlement: A, matu
 /// 
 /// •Denominator: The denominator of the fraction.
 ///
-/// __See also__: "DOLLARFR", "TRUNC", 
+/// __See also__: [crate::of::dollarfr()], [crate::of::trunc()], 
 #[inline]
 pub fn dollarde<A: Number, B: Number>(fractional: A, denominator: B) -> FnNumber2<A, B> {
     FnNumber2("DOLLARDE", fractional, denominator)
 }
 
 /// Converts a decimal dollar representation into a fractional representation.
+///
+/// [documentfoundation->DOLLARFR](https://wiki.documentfoundation.org/Documentation/Calc_Functions/DOLLARFR)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -1045,13 +1103,15 @@ pub fn dollarde<A: Number, B: Number>(fractional: A, denominator: B) -> FnNumber
 /// 
 /// •Denominator: The denominator of the fraction.
 ///
-/// __See also__: "DOLLARDE", "TRUNC", 
+/// __See also__: [crate::of::dollarde()], [crate::of::trunc()], 
 #[inline]
 pub fn dollarfr<A: Number, B: Number>(decimal: A, denominator: B) -> FnNumber2<A, B> {
     FnNumber2("DOLLARFR", decimal, denominator)
 }
 
 /// Returns the Macaulay duration of a fixed interest security in years
+///
+/// [documentfoundation->DURATION](https://wiki.documentfoundation.org/Documentation/Calc_Functions/DURATION)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -1076,13 +1136,15 @@ pub fn dollarfr<A: Number, B: Number>(decimal: A, denominator: B) -> FnNumber2<A
 /// 
 /// •B: Indicates the day-count convention to use in the calculation. 4.11.7
 ///
-/// __See also__: "MDURATION", 
+/// __See also__: [crate::of::mduration()], [crate::of::duration_()], 
 #[inline]
 pub fn duration<A: DateTime, B: DateTime, C: Number, D: Number>(settlement: A, maturity: B, coupon: C, yield_: D, frequency: Frequency) -> FnNumber5<A, B, C, D, Frequency> {
     FnNumber5("DURATION", settlement, maturity, coupon, yield_, frequency)
 }
 
 /// Returns the Macaulay duration of a fixed interest security in years
+///
+/// [documentfoundation->DURATION](https://wiki.documentfoundation.org/Documentation/Calc_Functions/DURATION)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -1107,13 +1169,15 @@ pub fn duration<A: DateTime, B: DateTime, C: Number, D: Number>(settlement: A, m
 /// 
 /// •B: Indicates the day-count convention to use in the calculation. 4.11.7
 ///
-/// __See also__: "MDURATION", 
+/// __See also__: [crate::of::mduration()], [crate::of::duration()], 
 #[inline]
 pub fn duration_<A: DateTime, B: DateTime, C: Number, D: Number>(settlement: A, maturity: B, coupon: C, yield_: D, frequency: Frequency, b: YearFracMethod) -> FnNumber6<A, B, C, D, Frequency, YearFracMethod> {
     FnNumber6("DURATION", settlement, maturity, coupon, yield_, frequency, b)
 }
 
 /// Returns the net annual interest rate for a nominal interest rate.
+///
+/// [documentfoundation->EFFECT](https://wiki.documentfoundation.org/Documentation/Calc_Functions/EFFECT)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -1133,13 +1197,15 @@ pub fn duration_<A: DateTime, B: DateTime, C: Number, D: Number>(settlement: A, 
 /// 
 /// •Payments: The number of payments per period.
 ///
-/// __See also__: "NOMINAL", 
+/// __See also__: [crate::of::nominal()], 
 #[inline]
 pub fn effect<A: Number, B: Number>(rate: A, payments: B) -> FnNumber2<A, B> {
     FnNumber2("EFFECT", rate, payments)
 }
 
 /// Compute the future value (FV) of an investment.
+///
+/// [documentfoundation->FV](https://wiki.documentfoundation.org/Documentation/Calc_Functions/FV)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -1165,13 +1231,15 @@ pub fn effect<A: Number, B: Number>(rate: A, payments: B) -> FnNumber2<A, B> {
 /// 
 /// See PV 6.12.41 for the equation this solves.
 ///
-/// __See also__: "PV", "NPER", "PMT", "RATE", 
+/// __See also__: [crate::of::pv()], [crate::of::nper()], [crate::of::pmt()], [crate::of::rate()], [crate::of::fv_()], [crate::of::fv__()], 
 #[inline]
 pub fn fv<A: Number, B: Number, C: Number>(rate: A, nper: B, payment: C) -> FnNumber3<A, B, C> {
     FnNumber3("FV", rate, nper, payment)
 }
 
 /// Compute the future value (FV) of an investment.
+///
+/// [documentfoundation->FV](https://wiki.documentfoundation.org/Documentation/Calc_Functions/FV)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -1197,13 +1265,15 @@ pub fn fv<A: Number, B: Number, C: Number>(rate: A, nper: B, payment: C) -> FnNu
 /// 
 /// See PV 6.12.41 for the equation this solves.
 ///
-/// __See also__: "PV", "NPER", "PMT", "RATE", 
+/// __See also__: [crate::of::pv()], [crate::of::nper()], [crate::of::pmt()], [crate::of::rate()], [crate::of::fv()], [crate::of::fv__()], 
 #[inline]
 pub fn fv_<A: Number, B: Number, C: Number, D: Number>(rate: A, nper: B, payment: C, pv: D) -> FnNumber4<A, B, C, D> {
     FnNumber4("FV", rate, nper, payment, pv)
 }
 
 /// Compute the future value (FV) of an investment.
+///
+/// [documentfoundation->FV](https://wiki.documentfoundation.org/Documentation/Calc_Functions/FV)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -1229,7 +1299,7 @@ pub fn fv_<A: Number, B: Number, C: Number, D: Number>(rate: A, nper: B, payment
 /// 
 /// See PV 6.12.41 for the equation this solves.
 ///
-/// __See also__: "PV", "NPER", "PMT", "RATE", 
+/// __See also__: [crate::of::pv()], [crate::of::nper()], [crate::of::pmt()], [crate::of::rate()], [crate::of::fv()], [crate::of::fv_()], 
 #[inline]
 pub fn fv__<A: Number, B: Number, C: Number, D: Number, E: Number>(rate: A, nper: B, payment: C, pv: D, pay_type: E) -> FnNumber5<A, B, C, D, E> {
     FnNumber5("FV", rate, nper, payment, pv, pay_type)
@@ -1237,6 +1307,8 @@ pub fn fv__<A: Number, B: Number, C: Number, D: Number, E: Number>(rate: A, nper
 
 /// Returns the accumulated value given starting capital and a series of 
 /// interest rates.
+///
+/// [documentfoundation->FVSCHEDULE](https://wiki.documentfoundation.org/Documentation/Calc_Functions/FVSCHEDULE)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -1250,13 +1322,15 @@ pub fn fv__<A: Number, B: Number, C: Number, D: Number, E: Number>(rate: A, nper
 /// Returns the accumulated value given starting capital and a series of 
 /// interest rates, as follows:
 ///
-/// __See also__: "PV", "NPER", "PMT", "RATE", 
+/// __See also__: [crate::of::pv()], [crate::of::nper()], [crate::of::pmt()], [crate::of::rate()], 
 #[inline]
 pub fn fvschedule<A: Number, B: Sequence>(principal: A, schedule: B) -> FnNumber2<A, B> {
     FnNumber2("FVSCHEDULE", principal, schedule)
 }
 
 /// Computes the interest rate of a fully vested security.
+///
+/// [documentfoundation->INTRATE](https://wiki.documentfoundation.org/Documentation/Calc_Functions/INTRATE)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -1284,13 +1358,15 @@ pub fn fvschedule<A: Number, B: Sequence>(principal: A, schedule: B) -> FnNumber
 /// 
 /// The return value for this function is:
 ///
-/// __See also__: "RECEIVED", "YEARFRAC", 
+/// __See also__: [crate::of::received()], [crate::of::yearfrac()], [crate::of::intrate_()], 
 #[inline]
 pub fn intrate<A: DateTime, B: DateTime, C: Number, D: Number>(settlement: A, maturity: B, investment: C, redemption: D) -> FnNumber4<A, B, C, D> {
     FnNumber4("INTRATE", settlement, maturity, investment, redemption)
 }
 
 /// Computes the interest rate of a fully vested security.
+///
+/// [documentfoundation->INTRATE](https://wiki.documentfoundation.org/Documentation/Calc_Functions/INTRATE)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -1318,13 +1394,15 @@ pub fn intrate<A: DateTime, B: DateTime, C: Number, D: Number>(settlement: A, ma
 /// 
 /// The return value for this function is:
 ///
-/// __See also__: "RECEIVED", "YEARFRAC", 
+/// __See also__: [crate::of::received()], [crate::of::yearfrac()], [crate::of::intrate()], 
 #[inline]
 pub fn intrate_<A: DateTime, B: DateTime, C: Number, D: Number>(settlement: A, maturity: B, investment: C, redemption: D, basis: YearFracMethod) -> FnNumber5<A, B, C, D, YearFracMethod> {
     FnNumber5("INTRATE", settlement, maturity, investment, redemption, basis)
 }
 
 /// Returns the amount of an annuity payment going towards interest.
+///
+/// [documentfoundation->IPMT](https://wiki.documentfoundation.org/Documentation/Calc_Functions/IPMT)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -1355,13 +1433,15 @@ pub fn intrate_<A: DateTime, B: DateTime, C: Number, D: Number>(settlement: A, m
 /// is 1, then payments are made at the beginning of each period. If Type is 0, 
 /// then payments are made at the end of each period.
 ///
-/// __See also__: "PPMT", "PMT", 
+/// __See also__: [crate::of::ppmt()], [crate::of::pmt()], [crate::of::ipmt_()], [crate::of::ipmt__()], 
 #[inline]
 pub fn ipmt<A: Number, B: Number, C: Number, D: Number>(rate: A, period: B, nper: C, p_v: D) -> FnNumber4<A, B, C, D> {
     FnNumber4("IPMT", rate, period, nper, p_v)
 }
 
 /// Returns the amount of an annuity payment going towards interest.
+///
+/// [documentfoundation->IPMT](https://wiki.documentfoundation.org/Documentation/Calc_Functions/IPMT)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -1392,13 +1472,15 @@ pub fn ipmt<A: Number, B: Number, C: Number, D: Number>(rate: A, period: B, nper
 /// is 1, then payments are made at the beginning of each period. If Type is 0, 
 /// then payments are made at the end of each period.
 ///
-/// __See also__: "PPMT", "PMT", 
+/// __See also__: [crate::of::ppmt()], [crate::of::pmt()], [crate::of::ipmt()], [crate::of::ipmt__()], 
 #[inline]
 pub fn ipmt_<A: Number, B: Number, C: Number, D: Number, E: Number>(rate: A, period: B, nper: C, p_v: D, f_v: E) -> FnNumber5<A, B, C, D, E> {
     FnNumber5("IPMT", rate, period, nper, p_v, f_v)
 }
 
 /// Returns the amount of an annuity payment going towards interest.
+///
+/// [documentfoundation->IPMT](https://wiki.documentfoundation.org/Documentation/Calc_Functions/IPMT)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -1429,13 +1511,15 @@ pub fn ipmt_<A: Number, B: Number, C: Number, D: Number, E: Number>(rate: A, per
 /// is 1, then payments are made at the beginning of each period. If Type is 0, 
 /// then payments are made at the end of each period.
 ///
-/// __See also__: "PPMT", "PMT", 
+/// __See also__: [crate::of::ppmt()], [crate::of::pmt()], [crate::of::ipmt()], [crate::of::ipmt_()], 
 #[inline]
 pub fn ipmt__<A: Number, B: Number, C: Number, D: Number, E: Number, F: Number>(rate: A, period: B, nper: C, p_v: D, f_v: E, type_: F) -> FnNumber6<A, B, C, D, E, F> {
     FnNumber6("IPMT", rate, period, nper, p_v, f_v, type_)
 }
 
 /// Compute the internal rate of return for a series of cash flows.
+///
+/// [documentfoundation->IRR](https://wiki.documentfoundation.org/Documentation/Calc_Functions/IRR)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -1459,13 +1543,15 @@ pub fn ipmt__<A: Number, B: Number, C: Number, D: Number, E: Number, F: Number>(
 /// be used to initialize the iteration. If the evaluator is unable to converge 
 /// on a solution given a particular Guess, it may return an Error.
 ///
-/// __See also__: "NPV", "RATE", 
+/// __See also__: [crate::of::npv()], [crate::of::rate()], [crate::of::irr_()], 
 #[inline]
 pub fn irr<A: Sequence>(values: A) -> FnNumber1<A> {
     FnNumber1("IRR", values)
 }
 
 /// Compute the internal rate of return for a series of cash flows.
+///
+/// [documentfoundation->IRR](https://wiki.documentfoundation.org/Documentation/Calc_Functions/IRR)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -1489,13 +1575,15 @@ pub fn irr<A: Sequence>(values: A) -> FnNumber1<A> {
 /// be used to initialize the iteration. If the evaluator is unable to converge 
 /// on a solution given a particular Guess, it may return an Error.
 ///
-/// __See also__: "NPV", "RATE", 
+/// __See also__: [crate::of::npv()], [crate::of::rate()], [crate::of::irr()], 
 #[inline]
 pub fn irr_<A: Sequence, B: Number>(values: A, guess: B) -> FnNumber2<A, B> {
     FnNumber2("IRR", values, guess)
 }
 
 /// Compute the interest payment of an amortized loan for a given period.
+///
+/// [documentfoundation->ISPMT](https://wiki.documentfoundation.org/Documentation/Calc_Functions/ISPMT)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -1517,7 +1605,7 @@ pub fn irr_<A: Sequence, B: Number>(values: A, guess: B) -> FnNumber2<A, B> {
 /// 
 /// •Pv: the amount of the investment
 ///
-/// __See also__: "PV", "FV", "NPER", "PMT", "RATE", 
+/// __See also__: [crate::of::pv()], [crate::of::fv()], [crate::of::nper()], [crate::of::pmt()], [crate::of::rate()], 
 #[inline]
 pub fn ispmt<A: Number, B: Number, C: Number, D: Number>(rate: A, period: B, nper: C, pv: D) -> FnNumber4<A, B, C, D> {
     FnNumber4("ISPMT", rate, period, nper, pv)
@@ -1525,6 +1613,8 @@ pub fn ispmt<A: Number, B: Number, C: Number, D: Number>(rate: A, period: B, npe
 
 /// Returns the modified Macaulay duration of a fixed interest security in 
 /// years.
+///
+/// [documentfoundation->MDURATION](https://wiki.documentfoundation.org/Documentation/Calc_Functions/MDURATION)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -1551,7 +1641,7 @@ pub fn ispmt<A: Number, B: Number, C: Number, D: Number>(rate: A, period: B, npe
 /// 
 /// The modified duration is computed as follows:
 ///
-/// __See also__: "DURATION", 
+/// __See also__: [crate::of::duration()], [crate::of::mduration_()], 
 #[inline]
 pub fn mduration<A: DateTime, B: DateTime, C: Number, D: Number>(settlement: A, maturity: B, coupon: C, yield_: D, frequency: Frequency) -> FnNumber5<A, B, C, D, Frequency> {
     FnNumber5("MDURATION", settlement, maturity, coupon, yield_, frequency)
@@ -1559,6 +1649,8 @@ pub fn mduration<A: DateTime, B: DateTime, C: Number, D: Number>(settlement: A, 
 
 /// Returns the modified Macaulay duration of a fixed interest security in 
 /// years.
+///
+/// [documentfoundation->MDURATION](https://wiki.documentfoundation.org/Documentation/Calc_Functions/MDURATION)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -1585,7 +1677,7 @@ pub fn mduration<A: DateTime, B: DateTime, C: Number, D: Number>(settlement: A, 
 /// 
 /// The modified duration is computed as follows:
 ///
-/// __See also__: "DURATION", 
+/// __See also__: [crate::of::duration()], [crate::of::mduration()], 
 #[inline]
 pub fn mduration_<A: DateTime, B: DateTime, C: Number, D: Number>(settlement: A, maturity: B, coupon: C, yield_: D, frequency: Frequency, b: YearFracMethod) -> FnNumber6<A, B, C, D, Frequency, YearFracMethod> {
     FnNumber6("MDURATION", settlement, maturity, coupon, yield_, frequency, b)
@@ -1593,6 +1685,8 @@ pub fn mduration_<A: DateTime, B: DateTime, C: Number, D: Number>(settlement: A,
 
 /// Returns the modified internal rate of return (IRR) of a series of periodic 
 /// investments.
+///
+/// [documentfoundation->MIRR](https://wiki.documentfoundation.org/Documentation/Calc_Functions/MIRR)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -1613,13 +1707,15 @@ pub fn mduration_<A: DateTime, B: DateTime, C: Number, D: Number>(settlement: A,
 /// 
 /// where N is the number of incomes and payments in Values (total).
 ///
-/// __See also__: "IRR", "NPV", 
+/// __See also__: [crate::of::irr()], [crate::of::npv()], 
 #[inline]
 pub fn mirr<A: Array, B: Number, C: Number>(values: A, investment: B, reinvest_rate: C) -> FnNumber3<A, B, C> {
     FnNumber3("MIRR", values, investment, reinvest_rate)
 }
 
 /// Compute the annual nominal interest rate.
+///
+/// [documentfoundation->NOMINAL](https://wiki.documentfoundation.org/Documentation/Calc_Functions/NOMINAL)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -1642,13 +1738,15 @@ pub fn mirr<A: Array, B: Number, C: Number>(values: A, investment: B, reinvest_r
 /// 
 /// The mapping between nominal rate and effective rate is
 ///
-/// __See also__: "EFFECT", 
+/// __See also__: [crate::of::effect()], 
 #[inline]
 pub fn nominal<A: Number, B: Number>(effective_rate: A, compounding_periods: B) -> FnNumber2<A, B> {
     FnNumber2("NOMINAL", effective_rate, compounding_periods)
 }
 
 /// Compute the number of payment periods for an investment.
+///
+/// [documentfoundation->NPER](https://wiki.documentfoundation.org/Documentation/Calc_Functions/NPER)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -1685,13 +1783,15 @@ pub fn nominal<A: Number, B: Number>(effective_rate: A, compounding_periods: B) 
 /// support negative rates; evaluators only claiming to support the “Small” 
 /// set need not.
 ///
-/// __See also__: "FV", "RATE", "PMT", "PV", 
+/// __See also__: [crate::of::fv()], [crate::of::rate()], [crate::of::pmt()], [crate::of::pv()], [crate::of::nper_()], [crate::of::nper__()], 
 #[inline]
 pub fn nper<A: Number, B: Number, C: Number>(rate: A, payment: B, pv: C) -> FnNumber3<A, B, C> {
     FnNumber3("NPER", rate, payment, pv)
 }
 
 /// Compute the number of payment periods for an investment.
+///
+/// [documentfoundation->NPER](https://wiki.documentfoundation.org/Documentation/Calc_Functions/NPER)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -1728,13 +1828,15 @@ pub fn nper<A: Number, B: Number, C: Number>(rate: A, payment: B, pv: C) -> FnNu
 /// support negative rates; evaluators only claiming to support the “Small” 
 /// set need not.
 ///
-/// __See also__: "FV", "RATE", "PMT", "PV", 
+/// __See also__: [crate::of::fv()], [crate::of::rate()], [crate::of::pmt()], [crate::of::pv()], [crate::of::nper()], [crate::of::nper__()], 
 #[inline]
 pub fn nper_<A: Number, B: Number, C: Number, D: Number>(rate: A, payment: B, pv: C, fv: D) -> FnNumber4<A, B, C, D> {
     FnNumber4("NPER", rate, payment, pv, fv)
 }
 
 /// Compute the number of payment periods for an investment.
+///
+/// [documentfoundation->NPER](https://wiki.documentfoundation.org/Documentation/Calc_Functions/NPER)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -1771,13 +1873,15 @@ pub fn nper_<A: Number, B: Number, C: Number, D: Number>(rate: A, payment: B, pv
 /// support negative rates; evaluators only claiming to support the “Small” 
 /// set need not.
 ///
-/// __See also__: "FV", "RATE", "PMT", "PV", 
+/// __See also__: [crate::of::fv()], [crate::of::rate()], [crate::of::pmt()], [crate::of::pv()], [crate::of::nper()], [crate::of::nper_()], 
 #[inline]
 pub fn nper__<A: Number, B: Number, C: Number, D: Number>(rate: A, payment: B, pv: C, fv: D, pay_type: PayType) -> FnNumber5<A, B, C, D, PayType> {
     FnNumber5("NPER", rate, payment, pv, fv, pay_type)
 }
 
 /// Compute the net present value (NPV) for a series of periodic cash flows.
+///
+/// [documentfoundation->NPV](https://wiki.documentfoundation.org/Documentation/Calc_Functions/NPV)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -1797,7 +1901,7 @@ pub fn nper__<A: Number, B: Number, C: Number, D: Number>(rate: A, payment: B, p
 /// 
 /// If N is the number of values in Values, the formula for NPV is:
 ///
-/// __See also__: "FV", "IRR", "NPER", "PMT", "PV", "XNPV", 
+/// __See also__: [crate::of::fv()], [crate::of::irr()], [crate::of::nper()], [crate::of::pmt()], [crate::of::pv()], [crate::of::xnpv()], 
 #[inline]
 pub fn npv<A: Number, B: Sequence>(rate: A, values: B) -> FnNumber2<A, B> {
     FnNumber2("NPV", rate, values)
@@ -1805,6 +1909,8 @@ pub fn npv<A: Number, B: Sequence>(rate: A, values: B) -> FnNumber2<A, B> {
 
 /// Compute the value of a security per 100 currency units of face value. The 
 /// security has an irregular first interest date.
+///
+/// [documentfoundation->ODDFPRICE](https://wiki.documentfoundation.org/Documentation/Calc_Functions/ODDFPRICE)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -1836,7 +1942,7 @@ pub fn npv<A: Number, B: Sequence>(rate: A, values: B) -> FnNumber2<A, B> {
 /// 
 /// •B: indicates the day-count convention to use in the calculation. 4.11.7
 ///
-/// __See also__: "ODDLPRICE", "ODDFYIELD", 
+/// __See also__: [crate::of::oddlprice()], [crate::of::oddfyield()], [crate::of::oddfprice_()], 
 #[inline]
 pub fn oddfprice<A: DateTime, B: DateTime, C: DateTime, D: DateTime, E: Number, F: Number, G: Number>(settlement: A, maturity: B, issue: C, first: D, rate: E, yield_: F, redemption: G, frequency: Frequency) -> FnNumber8<A, B, C, D, E, F, G, Frequency> {
     FnNumber8("ODDFPRICE", settlement, maturity, issue, first, rate, yield_, redemption, frequency)
@@ -1844,6 +1950,8 @@ pub fn oddfprice<A: DateTime, B: DateTime, C: DateTime, D: DateTime, E: Number, 
 
 /// Compute the value of a security per 100 currency units of face value. The 
 /// security has an irregular first interest date.
+///
+/// [documentfoundation->ODDFPRICE](https://wiki.documentfoundation.org/Documentation/Calc_Functions/ODDFPRICE)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -1875,7 +1983,7 @@ pub fn oddfprice<A: DateTime, B: DateTime, C: DateTime, D: DateTime, E: Number, 
 /// 
 /// •B: indicates the day-count convention to use in the calculation. 4.11.7
 ///
-/// __See also__: "ODDLPRICE", "ODDFYIELD", 
+/// __See also__: [crate::of::oddlprice()], [crate::of::oddfyield()], [crate::of::oddfprice()], 
 #[inline]
 pub fn oddfprice_<A: DateTime, B: DateTime, C: DateTime, D: DateTime, E: Number, F: Number, G: Number>(settlement: A, maturity: B, issue: C, first: D, rate: E, yield_: F, redemption: G, frequency: Frequency, b: YearFracMethod) -> FnNumber9<A, B, C, D, E, F, G, Frequency, YearFracMethod> {
     FnNumber9("ODDFPRICE", settlement, maturity, issue, first, rate, yield_, redemption, frequency, b)
@@ -1883,6 +1991,8 @@ pub fn oddfprice_<A: DateTime, B: DateTime, C: DateTime, D: DateTime, E: Number,
 
 /// Compute the yield of a security per 100 currency units of face value. The 
 /// security has an irregular first interest date.
+///
+/// [documentfoundation->ODDFYIELD](https://wiki.documentfoundation.org/Documentation/Calc_Functions/ODDFYIELD)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -1915,7 +2025,7 @@ pub fn oddfprice_<A: DateTime, B: DateTime, C: DateTime, D: DateTime, E: Number,
 /// 
 /// •B: indicates the day-count convention to use in the calculation. 4.11.7
 ///
-/// __See also__: "ODDLYIELD", "ODDFPRICE", 
+/// __See also__: [crate::of::oddlyield()], [crate::of::oddfprice()], [crate::of::oddfyield_()], 
 #[inline]
 pub fn oddfyield<A: DateTime, B: DateTime, C: DateTime, D: DateTime, E: Number, F: Number, G: Number>(settlement: A, maturity: B, issue: C, first: D, rate: E, price: F, redemption: G, frequency: Frequency) -> FnNumber8<A, B, C, D, E, F, G, Frequency> {
     FnNumber8("ODDFYIELD", settlement, maturity, issue, first, rate, price, redemption, frequency)
@@ -1923,6 +2033,8 @@ pub fn oddfyield<A: DateTime, B: DateTime, C: DateTime, D: DateTime, E: Number, 
 
 /// Compute the yield of a security per 100 currency units of face value. The 
 /// security has an irregular first interest date.
+///
+/// [documentfoundation->ODDFYIELD](https://wiki.documentfoundation.org/Documentation/Calc_Functions/ODDFYIELD)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -1955,7 +2067,7 @@ pub fn oddfyield<A: DateTime, B: DateTime, C: DateTime, D: DateTime, E: Number, 
 /// 
 /// •B: indicates the day-count convention to use in the calculation. 4.11.7
 ///
-/// __See also__: "ODDLYIELD", "ODDFPRICE", 
+/// __See also__: [crate::of::oddlyield()], [crate::of::oddfprice()], [crate::of::oddfyield()], 
 #[inline]
 pub fn oddfyield_<A: DateTime, B: DateTime, C: DateTime, D: DateTime, E: Number, F: Number, G: Number>(settlement: A, maturity: B, issue: C, first: D, rate: E, price: F, redemption: G, frequency: Frequency, b: YearFracMethod) -> FnNumber9<A, B, C, D, E, F, G, Frequency, YearFracMethod> {
     FnNumber9("ODDFYIELD", settlement, maturity, issue, first, rate, price, redemption, frequency, b)
@@ -1963,6 +2075,8 @@ pub fn oddfyield_<A: DateTime, B: DateTime, C: DateTime, D: DateTime, E: Number,
 
 /// Compute the value of a security per 100 currency units of face value. The 
 /// security has an irregular last interest date.
+///
+/// [documentfoundation->ODDLPRICE](https://wiki.documentfoundation.org/Documentation/Calc_Functions/ODDLPRICE)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -1994,7 +2108,7 @@ pub fn oddfyield_<A: DateTime, B: DateTime, C: DateTime, D: DateTime, E: Number,
 /// 
 /// •B: indicates the day-count convention to use in the calculation. 4.11.7
 ///
-/// __See also__: "ODDFPRICE", 
+/// __See also__: [crate::of::oddfprice()], [crate::of::oddlprice_()], 
 #[inline]
 pub fn oddlprice<A: DateTime, B: DateTime, C: DateTime, D: Number, E: Number, F: Number>(settlement: A, maturity: B, last: C, rate: D, annual_yield: E, redemption: F, frequency: Frequency) -> FnNumber7<A, B, C, D, E, F, Frequency> {
     FnNumber7("ODDLPRICE", settlement, maturity, last, rate, annual_yield, redemption, frequency)
@@ -2002,6 +2116,8 @@ pub fn oddlprice<A: DateTime, B: DateTime, C: DateTime, D: Number, E: Number, F:
 
 /// Compute the value of a security per 100 currency units of face value. The 
 /// security has an irregular last interest date.
+///
+/// [documentfoundation->ODDLPRICE](https://wiki.documentfoundation.org/Documentation/Calc_Functions/ODDLPRICE)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -2033,13 +2149,15 @@ pub fn oddlprice<A: DateTime, B: DateTime, C: DateTime, D: Number, E: Number, F:
 /// 
 /// •B: indicates the day-count convention to use in the calculation. 4.11.7
 ///
-/// __See also__: "ODDFPRICE", 
+/// __See also__: [crate::of::oddfprice()], [crate::of::oddlprice()], 
 #[inline]
 pub fn oddlprice_<A: DateTime, B: DateTime, C: DateTime, D: Number, E: Number, F: Number>(settlement: A, maturity: B, last: C, rate: D, annual_yield: E, redemption: F, frequency: Frequency, b: YearFracMethod) -> FnNumber8<A, B, C, D, E, F, Frequency, YearFracMethod> {
     FnNumber8("ODDLPRICE", settlement, maturity, last, rate, annual_yield, redemption, frequency, b)
 }
 
 /// Compute the yield of a security which has an irregular last interest date.
+///
+/// [documentfoundation->ODDLYIELD](https://wiki.documentfoundation.org/Documentation/Calc_Functions/ODDLYIELD)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -2069,13 +2187,15 @@ pub fn oddlprice_<A: DateTime, B: DateTime, C: DateTime, D: Number, E: Number, F
 /// 
 /// •B: indicates the day-count convention to use in the calculation. 4.11.7
 ///
-/// __See also__: "ODDLPRICE", "ODDFYIELD", 
+/// __See also__: [crate::of::oddlprice()], [crate::of::oddfyield()], [crate::of::oddlyield_()], 
 #[inline]
 pub fn oddlyield<A: DateTime, B: DateTime, C: DateTime, D: Number, E: Number, F: Number>(settlement: A, maturity: B, last: C, rate: D, price: E, redemption: F, frequency: Frequency) -> FnNumber7<A, B, C, D, E, F, Frequency> {
     FnNumber7("ODDLYIELD", settlement, maturity, last, rate, price, redemption, frequency)
 }
 
 /// Compute the yield of a security which has an irregular last interest date.
+///
+/// [documentfoundation->ODDLYIELD](https://wiki.documentfoundation.org/Documentation/Calc_Functions/ODDLYIELD)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -2105,7 +2225,7 @@ pub fn oddlyield<A: DateTime, B: DateTime, C: DateTime, D: Number, E: Number, F:
 /// 
 /// •B: indicates the day-count convention to use in the calculation. 4.11.7
 ///
-/// __See also__: "ODDLPRICE", "ODDFYIELD", 
+/// __See also__: [crate::of::oddlprice()], [crate::of::oddfyield()], [crate::of::oddlyield()], 
 #[inline]
 pub fn oddlyield_<A: DateTime, B: DateTime, C: DateTime, D: Number, E: Number, F: Number>(settlement: A, maturity: B, last: C, rate: D, price: E, redemption: F, frequency: Frequency, b: YearFracMethod) -> FnNumber8<A, B, C, D, E, F, Frequency, YearFracMethod> {
     FnNumber8("ODDLYIELD", settlement, maturity, last, rate, price, redemption, frequency, b)
@@ -2113,6 +2233,8 @@ pub fn oddlyield_<A: DateTime, B: DateTime, C: DateTime, D: Number, E: Number, F
 
 /// Returns the number of periods required by an investment to realize a 
 /// specified value.
+///
+/// [documentfoundation->PDURATION](https://wiki.documentfoundation.org/Documentation/Calc_Functions/PDURATION)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -2133,13 +2255,15 @@ pub fn oddlyield_<A: DateTime, B: DateTime, C: DateTime, D: Number, E: Number, F
 /// 
 /// •SpecifiedValue: The value, that should be reached.
 ///
-/// __See also__: "DURATION", 
+/// __See also__: [crate::of::duration()], 
 #[inline]
 pub fn pduration<A: Number, B: Number, C: Number>(rate: A, current_value: B, specified_value: C) -> FnNumber3<A, B, C> {
     FnNumber3("PDURATION", rate, current_value, specified_value)
 }
 
 /// Compute the payment made each period for an investment.
+///
+/// [documentfoundation->PMT](https://wiki.documentfoundation.org/Documentation/Calc_Functions/PMT)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -2170,13 +2294,15 @@ pub fn pduration<A: Number, B: Number, C: Number>(rate: A, current_value: B, spe
 /// 
 /// If Rate is nonzero, then PMT solves this equation:
 ///
-/// __See also__: "FV", "NPER", "PV", "RATE", 
+/// __See also__: [crate::of::fv()], [crate::of::nper()], [crate::of::pv()], [crate::of::rate()], [crate::of::pmt_()], [crate::of::pmt__()], 
 #[inline]
 pub fn pmt<A: Number, B: Number, C: Number>(rate: A, nper: B, pv: C) -> FnNumber3<A, B, C> {
     FnNumber3("PMT", rate, nper, pv)
 }
 
 /// Compute the payment made each period for an investment.
+///
+/// [documentfoundation->PMT](https://wiki.documentfoundation.org/Documentation/Calc_Functions/PMT)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -2207,13 +2333,15 @@ pub fn pmt<A: Number, B: Number, C: Number>(rate: A, nper: B, pv: C) -> FnNumber
 /// 
 /// If Rate is nonzero, then PMT solves this equation:
 ///
-/// __See also__: "FV", "NPER", "PV", "RATE", 
+/// __See also__: [crate::of::fv()], [crate::of::nper()], [crate::of::pv()], [crate::of::rate()], [crate::of::pmt()], [crate::of::pmt__()], 
 #[inline]
 pub fn pmt_<A: Number, B: Number, C: Number, D: Number>(rate: A, nper: B, pv: C, fv: D) -> FnNumber4<A, B, C, D> {
     FnNumber4("PMT", rate, nper, pv, fv)
 }
 
 /// Compute the payment made each period for an investment.
+///
+/// [documentfoundation->PMT](https://wiki.documentfoundation.org/Documentation/Calc_Functions/PMT)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -2244,7 +2372,7 @@ pub fn pmt_<A: Number, B: Number, C: Number, D: Number>(rate: A, nper: B, pv: C,
 /// 
 /// If Rate is nonzero, then PMT solves this equation:
 ///
-/// __See also__: "FV", "NPER", "PV", "RATE", 
+/// __See also__: [crate::of::fv()], [crate::of::nper()], [crate::of::pv()], [crate::of::rate()], [crate::of::pmt()], [crate::of::pmt_()], 
 #[inline]
 pub fn pmt__<A: Number, B: Number, C: Number, D: Number, E: Number>(rate: A, nper: B, pv: C, fv: D, pay_type: E) -> FnNumber5<A, B, C, D, E> {
     FnNumber5("PMT", rate, nper, pv, fv, pay_type)
@@ -2252,6 +2380,8 @@ pub fn pmt__<A: Number, B: Number, C: Number, D: Number, E: Number>(rate: A, npe
 
 /// Calculate the payment for a given period on the principal for an investment 
 /// at a given interest rate and constant payments.
+///
+/// [documentfoundation->PPMT](https://wiki.documentfoundation.org/Documentation/Calc_Functions/PPMT)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -2278,7 +2408,7 @@ pub fn pmt__<A: Number, B: Number, C: Number, D: Number, E: Number>(rate: A, npe
 /// •Type: optional, 0 or 1, respectively for payment at the end or at the 
 /// beginning of a period. The default value is 0.
 ///
-/// __See also__: "PMT", 
+/// __See also__: [crate::of::pmt()], [crate::of::ppmt_()], [crate::of::ppmt__()], 
 #[inline]
 pub fn ppmt<A: Number, B: Number, C: Number, D: Number>(rate: A, period: B, nper: C, present: D) -> FnNumber4<A, B, C, D> {
     FnNumber4("PPMT", rate, period, nper, present)
@@ -2286,6 +2416,8 @@ pub fn ppmt<A: Number, B: Number, C: Number, D: Number>(rate: A, period: B, nper
 
 /// Calculate the payment for a given period on the principal for an investment 
 /// at a given interest rate and constant payments.
+///
+/// [documentfoundation->PPMT](https://wiki.documentfoundation.org/Documentation/Calc_Functions/PPMT)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -2312,7 +2444,7 @@ pub fn ppmt<A: Number, B: Number, C: Number, D: Number>(rate: A, period: B, nper
 /// •Type: optional, 0 or 1, respectively for payment at the end or at the 
 /// beginning of a period. The default value is 0.
 ///
-/// __See also__: "PMT", 
+/// __See also__: [crate::of::pmt()], [crate::of::ppmt()], [crate::of::ppmt__()], 
 #[inline]
 pub fn ppmt_<A: Number, B: Number, C: Number, D: Number, E: Number>(rate: A, period: B, nper: C, present: D, future: E) -> FnNumber5<A, B, C, D, E> {
     FnNumber5("PPMT", rate, period, nper, present, future)
@@ -2320,6 +2452,8 @@ pub fn ppmt_<A: Number, B: Number, C: Number, D: Number, E: Number>(rate: A, per
 
 /// Calculate the payment for a given period on the principal for an investment 
 /// at a given interest rate and constant payments.
+///
+/// [documentfoundation->PPMT](https://wiki.documentfoundation.org/Documentation/Calc_Functions/PPMT)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -2346,7 +2480,7 @@ pub fn ppmt_<A: Number, B: Number, C: Number, D: Number, E: Number>(rate: A, per
 /// •Type: optional, 0 or 1, respectively for payment at the end or at the 
 /// beginning of a period. The default value is 0.
 ///
-/// __See also__: "PMT", 
+/// __See also__: [crate::of::pmt()], [crate::of::ppmt()], [crate::of::ppmt_()], 
 #[inline]
 pub fn ppmt__<A: Number, B: Number, C: Number, D: Number, E: Number, F: Number>(rate: A, period: B, nper: C, present: D, future: E, type_: F) -> FnNumber6<A, B, C, D, E, F> {
     FnNumber6("PPMT", rate, period, nper, present, future, type_)
@@ -2354,6 +2488,8 @@ pub fn ppmt__<A: Number, B: Number, C: Number, D: Number, E: Number, F: Number>(
 
 /// Calculates a quoted price for an interest paying security, per 100 currency 
 /// units of face value.
+///
+/// [documentfoundation->PRICE](https://wiki.documentfoundation.org/Documentation/Calc_Functions/PRICE)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -2390,7 +2526,7 @@ pub fn ppmt__<A: Number, B: Number, C: Number, D: Number, E: Number, F: Number>(
 /// •Bas: indicates the day-count convention to use in the calculation. 
 /// 4.11.7
 ///
-/// __See also__: "PRICEDISC", "PRICEMAT", 
+/// __See also__: [crate::of::pricedisc()], [crate::of::pricemat()], [crate::of::price_()], 
 #[inline]
 pub fn price<A: DateTime, B: DateTime, C: Number, D: Number, E: Number>(settlement: A, maturity: B, rate: C, annual_yield: D, redemption: E, frequency: Frequency) -> FnNumber6<A, B, C, D, E, Frequency> {
     FnNumber6("PRICE", settlement, maturity, rate, annual_yield, redemption, frequency)
@@ -2398,6 +2534,8 @@ pub fn price<A: DateTime, B: DateTime, C: Number, D: Number, E: Number>(settleme
 
 /// Calculates a quoted price for an interest paying security, per 100 currency 
 /// units of face value.
+///
+/// [documentfoundation->PRICE](https://wiki.documentfoundation.org/Documentation/Calc_Functions/PRICE)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -2434,7 +2572,7 @@ pub fn price<A: DateTime, B: DateTime, C: Number, D: Number, E: Number>(settleme
 /// •Bas: indicates the day-count convention to use in the calculation. 
 /// 4.11.7
 ///
-/// __See also__: "PRICEDISC", "PRICEMAT", 
+/// __See also__: [crate::of::pricedisc()], [crate::of::pricemat()], [crate::of::price()], 
 #[inline]
 pub fn price_<A: DateTime, B: DateTime, C: Number, D: Number, E: Number>(settlement: A, maturity: B, rate: C, annual_yield: D, redemption: E, frequency: Frequency, bas: YearFracMethod) -> FnNumber7<A, B, C, D, E, Frequency, YearFracMethod> {
     FnNumber7("PRICE", settlement, maturity, rate, annual_yield, redemption, frequency, bas)
@@ -2442,6 +2580,8 @@ pub fn price_<A: DateTime, B: DateTime, C: Number, D: Number, E: Number>(settlem
 
 /// Calculate the price of a security with a discount per 100 currency units of 
 /// face value.
+///
+/// [documentfoundation->PRICEDISC](https://wiki.documentfoundation.org/Documentation/Calc_Functions/PRICEDISC)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -2464,7 +2604,7 @@ pub fn price_<A: DateTime, B: DateTime, C: Number, D: Number, E: Number>(settlem
 /// 
 /// •B: indicates the day-count convention to use in the calculation. 4.11.7
 ///
-/// __See also__: "PRICE", "PRICEMAT", "YIELDDISC", 
+/// __See also__: [crate::of::price()], [crate::of::pricemat()], [crate::of::yielddisc()], [crate::of::pricedisc_()], 
 #[inline]
 pub fn pricedisc<A: DateTime, B: DateTime, C: Number, D: Number>(settlement: A, maturity: B, discount: C, redemption: D) -> FnNumber4<A, B, C, D> {
     FnNumber4("PRICEDISC", settlement, maturity, discount, redemption)
@@ -2472,6 +2612,8 @@ pub fn pricedisc<A: DateTime, B: DateTime, C: Number, D: Number>(settlement: A, 
 
 /// Calculate the price of a security with a discount per 100 currency units of 
 /// face value.
+///
+/// [documentfoundation->PRICEDISC](https://wiki.documentfoundation.org/Documentation/Calc_Functions/PRICEDISC)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -2494,7 +2636,7 @@ pub fn pricedisc<A: DateTime, B: DateTime, C: Number, D: Number>(settlement: A, 
 /// 
 /// •B: indicates the day-count convention to use in the calculation. 4.11.7
 ///
-/// __See also__: "PRICE", "PRICEMAT", "YIELDDISC", 
+/// __See also__: [crate::of::price()], [crate::of::pricemat()], [crate::of::yielddisc()], [crate::of::pricedisc()], 
 #[inline]
 pub fn pricedisc_<A: DateTime, B: DateTime, C: Number, D: Number>(settlement: A, maturity: B, discount: C, redemption: D, b: YearFracMethod) -> FnNumber5<A, B, C, D, YearFracMethod> {
     FnNumber5("PRICEDISC", settlement, maturity, discount, redemption, b)
@@ -2502,6 +2644,8 @@ pub fn pricedisc_<A: DateTime, B: DateTime, C: Number, D: Number>(settlement: A,
 
 /// Calculate the price per 100 currency units of face value of the security 
 /// that pays interest on the maturity date.
+///
+/// [documentfoundation->PRICEMAT](https://wiki.documentfoundation.org/Documentation/Calc_Functions/PRICEMAT)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -2528,7 +2672,7 @@ pub fn pricedisc_<A: DateTime, B: DateTime, C: Number, D: Number>(settlement: A,
 /// 
 /// If both, Rate and AnnualYield, are 0, the return value is 100.
 ///
-/// __See also__: "PRICEDISC", "PRICEMAT", 
+/// __See also__: [crate::of::pricedisc()], [crate::of::pricemat_()], 
 #[inline]
 pub fn pricemat<A: DateTime, B: DateTime, C: DateTime, D: Number, E: Number>(settlement: A, maturity: B, issue: C, rate: D, annual_yield: E) -> FnNumber5<A, B, C, D, E> {
     FnNumber5("PRICEMAT", settlement, maturity, issue, rate, annual_yield)
@@ -2536,6 +2680,8 @@ pub fn pricemat<A: DateTime, B: DateTime, C: DateTime, D: Number, E: Number>(set
 
 /// Calculate the price per 100 currency units of face value of the security 
 /// that pays interest on the maturity date.
+///
+/// [documentfoundation->PRICEMAT](https://wiki.documentfoundation.org/Documentation/Calc_Functions/PRICEMAT)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -2562,13 +2708,15 @@ pub fn pricemat<A: DateTime, B: DateTime, C: DateTime, D: Number, E: Number>(set
 /// 
 /// If both, Rate and AnnualYield, are 0, the return value is 100.
 ///
-/// __See also__: "PRICEDISC", "PRICEMAT", 
+/// __See also__: [crate::of::pricedisc()], [crate::of::pricemat()], [crate::of::pricemat()], 
 #[inline]
 pub fn pricemat_<A: DateTime, B: DateTime, C: DateTime, D: Number, E: Number>(settlement: A, maturity: B, issue: C, rate: D, annual_yield: E, b: YearFracMethod) -> FnNumber6<A, B, C, D, E, YearFracMethod> {
     FnNumber6("PRICEMAT", settlement, maturity, issue, rate, annual_yield, b)
 }
 
 /// Compute the present value (PV) of an investment.
+///
+/// [documentfoundation->PV](https://wiki.documentfoundation.org/Documentation/Calc_Functions/PV)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -2596,13 +2744,15 @@ pub fn pricemat_<A: DateTime, B: DateTime, C: DateTime, D: Number, E: Number>(se
 /// 
 /// If Rate is nonzero, then PV solves this equation:
 ///
-/// __See also__: "FV", "NPER", "PMT", "RATE", 
+/// __See also__: [crate::of::fv()], [crate::of::nper()], [crate::of::pmt()], [crate::of::rate()], [crate::of::pv_()], [crate::of::pv__()], 
 #[inline]
 pub fn pv<A: Number, B: Number, C: Number>(rate: A, nper: B, payment: C) -> FnNumber3<A, B, C> {
     FnNumber3("PV", rate, nper, payment)
 }
 
 /// Compute the present value (PV) of an investment.
+///
+/// [documentfoundation->PV](https://wiki.documentfoundation.org/Documentation/Calc_Functions/PV)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -2630,13 +2780,15 @@ pub fn pv<A: Number, B: Number, C: Number>(rate: A, nper: B, payment: C) -> FnNu
 /// 
 /// If Rate is nonzero, then PV solves this equation:
 ///
-/// __See also__: "FV", "NPER", "PMT", "RATE", 
+/// __See also__: [crate::of::fv()], [crate::of::nper()], [crate::of::pmt()], [crate::of::rate()], [crate::of::pv()], [crate::of::pv__()], 
 #[inline]
 pub fn pv_<A: Number, B: Number, C: Number, D: Number>(rate: A, nper: B, payment: C, fv: D) -> FnNumber4<A, B, C, D> {
     FnNumber4("PV", rate, nper, payment, fv)
 }
 
 /// Compute the present value (PV) of an investment.
+///
+/// [documentfoundation->PV](https://wiki.documentfoundation.org/Documentation/Calc_Functions/PV)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -2664,13 +2816,15 @@ pub fn pv_<A: Number, B: Number, C: Number, D: Number>(rate: A, nper: B, payment
 /// 
 /// If Rate is nonzero, then PV solves this equation:
 ///
-/// __See also__: "FV", "NPER", "PMT", "RATE", 
+/// __See also__: [crate::of::fv()], [crate::of::nper()], [crate::of::pmt()], [crate::of::rate()], [crate::of::pv()], [crate::of::pv_()], 
 #[inline]
 pub fn pv__<A: Number, B: Number, C: Number, D: Number, E: Number>(rate: A, nper: B, payment: C, fv: D, pay_type: E) -> FnNumber5<A, B, C, D, E> {
     FnNumber5("PV", rate, nper, payment, fv, pay_type)
 }
 
 /// Compute the interest rate per period of an investment.
+///
+/// [documentfoundation->RATE](https://wiki.documentfoundation.org/Documentation/Calc_Functions/RATE)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -2699,13 +2853,15 @@ pub fn pv__<A: Number, B: Number, C: Number, D: Number, E: Number>(rate: A, nper
 /// 
 /// RATE solves this equation:
 ///
-/// __See also__: "FV", "NPER", "PMT", "PV", 
+/// __See also__: [crate::of::fv()], [crate::of::nper()], [crate::of::pmt()], [crate::of::pv()], [crate::of::rate_()], [crate::of::rate__()], [crate::of::rate___()], 
 #[inline]
 pub fn rate<A: Number, B: Number, C: Number>(nper: A, payment: B, pv: C) -> FnNumber3<A, B, C> {
     FnNumber3("RATE", nper, payment, pv)
 }
 
 /// Compute the interest rate per period of an investment.
+///
+/// [documentfoundation->RATE](https://wiki.documentfoundation.org/Documentation/Calc_Functions/RATE)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -2734,13 +2890,15 @@ pub fn rate<A: Number, B: Number, C: Number>(nper: A, payment: B, pv: C) -> FnNu
 /// 
 /// RATE solves this equation:
 ///
-/// __See also__: "FV", "NPER", "PMT", "PV", 
+/// __See also__: [crate::of::fv()], [crate::of::nper()], [crate::of::pmt()], [crate::of::pv()], [crate::of::rate()], [crate::of::rate__()], [crate::of::rate___()], 
 #[inline]
 pub fn rate_<A: Number, B: Number, C: Number, D: Number>(nper: A, payment: B, pv: C, fv: D) -> FnNumber4<A, B, C, D> {
     FnNumber4("RATE", nper, payment, pv, fv)
 }
 
 /// Compute the interest rate per period of an investment.
+///
+/// [documentfoundation->RATE](https://wiki.documentfoundation.org/Documentation/Calc_Functions/RATE)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -2769,13 +2927,15 @@ pub fn rate_<A: Number, B: Number, C: Number, D: Number>(nper: A, payment: B, pv
 /// 
 /// RATE solves this equation:
 ///
-/// __See also__: "FV", "NPER", "PMT", "PV", 
+/// __See also__: [crate::of::fv()], [crate::of::nper()], [crate::of::pmt()], [crate::of::pv()], [crate::of::rate()], [crate::of::rate_()], [crate::of::rate___()], 
 #[inline]
 pub fn rate__<A: Number, B: Number, C: Number, D: Number, E: Number>(nper: A, payment: B, pv: C, fv: D, pay_type: E) -> FnNumber5<A, B, C, D, E> {
     FnNumber5("RATE", nper, payment, pv, fv, pay_type)
 }
 
 /// Compute the interest rate per period of an investment.
+///
+/// [documentfoundation->RATE](https://wiki.documentfoundation.org/Documentation/Calc_Functions/RATE)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -2804,13 +2964,15 @@ pub fn rate__<A: Number, B: Number, C: Number, D: Number, E: Number>(nper: A, pa
 /// 
 /// RATE solves this equation:
 ///
-/// __See also__: "FV", "NPER", "PMT", "PV", 
+/// __See also__: [crate::of::fv()], [crate::of::nper()], [crate::of::pmt()], [crate::of::pv()], [crate::of::rate()], [crate::of::rate_()], [crate::of::rate__()], 
 #[inline]
 pub fn rate___<A: Number, B: Number, C: Number, D: Number, E: Number, F: Number>(nper: A, payment: B, pv: C, fv: D, pay_type: E, guess: F) -> FnNumber6<A, B, C, D, E, F> {
     FnNumber6("RATE", nper, payment, pv, fv, pay_type, guess)
 }
 
 /// Calculates the amount received at maturity for a zero coupon bond.
+///
+/// [documentfoundation->RECEIVED](https://wiki.documentfoundation.org/Documentation/Calc_Functions/RECEIVED)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -2835,13 +2997,15 @@ pub fn rate___<A: Number, B: Number, C: Number, D: Number, E: Number, F: Number>
 /// 
 /// The returned value is:
 ///
-/// __See also__: "YEARFRAC", 
+/// __See also__: [crate::of::yearfrac()], [crate::of::received_()], 
 #[inline]
 pub fn received<A: DateTime, B: DateTime, C: Number, D: Number>(settlement: A, maturity: B, investment: C, discount: D) -> FnNumber4<A, B, C, D> {
     FnNumber4("RECEIVED", settlement, maturity, investment, discount)
 }
 
 /// Calculates the amount received at maturity for a zero coupon bond.
+///
+/// [documentfoundation->RECEIVED](https://wiki.documentfoundation.org/Documentation/Calc_Functions/RECEIVED)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -2866,13 +3030,15 @@ pub fn received<A: DateTime, B: DateTime, C: Number, D: Number>(settlement: A, m
 /// 
 /// The returned value is:
 ///
-/// __See also__: "YEARFRAC", 
+/// __See also__: [crate::of::yearfrac()], [crate::of::received()], 
 #[inline]
 pub fn received_<A: DateTime, B: DateTime, C: Number, D: Number>(settlement: A, maturity: B, investment: C, discount: D, b: YearFracMethod) -> FnNumber5<A, B, C, D, YearFracMethod> {
     FnNumber5("RECEIVED", settlement, maturity, investment, discount, b)
 }
 
 /// Returns an equivalent interest rate when an investment increases in value.
+///
+/// [documentfoundation->RRI](https://wiki.documentfoundation.org/Documentation/Calc_Functions/RRI)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -2886,7 +3052,7 @@ pub fn received_<A: DateTime, B: DateTime, C: Number, D: Number>(settlement: A, 
 /// Returns the interest rate given Nper (the number of periods), Pv (present 
 /// value), and Fv (future value), calculated as follows:
 ///
-/// __See also__: "FV", "NPER", "PMT", "PV", "RATE", 
+/// __See also__: [crate::of::fv()], [crate::of::nper()], [crate::of::pmt()], [crate::of::pv()], [crate::of::rate()], 
 #[inline]
 pub fn rri<A: Number, B: Number, C: Number>(nper: A, pv: B, fv: C) -> FnNumber3<A, B, C> {
     FnNumber3("RRI", nper, pv, fv)
@@ -2894,6 +3060,8 @@ pub fn rri<A: Number, B: Number, C: Number>(nper: A, pv: B, fv: C) -> FnNumber3<
 
 /// Compute the amount of depreciation at a given period of time using the 
 /// straight-line depreciation method.
+///
+/// [documentfoundation->SLN](https://wiki.documentfoundation.org/Documentation/Calc_Functions/SLN)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -2915,6 +3083,8 @@ pub fn rri<A: Number, B: Number, C: Number>(nper: A, pv: B, fv: C) -> FnNumber3<
 /// positive integer.
 /// 
 /// For alternative methods to compute depreciation, see DDB 6.12.14.
+///
+/// __See also__: 
 #[inline]
 pub fn sln<A: Number, B: Number, C: Number>(cost: A, salvage: B, life_time: C) -> FnNumber3<A, B, C> {
     FnNumber3("SLN", cost, salvage, life_time)
@@ -2922,6 +3092,8 @@ pub fn sln<A: Number, B: Number, C: Number>(cost: A, salvage: B, life_time: C) -
 
 /// Compute the amount of depreciation at a given period of time using the 
 /// Sum-of-the-Years'-Digits method.
+///
+/// [documentfoundation->SYD](https://wiki.documentfoundation.org/Documentation/Calc_Functions/SYD)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -2946,13 +3118,15 @@ pub fn sln<A: Number, B: Number, C: Number>(cost: A, salvage: B, life_time: C) -
 /// 
 /// For other methods of computing depreciation, see DDB 6.12.14.
 ///
-/// __See also__: "SLN", 
+/// __See also__: [crate::of::sln()], 
 #[inline]
 pub fn syd<A: Number, B: Number, C: Number, D: Number>(cost: A, salvage: B, life_time: C, period: D) -> FnNumber4<A, B, C, D> {
     FnNumber4("SYD", cost, salvage, life_time, period)
 }
 
 /// Compute the bond-equivalent yield for a treasury bill.
+///
+/// [documentfoundation->TBILLEQ](https://wiki.documentfoundation.org/Documentation/Calc_Functions/TBILLEQ)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -2977,13 +3151,15 @@ pub fn syd<A: Number, B: Number, C: Number, D: Number>(cost: A, salvage: B, life
 /// where DSM is the number of days between settlement and maturity computed 
 /// according to the 360 days per year basis (basis 2, 4.11.7)
 ///
-/// __See also__: "TBILLPRICE", "TBILLYIELD", 
+/// __See also__: [crate::of::tbillprice()], [crate::of::tbillyield()], 
 #[inline]
 pub fn tbilleq<A: DateTime, B: DateTime, C: Number>(settlement: A, maturity: B, discount: C) -> FnNumber3<A, B, C> {
     FnNumber3("TBILLEQ", settlement, maturity, discount)
 }
 
 /// Compute the price per 100 face value for a treasury bill.
+///
+/// [documentfoundation->TBILLPRICE](https://wiki.documentfoundation.org/Documentation/Calc_Functions/TBILLPRICE)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -3003,13 +3179,15 @@ pub fn tbilleq<A: DateTime, B: DateTime, C: Number>(settlement: A, maturity: B, 
 /// 
 /// •Discount: the discount rate of the treasury bill.
 ///
-/// __See also__: "TBILLEQ", "TBILLYIELD", 
+/// __See also__: [crate::of::tbilleq()], [crate::of::tbillyield()], 
 #[inline]
 pub fn tbillprice<A: DateTime, B: DateTime, C: Number>(settlement: A, maturity: B, discount: C) -> FnNumber3<A, B, C> {
     FnNumber3("TBILLPRICE", settlement, maturity, discount)
 }
 
 /// Compute the yield for a treasury bill.
+///
+/// [documentfoundation->TBILLYIELD](https://wiki.documentfoundation.org/Documentation/Calc_Functions/TBILLYIELD)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -3029,7 +3207,7 @@ pub fn tbillprice<A: DateTime, B: DateTime, C: Number>(settlement: A, maturity: 
 /// 
 /// •Price: the price of the treasury bill per 100 face value
 ///
-/// __See also__: "TBILLEQ", "TBILLPRICE", 
+/// __See also__: [crate::of::tbilleq()], [crate::of::tbillprice()], 
 #[inline]
 pub fn tbillyield<A: DateTime, B: DateTime, C: Number>(settlement: A, maturity: B, price: C) -> FnNumber3<A, B, C> {
     FnNumber3("TBILLYIELD", settlement, maturity, price)
@@ -3038,6 +3216,8 @@ pub fn tbillyield<A: DateTime, B: DateTime, C: Number>(settlement: A, maturity: 
 /// Calculates the depreciation allowance of an asset with an initial value, an 
 /// expected useful life, and a final value of salvage for a period specified, 
 /// using the variable-rate declining balance method..
+///
+/// [documentfoundation->VDB](https://wiki.documentfoundation.org/Documentation/Calc_Functions/VDB)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -3096,7 +3276,7 @@ pub fn tbillyield<A: DateTime, B: DateTime, C: Number>(settlement: A, maturity: 
 /// depreciation. If NoSwitch is TRUE, VDB never switches to straight-line 
 /// depreciation.
 ///
-/// __See also__: "DDB", "SLN", 
+/// __See also__: [crate::of::ddb()], [crate::of::sln()], [crate::of::vdb_()], [crate::of::vdb__()], 
 #[inline]
 pub fn vdb<A: Number, B: Number, C: Number, D: Number, E: Number>(cost: A, salvage: B, life_time: C, start_period: D, end_period: E) -> FnNumber5<A, B, C, D, E> {
     FnNumber5("VDB", cost, salvage, life_time, start_period, end_period)
@@ -3105,6 +3285,8 @@ pub fn vdb<A: Number, B: Number, C: Number, D: Number, E: Number>(cost: A, salva
 /// Calculates the depreciation allowance of an asset with an initial value, an 
 /// expected useful life, and a final value of salvage for a period specified, 
 /// using the variable-rate declining balance method..
+///
+/// [documentfoundation->VDB](https://wiki.documentfoundation.org/Documentation/Calc_Functions/VDB)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -3163,7 +3345,7 @@ pub fn vdb<A: Number, B: Number, C: Number, D: Number, E: Number>(cost: A, salva
 /// depreciation. If NoSwitch is TRUE, VDB never switches to straight-line 
 /// depreciation.
 ///
-/// __See also__: "DDB", "SLN", 
+/// __See also__: [crate::of::ddb()], [crate::of::sln()], [crate::of::vdb()], [crate::of::vdb__()], 
 #[inline]
 pub fn vdb_<A: Number, B: Number, C: Number, D: Number, E: Number, F: Number>(cost: A, salvage: B, life_time: C, start_period: D, end_period: E, depreciation_factor: F) -> FnNumber6<A, B, C, D, E, F> {
     FnNumber6("VDB", cost, salvage, life_time, start_period, end_period, depreciation_factor)
@@ -3172,6 +3354,8 @@ pub fn vdb_<A: Number, B: Number, C: Number, D: Number, E: Number, F: Number>(co
 /// Calculates the depreciation allowance of an asset with an initial value, an 
 /// expected useful life, and a final value of salvage for a period specified, 
 /// using the variable-rate declining balance method..
+///
+/// [documentfoundation->VDB](https://wiki.documentfoundation.org/Documentation/Calc_Functions/VDB)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -3230,7 +3414,7 @@ pub fn vdb_<A: Number, B: Number, C: Number, D: Number, E: Number, F: Number>(co
 /// depreciation. If NoSwitch is TRUE, VDB never switches to straight-line 
 /// depreciation.
 ///
-/// __See also__: "DDB", "SLN", 
+/// __See also__: [crate::of::ddb()], [crate::of::sln()], [crate::of::vdb()], [crate::of::vdb_()], 
 #[inline]
 pub fn vdb__<A: Number, B: Number, C: Number, D: Number, E: Number, F: Number, G: Logical>(cost: A, salvage: B, life_time: C, start_period: D, end_period: E, depreciation_factor: F, no_switch: G) -> FnNumber7<A, B, C, D, E, F, G> {
     FnNumber7("VDB", cost, salvage, life_time, start_period, end_period, depreciation_factor, no_switch)
@@ -3238,6 +3422,8 @@ pub fn vdb__<A: Number, B: Number, C: Number, D: Number, E: Number, F: Number, G
 
 /// Compute the internal rate of return for a non-periodic series of cash 
 /// flows.
+///
+/// [documentfoundation->XIRR](https://wiki.documentfoundation.org/Documentation/Calc_Functions/XIRR)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -3270,7 +3456,7 @@ pub fn vdb__<A: Number, B: Number, C: Number, D: Number, E: Number, F: Number, G
 /// iteration. If the implementation is unable to converge on a solution given 
 /// a particular Guess, it may return an error.
 ///
-/// __See also__: "IRR", "XNPV", 
+/// __See also__: [crate::of::irr()], [crate::of::xnpv()], [crate::of::xirr_()], 
 #[inline]
 pub fn xirr<A: Sequence, B: Sequence>(values: A, dates: B) -> FnNumber2<A, B> {
     FnNumber2("XIRR", values, dates)
@@ -3278,6 +3464,8 @@ pub fn xirr<A: Sequence, B: Sequence>(values: A, dates: B) -> FnNumber2<A, B> {
 
 /// Compute the internal rate of return for a non-periodic series of cash 
 /// flows.
+///
+/// [documentfoundation->XIRR](https://wiki.documentfoundation.org/Documentation/Calc_Functions/XIRR)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -3310,13 +3498,15 @@ pub fn xirr<A: Sequence, B: Sequence>(values: A, dates: B) -> FnNumber2<A, B> {
 /// iteration. If the implementation is unable to converge on a solution given 
 /// a particular Guess, it may return an error.
 ///
-/// __See also__: "IRR", "XNPV", 
+/// __See also__: [crate::of::irr()], [crate::of::xnpv()], [crate::of::xirr()], 
 #[inline]
 pub fn xirr_<A: Sequence, B: Sequence, C: Number>(values: A, dates: B, guess: C) -> FnNumber3<A, B, C> {
     FnNumber3("XIRR", values, dates, guess)
 }
 
 /// Compute the net present value of a series of cash flows.
+///
+/// [documentfoundation->XNPV](https://wiki.documentfoundation.org/Documentation/Calc_Functions/XNPV)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -3331,7 +3521,7 @@ pub fn xirr_<A: Sequence, B: Sequence, C: Number>(values: A, dates: B, guess: C)
 /// 
 /// All elements of Dates are of type Number.
 /// 
-/// All elements of Dates ≥ Dates[1]
+/// All elements of Dates ≥ Dates\[1\]
 ///
 /// __Semantics__:
 /// Compute the net present value for a series of cash flows which is not 
@@ -3352,13 +3542,15 @@ pub fn xirr_<A: Sequence, B: Sequence, C: Number>(values: A, dates: B, guess: C)
 /// With N being the number of elements in Values and Dates each, the formula 
 /// is:
 ///
-/// __See also__: "NPV", 
+/// __See also__: [crate::of::npv()], 
 #[inline]
 pub fn xnpv<A: Number, B: ReferenceOrArray, C: ReferenceOrArray>(rate: A, values: B, dates: C) -> FnNumber3<A, B, C> {
     FnNumber3("XNPV", rate, values, dates)
 }
 
 /// Calculate the yield of a bond.
+///
+/// [documentfoundation->YIELD](https://wiki.documentfoundation.org/Documentation/Calc_Functions/YIELD)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -3387,13 +3579,15 @@ pub fn xnpv<A: Number, B: ReferenceOrArray, C: ReferenceOrArray>(rate: A, values
 /// 
 /// •B: indicates the day-count convention to use in the calculation. 4.11.7
 ///
-/// __See also__: "PRICE", "YIELDDISC", "YIELDMAT", 
+/// __See also__: [crate::of::price()], [crate::of::yielddisc()], [crate::of::yieldmat()], [crate::of::yield__()], 
 #[inline]
 pub fn yield_<A: DateTime, B: DateTime, C: Number, D: Number, E: Number>(settlement: A, maturity: B, rate: C, price: D, redemption: E, frequency: Frequency) -> FnNumber6<A, B, C, D, E, Frequency> {
     FnNumber6("YIELD", settlement, maturity, rate, price, redemption, frequency)
 }
 
 /// Calculate the yield of a bond.
+///
+/// [documentfoundation->YIELD](https://wiki.documentfoundation.org/Documentation/Calc_Functions/YIELD)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -3422,7 +3616,7 @@ pub fn yield_<A: DateTime, B: DateTime, C: Number, D: Number, E: Number>(settlem
 /// 
 /// •B: indicates the day-count convention to use in the calculation. 4.11.7
 ///
-/// __See also__: "PRICE", "YIELDDISC", "YIELDMAT", 
+/// __See also__: [crate::of::price()], [crate::of::yielddisc()], [crate::of::yieldmat()], [crate::of::yield_()], 
 #[inline]
 pub fn yield__<A: DateTime, B: DateTime, C: Number, D: Number, E: Number>(settlement: A, maturity: B, rate: C, price: D, redemption: E, frequency: Frequency, b: YearFracMethod) -> FnNumber7<A, B, C, D, E, Frequency, YearFracMethod> {
     FnNumber7("YIELD", settlement, maturity, rate, price, redemption, frequency, b)
@@ -3430,6 +3624,8 @@ pub fn yield__<A: DateTime, B: DateTime, C: Number, D: Number, E: Number>(settle
 
 /// Calculate the yield of a discounted security per 100 currency units of face 
 /// value.
+///
+/// [documentfoundation->YIELDDISC](https://wiki.documentfoundation.org/Documentation/Calc_Functions/YIELDDISC)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -3454,7 +3650,7 @@ pub fn yield__<A: DateTime, B: DateTime, C: Number, D: Number, E: Number>(settle
 /// 
 /// The return value is
 ///
-/// __See also__: "PRICEDISC", "YEARFRAC", 
+/// __See also__: [crate::of::pricedisc()], [crate::of::yearfrac()], [crate::of::yielddisc_()], 
 #[inline]
 pub fn yielddisc<A: DateTime, B: DateTime, C: Number, D: Number>(settlement: A, maturity: B, price: C, redemption: D) -> FnNumber4<A, B, C, D> {
     FnNumber4("YIELDDISC", settlement, maturity, price, redemption)
@@ -3462,6 +3658,8 @@ pub fn yielddisc<A: DateTime, B: DateTime, C: Number, D: Number>(settlement: A, 
 
 /// Calculate the yield of a discounted security per 100 currency units of face 
 /// value.
+///
+/// [documentfoundation->YIELDDISC](https://wiki.documentfoundation.org/Documentation/Calc_Functions/YIELDDISC)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -3486,7 +3684,7 @@ pub fn yielddisc<A: DateTime, B: DateTime, C: Number, D: Number>(settlement: A, 
 /// 
 /// The return value is
 ///
-/// __See also__: "PRICEDISC", "YEARFRAC", 
+/// __See also__: [crate::of::pricedisc()], [crate::of::yearfrac()], [crate::of::yielddisc()], 
 #[inline]
 pub fn yielddisc_<A: DateTime, B: DateTime, C: Number, D: Number>(settlement: A, maturity: B, price: C, redemption: D, b: YearFracMethod) -> FnNumber5<A, B, C, D, YearFracMethod> {
     FnNumber5("YIELDDISC", settlement, maturity, price, redemption, b)
@@ -3494,6 +3692,8 @@ pub fn yielddisc_<A: DateTime, B: DateTime, C: Number, D: Number>(settlement: A,
 
 /// Calculate the yield of the security that pays interest on the maturity 
 /// date.
+///
+/// [documentfoundation->YIELDMAT](https://wiki.documentfoundation.org/Documentation/Calc_Functions/YIELDMAT)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -3518,7 +3718,7 @@ pub fn yielddisc_<A: DateTime, B: DateTime, C: Number, D: Number>(settlement: A,
 /// 
 /// •B: indicates the day-count convention to use in the calculation. 4.11.7
 ///
-/// __See also__: "PRICE", "YIELD", "YIELDDISC", 
+/// __See also__: [crate::of::price()], [crate::of::yield_()], [crate::of::yielddisc()], [crate::of::yieldmat_()], 
 #[inline]
 pub fn yieldmat<A: DateTime, B: DateTime, C: DateTime, D: Number, E: Number>(settlement: A, maturity: B, issue: C, rate: D, price: E) -> FnNumber5<A, B, C, D, E> {
     FnNumber5("YIELDMAT", settlement, maturity, issue, rate, price)
@@ -3526,6 +3726,8 @@ pub fn yieldmat<A: DateTime, B: DateTime, C: DateTime, D: Number, E: Number>(set
 
 /// Calculate the yield of the security that pays interest on the maturity 
 /// date.
+///
+/// [documentfoundation->YIELDMAT](https://wiki.documentfoundation.org/Documentation/Calc_Functions/YIELDMAT)
 ///
 /// __Syntax__: 
 /// ```ods
@@ -3550,8 +3752,112 @@ pub fn yieldmat<A: DateTime, B: DateTime, C: DateTime, D: Number, E: Number>(set
 /// 
 /// •B: indicates the day-count convention to use in the calculation. 4.11.7
 ///
-/// __See also__: "PRICE", "YIELD", "YIELDDISC", 
+/// __See also__: [crate::of::price()], [crate::of::yield_()], [crate::of::yielddisc()], [crate::of::yieldmat()], 
 #[inline]
 pub fn yieldmat_<A: DateTime, B: DateTime, C: DateTime, D: Number, E: Number>(settlement: A, maturity: B, issue: C, rate: D, price: E, b: YearFracMethod) -> FnNumber6<A, B, C, D, E, YearFracMethod> {
     FnNumber6("YIELDMAT", settlement, maturity, issue, rate, price, b)
+}
+
+/// Calculates the depreciation (or amortization) of an asset during a specific 
+/// period using a degressive depreciation model.
+/// 
+/// This method depreciates at a higher rate at the beginning and the rate 
+/// decreases over the useful life of the asset. If the asset is acquired 
+/// part-way through an accounting period, then depreciation for that period is 
+/// calculated on a pro rata basis. AMORDEGRC is intended for users of the 
+/// French accounting system.
+///
+/// [documentfoundation->AMORDEGRC](https://wiki.documentfoundation.org/Documentation/Calc_Functions/AMORDEGRC)
+///
+/// __Syntax__: 
+/// ```ods
+///     AMORDEGRC( Cost: Number; Date_Purchased: Date; First_Period: Date; Salvage: Number; Period: Integer; Rate: Number )
+/// ```
+///
+/// __Info2__:
+/// Returns a non-negative real number that is the depreciation of the asset 
+/// during the specified period, expressed in the same currency units as the 
+/// asset's cost and salvage values.
+///
+/// __Semantics__:
+/// 
+/// Cost is a positive real number, or a reference to a cell containing that 
+/// number, which is the cost or value of the asset before depreciation.
+/// Date Purchased is a date, or a reference to a cell containing that date, 
+/// which is the start date of the depreciation. For a tangible asset, this is 
+/// usually the date of acquisition.
+/// First Period is a date, or a reference to a cell containing that date, 
+/// which is the end date of the first accounting period during which 
+/// depreciation is calculated.
+/// Salvage is a positive real number, or a reference to a cell containing that 
+/// number, which is the residual value of the asset at the end of its 
+/// depreciated life. Salvage must be in the same currency units as Cost.
+/// Period is a non-negative integer, or a reference to a cell containing that 
+/// integer, which specifies the accounting period for which the depreciation 
+/// value is returned. The value 0 indicates the period that ends on the date 
+/// given by First Period. Subsequent accounting periods are numbered 1, 2, 3, 
+/// and so on.
+/// Rate is a positive real number (expressed as a percentage, such as 2.5%, or 
+/// a decimal fraction, such as 0.025), or a reference to a cell containing 
+/// that number, which is the annual rate at which the value of the asset is 
+/// depreciated.
+/// Basis is an integer in the range 0 to 4, or a reference to a cell 
+/// containing that integer, which indicates how the year is to be calculated.
+///
+/// __See also__: [crate::of::amordegrc_()], 
+#[inline]
+pub fn amordegrc<A: Number, B: DateTime, C: DateTime, D: Number, E: Number, F: Number>(cost: A, date_purchased: B, first_period: C, salvage: D, period: E, rate: F) -> FnNumber6<A, B, C, D, E, F> {
+    FnNumber6("AMORDEGRC", cost, date_purchased, first_period, salvage, period, rate)
+}
+
+/// Calculates the depreciation (or amortization) of an asset during a specific 
+/// period using a degressive depreciation model.
+/// 
+/// This method depreciates at a higher rate at the beginning and the rate 
+/// decreases over the useful life of the asset. If the asset is acquired 
+/// part-way through an accounting period, then depreciation for that period is 
+/// calculated on a pro rata basis. AMORDEGRC is intended for users of the 
+/// French accounting system.
+///
+/// [documentfoundation->AMORDEGRC](https://wiki.documentfoundation.org/Documentation/Calc_Functions/AMORDEGRC)
+///
+/// __Syntax__: 
+/// ```ods
+///     AMORDEGRC( Cost: Number; Date_Purchased: Date; First_Period: Date; Salvage: Number; Period: Integer; Rate: Number; B: Basis )
+/// ```
+///
+/// __Info2__:
+/// Returns a non-negative real number that is the depreciation of the asset 
+/// during the specified period, expressed in the same currency units as the 
+/// asset's cost and salvage values.
+///
+/// __Semantics__:
+/// 
+/// Cost is a positive real number, or a reference to a cell containing that 
+/// number, which is the cost or value of the asset before depreciation.
+/// Date Purchased is a date, or a reference to a cell containing that date, 
+/// which is the start date of the depreciation. For a tangible asset, this is 
+/// usually the date of acquisition.
+/// First Period is a date, or a reference to a cell containing that date, 
+/// which is the end date of the first accounting period during which 
+/// depreciation is calculated.
+/// Salvage is a positive real number, or a reference to a cell containing that 
+/// number, which is the residual value of the asset at the end of its 
+/// depreciated life. Salvage must be in the same currency units as Cost.
+/// Period is a non-negative integer, or a reference to a cell containing that 
+/// integer, which specifies the accounting period for which the depreciation 
+/// value is returned. The value 0 indicates the period that ends on the date 
+/// given by First Period. Subsequent accounting periods are numbered 1, 2, 3, 
+/// and so on.
+/// Rate is a positive real number (expressed as a percentage, such as 2.5%, or 
+/// a decimal fraction, such as 0.025), or a reference to a cell containing 
+/// that number, which is the annual rate at which the value of the asset is 
+/// depreciated.
+/// Basis is an integer in the range 0 to 4, or a reference to a cell 
+/// containing that integer, which indicates how the year is to be calculated.
+///
+/// __See also__: [crate::of::amordegrc()], 
+#[inline]
+pub fn amordegrc_<A: Number, B: DateTime, C: DateTime, D: Number, E: Number, F: Number>(cost: A, date_purchased: B, first_period: C, salvage: D, period: E, rate: F, b: YearFracMethod) -> FnNumber7<A, B, C, D, E, F, YearFracMethod> {
+    FnNumber7("AMORDEGRC", cost, date_purchased, first_period, salvage, period, rate, b)
 }
