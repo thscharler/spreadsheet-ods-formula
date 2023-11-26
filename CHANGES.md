@@ -1,3 +1,6 @@
+# 0.19.1
+
+Move cell! macro to crate spreadsheet-ods.
 
 # 0.19.0
 

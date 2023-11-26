@@ -1445,22 +1445,3 @@ pub fn formula<T: Any>(f: T) -> String {
     f.formula(&mut buf);
     buf
 }
-
-// -----------------------------------------------------------------------
-
-/// Macro for cell-references.
-#[macro_export]
-macro_rules! cell {
-    ($row:expr, $col:expr) => {
-        spreadsheet_ods::CellRef::local($row, $col)
-    };
-    ($row:expr, $col:expr, $row2:expr, $col2:expr) => {
-        spreadsheet_ods::CellRange::local($row, $col, $row2, $col2)
-    };
-    ($table:expr => $row:expr, $col:expr) => {
-        spreadsheet_ods::CellRef::remote($table, $row, $col)
-    };
-    ($table:expr => $row:expr, $col:expr, $row2:expr, $col2:expr) => {
-        spreadsheet_ods::CellRange::remote($table, $row, $col, $row2, $col2)
-    };
-}
