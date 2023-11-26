@@ -1998,3 +1998,243 @@ pub fn aggregate<A: Sequence>(function: AggregateFunction, option: AggregateOpti
 pub fn aggregate_<A: Sequence, B: Number>(function: AggregateFunction, option: AggregateOption, args: A, k: B) -> FnNumber4<AggregateFunction, AggregateOption, A, B> {
     FnNumber4("AGGREGATE", function, option, args, k)
 }
+
+/// Rounds a number to the nearest multiple of a significance value. In most 
+/// cases, the number is rounded up (toward +∞). However, a mode parameter is 
+/// provided and when this is set to a non-zero value, then negative numbers 
+/// are rounded down (toward -∞).
+///
+/// [documentfoundation->CEILING.MATH](https://wiki.documentfoundation.org/Documentation/Calc_Functions/CEILING.MATH)
+///
+/// __Syntax__: 
+/// ```ods
+///     CEILING.MATH( Number: Number )
+/// ```
+///
+/// __Info2__:
+/// Returns a real number that is the rounded value and is an integer multiple 
+/// of the significance value.
+///
+/// __Semantics__:
+/// 
+/// Number is a real number, or a reference to a cell containing that number, 
+/// that is the value to be rounded.
+/// 
+/// Significance is a real number, or a reference to a cell containing that 
+/// number, that is the significance value to be used. If omitted, Significance 
+/// defaults to 1. The sign of Significance is ignored.
+/// 
+/// Mode is a real number, or a reference to a cell containing that number, 
+/// that is a Boolean mode indicator. Mode is only effective when Number is 
+/// negative. If Mode is present and equal to any non-zero value (including 
+/// TRUE), negative numbers are rounded down (toward -∞). If Mode is omitted, 
+/// or equal to zero or FALSE, negative numbers are rounded up (toward +∞).
+/// 
+/// If any argument is non-numeric, then CEILING.MATH reports a #VALUE! error.
+/// If either Number or Significance is equal to 0, then CEILING.MATH returns 
+/// 0.
+/// 
+/// Info:
+/// Details specific to CEILING.MATH function
+/// 
+/// With Significance set to -1 or +1, or defaulted to 1, and Mode set or 
+/// defaulted to 0 or FALSE, CEILING.MATH provides functionality that 
+/// implements the standard mathematical definition of a ceiling value.
+/// 
+/// CEILING.MATH is similar to the CEILING function, the difference between the 
+/// two lying in the interpretation of the Significance argument. The CEILING 
+/// function requires the Significance and Number arguments to have the same 
+/// sign, whereas for CEILING.MATH the sign of the Significance argument is 
+/// ignored.
+///
+/// __See also__: [crate::of::ceiling_math_()], [crate::of::ceiling_math__()], 
+#[inline]
+pub fn ceiling_math<A: Number>(number: A) -> FnNumber1<A> {
+    FnNumber1("CEILING.MATH", number)
+}
+
+/// Rounds a number to the nearest multiple of a significance value. In most 
+/// cases, the number is rounded up (toward +∞). However, a mode parameter is 
+/// provided and when this is set to a non-zero value, then negative numbers 
+/// are rounded down (toward -∞).
+///
+/// [documentfoundation->CEILING.MATH](https://wiki.documentfoundation.org/Documentation/Calc_Functions/CEILING.MATH)
+///
+/// __Syntax__: 
+/// ```ods
+///     CEILING.MATH( Number: Number; Significance: Number )
+/// ```
+///
+/// __Info2__:
+/// Returns a real number that is the rounded value and is an integer multiple 
+/// of the significance value.
+///
+/// __Semantics__:
+/// 
+/// Number is a real number, or a reference to a cell containing that number, 
+/// that is the value to be rounded.
+/// 
+/// Significance is a real number, or a reference to a cell containing that 
+/// number, that is the significance value to be used. If omitted, Significance 
+/// defaults to 1. The sign of Significance is ignored.
+/// 
+/// Mode is a real number, or a reference to a cell containing that number, 
+/// that is a Boolean mode indicator. Mode is only effective when Number is 
+/// negative. If Mode is present and equal to any non-zero value (including 
+/// TRUE), negative numbers are rounded down (toward -∞). If Mode is omitted, 
+/// or equal to zero or FALSE, negative numbers are rounded up (toward +∞).
+/// 
+/// If any argument is non-numeric, then CEILING.MATH reports a #VALUE! error.
+/// If either Number or Significance is equal to 0, then CEILING.MATH returns 
+/// 0.
+/// 
+/// Info:
+/// Details specific to CEILING.MATH function
+/// 
+/// With Significance set to -1 or +1, or defaulted to 1, and Mode set or 
+/// defaulted to 0 or FALSE, CEILING.MATH provides functionality that 
+/// implements the standard mathematical definition of a ceiling value.
+/// 
+/// CEILING.MATH is similar to the CEILING function, the difference between the 
+/// two lying in the interpretation of the Significance argument. The CEILING 
+/// function requires the Significance and Number arguments to have the same 
+/// sign, whereas for CEILING.MATH the sign of the Significance argument is 
+/// ignored.
+///
+/// __See also__: [crate::of::ceiling_math()], [crate::of::ceiling_math__()], 
+#[inline]
+pub fn ceiling_math_<A: Number, B: Number>(number: A, significance: B) -> FnNumber2<A, B> {
+    FnNumber2("CEILING.MATH", number, significance)
+}
+
+/// Rounds a number to the nearest multiple of a significance value. In most 
+/// cases, the number is rounded up (toward +∞). However, a mode parameter is 
+/// provided and when this is set to a non-zero value, then negative numbers 
+/// are rounded down (toward -∞).
+///
+/// [documentfoundation->CEILING.MATH](https://wiki.documentfoundation.org/Documentation/Calc_Functions/CEILING.MATH)
+///
+/// __Syntax__: 
+/// ```ods
+///     CEILING.MATH( Number: Number; Significance: Number; Mode: Number )
+/// ```
+///
+/// __Info2__:
+/// Returns a real number that is the rounded value and is an integer multiple 
+/// of the significance value.
+///
+/// __Semantics__:
+/// 
+/// Number is a real number, or a reference to a cell containing that number, 
+/// that is the value to be rounded.
+/// 
+/// Significance is a real number, or a reference to a cell containing that 
+/// number, that is the significance value to be used. If omitted, Significance 
+/// defaults to 1. The sign of Significance is ignored.
+/// 
+/// Mode is a real number, or a reference to a cell containing that number, 
+/// that is a Boolean mode indicator. Mode is only effective when Number is 
+/// negative. If Mode is present and equal to any non-zero value (including 
+/// TRUE), negative numbers are rounded down (toward -∞). If Mode is omitted, 
+/// or equal to zero or FALSE, negative numbers are rounded up (toward +∞).
+/// 
+/// If any argument is non-numeric, then CEILING.MATH reports a #VALUE! error.
+/// If either Number or Significance is equal to 0, then CEILING.MATH returns 
+/// 0.
+/// 
+/// Info:
+/// Details specific to CEILING.MATH function
+/// 
+/// With Significance set to -1 or +1, or defaulted to 1, and Mode set or 
+/// defaulted to 0 or FALSE, CEILING.MATH provides functionality that 
+/// implements the standard mathematical definition of a ceiling value.
+/// 
+/// CEILING.MATH is similar to the CEILING function, the difference between the 
+/// two lying in the interpretation of the Significance argument. The CEILING 
+/// function requires the Significance and Number arguments to have the same 
+/// sign, whereas for CEILING.MATH the sign of the Significance argument is 
+/// ignored.
+///
+/// __See also__: [crate::of::ceiling_math()], [crate::of::ceiling_math_()], 
+#[inline]
+pub fn ceiling_math__<A: Number, B: Number, C: Number>(number: A, significance: B, mode: C) -> FnNumber3<A, B, C> {
+    FnNumber3("CEILING.MATH", number, significance, mode)
+}
+
+/// Rounds a number to the nearest multiple of a significance value. In all 
+/// cases, the number is rounded up (toward +∞).
+///
+/// [documentfoundation->CEILING.PRECISE](https://wiki.documentfoundation.org/Documentation/Calc_Functions/CEILING.PRECISE)
+///
+/// __Syntax__: 
+/// ```ods
+///     CEILING.PRECISE( Number: Number )
+/// ```
+///
+/// __Info2__:
+/// Returns a real number that is the rounded value and is an integer multiple 
+/// of the significance value.
+///
+/// __See also__: [crate::of::ceiling_precise_()], 
+#[inline]
+pub fn ceiling_precise<A: Number>(number: A) -> FnNumber1<A> {
+    FnNumber1("CEILING.PRECISE", number)
+}
+
+/// Rounds a number to the nearest multiple of a significance value. In all 
+/// cases, the number is rounded up (toward +∞).
+///
+/// [documentfoundation->CEILING.PRECISE](https://wiki.documentfoundation.org/Documentation/Calc_Functions/CEILING.PRECISE)
+///
+/// __Syntax__: 
+/// ```ods
+///     CEILING.PRECISE( Number: Number; Significance: Number )
+/// ```
+///
+/// __Info2__:
+/// Returns a real number that is the rounded value and is an integer multiple 
+/// of the significance value.
+///
+/// __See also__: [crate::of::ceiling_precise()], 
+#[inline]
+pub fn ceiling_precise_<A: Number, B: Number>(number: A, significance: B) -> FnNumber2<A, B> {
+    FnNumber2("CEILING.PRECISE", number, significance)
+}
+
+/// Rounds a number to the nearest multiple of a significance value. The 
+/// direction of rounding is dependent on the signs of the funtion's two 
+/// arguments.
+///
+/// [documentfoundation->CEILING.XCL](https://wiki.documentfoundation.org/Documentation/Calc_Functions/CEILING.XCL)
+///
+/// __Syntax__: 
+/// ```ods
+///     CEILING.XCL( Number: Number; Significance: Number )
+/// ```
+///
+/// __Info2__:
+/// Returns a real number that is the rounded value and is an integer multiple 
+/// of the significance value.
+///
+/// __Semantics__:
+/// 
+/// Number is a real number, or a reference to a cell containing that number, 
+/// that is the value to be rounded.
+/// 
+/// Significance is a real number, or a reference to a cell containing that 
+/// number, that is the significance value to be used.
+/// 
+/// If either Number or Significance is non-numeric, then CEILING.XCL reports a 
+/// #VALUE! error.
+/// If either Number or Significance is equal to 0, then CEILING.XCL returns 0.
+/// If Number is positive and Significance is negative, then CEILING.XCL 
+/// reports an invalid argument error (Err:502).
+/// 
+/// The signs of the Number and Significance arguments define the direction of 
+/// rounding as defined in the following table.
+///
+/// __See also__: 
+#[inline]
+pub fn ceiling_xcl<A: Number, B: Number>(number: A, significance: B) -> FnNumber2<A, B> {
+    FnNumber2("CEILING.XCL", number, significance)
+}

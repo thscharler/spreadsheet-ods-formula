@@ -3790,97 +3790,27 @@ pub fn ztest_<A: Sequence, B: Number, C: Number>(sample: A, mean: B, sigma: C) -
 /// 
 /// The formula for B is:
 /// 
-/// <math xmlns="http://www.w3.org/1998/Math/MathML">
-/// <mstyle displaystyle="true" scriptlevel="0">
-/// <mrow>
-/// <mtext>B</mtext>
-/// <mo stretchy="false">(</mo>
-/// <mi>n</mi>
-/// <mo>;</mo>
-/// <mstyle scriptlevel="0">
-/// <mspace width="mediummathspace"></mspace>
-/// </mstyle>
-/// <mi>p</mi>
-/// <mo>;</mo>
-/// <mstyle scriptlevel="0">
-/// <mspace width="mediummathspace"></mspace>
-/// </mstyle>
-/// <mi>k</mi>
-/// <mn>1</mn>
-/// <mo>;</mo>
-/// <mstyle scriptlevel="0">
-/// <mspace width="mediummathspace"></mspace>
-/// </mstyle>
-/// <mi>k</mi>
-/// <mn>2</mn>
-/// <mo stretchy="false">)</mo>
-/// <mtext>&#xA0;</mtext>
-/// <mo>=</mo>
-/// <mtext>&#xA0;</mtext>
-/// <munderover>
-/// <mo data-mjx-texclass="OP">&#x2211;</mo>
-/// <mrow>
-/// <mi>i</mi>
-/// <mo>=</mo>
-/// <mi>k</mi>
-/// <mn>1</mn>
-/// </mrow>
-/// <mrow>
-/// <mi>k</mi>
-/// <mn>2</mn>
-/// </mrow>
-/// </munderover>
-/// <mfrac>
-/// <mrow>
-/// <mi>n</mi>
-/// <mo>!</mo>
-/// </mrow>
-/// <mrow>
-/// <mi>i</mi>
-/// <mo>!</mo>
-/// <mo stretchy="false">(</mo>
-/// <mi>n</mi>
-/// <mo>&#x2212;</mo>
-/// <mi>i</mi>
-/// <mo stretchy="false">)</mo>
-/// <mo>!</mo>
-/// </mrow>
-/// </mfrac>
-/// <mstyle scriptlevel="0">
-/// <mspace width="mediummathspace"></mspace>
-/// </mstyle>
-/// <mo>&#xD7;</mo>
-/// <mstyle scriptlevel="0">
-/// <mspace width="mediummathspace"></mspace>
-/// </mstyle>
-/// <msup>
-/// <mi>p</mi>
-/// <mrow>
-/// <mi>i</mi>
-/// </mrow>
-/// </msup>
-/// <mstyle scriptlevel="0">
-/// <mspace width="mediummathspace"></mspace>
-/// </mstyle>
-/// <mo>&#xD7;</mo>
-/// <mstyle scriptlevel="0">
-/// <mspace width="mediummathspace"></mspace>
-/// </mstyle>
-/// <mo stretchy="false">(</mo>
-/// <mn>1</mn>
-/// <mo>&#x2212;</mo>
-/// <mi>p</mi>
-/// <msup>
-/// <mo stretchy="false">)</mo>
-/// <mrow>
-/// <mi>n</mi>
-/// <mo>&#x2212;</mo>
-/// <mi>i</mi>
-/// </mrow>
-/// </msup>
-/// </mrow>
-/// </mstyle>
-/// </math>
+/// <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle 
+/// displaystyle="true" scriptlevel="0"><mrow><mtext>B</mtext><mo 
+/// stretchy="false">(</mo><mi>n</mi><mo>;</mo><mstyle scriptlevel="0"><mspace 
+/// width="mediummathspace"></mspace></mstyle><mi>p</mi><mo>;</mo><mstyle 
+/// scriptlevel="0"><mspace 
+/// width="mediummathspace"></mspace></mstyle><mi>k</mi><mn>1</mn><mo>;</mo><mstyle 
+/// scriptlevel="0"><mspace 
+/// width="mediummathspace"></mspace></mstyle><mi>k</mi><mn>2</mn><mo 
+/// stretchy="false">)</mo><mtext>&#xA0;</mtext><mo>=</mo><mtext>&#xA0;</mtext><munderover><mo 
+/// data-mjx-texclass="OP">&#x2211;</mo><mrow><mi>i</mi><mo>=</mo><mi>k</mi><mn>1</mn></mrow><mrow><mi>k</mi><mn>2</mn></mrow></munderover><mfrac><mrow><mi>n</mi><mo>!</mo></mrow><mrow><mi>i</mi><mo>!</mo><mo 
+/// stretchy="false">(</mo><mi>n</mi><mo>&#x2212;</mo><mi>i</mi><mo 
+/// stretchy="false">)</mo><mo>!</mo></mrow></mfrac><mstyle 
+/// scriptlevel="0"><mspace 
+/// width="mediummathspace"></mspace></mstyle><mo>&#xD7;</mo><mstyle 
+/// scriptlevel="0"><mspace 
+/// width="mediummathspace"></mspace></mstyle><msup><mi>p</mi><mrow><mi>i</mi></mrow></msup><mstyle 
+/// scriptlevel="0"><mspace 
+/// width="mediummathspace"></mspace></mstyle><mo>&#xD7;</mo><mstyle 
+/// scriptlevel="0"><mspace width="mediummathspace"></mspace></mstyle><mo 
+/// stretchy="false">(</mo><mn>1</mn><mo>&#x2212;</mo><mi>p</mi><msup><mo 
+/// stretchy="false">)</mo><mrow><mi>n</mi><mo>&#x2212;</mo><mi>i</mi></mrow></msup></mrow></mstyle></math>
 /// 
 /// If the final argument (T 2) is omitted, then set k2 to the value of k1 in 
 /// this equation, effectively removing the summation operation.
@@ -3947,97 +3877,27 @@ pub fn b<A: Number, B: Number, C: Number>(trials: A, s_p: B, t_1: C) -> FnNumber
 /// 
 /// The formula for B is:
 /// 
-/// <math xmlns="http://www.w3.org/1998/Math/MathML">
-/// <mstyle displaystyle="true" scriptlevel="0">
-/// <mrow>
-/// <mtext>B</mtext>
-/// <mo stretchy="false">(</mo>
-/// <mi>n</mi>
-/// <mo>;</mo>
-/// <mstyle scriptlevel="0">
-/// <mspace width="mediummathspace"></mspace>
-/// </mstyle>
-/// <mi>p</mi>
-/// <mo>;</mo>
-/// <mstyle scriptlevel="0">
-/// <mspace width="mediummathspace"></mspace>
-/// </mstyle>
-/// <mi>k</mi>
-/// <mn>1</mn>
-/// <mo>;</mo>
-/// <mstyle scriptlevel="0">
-/// <mspace width="mediummathspace"></mspace>
-/// </mstyle>
-/// <mi>k</mi>
-/// <mn>2</mn>
-/// <mo stretchy="false">)</mo>
-/// <mtext>&#xA0;</mtext>
-/// <mo>=</mo>
-/// <mtext>&#xA0;</mtext>
-/// <munderover>
-/// <mo data-mjx-texclass="OP">&#x2211;</mo>
-/// <mrow>
-/// <mi>i</mi>
-/// <mo>=</mo>
-/// <mi>k</mi>
-/// <mn>1</mn>
-/// </mrow>
-/// <mrow>
-/// <mi>k</mi>
-/// <mn>2</mn>
-/// </mrow>
-/// </munderover>
-/// <mfrac>
-/// <mrow>
-/// <mi>n</mi>
-/// <mo>!</mo>
-/// </mrow>
-/// <mrow>
-/// <mi>i</mi>
-/// <mo>!</mo>
-/// <mo stretchy="false">(</mo>
-/// <mi>n</mi>
-/// <mo>&#x2212;</mo>
-/// <mi>i</mi>
-/// <mo stretchy="false">)</mo>
-/// <mo>!</mo>
-/// </mrow>
-/// </mfrac>
-/// <mstyle scriptlevel="0">
-/// <mspace width="mediummathspace"></mspace>
-/// </mstyle>
-/// <mo>&#xD7;</mo>
-/// <mstyle scriptlevel="0">
-/// <mspace width="mediummathspace"></mspace>
-/// </mstyle>
-/// <msup>
-/// <mi>p</mi>
-/// <mrow>
-/// <mi>i</mi>
-/// </mrow>
-/// </msup>
-/// <mstyle scriptlevel="0">
-/// <mspace width="mediummathspace"></mspace>
-/// </mstyle>
-/// <mo>&#xD7;</mo>
-/// <mstyle scriptlevel="0">
-/// <mspace width="mediummathspace"></mspace>
-/// </mstyle>
-/// <mo stretchy="false">(</mo>
-/// <mn>1</mn>
-/// <mo>&#x2212;</mo>
-/// <mi>p</mi>
-/// <msup>
-/// <mo stretchy="false">)</mo>
-/// <mrow>
-/// <mi>n</mi>
-/// <mo>&#x2212;</mo>
-/// <mi>i</mi>
-/// </mrow>
-/// </msup>
-/// </mrow>
-/// </mstyle>
-/// </math>
+/// <math xmlns="http://www.w3.org/1998/Math/MathML"><mstyle 
+/// displaystyle="true" scriptlevel="0"><mrow><mtext>B</mtext><mo 
+/// stretchy="false">(</mo><mi>n</mi><mo>;</mo><mstyle scriptlevel="0"><mspace 
+/// width="mediummathspace"></mspace></mstyle><mi>p</mi><mo>;</mo><mstyle 
+/// scriptlevel="0"><mspace 
+/// width="mediummathspace"></mspace></mstyle><mi>k</mi><mn>1</mn><mo>;</mo><mstyle 
+/// scriptlevel="0"><mspace 
+/// width="mediummathspace"></mspace></mstyle><mi>k</mi><mn>2</mn><mo 
+/// stretchy="false">)</mo><mtext>&#xA0;</mtext><mo>=</mo><mtext>&#xA0;</mtext><munderover><mo 
+/// data-mjx-texclass="OP">&#x2211;</mo><mrow><mi>i</mi><mo>=</mo><mi>k</mi><mn>1</mn></mrow><mrow><mi>k</mi><mn>2</mn></mrow></munderover><mfrac><mrow><mi>n</mi><mo>!</mo></mrow><mrow><mi>i</mi><mo>!</mo><mo 
+/// stretchy="false">(</mo><mi>n</mi><mo>&#x2212;</mo><mi>i</mi><mo 
+/// stretchy="false">)</mo><mo>!</mo></mrow></mfrac><mstyle 
+/// scriptlevel="0"><mspace 
+/// width="mediummathspace"></mspace></mstyle><mo>&#xD7;</mo><mstyle 
+/// scriptlevel="0"><mspace 
+/// width="mediummathspace"></mspace></mstyle><msup><mi>p</mi><mrow><mi>i</mi></mrow></msup><mstyle 
+/// scriptlevel="0"><mspace 
+/// width="mediummathspace"></mspace></mstyle><mo>&#xD7;</mo><mstyle 
+/// scriptlevel="0"><mspace width="mediummathspace"></mspace></mstyle><mo 
+/// stretchy="false">(</mo><mn>1</mn><mo>&#x2212;</mo><mi>p</mi><msup><mo 
+/// stretchy="false">)</mo><mrow><mi>n</mi><mo>&#x2212;</mo><mi>i</mi></mrow></msup></mrow></mstyle></math>
 /// 
 /// If the final argument (T 2) is omitted, then set k2 to the value of k1 in 
 /// this equation, effectively removing the summation operation.
@@ -4046,4 +3906,547 @@ pub fn b<A: Number, B: Number, C: Number>(trials: A, s_p: B, t_1: C) -> FnNumber
 #[inline]
 pub fn b_<A: Number, B: Number, C: Number, D: Number>(trials: A, s_p: B, t_1: C, t_2: D) -> FnNumber4<A, B, C, D> {
     FnNumber4("B", trials, s_p, t_1, t_2)
+}
+
+/// Calculates beta distribution values from either the probability density 
+/// function or the cumulative distribution function.
+/// 
+/// The beta distribution is a family of continuous probability distributions 
+/// that can be used to model random variables that lie within finite bounds. 
+/// The distribution has two characteristic positive real numbers, usually 
+/// denoted as alpha (α) and beta (β), that control its shape. In many cases 
+/// the beta distribution is defined on the range [0, 1] but in the more 
+/// general case can be defined on a range [a, b], where a and b are the lower 
+/// and upper bounds of the distribution (a < b).
+///
+/// [documentfoundation->BETA.DIST](https://wiki.documentfoundation.org/Documentation/Calc_Functions/BETA.DIST)
+///
+/// __Syntax__: 
+/// ```ods
+///     BETA.DIST( Number: Number; Alpha: Number; Beta: Number; Cumulative: Logical )
+/// ```
+///
+/// __Info2__:
+/// Returns a non-negative real number, which is the beta distribution value 
+/// for the given arguments. For the probability density function, the value 
+/// returned lies in the range [0, +∞). For the cumulative distribution 
+/// function, the value returned lies in the range [0, 1].
+///
+/// __Semantics__:
+/// 
+/// Number is a real number, or a reference to a cell containing that number, 
+/// which is the value of the random variable that is to be used in the 
+/// calculation. Number must lie in the range [Start, End].
+/// 
+/// Alpha is a positive real number, or a reference to a cell containing that 
+/// number, which is the value of one of the two parameters that control the 
+/// shape of the beta distribution.
+/// 
+/// Beta is a positive real number, or a reference to a cell containing that 
+/// number, which is the value of the second of the two parameters that control 
+/// the shape of the beta distribution.
+/// 
+/// Cumulative is a logical value, or a reference to a cell containing that 
+/// value, that determines whether the required probability is taken from the 
+/// probability density function or the cumulative distribution function. If 
+/// Cumulative is set to 0 or FALSE, a value from the probability density 
+/// function is calculated. For any other values of Cumulative, a value from 
+/// the cumulative distribution function is calculated.
+/// 
+/// Start is a real number, or a reference to a cell containing that number, 
+/// which is the lower bound of the distribution. If omitted, the default value 
+/// of 0.0 is used.
+/// 
+/// End is a real number, or a reference to a cell containing that number, 
+/// which is the upper bound of the distribution. If omitted, the default value 
+/// of 1.0 is used.
+/// 
+/// If any of Number, Alpha, Beta, Start, or End is non-numeric, then BETA.DIST 
+/// reports a #VALUE! error.
+/// If either Alpha or Beta is less than or equal to 0.0, then BETA.DIST 
+/// reports an invalid argument error (Err:502).
+/// If Number is less than Start or greater than End, then BETA.DIST reports an 
+/// invalid argument error (Err:502).
+/// Other errors may arise depending on the exact combination of values passed 
+/// as arguments to BETA.DIST.
+/// 
+/// Additional details:
+/// 
+/// Calc's BETADIST and BETA.DIST functions perform similar calculations. 
+/// However, there are differences between the two functions with respect to 
+/// the order of their arguments and the conditions placed on argument values. 
+/// The requirements for BETADIST are specified in ODF 1.2; BETA.DIST is 
+/// provided for interoperability with Microsoft Excel.
+///
+/// __See also__: [crate::of::beta_dist_()], [crate::of::beta_dist__()], 
+#[inline]
+pub fn beta_dist<A: Number, B: Number, C: Number, D: Logical>(number: A, alpha: B, beta: C, cumulative: D) -> FnNumber4<A, B, C, D> {
+    FnNumber4("BETA.DIST", number, alpha, beta, cumulative)
+}
+
+/// Calculates beta distribution values from either the probability density 
+/// function or the cumulative distribution function.
+/// 
+/// The beta distribution is a family of continuous probability distributions 
+/// that can be used to model random variables that lie within finite bounds. 
+/// The distribution has two characteristic positive real numbers, usually 
+/// denoted as alpha (α) and beta (β), that control its shape. In many cases 
+/// the beta distribution is defined on the range [0, 1] but in the more 
+/// general case can be defined on a range [a, b], where a and b are the lower 
+/// and upper bounds of the distribution (a < b).
+///
+/// [documentfoundation->BETA.DIST](https://wiki.documentfoundation.org/Documentation/Calc_Functions/BETA.DIST)
+///
+/// __Syntax__: 
+/// ```ods
+///     BETA.DIST( Number: Number; Alpha: Number; Beta: Number; Cumulative: Logical; Start: Number )
+/// ```
+///
+/// __Info2__:
+/// Returns a non-negative real number, which is the beta distribution value 
+/// for the given arguments. For the probability density function, the value 
+/// returned lies in the range [0, +∞). For the cumulative distribution 
+/// function, the value returned lies in the range [0, 1].
+///
+/// __Semantics__:
+/// 
+/// Number is a real number, or a reference to a cell containing that number, 
+/// which is the value of the random variable that is to be used in the 
+/// calculation. Number must lie in the range [Start, End].
+/// 
+/// Alpha is a positive real number, or a reference to a cell containing that 
+/// number, which is the value of one of the two parameters that control the 
+/// shape of the beta distribution.
+/// 
+/// Beta is a positive real number, or a reference to a cell containing that 
+/// number, which is the value of the second of the two parameters that control 
+/// the shape of the beta distribution.
+/// 
+/// Cumulative is a logical value, or a reference to a cell containing that 
+/// value, that determines whether the required probability is taken from the 
+/// probability density function or the cumulative distribution function. If 
+/// Cumulative is set to 0 or FALSE, a value from the probability density 
+/// function is calculated. For any other values of Cumulative, a value from 
+/// the cumulative distribution function is calculated.
+/// 
+/// Start is a real number, or a reference to a cell containing that number, 
+/// which is the lower bound of the distribution. If omitted, the default value 
+/// of 0.0 is used.
+/// 
+/// End is a real number, or a reference to a cell containing that number, 
+/// which is the upper bound of the distribution. If omitted, the default value 
+/// of 1.0 is used.
+/// 
+/// If any of Number, Alpha, Beta, Start, or End is non-numeric, then BETA.DIST 
+/// reports a #VALUE! error.
+/// If either Alpha or Beta is less than or equal to 0.0, then BETA.DIST 
+/// reports an invalid argument error (Err:502).
+/// If Number is less than Start or greater than End, then BETA.DIST reports an 
+/// invalid argument error (Err:502).
+/// Other errors may arise depending on the exact combination of values passed 
+/// as arguments to BETA.DIST.
+/// 
+/// Additional details:
+/// 
+/// Calc's BETADIST and BETA.DIST functions perform similar calculations. 
+/// However, there are differences between the two functions with respect to 
+/// the order of their arguments and the conditions placed on argument values. 
+/// The requirements for BETADIST are specified in ODF 1.2; BETA.DIST is 
+/// provided for interoperability with Microsoft Excel.
+///
+/// __See also__: [crate::of::beta_dist()], [crate::of::beta_dist__()], 
+#[inline]
+pub fn beta_dist_<A: Number, B: Number, C: Number, D: Logical, E: Number>(number: A, alpha: B, beta: C, cumulative: D, start: E) -> FnNumber5<A, B, C, D, E> {
+    FnNumber5("BETA.DIST", number, alpha, beta, cumulative, start)
+}
+
+/// Calculates beta distribution values from either the probability density 
+/// function or the cumulative distribution function.
+/// 
+/// The beta distribution is a family of continuous probability distributions 
+/// that can be used to model random variables that lie within finite bounds. 
+/// The distribution has two characteristic positive real numbers, usually 
+/// denoted as alpha (α) and beta (β), that control its shape. In many cases 
+/// the beta distribution is defined on the range [0, 1] but in the more 
+/// general case can be defined on a range [a, b], where a and b are the lower 
+/// and upper bounds of the distribution (a < b).
+///
+/// [documentfoundation->BETA.DIST](https://wiki.documentfoundation.org/Documentation/Calc_Functions/BETA.DIST)
+///
+/// __Syntax__: 
+/// ```ods
+///     BETA.DIST( Number: Number; Alpha: Number; Beta: Number; Cumulative: Logical; Start: Number; End: Number )
+/// ```
+///
+/// __Info2__:
+/// Returns a non-negative real number, which is the beta distribution value 
+/// for the given arguments. For the probability density function, the value 
+/// returned lies in the range [0, +∞). For the cumulative distribution 
+/// function, the value returned lies in the range [0, 1].
+///
+/// __Semantics__:
+/// 
+/// Number is a real number, or a reference to a cell containing that number, 
+/// which is the value of the random variable that is to be used in the 
+/// calculation. Number must lie in the range [Start, End].
+/// 
+/// Alpha is a positive real number, or a reference to a cell containing that 
+/// number, which is the value of one of the two parameters that control the 
+/// shape of the beta distribution.
+/// 
+/// Beta is a positive real number, or a reference to a cell containing that 
+/// number, which is the value of the second of the two parameters that control 
+/// the shape of the beta distribution.
+/// 
+/// Cumulative is a logical value, or a reference to a cell containing that 
+/// value, that determines whether the required probability is taken from the 
+/// probability density function or the cumulative distribution function. If 
+/// Cumulative is set to 0 or FALSE, a value from the probability density 
+/// function is calculated. For any other values of Cumulative, a value from 
+/// the cumulative distribution function is calculated.
+/// 
+/// Start is a real number, or a reference to a cell containing that number, 
+/// which is the lower bound of the distribution. If omitted, the default value 
+/// of 0.0 is used.
+/// 
+/// End is a real number, or a reference to a cell containing that number, 
+/// which is the upper bound of the distribution. If omitted, the default value 
+/// of 1.0 is used.
+/// 
+/// If any of Number, Alpha, Beta, Start, or End is non-numeric, then BETA.DIST 
+/// reports a #VALUE! error.
+/// If either Alpha or Beta is less than or equal to 0.0, then BETA.DIST 
+/// reports an invalid argument error (Err:502).
+/// If Number is less than Start or greater than End, then BETA.DIST reports an 
+/// invalid argument error (Err:502).
+/// Other errors may arise depending on the exact combination of values passed 
+/// as arguments to BETA.DIST.
+/// 
+/// Additional details:
+/// 
+/// Calc's BETADIST and BETA.DIST functions perform similar calculations. 
+/// However, there are differences between the two functions with respect to 
+/// the order of their arguments and the conditions placed on argument values. 
+/// The requirements for BETADIST are specified in ODF 1.2; BETA.DIST is 
+/// provided for interoperability with Microsoft Excel.
+///
+/// __See also__: [crate::of::beta_dist()], [crate::of::beta_dist_()], 
+#[inline]
+pub fn beta_dist__<A: Number, B: Number, C: Number, D: Logical, E: Number, F: Number>(number: A, alpha: B, beta: C, cumulative: D, start: E, end: F) -> FnNumber6<A, B, C, D, E, F> {
+    FnNumber6("BETA.DIST", number, alpha, beta, cumulative, start, end)
+}
+
+/// Calculates the inverse of the cumulative distribution function for a beta 
+/// distribution.
+/// 
+/// The beta distribution is a family of continuous probability distributions 
+/// that can be used to model random variables that lie within finite bounds. 
+/// The distribution has two characteristic positive real numbers, usually 
+/// denoted as alpha (α) and beta (β), that control its shape. In many cases 
+/// the beta distribution is defined on the range [0, 1] but in the more 
+/// general case can be defined on a range [a, b], where a and b are the lower 
+/// and upper bounds of the distribution (a < b).
+///
+/// [documentfoundation->BETA.INV](https://wiki.documentfoundation.org/Documentation/Calc_Functions/BETA.INV)
+///
+/// __Syntax__: 
+/// ```ods
+///     BETA.INV( Number: Number; Alpha: Number; Beta: Number )
+/// ```
+///
+/// __Info2__:
+/// Returns a real number, which is the value of the random variable that would 
+/// give the specified probability in the cumulative distribution function for 
+/// the specified beta distribution. The returned value will lie within the 
+/// defined range of the distribution.
+///
+/// __Semantics__:
+/// 
+/// Number is a real number, or a reference to a cell containing that number, 
+/// which is a probability in the cumulative distribution function of the beta 
+/// distribution function. Number lies in the range [0, 1].
+/// 
+/// Alpha is a positive real number, or a reference to a cell containing that 
+/// number, which is the value of one of the two parameters that control the 
+/// shape of the beta distribution.
+/// 
+/// Beta is a positive real number, or a reference to a cell containing that 
+/// number, which is the value of the second of the two parameters that control 
+/// the shape of the beta distribution.
+/// 
+/// Start is a real number, or a reference to a cell containing that number, 
+/// which is the lower bound of the distribution. If omitted, the default value 
+/// of 0.0 is used.
+/// 
+/// End is a real number, or a reference to a cell containing that number, 
+/// which is the upper bound of the distribution. If omitted, the default value 
+/// of 1.0 is used.
+/// 
+/// If any of Number, Alpha, Beta, Start, or End is non-numeric, then BETA.INV 
+/// reports a #VALUE! error.
+/// If either Alpha or Beta is less than or equal to 0.0, then BETA.INV reports 
+/// an invalid argument error (Err:502).
+/// If Number is less than 0.0 or greater than 1.0, then BETA.INV reports an 
+/// invalid argument error (Err:502).
+/// If Start is greater than or equal to End, then BETA.INV reports an invalid 
+/// argument error (Err:502).
+/// 
+/// Info:
+/// 
+/// Calc's BETAINV and BETA.INV functions perform the same calculations. The 
+/// requirements for BETAINV are specified in ODF 1.2; BETA.INV is provided for 
+/// interoperability with Microsoft Excel.
+///
+/// __See also__: [crate::of::beta_inv_()], [crate::of::beta_inv__()], 
+#[inline]
+pub fn beta_inv<A: Number, B: Number, C: Number>(number: A, alpha: B, beta: C) -> FnNumber3<A, B, C> {
+    FnNumber3("BETA.INV", number, alpha, beta)
+}
+
+/// Calculates the inverse of the cumulative distribution function for a beta 
+/// distribution.
+/// 
+/// The beta distribution is a family of continuous probability distributions 
+/// that can be used to model random variables that lie within finite bounds. 
+/// The distribution has two characteristic positive real numbers, usually 
+/// denoted as alpha (α) and beta (β), that control its shape. In many cases 
+/// the beta distribution is defined on the range [0, 1] but in the more 
+/// general case can be defined on a range [a, b], where a and b are the lower 
+/// and upper bounds of the distribution (a < b).
+///
+/// [documentfoundation->BETA.INV](https://wiki.documentfoundation.org/Documentation/Calc_Functions/BETA.INV)
+///
+/// __Syntax__: 
+/// ```ods
+///     BETA.INV( Number: Number; Alpha: Number; Beta: Number; Start: Number )
+/// ```
+///
+/// __Info2__:
+/// Returns a real number, which is the value of the random variable that would 
+/// give the specified probability in the cumulative distribution function for 
+/// the specified beta distribution. The returned value will lie within the 
+/// defined range of the distribution.
+///
+/// __Semantics__:
+/// 
+/// Number is a real number, or a reference to a cell containing that number, 
+/// which is a probability in the cumulative distribution function of the beta 
+/// distribution function. Number lies in the range [0, 1].
+/// 
+/// Alpha is a positive real number, or a reference to a cell containing that 
+/// number, which is the value of one of the two parameters that control the 
+/// shape of the beta distribution.
+/// 
+/// Beta is a positive real number, or a reference to a cell containing that 
+/// number, which is the value of the second of the two parameters that control 
+/// the shape of the beta distribution.
+/// 
+/// Start is a real number, or a reference to a cell containing that number, 
+/// which is the lower bound of the distribution. If omitted, the default value 
+/// of 0.0 is used.
+/// 
+/// End is a real number, or a reference to a cell containing that number, 
+/// which is the upper bound of the distribution. If omitted, the default value 
+/// of 1.0 is used.
+/// 
+/// If any of Number, Alpha, Beta, Start, or End is non-numeric, then BETA.INV 
+/// reports a #VALUE! error.
+/// If either Alpha or Beta is less than or equal to 0.0, then BETA.INV reports 
+/// an invalid argument error (Err:502).
+/// If Number is less than 0.0 or greater than 1.0, then BETA.INV reports an 
+/// invalid argument error (Err:502).
+/// If Start is greater than or equal to End, then BETA.INV reports an invalid 
+/// argument error (Err:502).
+/// 
+/// Info:
+/// 
+/// Calc's BETAINV and BETA.INV functions perform the same calculations. The 
+/// requirements for BETAINV are specified in ODF 1.2; BETA.INV is provided for 
+/// interoperability with Microsoft Excel.
+///
+/// __See also__: [crate::of::beta_inv()], [crate::of::beta_inv__()], 
+#[inline]
+pub fn beta_inv_<A: Number, B: Number, C: Number, D: Number>(number: A, alpha: B, beta: C, start: D) -> FnNumber4<A, B, C, D> {
+    FnNumber4("BETA.INV", number, alpha, beta, start)
+}
+
+/// Calculates the inverse of the cumulative distribution function for a beta 
+/// distribution.
+/// 
+/// The beta distribution is a family of continuous probability distributions 
+/// that can be used to model random variables that lie within finite bounds. 
+/// The distribution has two characteristic positive real numbers, usually 
+/// denoted as alpha (α) and beta (β), that control its shape. In many cases 
+/// the beta distribution is defined on the range [0, 1] but in the more 
+/// general case can be defined on a range [a, b], where a and b are the lower 
+/// and upper bounds of the distribution (a < b).
+///
+/// [documentfoundation->BETA.INV](https://wiki.documentfoundation.org/Documentation/Calc_Functions/BETA.INV)
+///
+/// __Syntax__: 
+/// ```ods
+///     BETA.INV( Number: Number; Alpha: Number; Beta: Number; Start: Number; End: Number )
+/// ```
+///
+/// __Info2__:
+/// Returns a real number, which is the value of the random variable that would 
+/// give the specified probability in the cumulative distribution function for 
+/// the specified beta distribution. The returned value will lie within the 
+/// defined range of the distribution.
+///
+/// __Semantics__:
+/// 
+/// Number is a real number, or a reference to a cell containing that number, 
+/// which is a probability in the cumulative distribution function of the beta 
+/// distribution function. Number lies in the range [0, 1].
+/// 
+/// Alpha is a positive real number, or a reference to a cell containing that 
+/// number, which is the value of one of the two parameters that control the 
+/// shape of the beta distribution.
+/// 
+/// Beta is a positive real number, or a reference to a cell containing that 
+/// number, which is the value of the second of the two parameters that control 
+/// the shape of the beta distribution.
+/// 
+/// Start is a real number, or a reference to a cell containing that number, 
+/// which is the lower bound of the distribution. If omitted, the default value 
+/// of 0.0 is used.
+/// 
+/// End is a real number, or a reference to a cell containing that number, 
+/// which is the upper bound of the distribution. If omitted, the default value 
+/// of 1.0 is used.
+/// 
+/// If any of Number, Alpha, Beta, Start, or End is non-numeric, then BETA.INV 
+/// reports a #VALUE! error.
+/// If either Alpha or Beta is less than or equal to 0.0, then BETA.INV reports 
+/// an invalid argument error (Err:502).
+/// If Number is less than 0.0 or greater than 1.0, then BETA.INV reports an 
+/// invalid argument error (Err:502).
+/// If Start is greater than or equal to End, then BETA.INV reports an invalid 
+/// argument error (Err:502).
+/// 
+/// Info:
+/// 
+/// Calc's BETAINV and BETA.INV functions perform the same calculations. The 
+/// requirements for BETAINV are specified in ODF 1.2; BETA.INV is provided for 
+/// interoperability with Microsoft Excel.
+///
+/// __See also__: [crate::of::beta_inv()], [crate::of::beta_inv_()], 
+#[inline]
+pub fn beta_inv__<A: Number, B: Number, C: Number, D: Number, E: Number>(number: A, alpha: B, beta: C, start: D, end: E) -> FnNumber5<A, B, C, D, E> {
+    FnNumber5("BETA.INV", number, alpha, beta, start, end)
+}
+
+/// Calculates binomial distribution probabilities from either the probability 
+/// mass function or the cumulative distribution function. The binomial 
+/// distribution is a discrete probability distribution that is used to analyze 
+/// data in many domains.
+///
+/// [documentfoundation->BINOM.DIST](https://wiki.documentfoundation.org/Documentation/Calc_Functions/BINOM.DIST)
+///
+/// __Syntax__: 
+/// ```ods
+///     BINOM.DIST( X: Integer; Trials: Integer; SP: Number; C: Logical )
+/// ```
+///
+/// __Info2__:
+/// Returns a real number in the range [0, 1], which is the binomial 
+/// distribution probability for the given arguments.
+///
+/// __Semantics__:
+/// 
+/// X is a non-negative integer, or a reference to a cell containing that 
+/// integer, that is the number of trial successes for which the probability is 
+/// required.
+/// 
+/// Trials is a non-negative integer, or a reference to a cell containing that 
+/// integer, that is the total number of independent trials.
+/// 
+/// SP is a real number (expressed as a percentage, such as 2.5%, or a decimal 
+/// fraction, such as 0.025), or a reference to a cell containing that number, 
+/// that is the probability of a successful outcome on each trial. As a 
+/// probability, SP lies in the range [0, 1] (or equivalently 0% ≤ SP ≤ 
+/// 100%).
+/// 
+/// C is a logical value, or a reference to a cell containing that value, that 
+/// determines whether the required probability is taken from the probability 
+/// mass function or the cumulative distribution function. If C is set to 0 or 
+/// FALSE, a value from the probability mass function is calculated. For any 
+/// other values of C, a value from the cumulative distribution function is 
+/// calculated.
+/// 
+/// If any of X, Trials, SP, and C is non-numeric, then BINOM.DIST reports a 
+/// #VALUE! error.
+/// If either of X or Trials is a non-integer value, then BINOM.DIST truncates 
+/// it to an integer value.
+/// If SP is less than 0.0 or greater than 1.0, then BINOM.DIST reports an 
+/// invalid argument error (Err:502).
+/// BINOM.DIST checks (after any truncation) that Trials ≥ 0, X ≥ 0, and 
+/// Trials ≥ X. If any of these checks fail, then BINOM.DIST reports an 
+/// invalid argument error (Err:502).
+/// 
+/// Info:
+/// 
+/// Calc's BINOM.DIST and BINOMDIST functions perform the same calculations. 
+/// The requirements for BINOMDIST are specified in ODF 1.2; BINOM.DIST is 
+/// provided for interoperability with Microsoft Excel.
+///
+/// __See also__: 
+#[inline]
+pub fn binom_dist<A: Number, B: Number, C: Number, D: Logical>(x: A, trials: B, s_p: C, c: D) -> FnNumber4<A, B, C, D> {
+    FnNumber4("BINOM.DIST", x, trials, s_p, c)
+}
+
+/// Given the total number of independent trials and the probability of a 
+/// successful outcome on each trial, BINOM.INV determines the minimum number 
+/// of trial successes for which the binomial cumulative density function gives 
+/// a probability of greater than or equal to a supplied criterion probability.
+///
+/// [documentfoundation->BINOM.INV](https://wiki.documentfoundation.org/Documentation/Calc_Functions/BINOM.INV)
+///
+/// __Syntax__: 
+/// ```ods
+///     BINOM.INV( Trials: Integer; SP: Number; Alpha: Number )
+/// ```
+///
+/// __Info2__:
+/// Returns a non-negative integer, which is the minimum number of trial 
+/// successes for the given arguments.
+///
+/// __Semantics__:
+/// 
+/// Trials is a non-negative integer, or a reference to a cell containing that 
+/// integer, that is the total number of independent trials.
+/// 
+/// SP is a real number (expressed as a percentage, such as 2.5%, or a decimal 
+/// fraction, such as 0.025), or a reference to a cell containing that number, 
+/// that is the probability of a successful outcome on each trial. As a 
+/// probability, SP lies in the range [0, 1] (or equivalently 0% ≤ SP ≤ 
+/// 100%).
+/// 
+/// Alpha is a real number (expressed as a percentage, such as 2.5%, or a 
+/// decimal fraction, such as 0.025), or a reference to a cell containing that 
+/// number, that is the criterion probability to be reached or exceeded. As a 
+/// probability, Alpha lies in the range [0, 1] (or equivalently 0% ≤ Alpha 
+/// ≤ 100%).
+/// 
+/// If any of Trials, SP, and Alpha is non-numeric, then BINOM.INV reports a 
+/// #VALUE! error.
+/// If Trials is a non-integer value, then BINOM.INV truncates it to an integer 
+/// value.
+/// If Trials is a less than 0, then BINOM.INV reports an invalid argument 
+/// error (Err:502).
+/// If either SP or Alpha is less than 0.0 or greater than 1.0, then BINOM.INV 
+/// reports an invalid argument error (Err:502).
+/// 
+/// Info:
+/// 
+/// Calc's CRITBINOM and BINOM.INV functions perform the same calculations. The 
+/// requirements for CRITBINOM are specified in ODF 1.2; BINOM.INV is provided 
+/// for interoperability with Microsoft Excel.
+///
+/// __See also__: 
+#[inline]
+pub fn binom_inv<A: Number, B: Number, C: Number>(trials: A, s_p: B, alpha: C) -> FnNumber3<A, B, C> {
+    FnNumber3("BINOM.INV", trials, s_p, alpha)
 }
