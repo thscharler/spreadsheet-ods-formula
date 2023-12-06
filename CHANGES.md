@@ -1,3 +1,7 @@
+# 0.20.0
+
+To keep up with spreadsheet-ods.
+
 # 0.19.1
 
 Move cell! macro to crate spreadsheet-ods.
