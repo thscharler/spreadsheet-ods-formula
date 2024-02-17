@@ -3,7 +3,7 @@ use spreadsheet_ods::{CellRange, CellRef};
 use spreadsheet_ods_formula::date::{Days360Method, WeekdayMethod};
 use spreadsheet_ods_formula::prelude::*;
 use spreadsheet_ods_formula::{
-    cell, formula, p, CriterionCmp, FArray, FCriterion, FMatrix, FnAny0, ValNumber,
+    formula, p, CriterionCmp, FArray, FCriterion, FMatrix, FnAny0, ValNumber,
 };
 use spreadsheet_ods_formula::{num, of};
 

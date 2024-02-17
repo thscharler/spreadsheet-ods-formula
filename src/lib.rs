@@ -2,8 +2,8 @@
 //! This library provides functions that map to ODS-functions.
 //!
 //! ```
-//! use spreadsheet_ods::CellRef;
-//! use spreadsheet_ods_formula::{cell, formula, of};
+//! use spreadsheet_ods::{cell, CellRef};
+//! use spreadsheet_ods_formula::{ formula, of};
 //!
 //! let f = formula(of::sin(cell!(0,0)));
 //!
@@ -29,7 +29,8 @@
 //! * CellRef and CellRange are imported from spreadsheet-ods. There is also a cell!() macro.
 //!
 //! ```
-//! use spreadsheet_ods_formula::{cell, formula};
+//! use spreadsheet_ods::cell;
+//! use spreadsheet_ods_formula::{formula};
 //!
 //! let f = formula(cell!(0, 0));
 //! println!("{}", f);
@@ -42,7 +43,8 @@
 //! * ODS operators are mapped with the AnyOp, TextOp, NumberOp, LogicalOp and ReferenceOp traits.
 //!
 //! ```
-//! use spreadsheet_ods_formula::{cell, formula};
+//! use spreadsheet_ods::cell;
+//! use spreadsheet_ods_formula::{formula};
 //! use spreadsheet_ods_formula::{ReferenceOp};
 //!
 //! let f = formula(cell!(0, 0, 4, 4).refcat(cell!(8, 8, 12, 12)));
@@ -52,7 +54,8 @@
 //! * Tuples are used for Sequences. They are formatted as inline-arrays.
 //!
 //! ```
-//! use spreadsheet_ods_formula::{cell, formula, of};
+//! use spreadsheet_ods::cell;
+//! use spreadsheet_ods_formula::{formula, of};
 //!
 //! let f = formula(of::networkdays__(
 //!      cell!(5, 5),
@@ -65,7 +68,8 @@
 //! * FMatrix and FArray for inline arrays and matrizes.
 //!
 //! ```
-//! use spreadsheet_ods_formula::{cell, FArray, formula, of};
+//! use spreadsheet_ods::cell;
+//! use spreadsheet_ods_formula::{FArray, formula, of};
 //!
 //! let f = formula(of::networkdays__(
 //!      cell!(5, 5),
