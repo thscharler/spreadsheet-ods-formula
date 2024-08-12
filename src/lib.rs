@@ -94,7 +94,6 @@
 // NO #![warn(non_ascii_idents)]
 #![warn(noop_method_call)]
 // NO #![warn(or_patterns_back_compat)]
-#![warn(pointer_structural_match)]
 #![warn(semicolon_in_expressions_from_macros)]
 // NOT_ACCURATE #![warn(single_use_lifetimes)]
 #![warn(trivial_casts)]
