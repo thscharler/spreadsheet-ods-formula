@@ -1,8 +1,8 @@
 [package]
 name = "spreadsheet-ods-formula"
-version = "0.22.1"
+version = "0.23.0"
 authors = ["thomasscharler <thscharler@gmail.com>"]
-edition = "2021"
+edition = "2024"
 description = "Create ods-formulas for use with spreadsheet-ods."
 license = "MIT/Apache-2.0"
 repository = "https://github.com/thscharler/spreadsheet-ods-formula"
@@ -19,8 +19,8 @@ nom = "7.1"
 nom_locate = "4.2"
 
 [dependencies.spreadsheet-ods]
-version = "0.22.1"
-features = ["use_decimal", "all_locales"]
+version = "1.0.1"
+features = ["rust_decimal", "all_locales"]
 #path = "../spreadsheet-ods"
 
 [dev-dependencies.kparse]

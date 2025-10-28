@@ -14,7 +14,7 @@ use std::io::Write;
 fn print_fnlist() -> Result<(), DError> {
     let mut txt = Vec::new();
 
-    let mut f = File::open("tests/spec.txt")?;
+    let mut f = File::open("examples/create_fn/spec.txt")?;
     f.read_to_end(&mut txt)?;
 
     let txt = String::from_utf8_lossy(txt.as_ref());
@@ -54,11 +54,10 @@ fn print_fnlist() -> Result<(), DError> {
     Ok(())
 }
 
-#[test]
-fn generate() -> Result<(), DError> {
+fn main() -> Result<(), DError> {
     let mut txt = Vec::new();
 
-    let mut f = File::open("tests/spec.txt")?;
+    let mut f = File::open("examples/create_fn/spec.txt")?;
     f.read_to_end(&mut txt)?;
 
     let txt = String::from_utf8_lossy(txt.as_ref());

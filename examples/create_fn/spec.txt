@@ -5022,11 +5022,11 @@ where a is the result of calling AVERAGE(N).
 
 Summary: returns the value of the probability density function or the cumulative distribution function for the exponential distribution.
 
-Syntax: EXPONDIST( Number X ; Number λ [ ; Logical Cumulative = TRUE ] )
+Syntax: EXPONDIST( Number X ; Number lambda [ ; Logical Cumulative = TRUE ] )
 
 Returns: Number
 
-Constraints: λ > 0
+Constraints: lambda > 0
 
 Semantics: If Cumulative is FALSE, EXPONDIST returns 0 if X < 0 and the value
 
@@ -5464,11 +5464,11 @@ See also LOGNORMDIST 6.18.44
 
 Summary: returns the value of the probability density function or the cumulative distribution function for the lognormal distribution with the mean and standard deviation given.
 
-Syntax: LOGNORMDIST( Number X [ ; Number μ = 0 [ ; Number σ = 1 [ ; Logical Cumulative = TRUE ] ] ] )
+Syntax: LOGNORMDIST( Number X [ ; Number mu = 0 [ ; Number sigma = 1 [ ; Logical Cumulative = TRUE ] ] ] )
 
 Returns: Number
 
-Constraints: σ > 0; X > 0 if Cumulative is FALSE
+Constraints: sigma > 0; X > 0 if Cumulative is FALSE
 
 Semantics: If Cumulative is FALSE, LOGNORMDIST returns the value
 
@@ -5584,7 +5584,7 @@ Returns: Number
 
 Constraints: StandardDeviation > 0.
 
-Semantics: In the following μ is Mean and σ is StandardDeviation.
+Semantics: In the following mu is Mean and sigma is StandardDeviation.
 
 If Cumulative is FALSE, NORMDIST returns the value
 
@@ -5753,11 +5753,11 @@ See also NORMDIST 6.18.52
 
 Summary: returns the probability or the cumulative distribution function for the Poisson distribution
 
-Syntax: POISSON( Integer X ; Number λ [ ; Logical Cumulative = TRUE ] )
+Syntax: POISSON( Integer X ; Number lambda [ ; Logical Cumulative = TRUE ] )
 
 Returns: Number
 
-Constraints: λ > 0, X ≥ 0
+Constraints: lambda > 0, X ≥ 0
 
 Semantics: If Cumulative is FALSE, POISSON returns the value
 
@@ -5919,7 +5919,7 @@ Constraints: The sequence shall contain three numbers at least.
 
 Semantics: Calculates the skewness of a distribution using the population, i.e. the possible outcomes, of a random variable.
 Given the expectation value
- and the standard deviation σ,the skewness becomes
+ and the standard deviation sigma,the skewness becomes
 
 
 
@@ -5980,7 +5980,7 @@ Constraints: At least two numbers shall be included. Returns an Error if less th
 Semantics: Computes the sample standard deviation s, where
 
 
-Note that s is not the same as the standard deviation of the set, σ, which uses n rather than n − 1.
+Note that s is not the same as the standard deviation of the set, sigma, which uses n rather than n − 1.
 
 See also STDEVP 6.18.74, AVERAGE 6.18.3
 6.18.73 STDEVA
@@ -6014,10 +6014,10 @@ Returns: Number
 
 Constraints: COUNT(N) ≥ 1.
 
-Semantics: Computes the standard deviation of the set σ, where
+Semantics: Computes the standard deviation of the set sigma, where
 
 
-Note that σ is not the same as the sample standard deviation, s, which uses n − 1 rather than n.
+Note that sigma is not the same as the sample standard deviation, s, which uses n − 1 rather than n.
 
 See also COUNT 6.13.6, STDEV 6.18.72, AVERAGE 6.18.3
 6.18.75 STDEVPA
@@ -6223,7 +6223,7 @@ Constraints: At least two numbers shall be included. Returns an Error if less th
 Semantics: Computes the sample variance s2, where
 
 
-Note that s2 is not the same as the variance of the set, σ2, which uses n rather than n − 1.
+Note that s2 is not the same as the variance of the set, sigma2, which uses n rather than n − 1.
 
 See also VARP 6.18.84, STDEV 6.18.72, AVERAGE 6.18.3
 6.18.83 VARA
@@ -6257,10 +6257,10 @@ Returns: Number
 
 Constraints: COUNT(N) ≥ 1
 
-Semantics: Computes the variance of the set σ2, where
+Semantics: Computes the variance of the set sigma2, where
 
 
-Note that σ2 is not the same as the sample variance, s2, which uses n − 1 rather than n.
+Note that sigma2 is not the same as the sample variance, s2, which uses n − 1 rather than n.
 
 If only one number is provided, returns 0.
 

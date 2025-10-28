@@ -1,3 +1,7 @@
+# 0.21.0
+
+Synced with spreadsheet-ods 1.0
+
 # 0.20.0
 
 To keep up with spreadsheet-ods.

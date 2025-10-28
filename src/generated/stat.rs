@@ -734,11 +734,11 @@ pub fn devsq<A: Sequence>(n: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     EXPONDIST( X: Number; λ: Number )
+///     EXPONDIST( X: Number; lambda: Number )
 /// ```
 ///
 /// __Constraints__:
-/// λ > 0
+/// lambda > 0
 ///
 /// __Semantics__:
 /// If Cumulative is FALSE, EXPONDIST returns 0 if X < 0 and the value
@@ -751,8 +751,8 @@ pub fn devsq<A: Sequence>(n: A) -> FnNumber1<A> {
 ///
 /// __See also__: [crate::of::expondist_()], 
 #[inline]
-pub fn expondist<A: Number, B: Number>(x: A, λ: B) -> FnNumber2<A, B> {
-    FnNumber2("EXPONDIST", x, λ)
+pub fn expondist<A: Number, B: Number>(x: A, lambda: B) -> FnNumber2<A, B> {
+    FnNumber2("EXPONDIST", x, lambda)
 }
 
 /// returns the value of the probability density function or the cumulative 
@@ -762,11 +762,11 @@ pub fn expondist<A: Number, B: Number>(x: A, λ: B) -> FnNumber2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     EXPONDIST( X: Number; λ: Number; Cumulative: Logical )
+///     EXPONDIST( X: Number; lambda: Number; Cumulative: Logical )
 /// ```
 ///
 /// __Constraints__:
-/// λ > 0
+/// lambda > 0
 ///
 /// __Semantics__:
 /// If Cumulative is FALSE, EXPONDIST returns 0 if X < 0 and the value
@@ -779,8 +779,8 @@ pub fn expondist<A: Number, B: Number>(x: A, λ: B) -> FnNumber2<A, B> {
 ///
 /// __See also__: [crate::of::expondist()], 
 #[inline]
-pub fn expondist_<A: Number, B: Number, C: Logical>(x: A, λ: B, cumulative: C) -> FnNumber3<A, B, C> {
-    FnNumber3("EXPONDIST", x, λ, cumulative)
+pub fn expondist_<A: Number, B: Number, C: Logical>(x: A, lambda: B, cumulative: C) -> FnNumber3<A, B, C> {
+    FnNumber3("EXPONDIST", x, lambda, cumulative)
 }
 
 /// returns the value of the probability density function or the cumulative 
@@ -1990,7 +1990,7 @@ pub fn loginv__<A: Number, B: Number, C: Number>(p: A, mean: B, standard_deviati
 /// ```
 ///
 /// __Constraints__:
-/// σ > 0; X > 0 if Cumulative is FALSE
+/// sigma > 0; X > 0 if Cumulative is FALSE
 ///
 /// __Semantics__:
 /// If Cumulative is FALSE, LOGNORMDIST returns the value
@@ -2013,11 +2013,11 @@ pub fn lognormdist<A: Number>(x: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     LOGNORMDIST( X: Number; μ: Number )
+///     LOGNORMDIST( X: Number; mu: Number )
 /// ```
 ///
 /// __Constraints__:
-/// σ > 0; X > 0 if Cumulative is FALSE
+/// sigma > 0; X > 0 if Cumulative is FALSE
 ///
 /// __Semantics__:
 /// If Cumulative is FALSE, LOGNORMDIST returns the value
@@ -2028,8 +2028,8 @@ pub fn lognormdist<A: Number>(x: A) -> FnNumber1<A> {
 ///
 /// __See also__: [crate::of::lognormdist()], [crate::of::lognormdist__()], [crate::of::lognormdist___()], 
 #[inline]
-pub fn lognormdist_<A: Number, B: Number>(x: A, μ: B) -> FnNumber2<A, B> {
-    FnNumber2("LOGNORMDIST", x, μ)
+pub fn lognormdist_<A: Number, B: Number>(x: A, mu: B) -> FnNumber2<A, B> {
+    FnNumber2("LOGNORMDIST", x, mu)
 }
 
 /// returns the value of the probability density function or the cumulative 
@@ -2040,11 +2040,11 @@ pub fn lognormdist_<A: Number, B: Number>(x: A, μ: B) -> FnNumber2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     LOGNORMDIST( X: Number; μ: Number; σ: Number )
+///     LOGNORMDIST( X: Number; mu: Number; sigma: Number )
 /// ```
 ///
 /// __Constraints__:
-/// σ > 0; X > 0 if Cumulative is FALSE
+/// sigma > 0; X > 0 if Cumulative is FALSE
 ///
 /// __Semantics__:
 /// If Cumulative is FALSE, LOGNORMDIST returns the value
@@ -2055,8 +2055,8 @@ pub fn lognormdist_<A: Number, B: Number>(x: A, μ: B) -> FnNumber2<A, B> {
 ///
 /// __See also__: [crate::of::lognormdist()], [crate::of::lognormdist_()], [crate::of::lognormdist___()], 
 #[inline]
-pub fn lognormdist__<A: Number, B: Number, C: Number>(x: A, μ: B, σ: C) -> FnNumber3<A, B, C> {
-    FnNumber3("LOGNORMDIST", x, μ, σ)
+pub fn lognormdist__<A: Number, B: Number, C: Number>(x: A, mu: B, sigma: C) -> FnNumber3<A, B, C> {
+    FnNumber3("LOGNORMDIST", x, mu, sigma)
 }
 
 /// returns the value of the probability density function or the cumulative 
@@ -2067,11 +2067,11 @@ pub fn lognormdist__<A: Number, B: Number, C: Number>(x: A, μ: B, σ: C) -> FnN
 ///
 /// __Syntax__: 
 /// ```ods
-///     LOGNORMDIST( X: Number; μ: Number; σ: Number; Cumulative: Logical )
+///     LOGNORMDIST( X: Number; mu: Number; sigma: Number; Cumulative: Logical )
 /// ```
 ///
 /// __Constraints__:
-/// σ > 0; X > 0 if Cumulative is FALSE
+/// sigma > 0; X > 0 if Cumulative is FALSE
 ///
 /// __Semantics__:
 /// If Cumulative is FALSE, LOGNORMDIST returns the value
@@ -2082,8 +2082,8 @@ pub fn lognormdist__<A: Number, B: Number, C: Number>(x: A, μ: B, σ: C) -> FnN
 ///
 /// __See also__: [crate::of::lognormdist()], [crate::of::lognormdist_()], [crate::of::lognormdist__()], 
 #[inline]
-pub fn lognormdist___<A: Number, B: Number, C: Number, D: Logical>(x: A, μ: B, σ: C, cumulative: D) -> FnNumber4<A, B, C, D> {
-    FnNumber4("LOGNORMDIST", x, μ, σ, cumulative)
+pub fn lognormdist___<A: Number, B: Number, C: Number, D: Logical>(x: A, mu: B, sigma: C, cumulative: D) -> FnNumber4<A, B, C, D> {
+    FnNumber4("LOGNORMDIST", x, mu, sigma, cumulative)
 }
 
 /// Return the maximum from a set of numbers.
@@ -2280,7 +2280,7 @@ pub fn negbinomdist<A: Number, B: Number, C: Number>(x: A, r: B, prob: C) -> FnN
 /// StandardDeviation > 0.
 ///
 /// __Semantics__:
-/// In the following μ is Mean and σ is StandardDeviation.
+/// In the following mu is Mean and sigma is StandardDeviation.
 /// 
 /// If Cumulative is FALSE, NORMDIST returns the value
 /// 
@@ -2307,7 +2307,7 @@ pub fn normdist<A: Number, B: Number, C: Number>(x: A, mean: B, standard_deviati
 /// StandardDeviation > 0.
 ///
 /// __Semantics__:
-/// In the following μ is Mean and σ is StandardDeviation.
+/// In the following mu is Mean and sigma is StandardDeviation.
 /// 
 /// If Cumulative is FALSE, NORMDIST returns the value
 /// 
@@ -2619,11 +2619,11 @@ pub fn phi<A: Number>(n: A) -> FnNumber1<A> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     POISSON( X: Integer; λ: Number )
+///     POISSON( X: Integer; lambda: Number )
 /// ```
 ///
 /// __Constraints__:
-/// λ > 0, X ≥ 0
+/// lambda > 0, X ≥ 0
 ///
 /// __Semantics__:
 /// If Cumulative is FALSE, POISSON returns the value
@@ -2632,8 +2632,8 @@ pub fn phi<A: Number>(n: A) -> FnNumber1<A> {
 ///
 /// __See also__: [crate::of::poisson_()], 
 #[inline]
-pub fn poisson<A: Number, B: Number>(x: A, λ: B) -> FnNumber2<A, B> {
-    FnNumber2("POISSON", x, λ)
+pub fn poisson<A: Number, B: Number>(x: A, lambda: B) -> FnNumber2<A, B> {
+    FnNumber2("POISSON", x, lambda)
 }
 
 /// returns the probability or the cumulative distribution function for the 
@@ -2643,11 +2643,11 @@ pub fn poisson<A: Number, B: Number>(x: A, λ: B) -> FnNumber2<A, B> {
 ///
 /// __Syntax__: 
 /// ```ods
-///     POISSON( X: Integer; λ: Number; Cumulative: Logical )
+///     POISSON( X: Integer; lambda: Number; Cumulative: Logical )
 /// ```
 ///
 /// __Constraints__:
-/// λ > 0, X ≥ 0
+/// lambda > 0, X ≥ 0
 ///
 /// __Semantics__:
 /// If Cumulative is FALSE, POISSON returns the value
@@ -2656,8 +2656,8 @@ pub fn poisson<A: Number, B: Number>(x: A, λ: B) -> FnNumber2<A, B> {
 ///
 /// __See also__: [crate::of::poisson()], 
 #[inline]
-pub fn poisson_<A: Number, B: Number, C: Logical>(x: A, λ: B, cumulative: C) -> FnNumber3<A, B, C> {
-    FnNumber3("POISSON", x, λ, cumulative)
+pub fn poisson_<A: Number, B: Number, C: Logical>(x: A, lambda: B, cumulative: C) -> FnNumber3<A, B, C> {
+    FnNumber3("POISSON", x, lambda, cumulative)
 }
 
 /// Returns the probability that a discrete random variable lies between two 
@@ -2960,7 +2960,7 @@ pub fn skew<A: Sequence>(sample: A) -> FnNumber1<A> {
 /// Calculates the skewness of a distribution using the population, i.e. the 
 /// possible outcomes, of a random variable.
 /// Given the expectation value
-/// and the standard deviation σ,the skewness becomes
+/// and the standard deviation sigma,the skewness becomes
 ///
 /// __See also__: [crate::of::skew()], 
 #[inline]
@@ -3052,8 +3052,8 @@ pub fn standardize<A: Number, B: Number, C: Number>(value: A, mean: B, sigma: C)
 /// __Semantics__:
 /// Computes the sample standard deviation s, where
 /// 
-/// Note that s is not the same as the standard deviation of the set, σ, which 
-/// uses n rather than n − 1.
+/// Note that s is not the same as the standard deviation of the set, sigma, 
+/// which uses n rather than n − 1.
 ///
 /// __See also__: [crate::of::stdevp()], [crate::of::average()], 
 #[inline]
@@ -3108,9 +3108,9 @@ pub fn stdeva<A: Sequence>(sample: A) -> FnNumber1<A> {
 /// COUNT(N) ≥ 1.
 ///
 /// __Semantics__:
-/// Computes the standard deviation of the set σ, where
+/// Computes the standard deviation of the set sigma, where
 /// 
-/// Note that σ is not the same as the sample standard deviation, s, which 
+/// Note that sigma is not the same as the sample standard deviation, s, which 
 /// uses n − 1 rather than n.
 ///
 /// __See also__: [crate::of::count()], [crate::of::stdev()], [crate::of::average()], 
@@ -3550,8 +3550,8 @@ pub fn ttest<A: Array, B: Array, C: Number, D: Number>(x: A, y: B, tails: C, typ
 /// __Semantics__:
 /// Computes the sample variance s2, where
 /// 
-/// Note that s2 is not the same as the variance of the set, σ2, which uses n 
-/// rather than n − 1.
+/// Note that s2 is not the same as the variance of the set, sigma2, which uses 
+/// n rather than n − 1.
 ///
 /// __See also__: [crate::of::varp()], [crate::of::stdev()], [crate::of::average()], 
 #[inline]
@@ -3608,10 +3608,10 @@ pub fn vara<A: Sequence>(sample: A) -> FnNumber1<A> {
 /// COUNT(N) ≥ 1
 ///
 /// __Semantics__:
-/// Computes the variance of the set σ2, where
+/// Computes the variance of the set sigma2, where
 /// 
-/// Note that σ2 is not the same as the sample variance, s2, which uses n − 
-/// 1 rather than n.
+/// Note that sigma2 is not the same as the sample variance, s2, which uses n 
+/// − 1 rather than n.
 /// 
 /// If only one number is provided, returns 0.
 ///

@@ -5,6 +5,7 @@ pub trait Report<Q> {
     fn report(self, q: Q);
 }
 
+#[allow(dead_code)]
 pub struct ReportDump;
 
 impl<O, E> Report<ResultTest<O, E>> for ReportDump {
