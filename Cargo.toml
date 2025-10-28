@@ -1,6 +1,6 @@
 [package]
 name = "spreadsheet-ods-formula"
-version = "0.23.0"
+version = "1.0.0"
 authors = ["thomasscharler <thscharler@gmail.com>"]
 edition = "2024"
 description = "Create ods-formulas for use with spreadsheet-ods."
