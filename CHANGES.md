@@ -1,6 +1,13 @@
-# 0.21.0
+# 1.0.0
 
-Synced with spreadsheet-ods 1.0
+Sync version with spreadsheet-ods.
+
+* fix: warnings about greek letters as variable names.
+* move generator from test to examples. better fit.
+
+# 0.22.0
+
+Sync version with spreadsheet-ods.
 
 # 0.20.0
 

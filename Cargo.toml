@@ -11,9 +11,6 @@ keywords = ["ODS", "spreadsheet", "OpenOffice", "LibreOffice"]
 categories = ["parser-implementations"]
 exclude = [".idea/*", ".gitignore"]
 
-[lib]
-name = "spreadsheet_ods_formula"
-
 [dependencies]
 nom = "7.1"
 nom_locate = "4.2"
